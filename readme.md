@@ -29,11 +29,13 @@ The first prototype demonstrated poor force output with approximately 0.5N at 20
 
 The main insights from this prototype are that the flat linear motor is commercially the standard, but must heavily rely on the usage of laminated silicon steel armatures. They are quite complex to manufacture, hence breaking the project objectives. A new architecture must be explored in the future. Another key insight is that thermal analysis must be considered with magneto analysis. Or risk the coil forms melting during testing again. Hence, a multi-physics approach is required for future design to succeed. Lastly, the high phase resistance led to the motor operating under voltage-limiting conditions, and thus, minimal current could be delivered. 
 
+  > [!NOTE]
+  > This path may still be revisited; limited documentation can be found in [prototype_0](/motors/prototype_0/)
 
 
 ## Prototype 1: Actual experimentation instead of standards
 
-The current prototype that is being developed is based on work done by cmore839 on his tubular linear motor ([DIY Linear Motor](https://github.com/cmore839/DIY-Linear-Motor)). This motor type is ideal for ironless designs as it geometrically ensures maximal flux usage rather than guiding it with iron. Currently, this prototype is nearly at the stage of building and testing. The main limiting factor is the data board, which should allow for numerical results due to its range of sensors. Specifically, the ADXL345 accelerometer, MAX31885 for thermal data, and the AS5311 magnetic encoder for position data. An automatic coil winder was also developed for this prototype, which enables inductance and resistance matching. Lastly, thermal-magneto axial symmetrical modelling was used to validate this design rather than the TLAR method.
+The current prototype that is being developed is based on work done by cmore839 on his tubular linear motor ([DIY Linear Motor](https://github.com/cmore839/DIY-Linear-Motor)). This motor type is ideal for ironless designs as it geometrically ensures maximal flux usage rather than guiding it with iron. Currently, this prototype is nearly at the stage of building and testing. The main limiting factor is the data board, which should allow for numerical results due to its range of sensors. Specifically, the ADXL345 accelerometer, 8 channel thermistor array for thermal data, and the AS5311 magnetic encoder for position data. An automatic coil winder was also developed for this prototype, which enables inductance and resistance matching. Lastly, thermal-magneto axial symmetrical modelling was used to validate this design rather than the TLAR method.
 
 ![Prototype 1: Tubular LSM](media/prototype_1/tubular_linear_motor.png)
 

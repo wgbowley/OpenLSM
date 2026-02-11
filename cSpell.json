@@ -20,6 +20,15 @@
     "Sorensen",
     "Runger",
     "FEMM",
-    "Screbuts"
+    "Screbuts",
+    "pico",
+    "picounits",
+    "milli",
+    "Steinhart",
+    "linearizer",
+    "VDDA",
+    "xlabel",
+    "ylabel",
+    "xlim"
   ]
 }
