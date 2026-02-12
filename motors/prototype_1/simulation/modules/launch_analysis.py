@@ -1,0 +1,373 @@
+"""
+Filename: launch_analysis.py
+
+Description:
+    Performs a Quasi-transient Electro-Magneto-Thermal-Mechanical
+    analysis of a tubular linear motor launch between two z coords.
+    
+    NOTE:
+    This scripts uses axial-symmetric coordinate system (Z-R) (Axial-Radial)
+    due to modelling. Configuration for this launch can be found in 
+    configuration.uiv
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from tabulate import tabulate
+from operator import attrgetter
+
+from modules.physics import *
+from modules.initial_setup import InitialConditions
+from modules.pd_pi_controller import CascadeController
+
+from pyfea import (
+    Quantity as q, second as S, ampere as A, meter as M, kelvin as K,
+    newton as N, joule as J, volt as V, weber, watt, ohm as Ω, henry as H,
+    dimensionless
+)
+
+from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
+from pyfea.solver.femm.domains.magnetostatic.solver import FEMMMagnetostaticSolver
+from pyfea.solver.femm.domains.thermostatic.solver import FEMMThermostaticSolver
+from pyfea.solver.solver_outputs import (
+    SolverOutputs, CircuitOptions, MagneticOptions, ThermalOptions
+)
+
+
+@dataclass(slots=True)
+class SummaryLaunchResults:
+    """ Summary results reports maximums """
+    time: q
+    maximum_currents: q
+    maximum_velocity: q
+    maximum_slot_temperature: q
+    maximum_pole_temperature: q
+    
+    @property
+    def _name(self) -> str:
+        """ Returns its name as a table """
+        table_data = [
+            ["time", f"{self.time:.3f}"],
+            ["Max Currents", f"{self.maximum_currents:.3f}"],
+            ["Max Velocity", f"{self.maximum_velocity:.3f}"],
+            ["Max Slot Temp", f"{self.maximum_slot_temperature:.3f}"],
+            ["Max Pole Temp", f"{self.maximum_pole_temperature:.3f}"]
+        ]
+
+        table_str = tabulate(
+            table_data, headers=["parameters", "value"], tablefmt="fancy_grid"
+        )
+    
+        table_width = len(table_str.split('\n')[0])
+        header_text = " Initial Conditions "
+        
+        return f"{header_text:=^{table_width}}\n{table_str}"
+        
+    def __repr__(self): return self._name
+    
+
+@dataclass(slots=True)
+class LaunchResults:
+    """ launch results holds the time series data """
+    time: q
+    d_current: q
+    q_current: q
+    force: q
+    velocity: q
+    displacement: q
+    mechanical_energy: q
+    electrical_energy: q
+    slot_temperature: q
+    pole_temperature: q
+
+    @classmethod
+    def create(cls) -> LaunchResults:
+        """ Factory method to create dataclass with units """
+        return LaunchResults(
+            []  * S, []  * A, []  * A, []  * N, []  * (M/S**1), 
+            []  * M, []  * J, []  * J, []  * K, []  * K
+        )
+
+    def append_frame(self, field: str, value: q):
+        """ Appends a quantity to a file of self """
+        if not hasattr(self, field):
+            msg = f"LaunchResults has no attribute {field!r}"
+            raise AttributeError(msg)
+        
+        # Finds the attributes and appends value
+        target = getattr(self, field)
+        target.append(value)
+
+    def record_step(
+        self, t: q, id: q, iq: q, f: q, v: q, d: q, me: q, ee: q, st: q, pt: q
+    ) -> None:
+        """ Appends a full set of results for a single time step """
+        # You could loop through these to check for complex values
+        self.time.append(t)
+        self.d_current.append(id)
+        self.q_current.append(iq)
+        self.force.append(f)
+        self.velocity.append(v)
+        self.displacement.append(d)
+        self.mechanical_energy.append(me)
+        self.electrical_energy.append(ee)
+        self.slot_temperature.append(st)
+        self.pole_temperature.append(pt)
+
+    @property
+    def _name(self) -> str:
+        """ Returns its name as a time series size """
+        return f"<LaunchResults(time={self.time}, entries={len(self.time)})>"
+
+    def __repr__(self): return self._name
+
+
+class _Analysis:
+    """ Parent class for 'launch' defining low level primitives """
+    def __init__(
+        self, 
+        motor: TubularLinearMotor,
+        magnetic: FEMMMagnetostaticSolver,
+        thermal: FEMMThermostaticSolver,
+        initial_conditions: InitialConditions
+    ) -> None:
+        """ Initializes the class and defines dependencies """
+        self.motor = motor
+        self.initial_conditions = initial_conditions
+        self.controller = CascadeController(motor, initial_conditions)
+        self.magnetic = magnetic
+        self.thermal = thermal
+        
+        # Quasi-transient loop variables
+        self.results = LaunchResults.create()
+        
+        self.system_mass = (
+            self.motor.config.motion.load + initial_conditions.armature_mass
+        )
+
+        # Magnetic requested outputs
+        m_requested = SolverOutputs()
+        m_requested.add_magnetic(self.motor.SLOT_ID, MagneticOptions.FORCE_LORENTZ)
+        for phase in self.motor.PHASES:
+            m_requested.add_circuit(phase, CircuitOptions.FLUX_LINKAGE)
+            m_requested.add_circuit(phase, CircuitOptions.POWER)
+            m_requested.add_circuit(phase, CircuitOptions.RESISTANCE)
+
+        self.magnetic_outputs = m_requested
+        
+        # Thermal requested outputs
+        t_requested = SolverOutputs()
+        t_requested.add_thermal(self.motor.SLOT_ID, ThermalOptions.AVERAGE_TEMPERATURE)
+        t_requested.add_thermal(self.motor.POLE_ID, ThermalOptions.AVERAGE_TEMPERATURE)
+        
+        self.thermal_outputs = t_requested
+    
+    def _solve_magnetic(
+        self, displacement: q, angle: q, currents: q, 
+        slot_temperature: q, pole_temperature
+    ) -> tuple[q, q, q, q, q]:
+        """ Solves the magnetic frame using the initialized solver"""    
+        # Updates temperature of materials within the domain
+        self.magnetic.update_temperature(
+            self.motor.armature_slots_material, slot_temperature
+        )
+        self.magnetic.update_temperature(
+            self.motor.stator_poles_material, pole_temperature
+        )
+        
+        # Moves the armature by the vector (displacement, angle)
+        moving_elements = [self.motor.SLOT_ID, self.motor.CORE_ID]
+        self.magnetic.move_elements(moving_elements, displacement, angle)
+        
+        # Changes currents and add circuit results 
+        for index, phase in enumerate(self.motor.PHASES):
+            phase.current = currents[index]
+            self.magnetic.update_current(phase)
+
+        # Solves the magnetic problem and extracts results
+        results = self.magnetic.solve(self.magnetic_outputs)
+        
+        power = 0 * watt
+        resistance = 0 * Ω
+        linkage = [] * weber
+        for phase in self.motor.PHASES:
+            power += abs(attrgetter(f"{phase.name}.power")(results))
+            resistance += abs(attrgetter(f"{phase.name}.resistance")(results))
+            linkage.append(attrgetter(f"{phase.name}.flux_linkage")(results))
+        
+        # Extracts force and turns to vector
+        resistance /= len(self.motor.PHASES)
+        force = attrgetter(f"element_{self.motor.SLOT_ID.value}.force_lorentz")(results)
+
+        angle = force[1].atan2(force[0]).to_degrees()
+        force = force.magnitude * force.unit
+        
+        return force, angle, resistance, power, linkage
+
+    def _solve_thermal(self, power_loss: q, time_step: q) -> tuple[q, q]:
+        """ Solves the thermal frame using the initialized solver """
+        # Updates the volumetric heating based on power loss
+        volumetric_heating = power_loss / self.initial_conditions.slot_volume
+        self.thermal.update_heat_source(
+            self.motor.armature_slots_material, volumetric_heating
+        )
+        
+        # Solves the problem and than extracts pole and slot temperatures
+        thermal_results = self.thermal.solve(self.thermal_outputs, time_step)
+        pole = attrgetter(
+            f"element_{self.motor.POLE_ID.value}.average_temperature"
+        )(thermal_results)
+        slot = attrgetter(
+            f"element_{self.motor.SLOT_ID.value}.average_temperature"
+        )(thermal_results)
+
+        return slot, pole
+        
+
+class Launch(_Analysis):
+    """ Runs teh Quasi-transient of the linear motor between points """
+    def run(self) -> tuple[SummaryLaunchResults, LaunchResults]:
+        """ Performs a PD-PI controlled point to point analysis """
+        inductance = self.initial_conditions.secant_phase_inductance
+        resistance = self.initial_conditions.resistance_atm_temp
+        magnet_flux = self.initial_conditions.magnet_flux
+        system_mass = self.system_mass
+
+        # Set the target for the controller
+        displacement_target = self.motor.config.motion.axial_displacement
+        displacement_steps = self.motor.config.motion.axial_displacement_step
+        self.controller.set_target_position(displacement_target)
+        
+        # Fractional time constant stepping
+        fraction = self.motor.config.numerical.de_solver_circuit_step
+        time_step = inductance / (resistance) * fraction
+        
+        fraction = self.motor.config.numerical.thermal_step
+        thermal_step = time_step * fraction
+        
+        self.controller.sync_loop_time_step(time_step)
+        
+        # Loop variables
+        loop_time = 0 * S
+        d_q_voltages = [0, 0] * V
+        d_q_currents = [self.motor.config.numerical.initial_current, 0] * A
+        a_b_c_currents = [0, 0, 0] * A
+        t_flux = [magnet_flux.value, magnet_flux.value, magnet_flux.value] * weber
+
+        slot_temperature = self.motor.config.thermal.atmospheric_temperature
+        pole_temperature = self.motor.config.thermal.atmospheric_temperature
+        
+        mechanical_energy = 0 * J
+        electrical_energy = 0 * J
+        
+        velocity = 0 * (M/S**1)
+        displacement = 0 * M
+        displacement_angle = 90 * dimensionless
+        force = 0.0 * N
+        
+        first_loop = True
+        while 1e-6 * M < abs(displacement - displacement_target):
+            print (
+                f"Step {loop_time/time_step:.0f}, Time: {loop_time:.3f}, "
+                f"Net Force: {force:.3f}, velocity: {velocity:.3f}, "
+                f"displacement {displacement:.3f},  dq_i: {d_q_currents}, "
+                f" dq_v: {d_q_voltages}"
+            )
+            
+            max = self.motor.config.numerical.de_solver_maximum_steps
+            if int(loop_time.value / time_step.value) > max.value:
+                break
+
+            # Calculates the d_q flux for the second loop as every loop is (n-1 behind)
+            elec_angle = electrical_angle(displacement, self.motor.pole_pitch)
+            a_b_frame = clarke_transform(t_flux[0], t_flux[0], t_flux[0])
+            d_q_flux = park_transform(a_b_frame, elec_angle)
+            first_loop = False
+            
+            if not first_loop:
+                if d_q_voltages[0] < 0 * V:
+                    # Reverses the direction of the motor
+                    a, b, c = a_b_current
+                    a_b_c_currents = [a.vale, c.vale, b.vale] * b.unit
+                
+                a_b_current = inverse_park_transform(d_q_currents, elec_angle)
+                a_b_c_currents = inverse_clarke_transform(a_b_current)
+                
+                # Solves mechanical DE's through explicit euler method
+                delta = velocity * time_step
+                displacement += delta
+                
+                self.results.record_step(
+                    loop_time, 
+                    d_q_currents[0],
+                    d_q_currents[1],
+                    force,
+                    velocity,
+                    displacement,
+                    mechanical_energy,
+                    electrical_energy,
+                    slot_temperature,
+                    pole_temperature   
+                )
+                
+                # Solves acceleration, velocity for the next frame
+                acceleration = force / system_mass
+                velocity += acceleration * time_step
+                    
+                # Solves magnetostatic frame using self.magnetic (solver)
+                result = self._solve_magnetic(
+                    delta, displacement_angle, a_b_c_currents,
+                    slot_temperature, pole_temperature
+                )
+                
+                # Extract solutions
+                force, f_angle = result[0], result[1]
+                resistance, power, t_flux = result[2], result[3], result[4]
+
+                inductance = 0 * H
+                for index, sample in enumerate(t_flux):
+                    inductance += (
+                        abs(sample-magnet_flux) / abs(a_b_c_currents[index])
+                    )
+                inductance /= len(t_flux)
+                
+                # Calculates the d-q flux linkage for current frame
+                a_b_frame = clarke_transform(t_flux[0], t_flux[1], t_flux[2])
+                d_q_frame_flux = park_transform(a_b_frame, elec_angle)
+                
+                d_q_delta_flux = d_q_frame_flux - d_q_flux
+                d_q_delta_flux *= 0         # Cancels flux for now
+
+                # Calculates force for next frame
+                force *= f_angle.to_radians().sin()
+
+                mechanical_energy += force * velocity * time_step
+                electrical_energy += power * time_step
+                
+                # Updates the system voltage via the pd-pi controller
+                q_voltage = self.controller.step(displacement, velocity, d_q_currents[0])
+                d_q_voltages[0] = q_voltage
+                
+                d_q_currents = rk_2nd_order_currents(
+                    d_q_currents,
+                    d_q_voltages,
+                    resistance,
+                    inductance,
+                    d_q_delta_flux,
+                    time_step
+                )
+
+                # Updates slot and pole temperature
+                if time_step.value % thermal_step.value == 0:
+                    power_loss = (d_q_currents[0]**2 + d_q_currents[1] ** 2) * resistance
+                    slot_temperature, pole_temperature = self._solve_thermal(
+                        power_loss, time_step
+                    )
+
+                loop_time += time_step
+
+        return None, self.results
+                
+            
+            

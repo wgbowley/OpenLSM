@@ -1,0 +1,6 @@
+*.log
+*.ans
+*.fem
+*.anh
+*.feh
+*.pyc

@@ -29,6 +29,19 @@
     "VDDA",
     "xlabel",
     "ylabel",
-    "xlim"
+    "xlim",
+    "pyfea",
+    "characterisation",
+    "magnetostatic",
+    "ralston",
+    "tablefmt",
+    "elec",
+    "figsize",
+    "suptitle",
+    "fontsize",
+    "labelcolor",
+    "twinx",
+    "labelcolor",
+
   ]
 }

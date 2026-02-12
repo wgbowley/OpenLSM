@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="media/images/logo_openlsm.png" alt="OpenLSM" style="max-width:600px;">
+  <img src="https://raw.githubusercontent.com/wgbowley/OpenLSM/refs/heads/main/media/images/logo_openlsm.png" alt="OpenLSM" style="max-width:600px;">
   <br>
   <em> High Performance Low Cost Linear Motors – Designed & built by <a href="https://github.com/wgbowley">William Bowley</a> & <a href="https://github.com/LawsonDG">Lawson Gallup</a> </em>
 </p>
