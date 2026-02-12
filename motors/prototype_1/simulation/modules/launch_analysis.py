@@ -20,6 +20,7 @@ from operator import attrgetter
 from modules.physics import *
 from modules.initial_setup import InitialConditions
 from modules.pd_pi_controller import CascadeController
+from modules.suvat_feeding import SUVATFeeder
 
 from pyfea import (
     Quantity as q, second as S, ampere as A, meter as M, kelvin as K,
@@ -200,9 +201,9 @@ class _Analysis:
         resistance /= len(self.motor.PHASES)
         force = attrgetter(f"element_{self.motor.SLOT_ID.value}.force_lorentz")(results)
 
-        angle = force[1].atan2(force[0]).to_degrees()
-        force = force.magnitude * force.unit
-        
+        angle = 90 * dimensionless      # force[1].atan2(force[0]).to_degrees()
+        force = force[1]                # Ignores radial forces
+
         return force, angle, resistance, power, linkage
 
     def _solve_thermal(self, power_loss: q, time_step: q) -> tuple[q, q]:
@@ -238,6 +239,7 @@ class Launch(_Analysis):
         displacement_target = self.motor.config.motion.axial_displacement
         displacement_steps = self.motor.config.motion.axial_displacement_step
         self.controller.set_target_position(displacement_target)
+        feeder = SUVATFeeder(self.motor)
         
         # Fractional time constant stepping
         fraction = self.motor.config.numerical.de_solver_circuit_step
@@ -265,20 +267,27 @@ class Launch(_Analysis):
         displacement = 0 * M
         displacement_angle = 90 * dimensionless
         force = 0.0 * N
+        power = 0.0 * watt
         
         first_loop = True
+        feeder.plan_path(displacement, displacement_target)
         while 1e-6 * M < abs(displacement - displacement_target):
-            print (
-                f"Step {loop_time/time_step:.0f}, Time: {loop_time:.3f}, "
-                f"Net Force: {force:.3f}, velocity: {velocity:.3f}, "
-                f"displacement {displacement:.3f},  dq_i: {d_q_currents}, "
-                f" dq_v: {d_q_voltages}"
-            )
-            
+            # Breaks the loop if it goes for too many time steps
             max = self.motor.config.numerical.de_solver_maximum_steps
             if int(loop_time.value / time_step.value) > max.value:
                 break
 
+            print (
+                f"Step {loop_time/time_step:.0f}, Time: {loop_time:.3f}, "
+                f"Power: {power:.3f}, Net Force: {force:.3f}, "
+                f"velocity: {velocity:.3f}, displacement {displacement:.3f}, "
+                f"dq_i: {d_q_currents}, dq_v: {d_q_voltages}"
+            )
+
+            # Updates the target position, velocity and feeds forwards velocity
+            target_x, target_v = feeder.get_setpoint(loop_time)
+            self.controller.set_target_position(target_x)
+            
             # Calculates the d_q flux for the second loop as every loop is (n-1 behind)
             elec_angle = electrical_angle(displacement, self.motor.pole_pitch)
             a_b_frame = clarke_transform(t_flux[0], t_flux[0], t_flux[0])
@@ -286,14 +295,9 @@ class Launch(_Analysis):
             first_loop = False
             
             if not first_loop:
-                if d_q_voltages[0] < 0 * V:
-                    # Reverses the direction of the motor
-                    a, b, c = a_b_current
-                    a_b_c_currents = [a.vale, c.vale, b.vale] * b.unit
-                
                 a_b_current = inverse_park_transform(d_q_currents, elec_angle)
                 a_b_c_currents = inverse_clarke_transform(a_b_current)
-                
+                                
                 # Solves mechanical DE's through explicit euler method
                 delta = velocity * time_step
                 displacement += delta
@@ -314,56 +318,60 @@ class Launch(_Analysis):
                 # Solves acceleration, velocity for the next frame
                 acceleration = force / system_mass
                 velocity += acceleration * time_step
+
+                if velocity >= 0 * (M/S):
+                    displacement_angle = 90 * dimensionless 
+                else:
+                    displacement_angle = 270 * dimensionless     
                     
                 # Solves magnetostatic frame using self.magnetic (solver)
                 result = self._solve_magnetic(
                     delta, displacement_angle, a_b_c_currents,
                     slot_temperature, pole_temperature
                 )
-                
+
                 # Extract solutions
-                force, f_angle = result[0], result[1]
+                force, _ = result[0], result[1]
                 resistance, power, t_flux = result[2], result[3], result[4]
 
-                inductance = 0 * H
+                d_q_ind = 0 * H
                 for index, sample in enumerate(t_flux):
-                    inductance += (
+                    d_q_ind += (
                         abs(sample-magnet_flux) / abs(a_b_c_currents[index])
                     )
-                inductance /= len(t_flux)
+                d_q_ind /= len(t_flux)
+                d_q_ind = [d_q_ind.value, d_q_ind.value] * H
                 
                 # Calculates the d-q flux linkage for current frame
                 a_b_frame = clarke_transform(t_flux[0], t_flux[1], t_flux[2])
                 d_q_frame_flux = park_transform(a_b_frame, elec_angle)
                 
                 d_q_delta_flux = d_q_frame_flux - d_q_flux
-                d_q_delta_flux *= 0         # Cancels flux for now
-
-                # Calculates force for next frame
-                force *= f_angle.to_radians().sin()
+                d_q_delta_flux *= 0     # Cancels back-emf for now
 
                 mechanical_energy += force * velocity * time_step
                 electrical_energy += power * time_step
                 
                 # Updates the system voltage via the pd-pi controller
-                q_voltage = self.controller.step(displacement, velocity, d_q_currents[0])
-                d_q_voltages[0] = q_voltage
-                
+                voltage = self.controller.step(
+                    displacement, velocity, target_v, d_q_currents[1]
+                )
+                d_q_voltages = [0, voltage.value] * voltage.unit
+
                 d_q_currents = rk_2nd_order_currents(
                     d_q_currents,
                     d_q_voltages,
                     resistance,
-                    inductance,
+                    d_q_ind,
                     d_q_delta_flux,
                     time_step
                 )
 
                 # Updates slot and pole temperature
-                if time_step.value % thermal_step.value == 0:
-                    power_loss = (d_q_currents[0]**2 + d_q_currents[1] ** 2) * resistance
-                    slot_temperature, pole_temperature = self._solve_thermal(
-                        power_loss, time_step
-                    )
+                power_loss = (d_q_currents[0]**2 + d_q_currents[1] ** 2) * resistance
+                slot_temperature, pole_temperature = self._solve_thermal(
+                    power_loss, time_step
+                )
 
                 loop_time += time_step
 

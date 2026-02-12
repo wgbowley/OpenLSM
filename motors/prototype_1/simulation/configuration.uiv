@@ -12,16 +12,17 @@ unit_frame: SI_METRIC_NON_DERIVED
 # This allows for model characterisation for either optimization or verification. 
 
 [numerical]
-de_solver_circuit_step:     0.5
+de_solver_circuit_step:     0.25
 pi_pd_solver_step:          10
-thermal_step:               10
+thermal_step:               5
 de_solver_maximum_steps:    1000
 characterisation_current:   1 (A)
 initial_current:            20 m(A)
 
 [motion]
 load:                       500 m(kg)
-target_speed:               200 m(m*s^-1)
+velocity_max:               100 m(m*s^-1)
+acceleration_max:           500 m(m*s^-2)
 axial_displacement:         10 m(m)
 axial_displacement_step:    1 m(m)      # Breaks target into 1 m(m) targets
 
@@ -31,7 +32,7 @@ current_limit:              10  (A)
 
 [thermal]
 atmospheric_temperature:    298.15 (K)
-convection_coefficient:     100 (kg*s^-3*K^-1)
+convection_coefficient:     25 (kg*s^-3*K^-1)
 
 [model]
 # 'stc_air' is dry air at standard test conditions (25c / 298.15k / 1 atm)

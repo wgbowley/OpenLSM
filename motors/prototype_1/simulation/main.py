@@ -18,13 +18,9 @@ import matplotlib.pyplot as plt
 from modules.initial_setup import pre_simulation_setup, initial_state
 from modules.launch_analysis import Launch
 
-from pyfea import dimensionless
 from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
 from pyfea.solver.femm.domains.magnetostatic.solver import FEMMMagnetostaticSolver
 from pyfea.solver.femm.domains.thermostatic.solver import FEMMThermostaticSolver
-
-from pyfea.solver.solver_outputs import SolverOutputs, ThermalOptions
-
 
 # Defines configuration file path and solver output folder path
 path_lib = "motors/prototype_1/simulation/configuration.uiv"

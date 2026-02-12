@@ -14,7 +14,7 @@ from math import sqrt
 
 from modules.initial_setup import InitialConditions
 
-from pyfea import Quantity, meter as M, ampere as A, volt as V, second as S
+from pyfea import Quantity as q, meter as M, ampere as A, volt as V, second as S
 from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
 
 class CascadeController:
@@ -25,7 +25,7 @@ class CascadeController:
         """ Initializes the class and calculates loop terms """
         self.current_limit = motor.config.circuit.current_limit
         self.voltage_limit = motor.config.circuit.supply_voltage
-        self.load = initial.armature_mass + motor.config.motion.load 
+        self.load = initial.armature_mass + motor.config.motion.load
         self.time_step = 0 * S
 
         # Defines controller constants
@@ -49,18 +49,19 @@ class CascadeController:
         self.cur_summation = 0 * A * S
         self.cur_target = 0
         
-    def set_target_position(self, position: Quantity) -> None:
+    def set_target_position(self, position: q) -> None:
         """ Sets the new target position for the controller """
         self.target_position = position
     
     def step(
-        self, position: Quantity, velocity: Quantity, current: Quantity
-    ) -> Quantity:
+        self, position: q, velocity: q, target_velocity: q, current: q
+    ) -> q:
         """ Calculates the voltage to drive the motor to target position """
-        self.cur_target = self._position_pd(position, velocity)
+
+        self.cur_target = self._position_pd(position, velocity, target_velocity)
         return self._current_pi(current)
     
-    def sync_loop_time_step(self, time_step: Quantity) -> None:
+    def sync_loop_time_step(self, time_step: q) -> None:
         """ Syncs up the Quasi-transient time_step and controller step """
         self.time_step = time_step
     
@@ -70,20 +71,21 @@ class CascadeController:
         self.target_position = 0 * M
         self.cur_target = 0 
     
-    def _position_pd(self, position: Quantity, velocity: Quantity) -> Quantity:
+    def _position_pd(self, position: q, velocity: q, target_velocity: q) -> q:
         """ Calculates the current for the PI current controller """
         error = self.target_position - position
         proportional = self.pos_kp * error
         
-        derivative = - self.pos_kd * velocity
+        # Takes derivative on delta between target and actual velocity
+        derivative = self.pos_kd * velocity
         current = proportional + derivative
         if abs(current) > self.current_limit:
             # Ensures that the directionality of the current is maintained
             return self.current_limit if current > 0 * A else - self.current_limit
-        
+
         return current
 
-    def _current_pi(self, current: Quantity) -> Quantity:
+    def _current_pi(self, current: q) -> q:
         """ Calculates the voltage for the motor q-axis; Assumes no voltage on d-axis"""
         error = self.cur_target - current
         proportional = self.cur_kp * error
@@ -95,4 +97,5 @@ class CascadeController:
             return tentative
 
         # Camps and prevent windup
-        return self.voltage_limit if tentative > 0 * V else - self.voltage_limit
+        windup = self.voltage_limit if tentative > 0 * V else - self.voltage_limit
+        return windup
