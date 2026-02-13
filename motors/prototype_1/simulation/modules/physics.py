@@ -105,7 +105,7 @@ def rk_2nd_order_currents(
     # Calculates the d-q axis induced voltages
     d_induced = induced_voltage(f_d, step_size)
     q_induced = induced_voltage(f_q, step_size)
-    
+    print(d_induced, q_induced)
     # Calculates the first step
     k1_d = differential_d_current(i_d, v_d, resistance, h_d, d_induced)
     k1_q = differential_q_current(i_q, v_q, resistance, h_d, q_induced)

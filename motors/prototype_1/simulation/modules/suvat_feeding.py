@@ -9,7 +9,7 @@ Description:
 """
 
 
-from pyfea import Quantity as q, second as s, meter as m
+from pyfea import Quantity as q, second, meter
 from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
 
 
@@ -37,7 +37,7 @@ class SUVATFeeder:
             self.v_peak = self.acceleration_max * self.t_accel
             
             # Time at constant velocity
-            self.t_cruise = 0 * s
+            self.t_cruise = 0 * second
         else:
             # Trapezoid profile (Hits maximum velocity; requires cruise period)
             self.v_peak = self.velocity_max
@@ -70,7 +70,7 @@ class SUVATFeeder:
         
         # Move finished
         else:
-            v = 0 * m/s
+            v = 0 * meter / second
             s = self.dis
 
         return (self.start_pos + s * self.direction, v * self.direction)

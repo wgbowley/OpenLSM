@@ -31,20 +31,20 @@ class CascadeController:
         # Defines controller constants
         freq = initial.resistance_atm_temp / initial.secant_phase_inductance
 
-        freq = motor.config.numerical.de_solver_circuit_step * freq
-        bandwidth = freq
+        self.freq = motor.config.numerical.de_solver_circuit_step * freq
+        self.bandwidth = freq
 
         # Defines position loop variables
-        loop_freq = freq / motor.config.numerical.pi_pd_solver_step
-        damping_ratio = sqrt(2) / 2
+        self.loop_freq = self.freq / motor.config.numerical.pi_pd_solver_step
+        self.damping_ratio = 2 # sqrt(2) / 2
         
-        self.pos_kp = (self.load * loop_freq ** 2) / initial.force_constant
-        self.pos_kd = (2 * self.load * damping_ratio * loop_freq ) / initial.force_constant
+        self.pos_kp = (self.load * self.loop_freq ** 2) / initial.force_constant
+        self.pos_kd = (2 * self.load * self.damping_ratio * self.loop_freq ) / initial.force_constant
         self.target_position = 0 * M
         
         # Defines the current loop
-        self.cur_kp = initial.secant_phase_inductance * bandwidth
-        self.cur_ki = initial.resistance_atm_temp * bandwidth
+        self.cur_kp = initial.secant_phase_inductance * self.bandwidth
+        self.cur_ki = initial.resistance_atm_temp * self.bandwidth
         
         self.cur_summation = 0 * A * S
         self.cur_target = 0
@@ -54,11 +54,12 @@ class CascadeController:
         self.target_position = position
     
     def step(
-        self, position: q, velocity: q, target_velocity: q, current: q
+        self, position: q, velocity: q, target_velocity: q, current: q, force: q
     ) -> q:
         """ Calculates the voltage to drive the motor to target position """
-
-        self.cur_target = self._position_pd(position, velocity, target_velocity)
+        self.cur_target = self._position_pd(
+            position, velocity, target_velocity, force
+        )
         return self._current_pi(current)
     
     def sync_loop_time_step(self, time_step: q) -> None:
@@ -71,13 +72,18 @@ class CascadeController:
         self.target_position = 0 * M
         self.cur_target = 0 
     
-    def _position_pd(self, position: q, velocity: q, target_velocity: q) -> q:
+    def _position_pd(
+        self, position: q, velocity: q, target_velocity: q, constant: q
+    ) -> q:
         """ Calculates the current for the PI current controller """
+        # self.pos_kp = (self.load * self.loop_freq ** 2) / (0.5 * constant)
+        # self.pos_kd = (2 * self.load * self.damping_ratio *self.loop_freq) / (0.5 * constant)
+        
         error = self.target_position - position
         proportional = self.pos_kp * error
         
         # Takes derivative on delta between target and actual velocity
-        derivative = self.pos_kd * velocity
+        derivative = self.pos_kd * (target_velocity - velocity)
         current = proportional + derivative
         if abs(current) > self.current_limit:
             # Ensures that the directionality of the current is maintained

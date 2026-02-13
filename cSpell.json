@@ -43,5 +43,13 @@
     "twinx",
     "labelcolor",
     "suvat",
+    "axhline",
+    "frameon",
+    "ncol",
+    "scilimits",
+    "ticklabel",
+    "sharex",
+    "whitegrid",
+    "fontweight",
   ]
 }

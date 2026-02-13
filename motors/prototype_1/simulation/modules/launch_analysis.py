@@ -25,7 +25,7 @@ from modules.suvat_feeding import SUVATFeeder
 from pyfea import (
     Quantity as q, second as S, ampere as A, meter as M, kelvin as K,
     newton as N, joule as J, volt as V, weber, watt, ohm as Ω, henry as H,
-    dimensionless
+    dimensionless, millimeter as mm
 )
 
 from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
@@ -77,51 +77,36 @@ class LaunchResults:
     force: q
     velocity: q
     displacement: q
-    mechanical_energy: q
-    electrical_energy: q
+    p_loss: q
+    k_m: q
     slot_temperature: q
     pole_temperature: q
+    set_points: q
 
     @classmethod
     def create(cls) -> LaunchResults:
-        """ Factory method to create dataclass with units """
+        """ Factory method with units """
         return LaunchResults(
-            []  * S, []  * A, []  * A, []  * N, []  * (M/S**1), 
-            []  * M, []  * J, []  * J, []  * K, []  * K
+            []*S, []*A, []*A, []*N, []*(M/S), 
+            []*M, []*watt, []*(N/watt**0.5), 
+            []*K, []*K, []*M
         )
 
-    def append_frame(self, field: str, value: q):
-        """ Appends a quantity to a file of self """
-        if not hasattr(self, field):
-            msg = f"LaunchResults has no attribute {field!r}"
-            raise AttributeError(msg)
-        
-        # Finds the attributes and appends value
-        target = getattr(self, field)
-        target.append(value)
-
     def record_step(
-        self, t: q, id: q, iq: q, f: q, v: q, d: q, me: q, ee: q, st: q, pt: q
+        self, t: q, id: q, iq: q, f: q, v: q, d: q, 
+        pl: q, km: q, st: q, pt: q, sp: q
     ) -> None:
-        """ Appends a full set of results for a single time step """
-        # You could loop through these to check for complex values
         self.time.append(t)
         self.d_current.append(id)
         self.q_current.append(iq)
         self.force.append(f)
         self.velocity.append(v)
         self.displacement.append(d)
-        self.mechanical_energy.append(me)
-        self.electrical_energy.append(ee)
+        self.p_loss.append(pl)
+        self.k_m.append(km)
         self.slot_temperature.append(st)
         self.pole_temperature.append(pt)
-
-    @property
-    def _name(self) -> str:
-        """ Returns its name as a time series size """
-        return f"<LaunchResults(time={self.time}, entries={len(self.time)})>"
-
-    def __repr__(self): return self._name
+        self.set_points.append(sp)
 
 
 class _Analysis:
@@ -237,8 +222,6 @@ class Launch(_Analysis):
 
         # Set the target for the controller
         displacement_target = self.motor.config.motion.axial_displacement
-        displacement_steps = self.motor.config.motion.axial_displacement_step
-        self.controller.set_target_position(displacement_target)
         feeder = SUVATFeeder(self.motor)
         
         # Fractional time constant stepping
@@ -260,18 +243,17 @@ class Launch(_Analysis):
         slot_temperature = self.motor.config.thermal.atmospheric_temperature
         pole_temperature = self.motor.config.thermal.atmospheric_temperature
         
-        mechanical_energy = 0 * J
-        electrical_energy = 0 * J
-        
         velocity = 0 * (M/S**1)
         displacement = 0 * M
         displacement_angle = 90 * dimensionless
-        force = 0.0 * N
+        force = 0 * N
         power = 0.0 * watt
         
         first_loop = True
+        target_x = 0 * M
+        power_loss = 0 * watt
         feeder.plan_path(displacement, displacement_target)
-        while 1e-6 * M < abs(displacement - displacement_target):
+        while 0.01 * mm < abs(displacement - displacement_target):
             # Breaks the loop if it goes for too many time steps
             max = self.motor.config.numerical.de_solver_maximum_steps
             if int(loop_time.value / time_step.value) > max.value:
@@ -280,11 +262,11 @@ class Launch(_Analysis):
             print (
                 f"Step {loop_time/time_step:.0f}, Time: {loop_time:.3f}, "
                 f"Power: {power:.3f}, Net Force: {force:.3f}, "
-                f"velocity: {velocity:.3f}, displacement {displacement:.3f}, "
+                f"velocity: {velocity:.3f}, dis {displacement:.3f}, tar: {target_x}, "
                 f"dq_i: {d_q_currents}, dq_v: {d_q_voltages}"
             )
 
-            # Updates the target position, velocity and feeds forwards velocity
+            # Updates the target position, velocity and feeds forwards velocity (phase leading)
             target_x, target_v = feeder.get_setpoint(loop_time)
             self.controller.set_target_position(target_x)
             
@@ -302,6 +284,10 @@ class Launch(_Analysis):
                 delta = velocity * time_step
                 displacement += delta
                 
+                k_m = 0.0 * (N/watt ** 0.5)
+                if power_loss > 0.0 * watt:
+                    k_m = force / power_loss ** 0.5
+
                 self.results.record_step(
                     loop_time, 
                     d_q_currents[0],
@@ -309,10 +295,11 @@ class Launch(_Analysis):
                     force,
                     velocity,
                     displacement,
-                    mechanical_energy,
-                    electrical_energy,
+                    power_loss,
+                    k_m,
                     slot_temperature,
-                    pole_temperature   
+                    pole_temperature,
+                    target_x
                 )
                 
                 # Solves acceleration, velocity for the next frame
@@ -332,7 +319,7 @@ class Launch(_Analysis):
 
                 # Extract solutions
                 force, _ = result[0], result[1]
-                resistance, power, t_flux = result[2], result[3], result[4]
+                resistance, _, t_flux = result[2], result[3], result[4]
 
                 d_q_ind = 0 * H
                 for index, sample in enumerate(t_flux):
@@ -340,21 +327,28 @@ class Launch(_Analysis):
                         abs(sample-magnet_flux) / abs(a_b_c_currents[index])
                     )
                 d_q_ind /= len(t_flux)
-                d_q_ind = [d_q_ind.value, d_q_ind.value] * H
+                d_q_ind = [inductance.value, inductance.value] * H
                 
                 # Calculates the d-q flux linkage for current frame
                 a_b_frame = clarke_transform(t_flux[0], t_flux[1], t_flux[2])
                 d_q_frame_flux = park_transform(a_b_frame, elec_angle)
                 
                 d_q_delta_flux = d_q_frame_flux - d_q_flux
-                d_q_delta_flux *= 0     # Cancels back-emf for now
-
-                mechanical_energy += force * velocity * time_step
-                electrical_energy += power * time_step
+                # d_q_delta_flux *= 0     # Cancels back-emf for now
                 
+                current_magnitude = (d_q_currents[0]**2 + d_q_currents[1]**2) ** 0.5
+                max_current = self.motor.config.circuit.current_limit
+                
+                if current_magnitude > max_current:
+                    # Emergency: scale back or halt
+                    scale = max_current / current_magnitude
+                    d_q_currents = [d_q_currents[0] * scale, d_q_currents[1] * scale]
+
                 # Updates the system voltage via the pd-pi controller
+                # rms = (d_q_currents[0]**2 + d_q_currents[1] ** 2) ** 0.5 / sqrt(2)
+                constant = self.initial_conditions.force_constant
                 voltage = self.controller.step(
-                    displacement, velocity, target_v, d_q_currents[1]
+                    displacement, velocity, target_v, d_q_currents[1], constant
                 )
                 d_q_voltages = [0, voltage.value] * voltage.unit
 
@@ -366,12 +360,14 @@ class Launch(_Analysis):
                     d_q_delta_flux,
                     time_step
                 )
+                power = abs(d_q_voltages[0]*d_q_currents[0] + d_q_voltages[1]*d_q_currents[1])
 
                 # Updates slot and pole temperature
-                power_loss = (d_q_currents[0]**2 + d_q_currents[1] ** 2) * resistance
-                slot_temperature, pole_temperature = self._solve_thermal(
-                    power_loss, time_step
-                )
+                if loop_time.value % (thermal_step * time_step).value:
+                    power_loss = (d_q_currents[0]**2 + d_q_currents[1] ** 2) * resistance
+                    slot_temperature, pole_temperature = self._solve_thermal(
+                        power_loss, time_step
+                    )
 
                 loop_time += time_step
 
