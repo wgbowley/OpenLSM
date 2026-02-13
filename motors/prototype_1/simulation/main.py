@@ -43,15 +43,12 @@ print(initial_conditions)
 analysis = Launch(TubularMotor, Magnetic, Thermal, initial_conditions)
 _, results = analysis.run()
 
-fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-fig.suptitle('Motor Launch Analysis Results', fontsize=16)
-
 # Extract stripped values (remove units)
 time = results.time.stripped
 force = results.force.stripped
 velocity = results.velocity.stripped
 displacement = results.displacement.stripped
-target_displacement = results.set_points
+target_displacement = results.set_points.stripped
 d_current = results.d_current.stripped
 q_current = results.q_current.stripped
 k_m = results.k_m.stripped
@@ -60,92 +57,82 @@ slot_temp = results.slot_temperature.stripped
 slot_temp = results.slot_temperature.stripped
 pole_temp = results.pole_temperature.stripped
 
-# Plot 1: Force and Currents
-plt.style.use('seaborn-v0_8-whitegrid')
+plt.style.use("dark_background")
+fig, axes = plt.subplots(5, 1, figsize=(12, 10), sharex=True)
 
-fig, axes = plt.subplots(2, 2, sharex=True, figsize=(13, 9))
-fig.suptitle('Motor System Dynamics Overview', fontsize=16, fontweight='bold')
+fig.canvas.manager.set_window_title("Motor System Simulation Results")
 
-# ---------------- Plot 1: Force and Currents ----------------
-ax1 = axes[0, 0]
-ax1.plot(time, force, 'b-', label='Force', linewidth=2)
-ax1.axhline(0, color='k', linewidth=0.8, alpha=0.2)
-ax1.set_ylabel('Force (N)', color='b')
-ax1.tick_params(axis='y', labelcolor='b')
+MAIN_LW = 2.2
+SEC_LW = 1.6
+ALPHA = 0.85
 
-ax1_twin = ax1.twinx()
-ax1_twin.plot(time, d_current, 'r--', label='d-axis Current', alpha=0.7)
-ax1_twin.plot(time, q_current, 'g--', label='q-axis Current', alpha=0.7)
-ax1_twin.set_ylabel('Current (A)', color='r')
-ax1_twin.tick_params(axis='y', labelcolor='r', alpha=0.7)
-ax1_twin.spines['right'].set_alpha(0.5)
+# -------- Force & Currents --------
+ax = axes[0]
+ax.plot(time, force, color="#FF4500", linewidth=MAIN_LW, label="Force")
+ax.set_ylabel("Force (N)", color="#FF4500")
+ax.tick_params(colors="#FF4500")
+ax.set_title("Force and Phase Currents vs Time", color="white")
 
-lines1, labels1 = ax1.get_legend_handles_labels()
-lines2, labels2 = ax1_twin.get_legend_handles_labels()
-ax1.legend(lines1 + lines2, labels1 + labels2,
-           loc='upper center', bbox_to_anchor=(0.5, -0.18),
-           ncol=3, frameon=False)
+ax_t = ax.twinx()
+ax_t.plot(time, d_current, color="#00BFFF", linestyle="--",
+            linewidth=SEC_LW, alpha=ALPHA, label="d-axis")
+ax_t.plot(time, q_current, color="#7CFC00", linestyle="--",
+            linewidth=SEC_LW, alpha=ALPHA, label="q-axis")
+ax_t.set_ylabel("Current (A)", color="#00BFFF")
+ax_t.tick_params(colors="#00BFFF")
 
-ax1.set_title('Force and Phase Currents')
+ax.legend(loc="upper left", frameon=False)
+ax_t.legend(loc="upper right", frameon=False)
 
-# ---------------- Plot 2: Velocity and Displacement ----------------
-ax2 = axes[0, 1]
-ax2.plot(time, velocity, color='tab:blue', label='Velocity', linewidth=2)
-ax2.axhline(0, color='k', linewidth=0.8, alpha=0.2)
-ax2.set_ylabel('Velocity (m/s)', color='tab:blue')
-ax2.tick_params(axis='y', labelcolor='tab:blue')
+# -------- Velocity & Displacement --------
+ax = axes[1]
+ax.plot(time, velocity, color="#00BFFF", linewidth=MAIN_LW, label="Velocity")
+ax.set_ylabel("Velocity (m/s)", color="#00BFFF")
+ax.tick_params(colors="#00BFFF")
+ax.set_title("Velocity and Displacement vs Time", color="white")
 
-ax2_twin = ax2.twinx()
-ax2_twin.plot(time, displacement, color='orange', label='Actual Displacement', linewidth=2)
-ax2_twin.plot(time, target_displacement.stripped, 'g--', label='Target Displacement', linewidth=1.5, alpha=0.8)
-ax2_twin.set_ylabel('Displacement (m)', color='orange')
-ax2_twin.tick_params(axis='y', labelcolor='orange', alpha=0.7)
-ax2_twin.spines['right'].set_alpha(0.5)
+ax_t = ax.twinx()
+ax_t.plot(time, displacement, color="#FFA500",
+            linewidth=MAIN_LW, label="Displacement")
+ax_t.plot(time, target_displacement, color="#7CFC00",
+            linestyle="--", linewidth=SEC_LW, label="Target")
+ax_t.set_ylabel("Displacement (m)", color="#FFA500")
+ax_t.tick_params(colors="#FFA500")
 
-lines1, labels1 = ax2.get_legend_handles_labels()
-lines2, labels2 = ax2_twin.get_legend_handles_labels()
-ax2.legend(lines1 + lines2, labels1 + labels2,
-           loc='upper center', bbox_to_anchor=(0.5, -0.18),
-           ncol=2, frameon=False)
+ax.legend(loc="upper left", frameon=False)
+ax_t.legend(loc="upper right", frameon=False)
 
-ax2.set_title('Velocity and Displacement')
+# -------- Motor Integrity --------
+ax = axes[2]
+ax.plot(time, k_m, color="#00BFFF", linewidth=MAIN_LW, label="Km")
+ax.set_ylabel("Km (N/√W)", color="#00BFFF")
+ax.tick_params(colors="#00BFFF")
+ax.set_title("Motor Constant and Temperature", color="white")
 
-# ---------------- Plot 3: Motor Constant and Temperature ----------------
-ax3 = axes[1, 0]
-ax3.plot(time, k_m, color='tab:blue', label='Motor Constant (Km)', linewidth=2)
-ax3.set_ylabel('Km (N/√W)', color='tab:blue')
-ax3.tick_params(axis='y', labelcolor='tab:blue')
+ax_t = ax.twinx()
+ax_t.plot(time, slot_temp, color="#FF4500",
+            linewidth=SEC_LW, label="Slot Temp")
+ax_t.set_ylabel("Temperature (K)", color="#FF4500")
+ax_t.tick_params(colors="#FF4500")
 
-ax3_twin = ax3.twinx()
-ax3_twin.plot(time, slot_temp, color='orange', label='Slot Temperature', linewidth=1.5)
-ax3_twin.set_ylabel('Temperature (K)', color='orange')
-ax3_twin.tick_params(axis='y', labelcolor='orange', alpha=0.7)
-ax3_twin.spines['right'].set_alpha(0.5)
+ax.legend(loc="upper left", frameon=False)
+ax_t.legend(loc="upper right", frameon=False)
 
-lines1, labels1 = ax3.get_legend_handles_labels()
-lines2, labels2 = ax3_twin.get_legend_handles_labels()
-ax3.legend(lines1 + lines2, labels1 + labels2,
-           loc='upper center', bbox_to_anchor=(0.5, -0.18),
-           ncol=2, frameon=False)
+# -------- Power Loss --------
+ax = axes[3]
+ax.plot(time, p_loss, color="#FF0000", linewidth=MAIN_LW)
+ax.fill_between(time, p_loss, alpha=0.2)
+ax.set_ylabel("Loss (W)", color="white")
+ax.set_title("Resistive Power Loss", color="white")
+ax.tick_params(colors="white")
+ax.yaxis.set_major_formatter(ScalarFormatter(useMathText=True))
+ax.ticklabel_format(style="sci", axis="y", scilimits=(0, 0))
 
-ax3.set_title('Motor Integrity')
+# -------- Time Reference --------
+axes[4].plot(time, time, color="#888888", alpha=0.0)  # dummy for spacing
+axes[4].set_xlabel("Time (s)", color="white")
+axes[4].set_title("Time Base", color="white")
+axes[4].tick_params(colors="white")
 
-# ---------------- Plot 4: Power Loss ----------------
-ax4 = axes[1, 1]
-ax4.fill_between(time, p_loss, alpha=0.15)
-ax4.plot(time, p_loss, label='Resistive Loss', linewidth=2)
-ax4.set_ylabel('Loss (W)')
-ax4.set_xlabel('Time (s)')
-ax4.yaxis.set_major_formatter(ScalarFormatter(useMathText=True))
-ax4.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-ax4.legend(loc='upper center', bbox_to_anchor=(0.5, -0.18),
-           frameon=False)
-
-ax4.set_title('Instantaneous Power Dissipation')
-
-# Shared x label only on bottom row
-ax3.set_xlabel('Time (s)')
-ax4.set_xlabel('Time (s)')
-
-plt.tight_layout(rect=[0, 0, 1, 0.95])
+fig.tight_layout(pad=2.0)
 plt.show()
