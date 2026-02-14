@@ -329,10 +329,14 @@ class Launch(_Analysis):
             a_b_frame = clarke_transform(t_flux[0], t_flux[1], t_flux[2])
             d_q_frame_flux = park_transform(a_b_frame, elec_angle)
             
+            a_b_frame = clarke_transform(
+                t_flux[0]-magnet_flux, t_flux[1]-magnet_flux, t_flux[2]-magnet_flux
+            )
+            d_q_ind_flux = park_transform(a_b_frame, elec_angle)
+
             d_q_ind = [inductance.value, inductance.value] * H
             if d_q_currents[0] > 0 * A and d_q_currents[1] > 0 * A:
-                d_q_ind = [d_q_frame_flux[0]/d_q_currents[0], d_q_frame_flux[1]/d_q_currents[1]] * H
-            
+                d_q_ind = [d_q_ind_flux[0]/d_q_currents[0], d_q_ind_flux[1]/d_q_currents[1]] * H
             current_magnitude = (d_q_currents[0]**2 + d_q_currents[1]**2) ** 0.5
             max_current = self.motor.config.circuit.current_limit
             

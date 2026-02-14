@@ -13,7 +13,6 @@ from math import sin, pi
 
 from dataclasses import dataclass
 from operator import attrgetter
-from tabulate import tabulate
 
 from pyfea.domain.units import Quantity, ampere as A, weber as W, ohm as Ω, henry as H
 from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
@@ -35,27 +34,17 @@ class InitialConditions:
     
     @property
     def _name(self) -> str:
-        """ Returns its name as a table """
-        table_data = [
-            ["Force Constant", f"{self.force_constant:.3f}"],
-            ["Resistance @ Atm_Temp", f"{self.resistance_atm_temp:.3f}"],
-            ["Secant Inductance", f"{self.secant_phase_inductance:.3f}"],
-            ["Magnet Flux", f"{self.magnet_flux:.3f}"],
-            ["Armature Mass", f"{self.armature_mass:.3f}"],
-            ["Slot Volume", f"{self.slot_volume:.3f}"]
-        ]
-
-        table_str = tabulate(
-            table_data, headers=["parameters", "value"], tablefmt="fancy_grid"
-        )
-    
-        table_width = len(table_str.split('\n')[0])
-        header_text = " Initial Conditions "
-        
-        return f"{header_text:=^{table_width}}\n{table_str}"
-        
+        """ Returns its name as a single line """
+        return (f"Initial Conditions: "
+                f"F ={self.force_constant:.3f}, "
+                f"R = {self.resistance_atm_temp:.3f}, "
+                f"L = {self.secant_phase_inductance:.3f}, "
+                f"Φ_magnet = {self.magnet_flux}, "
+                f"m_armature = {self.armature_mass:.3f}, "
+                f"V_slot={self.slot_volume:.3f}")
     
     def __repr__(self): return self._name
+
 
 def pre_simulation_setup(
     motor: TubularLinearMotor,

@@ -36,7 +36,7 @@ class CascadeController:
 
         # Defines position loop variables
         self.loop_freq = self.freq / motor.config.numerical.pi_pd_solver_step
-        self.damping_ratio = 2 # sqrt(2) / 2
+        self.damping_ratio = sqrt(2) / 2
         
         self.pos_kp = (self.load * self.loop_freq ** 2) / initial.force_constant
         self.pos_kd = (2 * self.load * self.damping_ratio * self.loop_freq ) / initial.force_constant
