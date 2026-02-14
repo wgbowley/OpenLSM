@@ -58,81 +58,82 @@ slot_temp = results.slot_temperature.stripped
 pole_temp = results.pole_temperature.stripped
 
 plt.style.use("dark_background")
-fig, axes = plt.subplots(5, 1, figsize=(12, 10), sharex=True)
 
-fig.canvas.manager.set_window_title("Motor System Simulation Results")
+# Setup for 3 clean graphs
+fig, axes = plt.subplots(3, 1, figsize=(12, 10), sharex=True)
+fig.suptitle("MOTOR SYSTEM PERFORMANCE SIMULATION", fontsize=16, fontweight='bold', color='white')
 
-MAIN_LW = 2.2
-SEC_LW = 1.6
-ALPHA = 0.85
+# Style Constants
+MAIN_LW = 2.0
+SEC_LW = 1.5
+ALPHA = 0.3
 
-# -------- Force & Currents --------
-ax = axes[0]
-ax.plot(time, force, color="#FF4500", linewidth=MAIN_LW, label="Force")
-ax.set_ylabel("Force (N)", color="#FF4500")
-ax.tick_params(colors="#FF4500")
-ax.set_title("Force and Phase Currents vs Time", color="white")
+# 1. DYNAMICS: Force & Phase Currents
+ax1 = axes[0]
+ax1.plot(time, force, color="#00FFD1", linewidth=MAIN_LW, label="Output Force")
+ax1.set_ylabel("FORCE (N)", fontweight='bold')
 
-ax_t = ax.twinx()
-ax_t.plot(time, d_current, color="#00BFFF", linestyle="--",
-            linewidth=SEC_LW, alpha=ALPHA, label="d-axis")
-ax_t.plot(time, q_current, color="#7CFC00", linestyle="--",
-            linewidth=SEC_LW, alpha=ALPHA, label="q-axis")
-ax_t.set_ylabel("Current (A)", color="#00BFFF")
-ax_t.tick_params(colors="#00BFFF")
+ax1_t = ax1.twinx()
+ax1_t.plot(time, d_current, color="#FF00FF", linestyle="--", linewidth=SEC_LW, label="$I_d$ (d-axis)")
+ax1_t.plot(time, q_current, color="#FFFF00", linestyle="--", linewidth=SEC_LW, label="$I_q$ (q-axis)")
+ax1_t.set_ylabel("CURRENTS (A)", fontweight='bold')
 
-ax.legend(loc="upper left", frameon=False)
-ax_t.legend(loc="upper right", frameon=False)
+ax1.set_title("Electromechanical Dynamics", loc='left', alpha=0.7)
+ax1.legend(loc="upper left", frameon=False)
+ax1_t.legend(loc="upper right", frameon=False)
 
-# -------- Velocity & Displacement --------
-ax = axes[1]
-ax.plot(time, velocity, color="#00BFFF", linewidth=MAIN_LW, label="Velocity")
-ax.set_ylabel("Velocity (m/s)", color="#00BFFF")
-ax.tick_params(colors="#00BFFF")
-ax.set_title("Velocity and Displacement vs Time", color="white")
+# 2. KINEMATICS: Velocity & Displacement
+ax2 = axes[1]
+ax2.plot(time, velocity, color="#00BFFF", linewidth=MAIN_LW, label="Velocity")
+ax2.set_ylabel("VELOCITY (m/s)", fontweight='bold')
 
-ax_t = ax.twinx()
-ax_t.plot(time, displacement, color="#FFA500",
-            linewidth=MAIN_LW, label="Displacement")
-ax_t.plot(time, target_displacement, color="#7CFC00",
-            linestyle="--", linewidth=SEC_LW, label="Target")
-ax_t.set_ylabel("Displacement (m)", color="#FFA500")
-ax_t.tick_params(colors="#FFA500")
+ax2_t = ax2.twinx()
+ax2_t.plot(time, displacement, color="#FF4500", linewidth=MAIN_LW, label="Actual Pos")
+ax2_t.plot(time, target_displacement, color="#7CFC00", linestyle=":", linewidth=SEC_LW, label="Target")
+ax2_t.set_ylabel("DISPLACEMENT (m)", fontweight='bold')
 
-ax.legend(loc="upper left", frameon=False)
-ax_t.legend(loc="upper right", frameon=False)
+ax2.set_title("Motion Tracking", loc='left', alpha=0.7)
+ax2.legend(loc="upper left", frameon=False)
+ax2_t.legend(loc="upper right", frameon=False)
 
-# -------- Motor Integrity --------
-ax = axes[2]
-ax.plot(time, k_m, color="#00BFFF", linewidth=MAIN_LW, label="Km")
-ax.set_ylabel("Km (N/√W)", color="#00BFFF")
-ax.tick_params(colors="#00BFFF")
-ax.set_title("Motor Constant and Temperature", color="white")
+# 3. THERMAL & LOSS: Motor Integrity & Power
+ax3 = axes[2]
+ax3.plot(time, slot_temp, color="#FF3131", linewidth=MAIN_LW, label="Slot Temp")
+ax3.fill_between(time, slot_temp, alpha=0.1, color="#FF3131")
+ax3.set_ylabel("TEMPERATURE (K)", fontweight='bold')
 
-ax_t = ax.twinx()
-ax_t.plot(time, slot_temp, color="#FF4500",
-            linewidth=SEC_LW, label="Slot Temp")
-ax_t.set_ylabel("Temperature (K)", color="#FF4500")
-ax_t.tick_params(colors="#FF4500")
+ax3_t = ax3.twinx()
+ax3_t.plot(time, p_loss, color="#FFFFFF", linewidth=SEC_LW, alpha=0.6, label="Power Loss")
+ax3_t.set_ylabel("LOSS (W)", fontweight='bold')
 
-ax.legend(loc="upper left", frameon=False)
-ax_t.legend(loc="upper right", frameon=False)
+ax3.set_title("Thermal Load & Efficiency", loc='left', alpha=0.7)
+ax3.set_xlabel("TIME", fontweight='bold')
+ax3.legend(loc="upper left", frameon=False)
+ax3_t.legend(loc="upper right", frameon=False)
 
-# -------- Power Loss --------
-ax = axes[3]
-ax.plot(time, p_loss, color="#FF0000", linewidth=MAIN_LW)
-ax.fill_between(time, p_loss, alpha=0.2)
-ax.set_ylabel("Loss (W)", color="white")
-ax.set_title("Resistive Power Loss", color="white")
-ax.tick_params(colors="white")
-ax.yaxis.set_major_formatter(ScalarFormatter(useMathText=True))
-ax.ticklabel_format(style="sci", axis="y", scilimits=(0, 0))
+for i, ax in enumerate(axes):
+    # 1. Enable Y-axis ticks and labels for the main axes
+    ax.tick_params(axis='y', colors='white', labelsize=9)
+    ax.yaxis.set_visible(True)
+    
+    # 2. Find and enable labels for the twin axes (the ones on the right)
+    # We look through all axes in the figure that aren't the main ones
+    for other_ax in fig.axes:
+        if other_ax not in axes:
+            other_ax.tick_params(axis='y', colors='white', labelsize=9)
+            other_ax.yaxis.set_visible(True)
 
-# -------- Time Reference --------
-axes[4].plot(time, time, color="#888888", alpha=0.0)  # dummy for spacing
-axes[4].set_xlabel("Time (s)", color="white")
-axes[4].set_title("Time Base", color="white")
-axes[4].tick_params(colors="white")
+    # 3. Enable X-axis labels only for the bottom plot (since sharex=True)
+    if i == 2:
+        ax.tick_params(axis='x', colors='white', labelsize=9)
+        ax.xaxis.set_visible(True)
 
-fig.tight_layout(pad=2.0)
+    # Aesthetic styling (Keeping the clean look but showing the lines)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_color('#444444')
+    ax.spines['bottom'].set_color('#444444')
+    ax.grid(True, linestyle=':', alpha=0.2)
+
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 plt.show()

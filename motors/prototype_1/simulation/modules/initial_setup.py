@@ -9,7 +9,7 @@ Description:
     Solve thermal @ atm_temp to allow for transient thermal modelling
 """
 
-from math import sin, sqrt, pi
+from math import sin, pi
 
 from dataclasses import dataclass
 from operator import attrgetter
@@ -115,9 +115,8 @@ def pre_simulation_setup(
     secant_inductance /= len(motor.PHASES)
     
     # Calculates the lorentz force constant
-    current_rms = initial_current / sqrt(2)
     force = attrgetter(f"element_{motor.SLOT_ID.value}.force_lorentz")(results)
-    force_constant = (force.magnitude * force.unit) / current_rms
+    force_constant = (force.magnitude * force.unit) / initial_current
     
     # Calculates armature mass
     slot_volume = attrgetter(f"element_{motor.SLOT_ID.value}.volume")(results)

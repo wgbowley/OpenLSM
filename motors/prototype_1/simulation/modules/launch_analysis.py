@@ -280,6 +280,7 @@ class Launch(_Analysis):
             
             a_b_frame = clarke_transform(t_flux[0], t_flux[1], t_flux[2])
             d_q_frame_flux = park_transform(a_b_frame, elec_angle)
+
             # Solves mechanical DE's through explicit euler method
             delta = velocity * time_step
             displacement += delta
@@ -303,6 +304,9 @@ class Launch(_Analysis):
             )
             
             # Solves acceleration, velocity for the next frame
+            normal_force = self.motor.config.motion.gravity * system_mass
+            force -= normal_force * self.motor.config.motion.coefficient_friction
+
             acceleration = force / system_mass
             velocity += acceleration * time_step
 
