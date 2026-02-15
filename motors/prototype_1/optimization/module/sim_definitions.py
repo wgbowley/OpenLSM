@@ -14,9 +14,10 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, fields, field, InitVar
 
+from pyfea import UnitError, Quantity as Q
 from pyfea import (
-    UnitError, Quantity as Q, newton as N, ampere as A, second as S,
-    henry as H, weber as TM2, volt as V, kilogram as kg, meter as m, 
+    newton as N, ampere as A, second as S, henry as H, 
+    weber as TM2, volt as V, kilogram as kg, meter as m, 
     ohm, kelvin as K, watt, dimensionless
 )
 
@@ -147,7 +148,7 @@ class DynamicSeries(SimStates):
 @dataclass(frozen=True, slots=True, repr=False)
 class DynamicEvaluation(SimData):
     motor_constant: Q       = field(metadata={'unit': N/watt**0.5})
-    temp_at_inf: Q          = field(metadata={'unit': K})
+    asymptotic_temp: Q      = field(metadata={'unit': K})
     force_ripple: Q         = field(metadata={'unit': dimensionless})
     time_constant: Q        = field(metadata={'unit': H/ohm})
     weight: Q               = field(metadata={'unit': kg})
@@ -159,7 +160,7 @@ class DynamicEvaluation(SimData):
         return (
             f"<DynamicEvaluation("
             f"k_m: {self.motor_constant:.3f}, "
-            f"Temp t=inf: {self.temp_at_inf:.3f}, "
+            f"asymptotic_temp: {self.asymptotic_temp:.3f}, "
             f"Ripple: {self.force_ripple:.3f}, "
             f"T_constant: {self.time_constant}, "
             f"m_armature: {self.weight:.3f}, "
@@ -179,6 +180,7 @@ class MotorState(SimStates):
     force: Q
     velocity: Q
     acceleration: Q
+    position_x: Q
     displacement: Q
     displacement_angle: Q
     
@@ -205,7 +207,7 @@ class MotorState(SimStates):
         return cls(
             0*S, 0*m, 0*m/S,             # Time & Control
             0*N, 0*m/S, 0*m/S**2,        # Mech: F, v, a
-            0*m, 0*dimensionless,        # Mech: x, theta
+            0 *m, 0*m, 0*dimensionless,  # Mech: x, theta
             [0, 0]*V, [0, 0]*A,          # Elec: V_dq, I_dq
             [0, 0]*TM2,                  # Elec: Flux
             atm_temp*K, atm_temp*K,      # Thermal 

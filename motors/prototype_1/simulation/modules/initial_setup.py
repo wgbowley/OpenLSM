@@ -109,7 +109,7 @@ def pre_simulation_setup(
     
     # Calculates armature mass
     slot_volume = attrgetter(f"element_{motor.SLOT_ID.value}.volume")(results)
-    core_volume = attrgetter(f"element_{motor.SLOT_ID.value}.volume")(results)
+    core_volume = attrgetter(f"element_{motor.CORE_ID.value}.volume")(results)
     
     slot_density = motor.armature_slots_material.values().physical.density
     core_density = motor.armature_core_material.values().physical.density

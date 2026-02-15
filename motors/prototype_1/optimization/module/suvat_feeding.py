@@ -9,7 +9,7 @@ Description:
 """
 
 
-from pyfea import Quantity as q, second, meter
+from pyfea import UnitError, Quantity as q, second, meter
 from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
 
 
@@ -23,6 +23,10 @@ class SUVATFeeder:
     
     def plan_path(self, start_pos: q, end_pos: q) -> None:
         """ Calculates accelerations, velocities and time """
+        if start_pos != meter or end_pos != meter:
+            msg = f"Both start_pos and end_pos must be defined in meters"
+            raise UnitError(msg)
+        
         self.start_pos, self.dis = start_pos, abs(end_pos - start_pos)
         self.direction = 1 if (end_pos > start_pos) else -1
 
@@ -73,4 +77,4 @@ class SUVATFeeder:
             v = 0 * meter / second
             s = self.dis
 
-        return (self.start_pos + s * self.direction, v * self.direction)
+        return self.start_pos + s * self.direction, v * self.direction

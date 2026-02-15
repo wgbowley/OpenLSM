@@ -54,5 +54,6 @@
     "linestyle",
     "xticklabels",
     "yticklabels",
+    "pymoo"
   ]
 }
