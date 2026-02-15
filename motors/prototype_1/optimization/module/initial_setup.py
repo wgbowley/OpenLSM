@@ -37,7 +37,8 @@ def _simulate_magnet_flux(
         
     # Defines the required output for this simulation
     outputs = SolverOutputs()
-    for phase in motor.PHASES: outputs.add_circuit(phase, CircuitOptions.FLUX_LINKAGE)
+    for phase in motor.PHASES: 
+        outputs.add_circuit(phase, CircuitOptions.FLUX_LINKAGE)
     
     # Solves and get average flux linkage across all phases
     magnet_results = magnetic_solver.solve(outputs)
@@ -115,12 +116,13 @@ def initial_state(
 def static_evaluation(
     motor: TubularLinearMotor,
     thermal_solver: FEMMThermostaticSolver,
-    magnetic_solver: FEMMMagnetostaticSolver
+    magnetic_solver: FEMMMagnetostaticSolver,
+    filename: str = "thread_1"
 ) -> StaticEvaluation:
     """ Constructs 'StaticEvaluation' via simulation """
     # Builds the motor within the magnetostatic domain
     domain = motor.build_domain(magnetic_solver)
-    magnetic_solver.setup(domain)
+    magnetic_solver.setup(domain, filename)
     
     # Calculates magnetic/circuit variables via FEA model
     magnet_flux = _simulate_magnet_flux(motor, magnetic_solver)
@@ -130,7 +132,7 @@ def static_evaluation(
     
     # Builds the motor within the thermostatic domain
     domain = motor.build_domain(thermal_solver)
-    thermal_solver.setup(domain)
+    thermal_solver.setup(domain, filename)
     armature_mass, slot_volume = initial_state(motor, thermal_solver)
 
     return StaticEvaluation(

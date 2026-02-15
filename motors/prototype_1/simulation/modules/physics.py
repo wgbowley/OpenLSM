@@ -102,8 +102,8 @@ def rk_2nd_order_currents(
     # f_d, f_q = flux_linkages[0], flux_linkages[1]
 
     # Calculates the d-q axis induced voltages
-    d_induced = 0 * volt
-    q_induced = induced
+    d_induced = induced[0] * 0      # Cancels d axis induced voltage
+    q_induced = induced[1]
 
     # Calculates the first step
     k1_d = differential_d_current(i_d, v_d, resistance, h_d, d_induced)

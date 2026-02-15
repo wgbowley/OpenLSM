@@ -347,25 +347,24 @@ class Launch(_Analysis):
 
             # Updates the system voltage via the pd-pi controller
             constant = self.initial_conditions.force_constant
-            voltage = self.controller.step(
-                displacement, velocity, target_v, d_q_currents[1], constant
-            )
-            d_q_voltages = [0, voltage.value] * voltage.unit
 
             # induced = (pi / self.motor.pole_pitch) * velocity * magnet_flux
             delta_flux_d = d_q_frame_flux[0] - prev_d_q_flux[0]
             delta_flux_q = d_q_frame_flux[1] - prev_d_q_flux[1]
 
             # d_induced_fea = delta_flux_d / time_step
-            q_induced_fea = delta_flux_q / time_step
-
-            induced = q_induced_fea  
+            qd_induced = [(delta_flux_d / time_step).value * 0, (delta_flux_q / time_step).value] * V
+  
+            d_q_voltages = self.controller.step(
+                displacement, velocity, target_v, d_q_currents[1], constant, 0 * V
+            )
+    
             d_q_currents = rk_2nd_order_currents(
                 d_q_currents,
                 d_q_voltages,
                 resistance,
                 d_q_ind,
-                induced,
+                qd_induced,
                 time_step
             )
             power = abs(d_q_voltages[0]*d_q_currents[0] + d_q_voltages[1]*d_q_currents[1])

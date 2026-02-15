@@ -184,8 +184,13 @@ class MotorState(SimStates):
     displacement: Q
     displacement_angle: Q
     
+    # Circuits
+    inductance: Q
+    resistance: Q
+    
     # Electrical State
     dq_voltages: Q
+    dq_induced: Q
     dq_currents: Q
     dq_flux_linkage: Q
     
@@ -208,7 +213,8 @@ class MotorState(SimStates):
             0*S, 0*m, 0*m/S,             # Time & Control
             0*N, 0*m/S, 0*m/S**2,        # Mech: F, v, a
             0 *m, 0*m, 0*dimensionless,  # Mech: x, theta
-            [0, 0]*V, [0, 0]*A,          # Elec: V_dq, I_dq
+            [0, 0]*H, 0 * ohm            # Circ: Ind_dq, Res
+            [0, 0]*V, [0, 0]*V, [0, 0]*A,# Elec: V_dq, I_dq
             [0, 0]*TM2,                  # Elec: Flux
             atm_temp*K, atm_temp*K,      # Thermal 
             _CREATED_THROUGH_CLS

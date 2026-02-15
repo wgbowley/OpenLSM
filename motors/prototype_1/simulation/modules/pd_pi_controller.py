@@ -54,14 +54,15 @@ class CascadeController:
         self.target_position = position
     
     def step(
-        self, position: q, velocity: q, target_velocity: q, current: q, force: q
+        self, position: q, velocity: q, target_velocity: q, current: q, force: q,
+        d_induced: q
     ) -> q:
         """ Calculates the voltage to drive the motor to target position """
         self.cur_target = self._position_pd(
             position, velocity, target_velocity, force
         )
-        return self._current_pi(current)
-    
+        return self._current_pi(current, d_induced)
+
     def sync_loop_time_step(self, time_step: q) -> None:
         """ Syncs up the Quasi-transient time_step and controller step """
         self.time_step = time_step
@@ -91,8 +92,8 @@ class CascadeController:
 
         return current
 
-    def _current_pi(self, current: q) -> q:
-        """ Calculates the voltage for the motor q-axis; Assumes no voltage on d-axis"""
+    def _current_pi(self, current: q, d_induced: q) -> tuple[q, q]:
+        """ Calculates the voltage for the motor q-axis; cancels d-axis voltage"""
         error = self.cur_target - current
         proportional = self.cur_kp * error
     
@@ -100,8 +101,8 @@ class CascadeController:
         tentative = proportional + self.cur_summation * self.cur_ki
         if abs(tentative) <= self.voltage_limit:
             self.cur_summation += error * self.time_step
-            return tentative
+            return (-d_induced.value, tentative.value) * tentative.unit
 
         # Camps and prevent windup
         windup = self.voltage_limit if tentative > 0 * V else - self.voltage_limit
-        return windup
+        return (-d_induced.value, windup.value) * windup.unit
