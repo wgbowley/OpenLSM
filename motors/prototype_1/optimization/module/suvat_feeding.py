@@ -10,20 +10,19 @@ Description:
 
 
 from pyfea import UnitError, Quantity as q, second, meter
-from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
 
 
 class SUVATFeeder:
     """ Feeds a controller target position at target times """
-    def __init__(self, motor: TubularLinearMotor) -> None:
+    def __init__(self, velocity_max: q, acceleration_max: q) -> None:
         """ Initializes the feeder and adds key attributes """     
         # dp/dt, dv/dt maximums for the feeder to follow
-        self.velocity_max = motor.config.motion.velocity_max
-        self.acceleration_max = motor.config.motion.acceleration_max
+        self.velocity_max = velocity_max
+        self.acceleration_max = acceleration_max
     
     def plan_path(self, start_pos: q, end_pos: q) -> None:
         """ Calculates accelerations, velocities and time """
-        if start_pos != meter or end_pos != meter:
+        if start_pos.unit != meter or end_pos.unit != meter:
             msg = f"Both start_pos and end_pos must be defined in meters"
             raise UnitError(msg)
         

@@ -2,30 +2,31 @@
 Filename: main.py
 
 Description:
-    Prototype 1 linear Motor simulation script refer
-    to configuration.uiv for implementation details
-    and parameters.
+    Prototype 1 linear Motor simulation / optimization 
+    script refer to configuration.uiv for implementation 
+    details and parameters.
     
     NOTE: 
+    Dependencies: matplotlib, pyfea, picounits, pymoo
+    
     If this script fails to run. It most likely means 
     that the pyfea (v0.1.0) api has been deprecated
-    
-    NOTE:
-    Dependencies: tabulate, matplotlib, pyfea, picounits
 """
+
 import matplotlib.pyplot as plt
-from matplotlib.ticker import ScalarFormatter
 
-from modules.initial_setup import pre_simulation_setup, initial_state
-from modules.launch_analysis import Launch
+from module.sim_definitions import PathSegment
+from module.initial_setup import static_evaluation
+from module.dynamic_analysis import PointToPoint
 
+from pyfea import second, millimeter as mm 
 from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
 from pyfea.solver.femm.domains.magnetostatic.solver import FEMMMagnetostaticSolver
 from pyfea.solver.femm.domains.thermostatic.solver import FEMMThermostaticSolver
 
-# Defines configuration file path and solver output folder path
-path_lib = "motors/prototype_1/simulation/configuration.uiv"
-solver_folder = "motors/prototype_1/simulation/outputs"
+# Defines configuration file and solver output path
+path_lib = "motors/prototype_1/optimization/configuration.uiv"
+solver_folder = "motors/prototype_1/optimization/outputs"
 
 # Defines the tubular linear motor via configuration parameters
 TubularMotor = TubularLinearMotor(path_lib)
@@ -34,16 +35,16 @@ TubularMotor = TubularLinearMotor(path_lib)
 Magnetic = FEMMMagnetostaticSolver(solver_folder)
 Thermal = FEMMThermostaticSolver(solver_folder)
 
-# Solves for initial magnetic parameters and initial thermal state
-initial_conditions = pre_simulation_setup(TubularMotor, Magnetic)
-initial_state(TubularMotor, Thermal)
-print(initial_conditions)
+static_results = static_evaluation(TubularMotor, Thermal, Magnetic)
+print(static_results)
 
-# Initializes the launch analysis class
-analysis = Launch(TubularMotor, Magnetic, Thermal, initial_conditions)
-_, results = analysis.run()
+analysis = PointToPoint(TubularMotor, Thermal, Magnetic, static_results)
+segment = PathSegment(2 * mm, 200 * mm/second, 10000 * mm/second**2, 1 * second)
 
-# Extract stripped values (remove units)
+results, summary = analysis.run(segment, True)
+print(summary)
+
+# Extract stripped values (removes units)
 time = results.time.stripped
 force = results.force.stripped
 velocity = results.velocity.stripped

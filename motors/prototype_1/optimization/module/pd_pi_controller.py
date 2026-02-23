@@ -65,7 +65,7 @@ class CascadeController:
     
     def sync_loop_time_step(self, time_step: Q) -> None:
         """ Syncs up the Quasi-transient time_step and controller step """
-        if time_step == S: 
+        if time_step.unit == S: 
             self.time_step = time_step
             return
         
@@ -75,7 +75,7 @@ class CascadeController:
     def step(self, state: MotorState) -> Q:
         """ Calculates the voltage to drive the motor to target position """
         self.cur_target = self._position_pd(state)
-        return self._current_pi(self.cur_target)
+        return self._current_pi(state)
         
     def _position_pd(self, state: MotorState) -> Q:
         """ Calculates the current for the PI controller from position/velocity """
@@ -93,17 +93,18 @@ class CascadeController:
         
         return current
     
-    def _current_pi(self, current: Q) -> Q:
+    def _current_pi(self, state: MotorState) -> None:
         """ Calculates the voltage for motor q-axis from PD controller """
         # Calculates the proportional of the current
-        error = self.cur_target - current
+        error = self.cur_target - state.dq_currents[1]
         proportional = self.cur_kp * error
         
         # Calculates the current integrator state
         tentative = proportional + self.cur_integral * self.cur_ki
         if abs(tentative) <= self.voltage_limit:
             self.cur_integral += error * self.time_step
-            return tentative
+            return [- state.dq_induced[0].value, tentative.value] * tentative.unit
         
-        # Camps and prevent windup
-        return self.voltage_limit if tentative > 0 * V else - self.voltage_limit
+        # Clamps and prevent windup
+        q_voltage = self.voltage_limit if tentative > 0 * V else - self.voltage_limit
+        return [- state.dq_induced[0].value, q_voltage] * q_voltage.unit

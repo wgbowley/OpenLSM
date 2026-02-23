@@ -10,7 +10,7 @@ Description:
 from math import pi, sqrt
 from module.sim_definitions import MotorState
 
-from pyfea import Quantity as q
+from pyfea import Quantity as q, weber
 from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
 
 def electrical_angle(displacement: q, pitch: q) -> q:
@@ -58,47 +58,81 @@ def clarke_transform(a: q, b: q, c: q) -> q:
     return (alpha, beta) * beta.unit
 
 
-def _id_dt(ms: MotorState, d_v: q, d_i: q, q_i: q, f_e: q) -> q:
-    """ Differential equation for d-axis current with q coupling """
-    standard = d_v - ms.resistance * d_i
-    coupling = f_e * q_i * ms.inductance[1] 
+def induced_voltage(delta_flux_linkage: q, delta_time: q) -> q:
+    """
+    Calculates total induced (back-EMF) voltage.
+    E = Δψ / Δt
+    """
+    return delta_flux_linkage / delta_time
 
-    return (standard + coupling) / ms.inductance[0]
+
+def differential_d_current(
+    current_d: q, voltage_d: q, resistance: q, inductance: q, e_induced: q 
+) -> q:
+    """
+    Differential equation for d-axis current.
+    di_d/dt = (v_d - R*i_d - E_d) / L_d
+    """
+    return (voltage_d - resistance * current_d - e_induced) / inductance
 
 
-def _id_qt(ms: MotorState, q_v: q, q_i: q, d_i: q, f_e: q, f_m: q) -> q:
-    """ Differential equation for q-axis current with d coupling """
-    standard = q_v - ms.resistance * q_i
-    coupling = f_e * (d_i * ms.inductance[0] + f_m)
-    
-    return (standard - coupling) / ms.inductance[1]
+def differential_q_current(
+    current_q: q, voltage_q: q, resistance: q, inductance: q, e_induced: q 
+) -> q:
+    """
+    Differential equation for q-axis current.
+    di_q/dt = (v_q - R*i_q - E_q) / L_q
+    """
+    return (voltage_q - resistance * current_q - e_induced) / inductance
 
 
 def rk_2nd_order_currents(
-    motor: TubularLinearMotor, state: MotorState, step_size: q, magnet_flux: q
-) -> None:
-    """ 
-    Solves the differential equations for the d-axis and q-axis 
-    currents using ralston's method
+    motor: TubularLinearMotor,
+    state: MotorState, 
+    prev_dq_flux: q,
+    step_size: q
+) -> q:
     """
-    ms, f_m = state, magnet_flux
-    f_e = pi * ms.velocity / motor.pole_pitch
+    Solves the differential equations for the d-axis 
+    and q-axis currents using Ralston's method
+    """
+    # Extract current d-q flux linkage from total flux
+    a_b_frame = clarke_transform(
+        state.total_flux[0], 
+        state.total_flux[1], 
+        state.total_flux[2]
+    )
+    elec_angle = electrical_angle(state.displacement, motor.pole_pitch)
+    current_dq_flux = park_transform(a_b_frame, elec_angle)
     
-    # Calculates the first & second step
-    k1_d = _id_dt(ms, ms.dq_voltages[0], ms.dq_currents[0], ms.dq_currents[1], f_e)
-    k1_q = _id_qt(ms, ms.dq_voltages[1], ms.dq_currents[1], ms.dq_currents[0], f_e, f_m)
+    # Calculate induced voltages from flux change
+    delta_flux_d = current_dq_flux[0] - prev_dq_flux[0]
+    delta_flux_q = current_dq_flux[1] - prev_dq_flux[1]
+    
+    e_induced_d = induced_voltage(delta_flux_d, step_size)
+    e_induced_q = induced_voltage(delta_flux_q, step_size)
 
-    # Calculates the second step
-    new_velocity = ms.velocity + 3 / 4 * ms.acceleration * step_size
-    f_e = pi * new_velocity / motor.pole_pitch
- 
-    i_ds = ms.dq_currents[0] + 3 / 4 * step_size * k1_d
-    i_qs = ms.dq_currents[1] + 3 / 4 * step_size * k1_q
-
-    k2_d = _id_dt(ms, ms.dq_voltages[0], i_ds, i_qs, f_e)
-    k2_q = _id_qt(ms, ms.dq_voltages[1], i_qs, i_ds, f_e, f_m)
-
-    # Updates current with weighted average derivative
-    ms.dq_currents[0] += (1 / 3 * k1_d + 2 / 3 * k2_d) * step_size
-    ms.dq_currents[1] += (1 / 3 * k1_q + 2 / 3 * k2_q) * step_size
- 
+    state.dq_induced = [e_induced_d.value, e_induced_q.value] * e_induced_d.unit
+    
+    # Extract parameters from state
+    i_d, i_q = state.dq_currents[0], state.dq_currents[1]
+    v_d, v_q = state.dq_voltages[0], state.dq_voltages[1]
+    L_d, L_q = state.inductance[0], state.inductance[1]
+    R = state.resistance
+    
+    # Calculates the first step (k1)
+    k1_d = differential_d_current(i_d, v_d, R, L_d, e_induced_d)
+    k1_q = differential_q_current(i_q, v_q, R, L_q, e_induced_q)
+    
+    # Calculates the second step via time stepping (k2 at 3/4 point)
+    i_ds = i_d + 3/4 * step_size * k1_d
+    i_qs = i_q + 3/4 * step_size * k1_q
+    
+    k2_d = differential_d_current(i_ds, v_d, R, L_d, e_induced_d)
+    k2_q = differential_q_current(i_qs, v_q, R, L_q, e_induced_q)
+    
+    # Final update using weighted average (Ralston's method)
+    i_d_new = i_d + (1/3 * k1_d + 2/3 * k2_d) * step_size
+    i_q_new = i_q + (1/3 * k1_q + 2/3 * k2_q) * step_size
+    
+    return [i_d_new.value, i_q_new.value] * i_q_new.unit, current_dq_flux

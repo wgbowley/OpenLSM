@@ -12,20 +12,19 @@ unit_frame: SI_METRIC_NON_DERIVED
 # This allows for model characterisation for either optimization or verification. 
 
 [numerical]
-de_solver_circuit_step:     0.5
-pi_pd_solver_step:          2
+de_solver_circuit_step:     0.25
+pi_pd_solver_step:          1
 thermal_step:               5
-de_solver_maximum_steps:    50000
+de_solver_maximum_steps:    5000
 characterisation_current:   1 (A)
 initial_current:            0 m(A)
 
 [motion]
 load:                       500 m(kg)
-velocity_max:               200   m(m*s^-1)
-acceleration_max:           10000 m(m*s^-2)
-axial_displacement:         20 m(m)
 coefficient_friction:       0.002
 gravity:                    9.8 m(m*s^-2)
+velocity_tolerance:         0.05 m(m*s^-1)      # Maximal velocity to be considered not moving
+position_tolerance:         0.05 m(m)           # Maximal position to be considered on target
 
 [circuit]
 supply_voltage:             24  (kg*m^2*s^-3*A^-1)   # Volts
@@ -34,6 +33,8 @@ current_limit:              10  (A)
 [thermal]
 atmospheric_temperature:    298.15 (K)
 convection_coefficient:     25 (kg*s^-3*K^-1)
+# Duty cycle is the time on/off during runtime -> Informs asymptotic temperatures
+duty_cycle: 0.60
 
 [model]
 # 'stc_air' is dry air at standard test conditions (25c / 298.15k / 1 atm)
@@ -48,6 +49,11 @@ number_slots: 12
 # Boundary pairs approximate infinite track via adding extra pairs to the track
 boundary_pairs: 12
 
+[material_cost]
+n52: 250            (kg^-1)
+copper: 120         (kg^-1)
+pa6cf: 80           (kg^-1)
+
 [armature_core]
 material:           "isotropic_pa6cf"
 inner_radius:       6.5 m(m)
@@ -56,7 +62,7 @@ axial_slot_spacing: 1.33 m(m)
 
 [armature_slots]
 material:           "pure_copper"
-wire_diameter:      0.4 m(m)
+wire_diameter:      0.2 m(m)
 
 # Percentage of the slot used for windings. (i.e 0.6 -> 60% copper, 40% air + enamel)
 fill_factor:        0.6

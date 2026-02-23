@@ -87,37 +87,49 @@ def _simulate_magnetic_variables(
     
     # Calculates the lorentz force constant
     force = attrgetter(f"element_{motor.SLOT_ID.value}.force_lorentz")(results)
-    force_constant = (force.magnitude * force.unit) / characterisation_current
+    force_constant = force[1] / characterisation_current
     
     return resistance, secant_inductance, force_constant
 
 
 def initial_state(
     motor: TubularLinearMotor, solver: FEMMThermostaticSolver
-) -> tuple[Q, Q]:
+) -> tuple[Q, Q, Q]:
     """ Solves the initial state of the thermal problem without a heat source """
     # Defines the required output for this simulation
     outputs = SolverOutputs()
     outputs.add_thermal(motor.SLOT_ID, ThermalOptions.VOLUME)
     outputs.add_thermal(motor.CORE_ID, ThermalOptions.VOLUME)
-    
+    outputs.add_thermal(motor.POLE_ID, ThermalOptions.VOLUME)
+
     # Solves and extract parameters
     results = solver.solve(outputs)
     slot_volume = attrgetter(f"element_{motor.SLOT_ID.value}.volume")(results)
     core_volume = attrgetter(f"element_{motor.CORE_ID.value}.volume")(results)
+    pole_volume = attrgetter(f"element_{motor.POLE_ID.value}.volume")(results)
     
+    # Material density
     slot_density = motor.armature_slots_material.values().physical.density
     core_density = motor.armature_core_material.values().physical.density
+    pole_density = motor.stator_poles_material.values().physical.density
+    # Material cost
+    slot_cost = motor.config.material_cost.copper
+    core_cost = motor.config.material_cost.pa6cf
+    pole_cost = motor.config.material_cost.n52
     
+    slot_mass, core_mass = slot_volume * slot_density, core_volume * core_density
     armature_mass = slot_volume * slot_density + core_volume * core_density
-    return armature_mass, slot_volume
+    
+    pole_mass = pole_density * pole_volume
+    cost = slot_mass * slot_cost + core_mass * core_cost + pole_cost * pole_mass
+    return armature_mass, slot_volume, cost
 
 
 def static_evaluation(
     motor: TubularLinearMotor,
     thermal_solver: FEMMThermostaticSolver,
     magnetic_solver: FEMMMagnetostaticSolver,
-    filename: str = "thread_1"
+    filename: str = "simulation_1"
 ) -> StaticEvaluation:
     """ Constructs 'StaticEvaluation' via simulation """
     # Builds the motor within the magnetostatic domain
@@ -133,8 +145,8 @@ def static_evaluation(
     # Builds the motor within the thermostatic domain
     domain = motor.build_domain(thermal_solver)
     thermal_solver.setup(domain, filename)
-    armature_mass, slot_volume = initial_state(motor, thermal_solver)
+    armature_mass, slot_volume, cost = initial_state(motor, thermal_solver)
 
     return StaticEvaluation(
-        force, resistance, inductance, magnet_flux, armature_mass, slot_volume
+        force, resistance, inductance, magnet_flux, armature_mass, slot_volume, cost
     )
