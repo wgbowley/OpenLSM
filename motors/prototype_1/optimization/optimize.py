@@ -106,13 +106,13 @@ def deletes_files(sim_name: str) -> None:
     """ Deletes simulation raw files from folder """
     thermal_raw = Path(solver_folder) / f"{sim_name}.feh"
     thermal_ans = Path(solver_folder) / f"{sim_name}.anh"
-    thermal_raw.unlink()
-    thermal_ans.unlink()
+    thermal_raw.unlink(missing_ok=True)
+    thermal_ans.unlink(missing_ok=True)
     
     magnetic_raw = Path(solver_folder) / f"{sim_name}.fem"
     magnetic_ans = Path(solver_folder) / f"{sim_name}.ans"
-    magnetic_raw.unlink()
-    magnetic_ans.unlink()
+    magnetic_raw.unlink(missing_ok=True)
+    magnetic_ans.unlink(missing_ok=True)
 
 
 class OptimizationProblem(ElementwiseProblem):
