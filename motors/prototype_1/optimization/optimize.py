@@ -42,6 +42,7 @@ BASE_DIR = Path(__file__).parent.parent.parent
 path_lib = BASE_DIR / "prototype_1/optimization/parameters.uiv"
 solver_folder = BASE_DIR / "prototype_1/optimization/outputs"
 motor_point_to_point = BASE_DIR / "prototype_1/optimization/path_data"
+checkpoint_path = BASE_DIR / "prototype_1/optimization/checkpoint.pkl"
 
 # Lists for indexed outputs:
 pole_slot_ratios = [[1, 6] * D, [2, 12] * D, [3, 18] * D, [4, 24] * D]
@@ -52,7 +53,7 @@ bare_conductor_diameters = [0.2, 0.224, 0.25, 0.315, 0.4, 0.5, 0.56, 0.71, 0.8, 
 initial_designs = np.array([[1, 9, 2, 0.002, 0.010, 0.0015]])
 
 # Configuration
-segment = PathSegment(10 * mm, 100 * mm/second, 5000 * mm/second**2, 0.10 * second)
+segment = PathSegment(10 * mm, 100 * mm/second, 5000 * mm/second**2, 0.15 * second)
 slot_temp_max = 393.15 * kelvin
 pole_temp_max = 343.15 * kelvin
 time_constant_max = 10 * ms
@@ -94,16 +95,18 @@ class InputsBounds:
 
 
 class MyCheckpoint(Callback):
-    def __init__(self, filepath="checkpoint.pkl"):
+    def __init__(self, filepath=checkpoint_path):
         super().__init__()
-        self.filepath = filepath
+        self.filepath = Path(filepath)
 
     def notify(self, algorithm):
-        # Save the entire algorithm state to a file
-        with open(self.filepath, "wb") as f:
+        # Write to temp file first then rename atomically
+        # prevents corruption if process is killed mid-write
+        tmp_path = self.filepath.with_suffix(".tmp")
+        with open(tmp_path, "wb") as f:
             pickle.dump(algorithm, f)
-        print(f"  > Checkpoint saved to {self.filepath}")
-
+        tmp_path.replace(self.filepath)
+        print(f"  > Checkpoint saved (gen {algorithm.n_gen}) to {self.filepath}", flush=True)
 
 def deletes_files(sim_name: str) -> None:
     """ Deletes simulation raw files from folder """
@@ -158,7 +161,7 @@ class OptimizationProblem(ElementwiseProblem):
         # Performs initializes evaluation and dynamic simulation for the motor
         try:
             static_results = static_evaluation(TubularMotor, Thermal, Magnetic, sim_name)
-            print(f"  [ok - static]  {static_results}")
+            print(f"  [ok - static]  {static_results}", flush=True)
             # Quick force requirement check
             voltage = TubularMotor.params.circuit.supply_voltage
             current = voltage / static_results.resistance_atm_temp
@@ -208,7 +211,7 @@ class OptimizationProblem(ElementwiseProblem):
             armature_length         = TubularMotor.armature_length.value
             
             deletes_files(sim_name)
-            print(f"  [ok - dynamic]  {results} ")
+            print(f"  [ok - dynamic]  {results} ", flush=True)
             
             # Objectives
             out["F"] = [
@@ -228,7 +231,7 @@ class OptimizationProblem(ElementwiseProblem):
                 
         except Exception as err:
             deletes_files(sim_name)
-            print(f"Simulation {sim_name!r} failed: {err}")
+            print(f"Simulation {sim_name!r} failed: {err}", flush=True)
             out["F"] = f_penalty
             out["G"] = g_penalty
 
@@ -252,30 +255,44 @@ if __name__ == "__main__":
     runner = StarmapParallelization(pool.starmap)
     problem = OptimizationProblem(bounds, elementwise_runner=runner)
 
-    random_samples = FloatRandomSampling().do(problem, pop_size - len(initial_designs)).get("X")
-    initial_pop = np.vstack([initial_designs, random_samples])
+    if checkpoint_path.exists():
+        try:
+            print(f"Resuming from checkpoint: {checkpoint_path}")
+            with open(checkpoint_path, "rb") as f:
+                algorithm = pickle.load(f)
+            algorithm.problem = problem
+            print(f"  > Resuming from generation {algorithm.n_gen}", flush=True)
+        except (EOFError, pickle.UnpicklingError) as e:
+            print(f"  > Checkpoint corrupted ({e}), starting fresh...", flush=True)
+            checkpoint_path.unlink()
+            algorithm = None
+    else:
+        algorithm = None
 
-    algorithm = NSGA3(
-        pop_size=pop_size,
-        ref_dirs=ref_dirs,
-        sampling=initial_pop,
-    )
+    if algorithm is None:
+        print("Starting fresh...")
+        random_samples = FloatRandomSampling().do(problem, pop_size - len(initial_designs)).get("X")
+        initial_pop = np.vstack([initial_designs, random_samples])
+        algorithm = NSGA3(
+            pop_size=pop_size,
+            ref_dirs=ref_dirs,
+            sampling=initial_pop,
+        )
 
     res = minimize(
         problem,
         algorithm,
-        termination=('n_gen', 100),
+        termination=('n_gen', 20),
         seed=1,
         save_history=True,
         verbose=True,
-        callback=MyCheckpoint("checkpoint.pkl")
+        callback=MyCheckpoint(checkpoint_path)
     )
 
-    print(" === Optimization Finished === ")
-    print(f"Number of valid solutions found: {len(res.F)}")
+    print(" === Optimization Finished === ", flush=True)
+    print(f"Number of valid solutions found: {len(res.F)}", flush=True)
 
-    # Show the first 10 optimal motor designs
     for i in range(min(10, len(res.F))):
-        print(f"\nSolution {i+1}:")
-        print(f"Inputs: {res.X[i]}")
-        print(f"Objectives: {res.F[i]}")
+        print(f"\nSolution {i+1}:", flush=True)
+        print(f"Inputs: {res.X[i]}", flush=True)
+        print(f"Objectives: {res.F[i]}", flush=True)

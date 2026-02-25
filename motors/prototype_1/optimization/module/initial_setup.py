@@ -148,6 +148,6 @@ def static_evaluation(
     armature_mass, slot_volume, armature, segment = initial_state(motor, thermal_solver)
 
     return StaticEvaluation(
-        force, resistance, inductance, magnet_flux, armature_mass, slot_volume, 
+        abs(force), abs(resistance), abs(inductance), magnet_flux, armature_mass, slot_volume, 
         armature, segment
     )
