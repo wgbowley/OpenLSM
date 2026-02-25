@@ -44,15 +44,18 @@ solver_folder = BASE_DIR / "prototype_1/optimization/outputs"
 motor_point_to_point = BASE_DIR / "prototype_1/optimization/path_data"
 
 # Lists for indexed outputs:
-pole_slot_ratios = [[2, 6] * D, [4, 12] * D, [6, 18] * D, [8, 24] * D]
+pole_slot_ratios = [[1, 6] * D, [2, 12] * D, [3, 18] * D, [4, 24] * D]
 pole_grades = ["N30", "N33", "N35", "N38", "N40", "N42", "N45", "N48", "N50", "N52"]
 bare_conductor_diameters = [0.2, 0.224, 0.25, 0.315, 0.4, 0.5, 0.56, 0.71, 0.8, 1.0, 1.25, 1.5] * mm
 
+# Initial design even though it doesn't meet all areas. Gives directionality to NSG3.
+initial_designs = np.array([[1, 9, 2, 0.002, 0.010, 0.0015]])
+
 # Configuration
-segment = PathSegment(10 * mm, 200 * mm/second, 10000 * mm/second**2, 0.10 * second)
+segment = PathSegment(10 * mm, 100 * mm/second, 5000 * mm/second**2, 0.10 * second)
 slot_temp_max = 393.15 * kelvin
 pole_temp_max = 343.15 * kelvin
-time_constant_max = 5 * ms
+time_constant_max = 10 * ms
 armature_length_max = 100 * mm
 
 
@@ -155,7 +158,7 @@ class OptimizationProblem(ElementwiseProblem):
         # Performs initializes evaluation and dynamic simulation for the motor
         try:
             static_results = static_evaluation(TubularMotor, Thermal, Magnetic, sim_name)
-            print(f"  [ok]  {static_results}")
+            print(f"  [ok - static]  {static_results}")
             # Quick force requirement check
             voltage = TubularMotor.params.circuit.supply_voltage
             current = voltage / static_results.resistance_atm_temp
@@ -168,16 +171,31 @@ class OptimizationProblem(ElementwiseProblem):
             mass = static_results.armature_mass + TubularMotor.params.motion.load
             required_force = mass * segment.max_acceleration
             
+            k_m_appox = force / (current * voltage).sqrt()
+            f_penalty = [
+                -k_m_appox.value,
+                1e6,
+                static_results.secant_phase_inductance.value / static_results.resistance_atm_temp.value,
+                static_results.armature_cost.value + static_results.segment_cost.value
+            ]
+            
+            g_penalty = [
+                1e6,
+                1e6,
+                1e6,
+                TubularMotor.armature_length.value - armature_length_max.value
+            ]
+            
             if force < required_force:
                 deletes_files(sim_name)
                 out["F"] = f_penalty
-                out["G"] = [100, 100, 100, 100]
+                out["G"] = g_penalty
                 return
             
             analysis = PointToPoint(TubularMotor, Thermal, Magnetic, static_results)
 
             csv_file = Path(motor_point_to_point) / f"{sim_name}.csv"
-            _, results = analysis.run(segment, csv_file, True)
+            _, results = analysis.run(segment, csv_file)
             
             # Extracts results
             motor_constant          = results.motor_constant.value
@@ -190,7 +208,7 @@ class OptimizationProblem(ElementwiseProblem):
             armature_length         = TubularMotor.armature_length.value
             
             deletes_files(sim_name)
-            print(f"  [ok]  {results}")
+            print(f"  [ok - dynamic]  {results} ")
             
             # Objectives
             out["F"] = [
@@ -227,18 +245,21 @@ bounds = InputsBounds(
 
 # Setups reference directions (NOTE: Not 100% on this)
 ref_dirs = get_reference_directions("das-dennis", 4, n_partitions=8)
-
-# Initializes algorithm
-algorithm = NSGA3(
-    pop_size=max(200, len(ref_dirs) + (8 - len(ref_dirs) % 8)),
-    ref_dirs=ref_dirs,
-    sampling=FloatRandomSampling(), 
-)
+pop_size = max(200, len(ref_dirs) + (8 - len(ref_dirs) % 8))
 
 if __name__ == "__main__":  
     pool = Pool(12)
     runner = StarmapParallelization(pool.starmap)
     problem = OptimizationProblem(bounds, elementwise_runner=runner)
+
+    random_samples = FloatRandomSampling().do(problem, pop_size - len(initial_designs)).get("X")
+    initial_pop = np.vstack([initial_designs, random_samples])
+
+    algorithm = NSGA3(
+        pop_size=pop_size,
+        ref_dirs=ref_dirs,
+        sampling=initial_pop,
+    )
 
     res = minimize(
         problem,
@@ -246,7 +267,8 @@ if __name__ == "__main__":
         termination=('n_gen', 100),
         seed=1,
         save_history=True,
-        verbose=True
+        verbose=True,
+        callback=MyCheckpoint("checkpoint.pkl")
     )
 
     print(" === Optimization Finished === ")

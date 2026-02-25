@@ -61,7 +61,7 @@ axial_slot_spacing: 1.5 m(m)
 
 [armature_slots]
 material:           "pure_copper"
-wire_diameter:      0.3 m(m)
+wire_diameter:      0.25 m(m)
 
 # Percentage of the slot used for windings. (i.e 0.6 -> 60% copper, 40% air + enamel)
 fill_factor:        0.6

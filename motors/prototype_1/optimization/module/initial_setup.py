@@ -142,7 +142,6 @@ def static_evaluation(
     resistance, inductance, force = _simulate_magnetic_variables(
         motor, magnetic_solver, magnet_flux
     )
-    
     # Builds the motor within the thermostatic domain
     domain = motor.construct_domain(thermal_solver)
     thermal_solver.setup(domain, filename)

@@ -108,18 +108,20 @@ class TubularLinearMotor:
         self.params.find_and_replace("armature_core.outer_radius", slot_outer_radius)
         self.params.find_and_replace("armature_core.axial_slot_spacing", slot_axial_spacing)
         
-    def build_armature(self) -> tuple[CSGNode, list[VectorGeometry]]:
+    def build_armature(self, align: bool = False) -> tuple[CSGNode, list[VectorGeometry]]:
         """ Builds the armature via constructing the core and its slots """
         parameters = self.params
         core_radial_thickness = (
             parameters.armature_core.outer_radius - parameters.armature_core.inner_radius
         )
         
+        phase_align = self.pole_pitch / 2 if align else 0.0 * millimeter
+        
         # Constructs the rectangular base shape to subtract the slots against.
         core = Builder.create_rectangle(
             (
                 parameters.armature_core.inner_radius,
-                - self.armature_length / 2
+                - self.armature_length / 2 + phase_align
             ),
             core_radial_thickness, self.armature_length
         )
@@ -128,7 +130,7 @@ class TubularLinearMotor:
         slots = []
         for slot in range(0, parameters.model.number_slots.value):
             offset = - self.effective_length / 2
-            bottom_left = offset + slot * self.slot_pitch
+            bottom_left = offset + slot * self.slot_pitch + phase_align
             
             slot = Builder.create_rectangle(
                 (parameters.armature_slots.inner_radius, bottom_left),
@@ -257,7 +259,7 @@ class ConstructMagnetic:
         parts = []
         
         # Builds armature and stator than extract parts
-        core, slots = motor.build_armature()
+        core, slots = motor.build_armature(True)
         poles, tube = motor.build_stator(motor.total_poles)
         boundary    = motor.build_boundary(motor.total_poles)
         
