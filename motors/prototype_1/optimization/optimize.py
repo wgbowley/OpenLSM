@@ -122,6 +122,7 @@ class OptimizationProblem(ElementwiseProblem):
         super().__init__(
             n_var = 6,
             n_obj = 4,
+            n_constr=4,
             xl=bounds.collapse_lower,
             xu=bounds.collapse_upper,
             **kwargs
@@ -154,7 +155,7 @@ class OptimizationProblem(ElementwiseProblem):
         # Performs initializes evaluation and dynamic simulation for the motor
         try:
             static_results = static_evaluation(TubularMotor, Thermal, Magnetic, sim_name)
-            
+            print(f"  [ok]  {static_results}")
             # Quick force requirement check
             voltage = TubularMotor.params.circuit.supply_voltage
             current = voltage / static_results.resistance_atm_temp
@@ -189,13 +190,7 @@ class OptimizationProblem(ElementwiseProblem):
             armature_length         = TubularMotor.armature_length.value
             
             deletes_files(sim_name)
-            
-            print(
-                f" [OK] Km: {results.motor_constant:.4f} | "
-                f"SlotT: {results.asymptotic_slot_temp:.1f} | "
-                f"Tau: {results.time_constant:.2f} | "
-                f"Cost: ${pole_segment_cost + armature_cost:.2f}"
-            )
+            print(f"  [ok]  {results}")
             
             # Objectives
             out["F"] = [
@@ -231,17 +226,17 @@ bounds = InputsBounds(
 )
 
 # Setups reference directions (NOTE: Not 100% on this)
-ref_dirs = get_reference_directions("das-dennis", 4, n_partitions=4)
+ref_dirs = get_reference_directions("das-dennis", 4, n_partitions=8)
 
 # Initializes algorithm
 algorithm = NSGA3(
-    pop_size=len(ref_dirs) + (4 - len(ref_dirs) % 4), # Multiples of 4 for parallel 
+    pop_size=max(200, len(ref_dirs) + (8 - len(ref_dirs) % 8)),
     ref_dirs=ref_dirs,
-    sampling=FloatRandomSampling(),
+    sampling=FloatRandomSampling(), 
 )
 
 if __name__ == "__main__":  
-    pool = Pool(8)
+    pool = Pool(12)
     runner = StarmapParallelization(pool.starmap)
     problem = OptimizationProblem(bounds, elementwise_runner=runner)
 
