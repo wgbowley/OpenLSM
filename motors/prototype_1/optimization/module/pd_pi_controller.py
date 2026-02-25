@@ -15,27 +15,27 @@ from module.sim_definitions import StaticEvaluation, MotorState
 
 from pyfea import UnitError, Quantity as Q
 from pyfea import meter as m, ampere as A, volt as V, second as S
-from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
+from model.tubular import TubularLinearMotor
 
 
 class CascadeController:
     """ Cascaded PD-PI motor controller """
     def __init__(self, motor: TubularLinearMotor, values: StaticEvaluation) -> None:
         """ Initializes the class and calculates the control variables """
-        self.current_limit = motor.config.circuit.current_limit
-        self.voltage_limit = motor.config.circuit.supply_voltage
+        self.current_limit = motor.params.circuit.current_limit
+        self.voltage_limit = motor.params.circuit.supply_voltage
         
-        self.load = values.armature_mass + motor.config.motion.load
+        self.load = values.armature_mass + motor.params.motion.load
         self.time_step = 0 * S
         self.target_position = 0 * m
         
         # Defines controller frequency and bandwidth
         tau_frequency = values.resistance_atm_temp / values.secant_phase_inductance
-        self.c_frequency = motor.config.numerical.de_solver_circuit_step * tau_frequency
+        self.c_frequency = motor.params.numerical.de_solver_circuit_step * tau_frequency
         self.bandwidth = tau_frequency
         
         # Defines position loop variables
-        self.l_frequency = self.c_frequency / motor.config.numerical.pi_pd_solver_step
+        self.l_frequency = self.c_frequency / motor.params.numerical.pi_pd_solver_step
         self.damping_ratio = sqrt(2) / 2
         
         f_constant = values.force_constant

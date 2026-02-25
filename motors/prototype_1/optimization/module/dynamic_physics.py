@@ -11,7 +11,7 @@ from math import pi, sqrt
 from module.sim_definitions import MotorState
 
 from pyfea import Quantity as q, weber
-from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
+from model.tubular import TubularLinearMotor
 
 def electrical_angle(displacement: q, pitch: q) -> q:
     """  Calculates the electrical angle of the armature; θ_e = πd / p """

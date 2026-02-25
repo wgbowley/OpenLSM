@@ -11,6 +11,9 @@ Descriptions:
 
 from __future__ import annotations
 
+import csv
+
+from pathlib import Path
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, fields, field, InitVar
 
@@ -80,7 +83,8 @@ class StaticEvaluation(SimData):
     magnet_flux: Q              = field(metadata={'unit': TM2})
     armature_mass: Q            = field(metadata={'unit': kg})
     slot_volume: Q              = field(metadata={'unit': m**3})
-    material_cost: Q            = field(metadata={'unit': dimensionless})
+    armature_cost: Q            = field(metadata={'unit': dimensionless})
+    segment_cost: Q             = field(metadata={'unit': dimensionless})
         
     @property
     def _name(self) -> str:
@@ -93,7 +97,8 @@ class StaticEvaluation(SimData):
             f"Φ_magnet: {self.magnet_flux}, "
             f"m_armature: {self.armature_mass:.3f}, "
             f"V_slot: {self.slot_volume:.3f}, "
-            f"cost: ${self.material_cost:.3f})>"
+            f"Armature Cost: ${self.armature_cost:.3f}, "
+            f"Segment Cost: ${self.segment_cost:.3f})>"
         )
         
 
@@ -165,6 +170,38 @@ class DynamicSeries(SimStates):
         self.p_loss.append(state.power_loss)
         self.slot_temperature.append(state.slot_temperature)
         self.pole_temperature.append(state.pole_temperature)
+        
+    def to_csv(self, path: str | Path) -> None:
+        """ Saves the time series data to a CSV file. """
+        # Define the fields to export (mapping CSV headers to attribute names)
+        fields = {
+            "time (s)":            self.time,
+            "set_points (m)":      self.set_points,
+            "k_m (kg^1/2.s^-1/2)": self.k_m,
+            "displacement (m)":    self.displacement,
+            "velocity (m.s^-1)":   self.velocity,
+            "d_current (A)":       self.d_current,
+            "q_current (A)":       self.q_current,
+            "force (N)":           self.force,
+            "total_power (W)":     self.total_power,
+            "p_loss (W)":          self.p_loss,
+            "slot_temp (K)":       self.slot_temperature,
+            "pole_temp (K)":       self.pole_temperature,
+        }
+
+        # Handle path expansion and resolution
+        target_path = Path(path).expanduser().resolve()
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Extract magnitude data
+        data_rows = zip(*(attr.value for attr in fields.values()))
+
+        # Writing with 'utf-8' is still good practice, but now 
+        # it won't crash even on 'cp1252' because everything is ASCII.
+        with open(target_path, mode='w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow(fields.keys())
+            writer.writerows(data_rows)
 
 
 @dataclass(frozen=True, slots=True, repr=False)
@@ -174,7 +211,8 @@ class DynamicEvaluation(SimData):
     asymptotic_pole_temp: Q     = field(metadata={'unit': K})
     time_constant: Q            = field(metadata={'unit': H/ohm})
     weight: Q                   = field(metadata={'unit': kg})
-    material_cost: Q            = field(metadata={'unit': dimensionless})
+    armature_cost: Q            = field(metadata={'unit': dimensionless})
+    segment_cost: Q             = field(metadata={'unit': dimensionless})
 
     @property
     def _name(self) -> str:
@@ -186,7 +224,8 @@ class DynamicEvaluation(SimData):
             f"asymptotic_slot_temp: {self.asymptotic_pole_temp:.3f}, "
             f"T_constant: {self.time_constant}, "
             f"m_armature: {self.weight:.3f}, "
-            f"mat_cost: ${self.material_cost:.3f})>"
+            f"Armature Cost: ${self.armature_cost:.3f}, "
+            f"Segment Cost: ${self.segment_cost:.3f})>"
         )
     
 
@@ -237,13 +276,13 @@ class MotorState(SimStates):
     def create(cls, atm_temp: Q) -> MotorState:
         """ Factory method to create set with units """
         return cls(
-            0*S, 0*m, 0*m/S,               # Time & Control
-            0*N, 0*m/S, 0*m/S**2,          # Mech: F, v, a
-            0*m, 0*m, 0*dimensionless,    # Mech: x, theta
-            [0, 0]*H, 0*ohm,               # Circ: Ind_dq, Res
-            [0, 0]*V, [0, 0]*V, [0, 0]*A,  # Elec: V_dq, V_ind, I_dq
-            [0, 0]*TM2,                    # Elec: Flux_linkage
-            0*watt, 0*watt, [0, 0, 0]*TM2, # Power & Total Flux (New)
-            atm_temp, atm_temp,            # Thermal 
+            0*S, 0*m, 0*m/S,                # Time & Control
+            0*N, 0*m/S, 0*m/S**2,           # Mech: F, v, a
+            0*m, 0*m, 0*dimensionless,      # Mech: x, theta
+            [0, 0]*H, 0*ohm,                # Circ: Ind_dq, Res
+            [0, 0]*V, [0, 0]*V, [0, 0]*A,   # Elec: V_dq, V_ind, I_dq
+            [0, 0]*TM2,                     # Elec: Flux_linkage
+            0*watt, 0*watt, [0, 0, 0]*TM2,  # Power & Total Flux (New)
+            atm_temp, atm_temp,             # Thermal 
             _CREATED_THROUGH_CLS
         )

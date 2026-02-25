@@ -12,9 +12,9 @@ unit_frame: SI_METRIC_NON_DERIVED
 # This allows for model characterisation for either optimization or verification. 
 
 [numerical]
-de_solver_circuit_step:     0.25
-pi_pd_solver_step:          1
-thermal_step:               5
+de_solver_circuit_step:     0.1
+pi_pd_solver_step:          0.1
+thermal_count:              5
 de_solver_maximum_steps:    5000
 characterisation_current:   1 (A)
 initial_current:            0 m(A)
@@ -33,8 +33,6 @@ current_limit:              10  (A)
 [thermal]
 atmospheric_temperature:    298.15 (K)
 convection_coefficient:     25 (kg*s^-3*K^-1)
-# Duty cycle is the time on/off during runtime -> Informs asymptotic temperatures
-duty_cycle: 0.60
 
 [model]
 # 'stc_air' is dry air at standard test conditions (25c / 298.15k / 1 atm)
@@ -55,14 +53,15 @@ copper: 120         (kg^-1)
 pa6cf: 80           (kg^-1)
 
 [armature_core]
-material:           "isotropic_pa6cf"
+material:           "PTFE_unfilled"
 inner_radius:       6.5 m(m)
 outer_radius:       10 m(m)
-axial_slot_spacing: 1.33 m(m)
+
+axial_slot_spacing: 1.5 m(m)
 
 [armature_slots]
 material:           "pure_copper"
-wire_diameter:      0.2 m(m)
+wire_diameter:      0.3 m(m)
 
 # Percentage of the slot used for windings. (i.e 0.6 -> 60% copper, 40% air + enamel)
 fill_factor:        0.6

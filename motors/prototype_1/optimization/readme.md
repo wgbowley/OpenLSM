@@ -11,4 +11,4 @@ calculating inductance via flux linkage over current and than back-emf from delt
 due to the fact that a 3d printer never sees true 100% power. Steady state != printing basically.
 
 ## Use prototype 1 simulation   
-It is as simple as installing `pyfea` via either pip install or setup-tools and than just running simulation.py or optimization.py in this folder. To change parameters use configuration.uiv and follow the .uiv standard notation if your changing element beyond their numerical values.
+It is as simple as installing `pyfea` via either pip install or setup-tools and than just running simulate.py or optimize.py in this folder. To change parameters use configuration.uiv and follow the .uiv standard notation if your changing element beyond their numerical values.

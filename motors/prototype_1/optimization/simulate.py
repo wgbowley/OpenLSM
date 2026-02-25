@@ -1,13 +1,12 @@
 """
-Filename: main.py
+Filename: simulate.py
 
 Description:
-    Prototype 1 linear Motor simulation / optimization 
-    script refer to configuration.uiv for implementation 
-    details and parameters.
+    Prototype 1 linear Motor simulation script refer to parameters.uiv 
+    for implementation details & parameters.
     
     NOTE: 
-    Dependencies: matplotlib, pyfea, picounits, pymoo
+    Dependencies: matplotlib, pyfea, picounits
     
     If this script fails to run. It most likely means 
     that the pyfea (v0.1.0) api has been deprecated
@@ -15,18 +14,21 @@ Description:
 
 import matplotlib.pyplot as plt
 
+from pathlib import Path
 from module.sim_definitions import PathSegment
 from module.initial_setup import static_evaluation
 from module.dynamic_analysis import PointToPoint
+from model.tubular import TubularLinearMotor
 
-from pyfea import second, millimeter as mm 
-from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
+from pyfea import second, millimeter as mm, dimensionless as D
 from pyfea.solver.femm.domains.magnetostatic.solver import FEMMMagnetostaticSolver
 from pyfea.solver.femm.domains.thermostatic.solver import FEMMThermostaticSolver
 
 # Defines configuration file and solver output path
-path_lib = "motors/prototype_1/optimization/configuration.uiv"
-solver_folder = "motors/prototype_1/optimization/outputs"
+BASE_DIR = Path(__file__).parent.parent.parent  
+path_lib = BASE_DIR / "prototype_1/optimization/parameters.uiv"
+solver_folder = BASE_DIR / "prototype_1/optimization/outputs"
+csv_output = BASE_DIR / "prototype_1/optimization/outputs/motor.csv"
 
 # Defines the tubular linear motor via configuration parameters
 TubularMotor = TubularLinearMotor(path_lib)
@@ -39,9 +41,9 @@ static_results = static_evaluation(TubularMotor, Thermal, Magnetic)
 print(static_results)
 
 analysis = PointToPoint(TubularMotor, Thermal, Magnetic, static_results)
-segment = PathSegment(2 * mm, 200 * mm/second, 10000 * mm/second**2, 1 * second)
+segment = PathSegment(10 * mm, 200 * mm/second, 8000 * mm/second**2, 0.10 * second)
 
-results, summary = analysis.run(segment, True)
+results, summary = analysis.run(segment, csv_output, True)
 print(summary)
 
 # Extract stripped values (removes units)

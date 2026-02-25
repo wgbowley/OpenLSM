@@ -55,6 +55,10 @@
     "xticklabels",
     "yticklabels",
     "pymoo",
-    "labelsize"
+    "labelsize",
+    "ElementwiseProblem",
+    "PTFE",
+    "NSGA3",
+    "elementwise",
   ]
 }

@@ -14,10 +14,11 @@ from math import sin, pi
 from operator import attrgetter
 
 from module.sim_definitions import StaticEvaluation
+from model.tubular import TubularLinearMotor
 
 from pyfea import Quantity as Q, ampere as A, weber as TM2, henry as H, ohm
 
-from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
+
 from pyfea.solver.femm.domains.thermostatic.solver import FEMMThermostaticSolver
 from pyfea.solver.femm.domains.magnetostatic.solver import FEMMMagnetostaticSolver
 
@@ -55,7 +56,7 @@ def _simulate_magnetic_variables(
     magnet_flux: Q
 ) -> tuple[Q, Q, Q]:
     """ Calculates the resistance, inductance and force constant """
-    characterisation_current = motor.config.numerical.characterisation_current
+    characterisation_current = motor.params.numerical.characterisation_current
     
     # Updates phases to a non-zero current position
     for index, phase in enumerate(motor.PHASES):
@@ -113,16 +114,16 @@ def initial_state(
     core_density = motor.armature_core_material.values().physical.density
     pole_density = motor.stator_poles_material.values().physical.density
     # Material cost
-    slot_cost = motor.config.material_cost.copper
-    core_cost = motor.config.material_cost.pa6cf
-    pole_cost = motor.config.material_cost.n52
+    slot_cost = motor.params.material_cost.copper
+    core_cost = motor.params.material_cost.pa6cf
+    pole_cost = motor.params.material_cost.n52
     
     slot_mass, core_mass = slot_volume * slot_density, core_volume * core_density
     armature_mass = slot_volume * slot_density + core_volume * core_density
-    
-    pole_mass = pole_density * pole_volume
-    cost = slot_mass * slot_cost + core_mass * core_cost + pole_cost * pole_mass
-    return armature_mass, slot_volume, cost
+
+    segment = pole_density * pole_volume * pole_cost
+    armature = slot_mass * slot_cost + core_mass * core_cost
+    return armature_mass, slot_volume, armature, segment
 
 
 def static_evaluation(
@@ -133,7 +134,7 @@ def static_evaluation(
 ) -> StaticEvaluation:
     """ Constructs 'StaticEvaluation' via simulation """
     # Builds the motor within the magnetostatic domain
-    domain = motor.build_domain(magnetic_solver)
+    domain = motor.construct_domain(magnetic_solver)
     magnetic_solver.setup(domain, filename)
     
     # Calculates magnetic/circuit variables via FEA model
@@ -143,10 +144,11 @@ def static_evaluation(
     )
     
     # Builds the motor within the thermostatic domain
-    domain = motor.build_domain(thermal_solver)
+    domain = motor.construct_domain(thermal_solver)
     thermal_solver.setup(domain, filename)
-    armature_mass, slot_volume, cost = initial_state(motor, thermal_solver)
+    armature_mass, slot_volume, armature, segment = initial_state(motor, thermal_solver)
 
     return StaticEvaluation(
-        force, resistance, inductance, magnet_flux, armature_mass, slot_volume, cost
+        force, resistance, inductance, magnet_flux, armature_mass, slot_volume, 
+        armature, segment
     )

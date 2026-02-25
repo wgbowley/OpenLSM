@@ -16,6 +16,7 @@ from operator import attrgetter
 from module.dynamic_physics import *
 from module.suvat_feeding import SUVATFeeder
 from module.pd_pi_controller import CascadeController
+from model.tubular import TubularLinearMotor
 from module.sim_definitions import (
     StaticEvaluation, DynamicSeries, DynamicEvaluation, MotorState, PathSegment
 )
@@ -23,7 +24,6 @@ from module.sim_definitions import (
 from pyfea import (
     Quantity as Q, ohm, weber, second, watt, newton, meter, dimensionless, henry, ampere
 )
-from pyfea.models.tubular_linear_motor.main import TubularLinearMotor
 
 from pyfea.solver.femm.domains.thermostatic.solver import FEMMThermostaticSolver
 from pyfea.solver.femm.domains.magnetostatic.solver import FEMMMagnetostaticSolver
@@ -51,7 +51,7 @@ class Analysis:
         self.magnetic = magnetic
         
         # Defines system mass and required outputs
-        self.system_mass = self.motor.config.motion.load + static.armature_mass
+        self.system_mass = self.motor.params.motion.load + static.armature_mass
         self.series = DynamicSeries.create()
         
         # Magnetic requested outputs
@@ -136,19 +136,18 @@ class Analysis:
 class PointToPoint(Analysis):
     """ Runs a Quasi-transient simulation of a linear motor between two z-points """
     def run(
-        self, segments: tuple[PathSegment], verbose: bool = False
+        self, segments: tuple[PathSegment] | PathSegment, file_path: str, verbose: bool = False
     ) -> tuple[DynamicSeries, DynamicEvaluation]:
         tau = self.static.secant_phase_inductance / self.static.resistance_atm_temp
 
         # Time steps based on time constant of the linear motor at 1A
-        main_time_step = tau * self.motor.config.numerical.de_solver_circuit_step
-        thermal_time_step = tau * self.motor.config.numerical.thermal_step
+        main_time_step = tau * self.motor.params.numerical.de_solver_circuit_step
         
         # Setups controller via syncing loops
         self.controller.sync_loop_time_step(main_time_step)
         
         # Loop variables
-        state = MotorState.create(self.motor.config.thermal.atmospheric_temperature)
+        state = MotorState.create(self.motor.params.thermal.atmospheric_temperature)
         last_segment_finish = 0 * second
         
         # Initialize previous d-q flux for induced voltage calculation
@@ -164,9 +163,10 @@ class PointToPoint(Analysis):
             feeder.plan_path(state.position_x, segment.target_position)
             
             not_meet_tolerance = True
+            count = 0
             while not_meet_tolerance:
                 # Breaks loop if maximum steps reached or segment time out is reached
-                max_steps = self.motor.config.numerical.de_solver_maximum_steps
+                max_steps = self.motor.params.numerical.de_solver_maximum_steps
                 if (state.time - last_segment_finish) / main_time_step > max_steps:
                     break
                 elif (state.time - last_segment_finish) > segment.time_out:
@@ -200,8 +200,8 @@ class PointToPoint(Analysis):
                 self.series.record_step(state, motor_constant)
                 
                 # Calculates acceleration and velocity via explicit euler method
-                normal_force = self.motor.config.motion.gravity * self.system_mass
-                state.force -= normal_force * self.motor.config.motion.coefficient_friction
+                normal_force = self.motor.params.motion.gravity * self.system_mass
+                state.force -= normal_force * self.motor.params.motion.coefficient_friction
                 
                 state.acceleration = state.force / self.system_mass
                 state.velocity += state.acceleration * main_time_step
@@ -255,13 +255,15 @@ class PointToPoint(Analysis):
                 state.power_loss = state.dq_currents.magnitude ** 2 * state.resistance
                 
                 # Updates slot and pole temperature
-                if state.time.value % (thermal_time_step).value:
-                    slot, pole = self._solve_thermal(state.power_loss, thermal_time_step)
+                thermal_count = self.motor.params.numerical.thermal_count.value
+                if count == thermal_count:
+                    slot, pole = self._solve_thermal(state.power_loss, thermal_count * main_time_step)
                     state.slot_temperature, state.pole_temperature = slot, pole
+                    count = 0
                 
                 # Ensures that the armature actually has stopped.
-                pos_tolerance = self.motor.config.motion.position_tolerance
-                vel_tolerance = self.motor.config.motion.velocity_tolerance
+                pos_tolerance = self.motor.params.motion.position_tolerance
+                vel_tolerance = self.motor.params.motion.velocity_tolerance
                 if (
                     pos_tolerance > abs(segment.target_position - state.position_x) and
                     vel_tolerance > abs(state.target_v - state.velocity)
@@ -269,10 +271,21 @@ class PointToPoint(Analysis):
                     not_meet_tolerance = False
                 
                 state.time += main_time_step
+                count += 1
+        
+        # Saves dynamic data to csv format
+        self.series.to_csv(file_path)
         
         # Calculates the asymptotic slot and pole temperature @ duty cycle
-        max_power_loss = max(self.series.p_loss) * self.motor.config.thermal.duty_cycle
-        slot, pole = self._solve_thermal(max_power_loss)
+        time_on = 0.0 * second
+        total_energy = 0.0 * (watt * second)
+        for index, current in enumerate(self.series.q_current):
+            if abs(current) > 0.1 * ampere:
+                time_on += main_time_step
+                total_energy += self.series.p_loss[index] * main_time_step
+        
+        average_power_loss = total_energy / state.time
+        slot, pole = self._solve_thermal(average_power_loss)
         state.slot_temperature, state.pole_temperature = slot, pole
 
         # Calculates the average k_m when current is applied
@@ -287,7 +300,7 @@ class PointToPoint(Analysis):
 
         # Given secant inductance usage throughout simulation t = L_s / R
         l_s = self.static.secant_phase_inductance / self.static.resistance_atm_temp
-        
         return self.series, DynamicEvaluation(
-            k_m, slot, pole, l_s, self.static.armature_mass, self.static.material_cost
+            k_m, slot, pole, l_s, self.static.armature_mass, 
+            self.static.armature_cost, self.static.segment_cost
         )

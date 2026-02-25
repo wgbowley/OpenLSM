@@ -9,8 +9,8 @@ Pa: kg*m^-1*s^-2
 
 # Electricity
 C: A*s
-V: kg*m^2*s^-3*A^-1
 F: kg^-1*m^-2*s^4*A^2
+V: kg*m^2*s^-3*A^-1
 Ω: kg*m^2*s^-3*A^-2
 S: kg^-1*m^-2*s^3*A^2
 Wb: kg*m^2*s^-2*A^-1
