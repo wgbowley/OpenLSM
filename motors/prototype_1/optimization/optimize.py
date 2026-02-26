@@ -32,6 +32,7 @@ from pymoo.algorithms.moo.nsga3 import NSGA3
 from pymoo.util.ref_dirs import get_reference_directions
 from pymoo.optimize import minimize
 from pymoo.operators.sampling.rnd import FloatRandomSampling
+from pymoo.core.population import Population
 
 from pymoo.core.callback import Callback
 from multiprocessing import Pool
@@ -76,8 +77,6 @@ class InputsBounds:
 
         for field in fields(self):
             attribute = getattr(self, field.name)
-            
-            # Extracts quality and takes raw value
             lower.append(attribute[0].value)
             upper.append(attribute[1].value)
 
@@ -85,49 +84,47 @@ class InputsBounds:
 
     @property
     def collapse_lower(self) -> list:
-        """ collapses parameter domain into lower bounds """
         return self._collapse()[0]
     
     @property
     def collapse_upper(self) -> list:
-        """ collapses parameter domain into upper bounds """
         return self._collapse()[1]
 
 
 class MyCheckpoint(Callback):
+    """
+    Saves only the serialisable parts of the algorithm state
+    """
     def __init__(self, filepath=checkpoint_path):
         super().__init__()
         self.filepath = Path(filepath)
 
     def notify(self, algorithm):
-        # Write to temp file first then rename atomically
-        # prevents corruption if process is killed mid-write
+        checkpoint_data = {
+            "n_gen": algorithm.n_gen,
+            "pop_X": algorithm.pop.get("X"),
+            "pop_F": algorithm.pop.get("F"),
+            "pop_G": algorithm.pop.get("G"),
+        }
         tmp_path = self.filepath.with_suffix(".tmp")
         with open(tmp_path, "wb") as f:
-            pickle.dump(algorithm, f)
+            pickle.dump(checkpoint_data, f)
         tmp_path.replace(self.filepath)
-        print(f"  > Checkpoint saved (gen {algorithm.n_gen}) to {self.filepath}", flush=True)
+        print(f"  > Checkpoint saved (gen {algorithm.n_gen})", flush=True)
+
 
 def deletes_files(sim_name: str) -> None:
     """ Deletes simulation raw files from folder """
-    thermal_raw = Path(solver_folder) / f"{sim_name}.feh"
-    thermal_ans = Path(solver_folder) / f"{sim_name}.anh"
-    thermal_raw.unlink(missing_ok=True)
-    thermal_ans.unlink(missing_ok=True)
-    
-    magnetic_raw = Path(solver_folder) / f"{sim_name}.fem"
-    magnetic_ans = Path(solver_folder) / f"{sim_name}.ans"
-    magnetic_raw.unlink(missing_ok=True)
-    magnetic_ans.unlink(missing_ok=True)
+    for ext in (".feh", ".anh", ".fem", ".ans"):
+        (Path(solver_folder) / f"{sim_name}{ext}").unlink(missing_ok=True)
 
 
 class OptimizationProblem(ElementwiseProblem):
     """ PYMOO evaluation wrapper for optimization. Evaluates one solution at a time """
     def __init__(self, bounds: InputsBounds, **kwargs) -> None:
-        """ Entries optimization parameters into pymoo via super injection """
         super().__init__(
-            n_var = 6,
-            n_obj = 4,
+            n_var=6,
+            n_obj=5,
             n_constr=4,
             xl=bounds.collapse_lower,
             xu=bounds.collapse_upper,
@@ -135,53 +132,45 @@ class OptimizationProblem(ElementwiseProblem):
         )
         
     def _evaluate(self, x, out, *args, **kwargs) -> None:
-        """ inherits the standard evaluate method from PYMOO problem """
-        # Unpacks x variable into variables and creates a simulation name
         index1, index2, index3, axial_length, outer_radius, axial_spacing = x
         sim_name = f"sim_{index1}_{index2}_{axial_length}_{outer_radius}_{axial_spacing}"
 
-        # Unpack & map indexed variables
-        pole_slot       = pole_slot_ratios[int(round(index1))]
-        pole_grade      = pole_grades[int(round(index2))]
-        wire_diameter   = bare_conductor_diameters[int(round(index3))]
+        pole_slot     = pole_slot_ratios[int(round(index1))]
+        pole_grade    = pole_grades[int(round(index2))]
+        wire_diameter = bare_conductor_diameters[int(round(index3))]
         
-        # Creates motor and updates parameters
         TubularMotor = TubularLinearMotor(path_lib) 
         TubularMotor.update_parameters(
             pole_slot, pole_grade, wire_diameter, 
             axial_length * m, outer_radius * m, axial_spacing * m
         ) 
         
-        # Initializes FEA solvers (magnetostatic and thermostatic)
         Magnetic = FEMMMagnetostaticSolver(solver_folder)
-        Thermal = FEMMThermostaticSolver(solver_folder)
+        Thermal  = FEMMThermostaticSolver(solver_folder)
         
-        f_penalty, g_penalty = [1e6] * 4, [1e6] * 4
+        f_penalty, g_penalty = [1e6] * 5, [1e6] * 4
         
-        # Performs initializes evaluation and dynamic simulation for the motor
         try:
             static_results = static_evaluation(TubularMotor, Thermal, Magnetic, sim_name)
             print(f"  [ok - static]  {static_results}", flush=True)
-            # Quick force requirement check
-            voltage = TubularMotor.params.circuit.supply_voltage
-            current = voltage / static_results.resistance_atm_temp
-            
-            # Current limit (check)
+
+            voltage     = TubularMotor.params.circuit.supply_voltage
+            current     = voltage / static_results.resistance_atm_temp
             max_current = TubularMotor.params.circuit.current_limit
-            current = max_current if max_current < current else current
+            current     = max_current if max_current < current else current
             
-            force = static_results.force_constant * current
-            mass = static_results.armature_mass + TubularMotor.params.motion.load
+            force         = static_results.force_constant * current
+            mass          = static_results.armature_mass + TubularMotor.params.motion.load
             required_force = mass * segment.max_acceleration
             
             k_m_appox = force / (current * voltage).sqrt()
             f_penalty = [
                 -k_m_appox.value,
                 1e6,
+                1e6,
                 static_results.secant_phase_inductance.value / static_results.resistance_atm_temp.value,
                 static_results.armature_cost.value + static_results.segment_cost.value
             ]
-            
             g_penalty = [
                 1e6,
                 1e6,
@@ -196,32 +185,29 @@ class OptimizationProblem(ElementwiseProblem):
                 return
             
             analysis = PointToPoint(TubularMotor, Thermal, Magnetic, static_results)
-
             csv_file = Path(motor_point_to_point) / f"{sim_name}.csv"
-            _, results = analysis.run(segment, csv_file)
+            dynamic, results = analysis.run(segment, csv_file)
             
-            # Extracts results
-            motor_constant          = results.motor_constant.value
-            asymptotic_slot_temp    = results.asymptotic_slot_temp.value
-            asymptotic_pole_temp    = results.asymptotic_pole_temp.value
-            time_constant           = results.time_constant.value
-            # armature_weight         = results.weight.value
-            armature_cost           = results.armature_cost.value
-            pole_segment_cost       = results.segment_cost.value
-            armature_length         = TubularMotor.armature_length.value
+            motor_constant       = results.motor_constant.value
+            asymptotic_slot_temp = results.asymptotic_slot_temp.value
+            asymptotic_pole_temp = results.asymptotic_pole_temp.value
+            time_constant        = results.time_constant.value
+            displacement         = dynamic.displacement[-1]
+            armature_cost        = results.armature_cost.value
+            pole_segment_cost    = results.segment_cost.value
+            armature_length      = TubularMotor.armature_length.value
             
+            target_different = segment.target_position - displacement
             deletes_files(sim_name)
             print(f"  [ok - dynamic]  {results} ", flush=True)
             
-            # Objectives
             out["F"] = [
                 -motor_constant,
                 asymptotic_slot_temp,
+                abs(target_different.value),
                 time_constant,
                 pole_segment_cost + armature_cost
             ]
-            
-            # Constraints
             out["G"] = [
                 asymptotic_pole_temp - pole_temp_max.value,
                 asymptotic_slot_temp - slot_temp_max.value,
@@ -240,49 +226,49 @@ class OptimizationProblem(ElementwiseProblem):
 bounds = InputsBounds(
     (0 * D,         (len(pole_slot_ratios) - 1) * D),
     (0 * D,         (len(pole_grades) - 1) * D),
-    (0 * D,         (len(bare_conductor_diameters) -1) * D),
+    (0 * D,         (len(bare_conductor_diameters) - 1) * D),
     (0.2 * mm,      10 * mm),
     (7.2 * mm,      14 * mm),
     (0.2 * mm,      10 * mm)
 )
 
-# Setups reference directions (NOTE: Not 100% on this)
-ref_dirs = get_reference_directions("das-dennis", 4, n_partitions=8)
-pop_size = max(200, len(ref_dirs) + (8 - len(ref_dirs) % 8))
+ref_dirs = get_reference_directions("das-dennis", 5, n_partitions=4)  # 21 dirs
+pop_size = 70
 
 if __name__ == "__main__":  
-    pool = Pool(12)
+    pool   = Pool(12)
     runner = StarmapParallelization(pool.starmap)
     problem = OptimizationProblem(bounds, elementwise_runner=runner)
+
+    initial_pop = None
 
     if checkpoint_path.exists():
         try:
             print(f"Resuming from checkpoint: {checkpoint_path}")
             with open(checkpoint_path, "rb") as f:
-                algorithm = pickle.load(f)
-            algorithm.problem = problem
-            print(f"  > Resuming from generation {algorithm.n_gen}", flush=True)
-        except (EOFError, pickle.UnpicklingError) as e:
-            print(f"  > Checkpoint corrupted ({e}), starting fresh...", flush=True)
-            checkpoint_path.unlink()
-            algorithm = None
-    else:
-        algorithm = None
+                data = pickle.load(f)
+            print(f"  > Last completed gen: {data['n_gen']}", flush=True)
+            # Warm-start from the last saved population
+            initial_pop = data["pop_X"]
+        except Exception as e:
+            print(f"  > Checkpoint load failed ({e}), starting fresh...", flush=True)
+            checkpoint_path.unlink(missing_ok=True)
 
-    if algorithm is None:
+    if initial_pop is None:
         print("Starting fresh...")
         random_samples = FloatRandomSampling().do(problem, pop_size - len(initial_designs)).get("X")
         initial_pop = np.vstack([initial_designs, random_samples])
-        algorithm = NSGA3(
-            pop_size=pop_size,
-            ref_dirs=ref_dirs,
-            sampling=initial_pop,
-        )
+
+    algorithm = NSGA3(
+        pop_size=pop_size,
+        ref_dirs=ref_dirs,
+        sampling=initial_pop,
+    )
 
     res = minimize(
         problem,
         algorithm,
-        termination=('n_gen', 20),
+        termination=('n_gen', 2),
         seed=1,
         save_history=True,
         verbose=True,
