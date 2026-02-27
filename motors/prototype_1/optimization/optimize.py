@@ -133,11 +133,12 @@ class OptimizationProblem(ElementwiseProblem):
         
     def _evaluate(self, x, out, *args, **kwargs) -> None:
         index1, index2, index3, axial_length, outer_radius, axial_spacing = x
-        sim_name = f"sim_{index1}_{index2}_{axial_length}_{outer_radius}_{axial_spacing}"
 
         pole_slot     = pole_slot_ratios[int(round(index1))]
         pole_grade    = pole_grades[int(round(index2))]
         wire_diameter = bare_conductor_diameters[int(round(index3))]
+        
+        sim_name = f"sim_{pole_slot}_{pole_grade}_{wire_diameter}_{axial_length}_{outer_radius}_{axial_spacing}"
         
         TubularMotor = TubularLinearMotor(path_lib) 
         TubularMotor.update_parameters(

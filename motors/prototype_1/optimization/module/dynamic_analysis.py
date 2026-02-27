@@ -22,7 +22,7 @@ from module.sim_definitions import (
 )
 
 from pyfea import (
-    Quantity as Q, ohm, weber, second, watt, newton, meter, dimensionless, henry, ampere
+    Quantity as Q, ohm, weber, second, watt, newton, meter, dimensionless, henry, ampere, millisecond
 )
 
 from pyfea.solver.femm.domains.thermostatic.solver import FEMMThermostaticSolver
@@ -141,7 +141,7 @@ class PointToPoint(Analysis):
         tau = self.static.secant_phase_inductance / self.static.resistance_atm_temp
 
         # Time steps based on time constant of the linear motor at 1A
-        main_time_step = tau * self.motor.params.numerical.de_solver_circuit_step
+        main_time_step = 0.2 * millisecond # tau * self.motor.params.numerical.de_solver_circuit_step
         
         # Setups controller via syncing loops
         self.controller.sync_loop_time_step(main_time_step)

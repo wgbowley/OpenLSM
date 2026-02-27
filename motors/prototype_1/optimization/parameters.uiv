@@ -39,10 +39,10 @@ convection_coefficient:     25 (kg*s^-3*K^-1)
 environmental_material: "stc_air"
 
 # Number of opposite polarity magnet Pairs (i.e Up-Down or 90-270)
-number_pairs: 2
+number_pairs: 1
 
 # Number of slots within the armature. A slot holds a coil, hence slot ~= coil
-number_slots: 12
+number_slots: 6
 
 # Boundary pairs approximate infinite track via adding extra pairs to the track
 boundary_pairs: 12
@@ -55,20 +55,20 @@ pa6cf: 80           (kg^-1)
 [armature_core]
 material:           "PTFE_unfilled"
 inner_radius:       6.5 m(m)
-outer_radius:       10 m(m)
+outer_radius:       10.58 m(m)
 
-axial_slot_spacing: 1.5 m(m)
+axial_slot_spacing: 1 m(m)
 
 [armature_slots]
 material:           "pure_copper"
-wire_diameter:      0.25 m(m)
+wire_diameter:      0.2 m(m)
 
 # Percentage of the slot used for windings. (i.e 0.6 -> 60% copper, 40% air + enamel)
 fill_factor:        0.6
 
 inner_radius:       7 m(m)
-outer_radius:       10 m(m)
-axial_length:       2 m(m)
+outer_radius:       10.58 m(m)
+axial_length:       2.5 m(m)
 
 [stator_tube]
 material:           "isotropic_carbon_fibre"
@@ -78,7 +78,7 @@ outer_radius:       6 m(m)
 
 [stator_poles]
 material:       "NdFeB"
-grade:          "N52"
+grade:          "N45"
 
 inner_radius:   0 m(m)
 outer_radius:   5 m(m)

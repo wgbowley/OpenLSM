@@ -151,7 +151,7 @@ class TubularLinearMotor:
             
             pole_shape = Builder.create_rectangle(
                 (0 * millimeter, bottom_left),
-                self.params.stator_poles.outer_radius, self.pole_pitch
+                self.params.stator_poles.outer_radius, self.params.stator_poles.axial_length
             )
             poles.append(pole_shape)
 

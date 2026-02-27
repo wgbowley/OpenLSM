@@ -41,7 +41,7 @@ static_results = static_evaluation(TubularMotor, Thermal, Magnetic)
 print(static_results)
 
 analysis = PointToPoint(TubularMotor, Thermal, Magnetic, static_results)
-segment = PathSegment(10 * mm, 200 * mm/second, 8000 * mm/second**2, 0.10 * second)
+segment = PathSegment(10 * mm, 100 * mm/second, 5000 * mm/second**2, 0.15 * second)
 
 results, summary = analysis.run(segment, csv_output, True)
 print(summary)
