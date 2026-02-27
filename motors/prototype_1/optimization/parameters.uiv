@@ -12,7 +12,6 @@ unit_frame: SI_METRIC_NON_DERIVED
 # This allows for model characterisation for either optimization or verification. 
 
 [numerical]
-de_solver_circuit_step:     0.1
 pi_pd_solver_step:          0.1
 thermal_count:              5
 de_solver_maximum_steps:    5000
@@ -50,36 +49,32 @@ boundary_pairs: 12
 [material_cost]
 n52: 250            (kg^-1)
 copper: 120         (kg^-1)
-pa6cf: 80           (kg^-1)
+ptfe: 150           (kg^-1)
 
 [armature_core]
 material:           "PTFE_unfilled"
-inner_radius:       6.5 m(m)
-outer_radius:       10.58 m(m)
 
-axial_slot_spacing: 1 m(m)
+gap_radial_thickness: 0.5 m(m)
+radial_thickness: 1 m(m)
+axial_slot_spacing: 10.00 m(m)
 
 [armature_slots]
 material:           "pure_copper"
 wire_diameter:      0.2 m(m)
+fill_factor: 0.6
 
-# Percentage of the slot used for windings. (i.e 0.6 -> 60% copper, 40% air + enamel)
-fill_factor:        0.6
-
-inner_radius:       7 m(m)
-outer_radius:       10.58 m(m)
-axial_length:       2.5 m(m)
+axial_length: 2.5 m(m)
+radial_thickness: 4 m(m)
 
 [stator_tube]
 material:           "isotropic_carbon_fibre"
 
-inner_radius:       5 m(m)
-outer_radius:       6 m(m)
+# Lays on-top of the stator poles.
+radial_thickness: 1 m(m)
 
 [stator_poles]
 material:       "NdFeB"
 grade:          "N45"
 
-inner_radius:   0 m(m)
-outer_radius:   5 m(m)
-axial_length:   10 m(m)
+radial_thickness: 5 m(m)
+axial_length: 10 m(m)

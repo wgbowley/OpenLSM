@@ -141,7 +141,7 @@ class PointToPoint(Analysis):
         tau = self.static.secant_phase_inductance / self.static.resistance_atm_temp
 
         # Time steps based on time constant of the linear motor at 1A
-        main_time_step = 0.2 * millisecond # tau * self.motor.params.numerical.de_solver_circuit_step
+        main_time_step = 0.5 * millisecond # tau * self.motor.params.numerical.de_solver_circuit_step
         
         # Setups controller via syncing loops
         self.controller.sync_loop_time_step(main_time_step)

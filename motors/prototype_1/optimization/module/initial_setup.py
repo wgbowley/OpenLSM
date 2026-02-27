@@ -115,7 +115,7 @@ def initial_state(
     pole_density = motor.stator_poles_material.values().physical.density
     # Material cost
     slot_cost = motor.params.material_cost.copper
-    core_cost = motor.params.material_cost.pa6cf
+    core_cost = motor.params.material_cost.ptfe
     pole_cost = motor.params.material_cost.n52
     
     slot_mass, core_mass = slot_volume * slot_density, core_volume * core_density

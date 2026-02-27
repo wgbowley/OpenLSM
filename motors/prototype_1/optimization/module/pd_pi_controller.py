@@ -31,7 +31,7 @@ class CascadeController:
         
         # Defines controller frequency and bandwidth
         tau_frequency = values.resistance_atm_temp / values.secant_phase_inductance
-        self.c_frequency = motor.params.numerical.de_solver_circuit_step * tau_frequency
+        self.c_frequency = tau_frequency
         self.bandwidth = tau_frequency
         
         # Defines position loop variables

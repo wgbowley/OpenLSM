@@ -70,6 +70,12 @@ class TubularLinearMotor:
         self.pole_pitch = 0.0
         self.armature_length = 0.0
         self.effective_length = 0.0
+        
+        self.pole_outer_radius = 0.0
+        self.tube_outer_radius = 0.0
+        self.armature_inner_radius = 0.0
+        self.slot_inner_radius = 0.0
+        self.slot_outer_radius = 0.0
     
     def construct_domain(self, solver: BaseSolver) -> Domain:
         """ Constructs the domain based on solver physics domain """
@@ -95,8 +101,10 @@ class TubularLinearMotor:
         pole_grade: str, 
         wire_diameter: Q, 
         slot_axial_length: Q,
-        slot_outer_radius: Q, 
-        slot_axial_spacing: Q
+        slot_radial_thickness: Q, 
+        slot_axial_spacing: Q,
+        pole_radial_thickness: Q,
+        pole_axial_length: Q
     ) -> None:
         """ Updates parameters within the configuration to reflect changes """
         self.params.find_and_replace("model.number_pairs", pole_slot_ratio[0])
@@ -104,26 +112,24 @@ class TubularLinearMotor:
         self.params.find_and_replace("stator_poles.grade", pole_grade)
         self.params.find_and_replace("armature_slots.wire_diameter", wire_diameter)
         self.params.find_and_replace("armature_slots.axial_length", slot_axial_length)
-        self.params.find_and_replace("armature_slots.outer_radius", slot_outer_radius)
-        self.params.find_and_replace("armature_core.outer_radius", slot_outer_radius)
+        self.params.find_and_replace("armature_slots.radial_thickness", slot_radial_thickness)
         self.params.find_and_replace("armature_core.axial_slot_spacing", slot_axial_spacing)
+        self.params.find_and_replace("stator_poles.radial_thickness", pole_radial_thickness)
+        self.params.find_and_replace("armature_core.axial_length", pole_axial_length)
         
     def build_armature(self, align: bool = False) -> tuple[CSGNode, list[VectorGeometry]]:
         """ Builds the armature via constructing the core and its slots """
         parameters = self.params
-        core_radial_thickness = (
-            parameters.armature_core.outer_radius - parameters.armature_core.inner_radius
-        )
-        
         phase_align = self.pole_pitch / 2 if align else 0.0 * millimeter
         
         # Constructs the rectangular base shape to subtract the slots against.
         core = Builder.create_rectangle(
             (
-                parameters.armature_core.inner_radius,
+                self.armature_inner_radius,
                 - self.armature_length / 2 + phase_align
             ),
-            core_radial_thickness, self.armature_length
+            parameters.armature_slots.radial_thickness + parameters.armature_core.radial_thickness
+            , self.armature_length
         )
         
         # Constructs the slots and remove the slot area from the armature
@@ -133,8 +139,8 @@ class TubularLinearMotor:
             bottom_left = offset + slot * self.slot_pitch + phase_align
             
             slot = Builder.create_rectangle(
-                (parameters.armature_slots.inner_radius, bottom_left),
-                parameters.armature_slots.outer_radius - parameters.armature_slots.inner_radius,
+                (self.slot_inner_radius, bottom_left),
+                parameters.armature_slots.radial_thickness, 
                 parameters.armature_slots.axial_length
             )
             core.subtract(slot)
@@ -151,23 +157,28 @@ class TubularLinearMotor:
             
             pole_shape = Builder.create_rectangle(
                 (0 * millimeter, bottom_left),
-                self.params.stator_poles.outer_radius, self.params.stator_poles.axial_length
+                self.pole_outer_radius, self.params.stator_poles.axial_length
             )
             poles.append(pole_shape)
 
         tube = Builder.create_rectangle(
-            (self.params.stator_poles.outer_radius, - number_poles * self.pole_pitch / 2),
-            self.params.stator_tube.outer_radius - self.params.stator_tube.inner_radius,
-            number_poles * self.pole_pitch
+            (self.pole_outer_radius, - number_poles * self.pole_pitch / 2),
+            self.params.stator_tube.radial_thickness, number_poles * self.pole_pitch
         )
         return poles, tube
 
     def build_boundary(self, number_poles: Q) -> VectorGeometry:
         """ Builds the boundary shape via parameters with 20% margin for safety """
+        axial_length = number_poles * self.pole_pitch
+        stator_length = self.slot_pitch * self.params.model.number_slots.value
+
+        if stator_length > axial_length:
+            # Ensures even if the armature is longer than the stator. It can simulate.
+            axial_length = stator_length
+        
         return Builder.create_rectangle(
-            (0 * millimeter, - 1.2 * number_poles * self.pole_pitch / 2),
-            self.params.armature_core.outer_radius * 1.2,
-            number_poles * self.pole_pitch * 1.2
+            (0 * millimeter, - 1.2 * axial_length / 2),
+            self.slot_outer_radius * 1.2, axial_length * 1.2
         )
     
     def _get_parameters(self, path: Path) -> Parser:
@@ -230,14 +241,20 @@ class TubularLinearMotor:
             msg += f"{self.pole_pitch:.3f} : {pole_length:.3f}"
             raise ModelError("TubularLinearMotor._derived_parameters()", msg)
         
-
+        # Calculating radial sizes
+        self.pole_outer_radius = self.params.stator_poles.radial_thickness
+        self.tube_outer_radius = self.pole_outer_radius + self.params.stator_tube.radial_thickness
+        self.armature_inner_radius = self.tube_outer_radius + self.params.armature_core.gap_radial_thickness
+        self.slot_inner_radius = self.armature_inner_radius + self.params.armature_core.radial_thickness
+        self.slot_outer_radius = self.slot_inner_radius + self.params.armature_slots.radial_thickness
+        
 class ConstructMagnetic:
     """ Constructs magnetic domain via adding magnetic metadata to geometry """
     @classmethod
     def calculate_number_turns(cls, motor: TubularLinearMotor) -> int:
         """ Calculates the approximate number of turns within a slot """
         parameters = motor.params
-        radius = parameters.armature_slots.outer_radius - parameters.armature_slots.inner_radius
+        radius = motor.slot_outer_radius - motor.slot_inner_radius
 
         # Calculates the cross sectional area, wire area and than effective material area
         slot_area = radius * parameters.armature_slots.axial_length
@@ -316,7 +333,7 @@ class ConstructThermal:
     @classmethod
     def build(cls, motor: TubularLinearMotor) -> Domain:
         """ Builds the thermal simulation via adding metadata to geometry """
-        parameters = motor.params
+    
         parts = []
         
         # Builds armature and stator than extract parts
