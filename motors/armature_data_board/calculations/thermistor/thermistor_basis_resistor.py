@@ -1,7 +1,6 @@
 """
 Filename: thermistor_basis_resistor.py
-Author: William Bowley
-Version: 0.1
+
 Description:
     Calculates the basis resistor for the 10kOhm thermistor
     divider circuit into the 74HC4051 and than ADC

@@ -55,6 +55,8 @@ pole_slot_ratios = [[1, 6] * D, [2, 12] * D, [3, 18] * D, [4, 24] * D]
 pole_grades = ["N30", "N33", "N35", "N38", "N40", "N42", "N45", "N48", "N50", "N52"]
 bare_conductor_diameters = [0.2, 0.224, 0.25, 0.315, 0.4, 0.5, 0.56, 0.71, 0.8, 1.0, 1.25, 1.5] * mm
 
+initial_designs = np.array([[0, 7, 3, 0.0025, 0.010, 0.001, 0.005, 0.010]])
+
 # Configuration
 segment = PathSegment(50 * mm, 200 * mm/second, 10000 * mm/second**2, 0.5 * second)
 slot_temp_max = 393.15 * kelvin
@@ -119,9 +121,8 @@ class MyCheckpoint(Callback):
 
 def deletes_files(sim_name: str) -> None:
     """ Deletes simulation raw files from folder """
-    return
-    # for ext in (".feh", ".anh", ".fem", ".ans"):
-    #     (Path(solver_folder) / f"{sim_name}{ext}").unlink(missing_ok=True)
+    for ext in (".feh", ".anh", ".fem", ".ans"):
+        (Path(solver_folder) / f"{sim_name}{ext}").unlink(missing_ok=True)
 
 
 class OptimizationProblem(ElementwiseProblem):
@@ -184,11 +185,11 @@ class OptimizationProblem(ElementwiseProblem):
             mass          = static_results.armature_mass + TubularMotor.params.motion.load
             required_force = mass * segment.max_acceleration
             
-            k_m_appox = force / (current * voltage).sqrt()
+            k_m_approx = force / (current * voltage).sqrt()
             
             # normalization of values
             force_norm = static_results.force_constant.value / self.ref_force_constant
-            km_norm    = k_m_appox.value / self.ref_motor_constant
+            km_norm    = k_m_approx.value / self.ref_motor_constant
             tau_norm   = (
                 static_results.secant_phase_inductance.value /
                 static_results.resistance_atm_temp.value
@@ -216,11 +217,14 @@ class OptimizationProblem(ElementwiseProblem):
                 (TubularMotor.armature_length.value - self.ref_arm_length) / self.ref_arm_length
             ]
             
-            if (force < required_force) or (tau_norm > 1.0):
+            # Relaxing the minimal pass requirements
+            if (force < 1/4 * required_force): #or (time_constant > 20 * ms):
                 deletes_files(sim_name)
                 out["F"] = f_penalty
                 out["G"] = g_penalty
                 return
+            
+            print("[ ok - Passed Static ] Beginning dynamic analysis")
             
             analysis = PointToPoint(TubularMotor, Thermal, Magnetic, static_results)
             csv_file = Path(motor_point_to_point) / f"{sim_name}.csv"
@@ -278,7 +282,7 @@ ref_dirs = get_reference_directions("das-dennis", 6, n_partitions=5)
 pop_size = len(ref_dirs) + 1
 
 if __name__ == "__main__":  
-    pool   = Pool(1)
+    pool   = Pool(12)
     runner = StarmapParallelization(pool.starmap)
     problem = OptimizationProblem(bounds, elementwise_runner=runner)
 
@@ -298,8 +302,8 @@ if __name__ == "__main__":
 
     if initial_pop is None:
         print("Starting fresh...")
-        random_samples = FloatRandomSampling().do(problem, pop_size).get("X")
-        initial_pop = random_samples
+        random_samples = FloatRandomSampling().do(problem, pop_size - len(initial_designs)).get("X")
+        initial_pop = np.vstack([initial_designs, random_samples])
 
     algorithm = NSGA3(
         pop_size=pop_size,
@@ -310,7 +314,7 @@ if __name__ == "__main__":
     res = minimize(
         problem,
         algorithm,
-        termination=('n_gen', 20),
+        termination=('n_gen', 5),
         seed=1,
         save_history=True,
         verbose=True,

@@ -1,7 +1,6 @@
 """
 Filename: crystal_load_capacitors.py
-Author: William Bowley
-Version: 0.1
+
 Description:
     Calculates the capacitance for C1 and C2
     for the 8MHZ crystal (ECS-80-18-23B-JTN-TR)

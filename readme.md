@@ -39,9 +39,9 @@ The current prototype that is being developed is based on work done by cmore839 
 
 ![Prototype 1: Tubular LSM](media/prototype_1/tubular_linear_motor.png)
 
-Sneak peak into the optimization of the motor using NSG3 and the simulation architecture described above. This initial test took about 12 hours and due to a memory error it crashed. The goal is ~10k models to be evaluated beyond a simple static check. Do note that the temperature graph at the bottom is transient hence the low rise ~0.1s this was due to thermal inertia. However asymptotic temperature is as an optimization objective due to its more independent nature.  
+Sneak peak into the optimization of the motor using NSGA-3 and the simulation architecture described above. This initial test took about 12 hours and due to a memory error it crashed. The goal is ~10k models to be evaluated beyond a simple static check. Do note that the temperature graph at the bottom is transient hence the low rise ~0.1s this was due to thermal inertia. However asymptotic temperature is as an optimization objective due to its more independent nature.  
 
-![Optimization Sneak Peak](motors/prototype_1/optimization/Figure_19.png)
+![Optimization Sneak Peak](media/prototype_1/Figure_21.png)
 
 # Credits:
 

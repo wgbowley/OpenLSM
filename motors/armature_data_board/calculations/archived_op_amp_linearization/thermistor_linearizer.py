@@ -1,7 +1,6 @@
 """
 Filename: thermistor_linearizer.py
-Author: William Bowley
-Version: 0.1
+
 Description:
     Calculates the resistors needed to produce a linear output voltage
     between 0 and 3.3 volts for the pi pico ADC line.

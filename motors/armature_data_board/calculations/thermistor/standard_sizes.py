@@ -1,7 +1,6 @@
 """
 Filename: standard_sizes.py
-Author: William Bowley
-Version: 0.1
+
 Description:
     Standard resistor sizes reference table
 """
