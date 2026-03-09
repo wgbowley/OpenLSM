@@ -178,7 +178,7 @@ class TubularLinearMotor:
         
         return Builder.create_rectangle(
             (0 * millimeter, - 1.2 * axial_length / 2),
-            self.slot_outer_radius * 1.2, axial_length * 1.2
+            self.slot_outer_radius * 1.5, axial_length * 1.2
         )
     
     def _get_parameters(self, path: Path) -> Parser:
@@ -228,7 +228,7 @@ class TubularLinearMotor:
         # Physical length and effective magnetic length of the armature
         self.armature_length = self.slot_pitch * self.params.model.number_slots
         self.effective_length = self.armature_length - axial_spacing
-        
+        print(self.effective_length)
         # Adds another axial_spacing to the armature length for equivalents end-segments
         self.armature_length += axial_spacing
         
@@ -236,7 +236,7 @@ class TubularLinearMotor:
         self.pole_pitch = self.effective_length / segment_poles
         
         pole_length = self.params.stator_poles.axial_length
-        if self.pole_pitch < pole_length:
+        if round(self.pole_pitch, 2) < round(pole_length, 2):
             msg = "Failed to derive parameters, overlapping stator poles: "
             msg += f"{self.pole_pitch:.3f} : {pole_length:.3f}"
             raise ModelError("TubularLinearMotor._derived_parameters()", msg)

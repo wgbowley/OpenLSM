@@ -14,7 +14,7 @@ unit_frame: SI_METRIC_NON_DERIVED
 [numerical]
 pi_pd_solver_step:          0.1
 thermal_count:              5
-de_solver_maximum_steps:    5000
+de_solver_maximum_steps:    1000
 characterisation_current:   0.50 (A)
 initial_current:            0 m(A)
 
@@ -38,10 +38,10 @@ convection_coefficient:     25 (kg*s^-3*K^-1)
 environmental_material: "stc_air"
 
 # Number of opposite polarity magnet Pairs (i.e Up-Down or 90-270)
-number_pairs: 1
+number_pairs: 2
 
 # Number of slots within the armature. A slot holds a coil, hence slot ~= coil
-number_slots: 6
+number_slots: 12
 
 # Boundary pairs approximate infinite track via adding extra pairs to the track
 boundary_pairs: 12
@@ -56,15 +56,16 @@ material:           "PTFE_unfilled"
 
 gap_radial_thickness: 0.5 m(m)
 radial_thickness: 1 m(m)
-axial_slot_spacing: 10.00 m(m)
+axial_slot_spacing: 2 m(m)
+axial_bolt_material: 7.5 m(m)
 
 [armature_slots]
 material:           "pure_copper"
-wire_diameter:      0.2 m(m)
-fill_factor: 0.6
+wire_diameter:      0.5 m(m)
+fill_factor: 0.65
 
-axial_length: 2.5 m(m)
-radial_thickness: 4 m(m)
+axial_length: 4.833333333 m(m)
+radial_thickness: 6.5 m(m)
 
 [stator_tube]
 material:           "isotropic_carbon_fibre"
@@ -74,7 +75,7 @@ radial_thickness: 1 m(m)
 
 [stator_poles]
 material:       "NdFeB"
-grade:          "N45"
+grade:          "N52"
 
 radial_thickness: 5 m(m)
-axial_length: 10 m(m)
+axial_length: 20 m(m)

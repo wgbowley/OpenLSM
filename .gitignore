@@ -5,3 +5,4 @@
 *.feh
 *.pyc
 /motors/prototype_1/viewing_outputs
+motors/prototype_1/preliminary_design/checkpoint.pkl

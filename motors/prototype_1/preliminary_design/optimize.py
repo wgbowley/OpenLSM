@@ -45,10 +45,10 @@ from pymoo.parallelization import StarmapParallelization
 
 # Defines configuration file and solver output path
 BASE_DIR = Path(__file__).parent.parent.parent  
-path_lib = BASE_DIR / "prototype_1/optimization/parameters.uiv"
-solver_folder = BASE_DIR / "prototype_1/optimization/outputs"
-motor_point_to_point = BASE_DIR / "prototype_1/optimization/path_data"
-checkpoint_path = BASE_DIR / "prototype_1/optimization/checkpoint.pkl"
+path_lib = BASE_DIR / "prototype_1/preliminary_design/initial.uiv"
+solver_folder = BASE_DIR / "prototype_1/preliminary_design/outputs"
+motor_point_to_point = BASE_DIR / "prototype_1/preliminary_design/path_data"
+checkpoint_path = BASE_DIR / "prototype_1/preliminary_design/checkpoint.pkl"
 
 # Lists for indexed outputs:
 pole_slot_ratios = [[1, 6] * D, [2, 12] * D, [3, 18] * D, [4, 24] * D]
