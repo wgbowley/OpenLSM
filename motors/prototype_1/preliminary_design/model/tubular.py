@@ -48,6 +48,7 @@ class TubularLinearMotor:
     CORE_ID = 2 * dimensionless
     POLE_ID = 3 * dimensionless
     TUBE_ID = 4 * dimensionless 
+    HEAT_SINK_ID = 5 * dimensionless 
     
     # Phases within the motor
     PHASES = [
@@ -128,7 +129,10 @@ class TubularLinearMotor:
                 self.armature_inner_radius,
                 - self.armature_length / 2 + phase_align
             ),
-            parameters.armature_slots.radial_thickness + parameters.armature_core.radial_thickness
+            (
+                self.params.armature_heat_sink.sink_radial_thickness +
+                self.params.armature_slots.radial_thickness
+            )
             , self.armature_length
         )
         
@@ -141,12 +145,39 @@ class TubularLinearMotor:
             slot = Builder.create_rectangle(
                 (self.slot_inner_radius, bottom_left),
                 parameters.armature_slots.radial_thickness, 
-                parameters.armature_slots.axial_length
+                parameters.armature_slots.axial_length,
             )
-            core.subtract(slot)
+            core = core.subtract(slot)
             slots.append(slot)
+
+        # Cuts out the heat sink
+        heat_sink_length = self.armature_length
+        heat_sink = Builder.create_rectangle(
+            (self.armature_outer_radius, -self.armature_length / 2 + phase_align),
+            self.params.armature_heat_sink.sink_radial_thickness, heat_sink_length
+        )
+        core = core.subtract(heat_sink)
+
+        # Builds heat sink
+        fin_pitch = (
+            self.params.armature_heat_sink.fin_axial_size + 
+            self.params.armature_heat_sink.fin_spacing
+        )
+        
+        for index in range(0, int(round(heat_sink_length.value/fin_pitch.value))):
+            offset = (
+                -self.armature_length / 2 + phase_align + index * fin_pitch 
+                + 1 / 2 * self.params.armature_heat_sink.fin_spacing
+            )
+
+            fin = Builder.create_rectangle(
+                (self.armature_heat_sink_outer, offset),
+                self.params.armature_heat_sink.fin_radial_thickness,
+                self.params.armature_heat_sink.fin_axial_size
+            )
+            heat_sink = heat_sink.union(fin)
             
-        return core, slots
+        return core, slots, heat_sink
     
     def build_stator(self, number_poles: Q) -> tuple[list, VectorGeometry]:
         """ Builds the stator poles and their enclosing tube """
@@ -170,15 +201,15 @@ class TubularLinearMotor:
     def build_boundary(self, number_poles: Q) -> VectorGeometry:
         """ Builds the boundary shape via parameters with 20% margin for safety """
         axial_length = number_poles * self.pole_pitch
-        stator_length = self.slot_pitch * self.params.model.number_slots.value
+        stator_length = self.armature_length
 
         if stator_length > axial_length:
             # Ensures even if the armature is longer than the stator. It can simulate.
             axial_length = stator_length
-        
+
         return Builder.create_rectangle(
             (0 * millimeter, - 1.2 * axial_length / 2),
-            self.slot_outer_radius * 1.5, axial_length * 1.2
+            self.armature_heat_fin_outer * 1.5, axial_length * 1.2
         )
     
     def _get_parameters(self, path: Path) -> Parser:
@@ -208,6 +239,9 @@ class TubularLinearMotor:
         self.stator_tube_material = manager.use_material(
             self.params.stator_tube.material
         )
+        self.heat_sink_material = manager.use_material(
+            self.params.armature_heat_sink.material
+        )
         self.stator_poles_material = manager.use_material(
             self.params.stator_poles.material, 
             grade = self.params.stator_poles.grade
@@ -228,9 +262,9 @@ class TubularLinearMotor:
         # Physical length and effective magnetic length of the armature
         self.armature_length = self.slot_pitch * self.params.model.number_slots
         self.effective_length = self.armature_length - axial_spacing
-        print(self.effective_length)
+
         # Adds another axial_spacing to the armature length for equivalents end-segments
-        self.armature_length += axial_spacing
+        self.armature_length += 2 * self.params.armature_core.axial_end_caps - axial_spacing 
         
         # Pole pitch is the distance between adjacent poles (start 1 -> start 2)
         self.pole_pitch = self.effective_length / segment_poles
@@ -245,9 +279,13 @@ class TubularLinearMotor:
         self.pole_outer_radius = self.params.stator_poles.radial_thickness
         self.tube_outer_radius = self.pole_outer_radius + self.params.stator_tube.radial_thickness
         self.armature_inner_radius = self.tube_outer_radius + self.params.armature_core.gap_radial_thickness
-        self.slot_inner_radius = self.armature_inner_radius + self.params.armature_core.radial_thickness
+        self.slot_inner_radius = self.armature_inner_radius + self.params.armature_core.wall_radial_thickness
         self.slot_outer_radius = self.slot_inner_radius + self.params.armature_slots.radial_thickness
+        self.armature_outer_radius = self.slot_outer_radius
+        self.armature_heat_sink_outer = self.armature_outer_radius + self.params.armature_heat_sink.sink_radial_thickness
+        self.armature_heat_fin_outer = self.armature_heat_sink_outer + self.params.armature_heat_sink.fin_radial_thickness 
         
+
 class ConstructMagnetic:
     """ Constructs magnetic domain via adding magnetic metadata to geometry """
     @classmethod
@@ -276,7 +314,7 @@ class ConstructMagnetic:
         parts = []
         
         # Builds armature and stator than extract parts
-        core, slots = motor.build_armature(True)
+        core, slots, heat_sink = motor.build_armature(True)
         poles, tube = motor.build_stator(motor.total_poles)
         boundary    = motor.build_boundary(motor.total_poles)
         
@@ -321,6 +359,12 @@ class ConstructMagnetic:
             )
         )
         
+        parts.append(
+            Builder.promote_to_part(
+                heat_sink, MagneticData(motor.HEAT_SINK_ID, motor.heat_sink_material)
+            ) 
+        )
+        
         # Overall simulation problem definition
         meta = MagneticData(motor.ENVIRONMENT_ID, motor.environmental_material)
         return Domain(
@@ -337,7 +381,7 @@ class ConstructThermal:
         parts = []
         
         # Builds armature and stator than extract parts
-        core, slots = motor.build_armature()
+        core, slots, heat_sink = motor.build_armature()
         poles, tube = motor.build_stator(motor.params.model.number_pairs * 2)
         boundary    = motor.build_boundary(motor.params.model.number_pairs * 2)
         
@@ -368,6 +412,12 @@ class ConstructThermal:
             Builder.promote_to_part(
                 tube, ThermalData(motor.TUBE_ID, motor.stator_tube_material)
             )
+        )
+        
+        parts.append(
+            Builder.promote_to_part(
+                heat_sink, ThermalData(motor.HEAT_SINK_ID, motor.heat_sink_material)
+            ) 
         )
         
         # Overall simulation problem definition

@@ -102,27 +102,35 @@ def initial_state(
     outputs.add_thermal(motor.SLOT_ID, ThermalOptions.VOLUME)
     outputs.add_thermal(motor.CORE_ID, ThermalOptions.VOLUME)
     outputs.add_thermal(motor.POLE_ID, ThermalOptions.VOLUME)
-
+    outputs.add_thermal(motor.HEAT_SINK_ID, ThermalOptions.VOLUME)
+    
     # Solves and extract parameters
     results = solver.solve(outputs)
     slot_volume = attrgetter(f"element_{motor.SLOT_ID.value}.volume")(results)
     core_volume = attrgetter(f"element_{motor.CORE_ID.value}.volume")(results)
     pole_volume = attrgetter(f"element_{motor.POLE_ID.value}.volume")(results)
+    heat_volume = attrgetter(f"element_{motor.HEAT_SINK_ID.value}.volume")(results)
     
     # Material density
     slot_density = motor.armature_slots_material.values().physical.density
     core_density = motor.armature_core_material.values().physical.density
     pole_density = motor.stator_poles_material.values().physical.density
+    heat_density = motor.heat_sink_material.values().physical.density
+    
     # Material cost
     slot_cost = motor.params.material_cost.copper
-    core_cost = motor.params.material_cost.ptfe
+    core_cost = motor.params.material_cost.nylon
     pole_cost = motor.params.material_cost.n52
-    
+    heat_cost = motor.params.material_cost.aluminum
+
+    print(f"<Static volumes=(core={core_volume:.3f}, slot={slot_volume:.3f}, sink={heat_volume:.3f})")
+        
     slot_mass, core_mass = slot_volume * slot_density, core_volume * core_density
-    armature_mass = slot_volume * slot_density + core_volume * core_density
+    heat_mass = heat_volume * heat_density
+    armature_mass = slot_mass + core_mass + heat_mass
 
     segment = pole_density * pole_volume * pole_cost
-    armature = slot_mass * slot_cost + core_mass * core_cost
+    armature = slot_mass * slot_cost + core_mass * core_cost + heat_cost * heat_mass
     return armature_mass, slot_volume, armature, segment
 
 

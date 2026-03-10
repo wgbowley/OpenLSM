@@ -64,6 +64,7 @@
     "NSGA3",
     "elementwise",
     "serialisable",
-    "NSGA"
+    "NSGA",
+    "centi",
   ]
 }

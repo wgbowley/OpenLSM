@@ -84,7 +84,7 @@ class Analysis:
         )
         
         # Moves the armature by the vector (displacement, angle)
-        elements = [self.motor.SLOT_ID, self.motor.CORE_ID]
+        elements = [self.motor.SLOT_ID, self.motor.CORE_ID, self.motor.HEAT_SINK_ID]
         self.magnetic.move_elements(elements, delta, state.displace_angle)
         
         # Changes currents and solves the magnetic problem
