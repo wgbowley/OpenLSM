@@ -83,6 +83,7 @@ class StaticEvaluation(SimData):
     magnet_flux: Q              = field(metadata={'unit': TM2})
     armature_mass: Q            = field(metadata={'unit': kg})
     slot_volume: Q              = field(metadata={'unit': m**3})
+    heat_sink_volume: Q         = field(metadata={'unit': m**3})
     armature_cost: Q            = field(metadata={'unit': dimensionless})
     segment_cost: Q             = field(metadata={'unit': dimensionless})
         
@@ -97,6 +98,7 @@ class StaticEvaluation(SimData):
             f"Φ_magnet: {self.magnet_flux}, "
             f"m_armature: {self.armature_mass:.3f}, "
             f"V_slot: {self.slot_volume:.3f}, "
+            f"V_sink: {self.heat_sink_volume:.3f}, "
             f"Armature Cost: ${self.armature_cost:.3f}, "
             f"Segment Cost: ${self.segment_cost:.3f})>"
         )

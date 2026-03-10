@@ -131,7 +131,7 @@ def initial_state(
 
     segment = pole_density * pole_volume * pole_cost
     armature = slot_mass * slot_cost + core_mass * core_cost + heat_cost * heat_mass
-    return armature_mass, slot_volume, armature, segment
+    return armature_mass, slot_volume, heat_volume, armature, segment
 
 
 def static_evaluation(
@@ -153,9 +153,9 @@ def static_evaluation(
     # Builds the motor within the thermostatic domain
     domain = motor.construct_domain(thermal_solver)
     thermal_solver.setup(domain, filename)
-    armature_mass, slot_volume, armature, segment = initial_state(motor, thermal_solver)
+    armature_mass, slot_volume, heat_volume, armature, segment = initial_state(motor, thermal_solver)
 
     return StaticEvaluation(
         abs(force), abs(resistance), abs(inductance), magnet_flux, armature_mass, slot_volume, 
-        armature, segment
+        heat_volume, armature, segment
     )

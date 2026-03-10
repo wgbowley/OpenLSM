@@ -1,8 +1,8 @@
 """
-Filename: optimize.py
+Filename: magnetic_optimize.py
 
 Description:
-    Prototype 1 linear Motor optimization script refer to parameters.uiv
+    Prototype 1 linear Motor optimization script refer to design.uiv
     for initial motor parameters.
     
     NOTE:
@@ -45,7 +45,7 @@ from pymoo.parallelization import StarmapParallelization
 
 # Defines configuration file and solver output path
 BASE_DIR = Path(__file__).parent.parent.parent  
-path_lib = BASE_DIR / "prototype_1/preliminary_design/initial.uiv"
+path_lib = BASE_DIR / "prototype_1/preliminary_design/design.uiv"
 solver_folder = BASE_DIR / "prototype_1/preliminary_design/outputs"
 motor_point_to_point = BASE_DIR / "prototype_1/preliminary_design/path_data"
 checkpoint_path = BASE_DIR / "prototype_1/preliminary_design/checkpoint.pkl"

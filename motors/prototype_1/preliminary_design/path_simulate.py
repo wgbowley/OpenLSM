@@ -20,7 +20,7 @@ from module.initial_setup import static_evaluation
 from module.dynamic_analysis import PointToPoint
 from model.tubular import TubularLinearMotor
 
-from pyfea import second, millimeter as mm, dimensionless as D
+from pyfea import second, millimeter as mm
 from pyfea.solver.femm.domains.magnetostatic.solver import FEMMMagnetostaticSolver
 from pyfea.solver.femm.domains.thermostatic.solver import FEMMThermostaticSolver
 

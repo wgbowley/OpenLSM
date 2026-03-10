@@ -66,5 +66,6 @@
     "serialisable",
     "NSGA",
     "centi",
+    "pbounds",
   ]
 }

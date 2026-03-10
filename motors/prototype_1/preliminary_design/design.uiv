@@ -31,7 +31,7 @@ current_limit:              10  (A)
 
 [thermal]
 atmospheric_temperature:    298.15 (K)
-convection_coefficient:     25 (kg*s^-3*K^-1)
+convection_coefficient:     20 (kg*s^-3*K^-1)
 
 [model]
 # 'stc_air' is dry air at standard test conditions (25c / 298.15k / 1 atm)
@@ -71,11 +71,14 @@ radial_thickness: 3 m(m)
 
 [armature_heat_sink]
 material: "aluminum_6061"
-sink_radial_thickness: 1 m(m)
+interface_material: "isotropic_thermal_paste"
 
-fin_axial_size: 1 m(m)
-fin_radial_thickness: 4 m(m)
-fin_spacing: 1 m(m)
+sink_arm_gap: 1 m(m)
+sink_radial_thickness: 0.8 m(m)
+
+fin_axial_size: 1.5 m(m)
+fin_radial_thickness: 5.5 m(m)
+fin_spacing: 0.5 m(m)
 
 
 [stator_tube]
