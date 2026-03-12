@@ -199,7 +199,7 @@ class PointToPoint(Analysis):
                 
                 motor_constant = 0.0 * (newton / watt ** 0.5)
                 if state.power_loss > 0.0 * watt:
-                    motor_constant = state.force / state.power_loss ** 0.5
+                    motor_constant = abs(state.force) / state.power_loss ** 0.5
                     
                 # Records time series data for evaluation
                 self.series.record_step(state, motor_constant)

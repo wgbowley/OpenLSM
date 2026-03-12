@@ -6,3 +6,4 @@
 *.pyc
 /motors/prototype_1/viewing_outputs
 motors/prototype_1/preliminary_design/checkpoint.pkl
+motors/prototype_1/preliminary_design/path_circle_simulate.py
