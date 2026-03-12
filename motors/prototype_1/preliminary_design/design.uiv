@@ -23,7 +23,7 @@ load:                       500 m(kg)
 coefficient_friction:       0.002
 gravity:                    9.8 m(m*s^-2)
 velocity_tolerance:         0.005 m(m*s^-1)     # Maximal velocity to be considered not moving
-position_tolerance:         0.05 m(m)           # Maximal position to be considered on target
+position_tolerance:         0.05 m(m)           # Maximal position error to be considered on target
 
 [circuit]
 supply_voltage:             24  (kg*m^2*s^-3*A^-1)   # Volts

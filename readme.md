@@ -15,7 +15,6 @@ FDM 3D printers have evolved from commercial to household items, but they still 
 OpenLSM is a research project striving to produce high-performance linear motors while minimising complexity. The hybrid acronym “OpenLSM” stands for open linear synchronous motors, essentially the same technology used in modern drones and electric vehicles. Linear motors use the same fundamental principles; however, they are built with different geometries to achieve their linear motion.
 
 
-
 They should allow for continuous motion at the hardware level, while also having no expandability issues. Whereas for core-xy, it requires approximately 4mm of belt length for every 1 mm of extra travel distance. That leads to harmonic problems, which are resolved with belt tensioning. That ultimately stresses the frame while also wearing down the pulley's teeth. However, it should be emphasized that these longevity issues are mostly a problem for large-format FDM printers. Linear motors avoid these problems due to their reliance on direct motion and minimal mechanical parts. 
 
 ## Prototype 0: The curse of blindly following standards
@@ -33,11 +32,11 @@ The main insights from this prototype are that the flat linear motor is commerci
   > This path may still be revisited; limited documentation can be found in [prototype_0](/motors/prototype_0/)
 
 
-## Prototype 1: Actual experimentation instead of standards
+## Prototype 1: Experimentation rather than standards
 
 The current prototype that is being developed is based on work done by cmore839 on his tubular linear motor ([DIY Linear Motor](https://github.com/cmore839/DIY-Linear-Motor)). This motor type is ideal for ironless designs as it geometrically ensures maximal flux usage rather than guiding it with iron. Currently, this prototype is nearly at the stage of building and testing. The main limiting factor is the data board, which should allow for numerical results due to its range of sensors. Specifically, the ADXL345 accelerometer, 8 channel thermistor array for thermal data, and the AS5311 magnetic encoder for position data. An automatic coil winder was also developed for this prototype, which enables inductance and resistance matching. Lastly, thermal-magneto axial symmetrical modelling was used to validate this design rather than the TLAR method.
 
-![Prototype 1: Tubular LSM](media/prototype_1/tubular_linear_motor.png)
+[![Prototype 1: Tubular LSM](media/prototype_1/prototype_1_rev_1_whole.png)](https://a360.co/4bnGirH)
 
 Sneak peak into the optimization of the motor using NSGA-3 and the simulation architecture described above. This initial test took about 12 hours and due to a memory error it crashed. The goal is ~10k models to be evaluated beyond a simple static check. Do note that the temperature graph at the bottom is transient hence the low rise ~0.1s this was due to thermal inertia. However asymptotic temperature is as an optimization objective due to its more independent nature.  
 
