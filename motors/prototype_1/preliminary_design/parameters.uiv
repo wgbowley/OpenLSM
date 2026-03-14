@@ -1,6 +1,6 @@
 [version]
 format: 0.1.0
-unit_frame: SI_METRIC_NON_DERIVED
+unit_frame: si_metric.ut
 
 [notes]
 # The configuration file describes a tubular synchronous linear motor simulation.
@@ -26,12 +26,12 @@ velocity_tolerance:         0.005 m(m*s^-1)     # Maximal velocity to be conside
 position_tolerance:         0.05 m(m)           # Maximal position error to be considered on target
 
 [circuit]
-supply_voltage:             24  (kg*m^2*s^-3*A^-1)   # Volts
+supply_voltage:             24  (V)   # Volts
 current_limit:              10  (A)
 
 [thermal]
 atmospheric_temperature:    298.15 (K)
-convection_coefficient:     10 (kg*s^-3*K^-1)
+convection_coefficient:     20 (W*m^-2*K^-1)
 
 [model]
 # 'stc_air' is dry air at standard test conditions (25c / 298.15k / 1 atm)
@@ -58,16 +58,16 @@ material:           "isotropic_cf_nylon"
 gap_radial_thickness: 0.5 m(m)
 wall_radial_thickness: 1 m(m)
 
-axial_slot_spacing: 2 m(m)
+axial_slot_spacing: 0.8 m(m)
 axial_end_caps: 5 m(m)
 
 [armature_slots]
 material:           "pure_copper"
 wire_diameter:      0.4 m(m)
-fill_factor: 0.65
+fill_factor: 0.75
 
-axial_length: 4.833333333 m(m)
-radial_thickness: 3 m(m)
+axial_length: 5.933333333 m(m)
+radial_thickness: 4.8 m(m)
 
 [armature_heat_sink]
 material: "aluminum_6061"

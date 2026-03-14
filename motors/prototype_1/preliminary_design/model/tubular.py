@@ -207,7 +207,7 @@ class TubularLinearMotor:
     def build_stator(self, number_poles: Q) -> tuple[list, VectorGeometry]:
         """ Builds the stator poles and their enclosing tube """
         poles = []
-        for pole in range(0, number_poles.value):
+        for pole in range(0, int(number_poles.value)):
             offset = - number_poles * self.pole_pitch / 2
             bottom_left = offset + pole * self.pole_pitch
             
@@ -296,12 +296,15 @@ class TubularLinearMotor:
         
         # Pole pitch is the distance between adjacent poles (start 1 -> start 2)
         self.pole_pitch = self.effective_length / segment_poles
-        
+
         pole_length = self.params.stator_poles.axial_length
-        if round(self.pole_pitch, 2) < round(pole_length, 2):
+        if round(self.pole_pitch, 5) < round(pole_length, 5):
             msg = "Failed to derive parameters, overlapping stator poles: "
             msg += f"{self.pole_pitch:.3f} : {pole_length:.3f}"
             raise ModelError("TubularLinearMotor._derived_parameters()", msg)
+        
+        # Geometric parameters
+        # print(f"pole pitch: {self.pole_pitch}, slot pitch {self.slot_pitch}")
         
         # Calculating radial sizes
         self.pole_outer_radius = self.params.stator_poles.radial_thickness
