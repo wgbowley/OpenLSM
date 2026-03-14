@@ -191,8 +191,14 @@ class PointToPoint(Analysis):
                         f"Pos: {state.position_x:.3f}, Tar: {state.target_x:.3f}, "
                         f"dq_v: {state.dq_voltages}, dq_i: {state.dq_currents}"
                     )
-                           
-                # Solves mechanical differential equations through explicit euler method
+
+                # Calculates acceleration and velocity via explicit euler method
+                normal_force = self.motor.params.motion.gravity * self.system_mass
+                state.force -= normal_force * self.motor.params.motion.coefficient_friction
+                
+                state.acceleration = state.force / self.system_mass
+                state.velocity += state.acceleration * main_time_step
+                                    
                 delta = state.velocity * main_time_step
                 state.displacement += delta
                 state.position_x = state.displacement
@@ -203,13 +209,6 @@ class PointToPoint(Analysis):
                     
                 # Records time series data for evaluation
                 self.series.record_step(state, motor_constant)
-                
-                # Calculates acceleration and velocity via explicit euler method
-                normal_force = self.motor.params.motion.gravity * self.system_mass
-                state.force -= normal_force * self.motor.params.motion.coefficient_friction
-                
-                state.acceleration = state.force / self.system_mass
-                state.velocity += state.acceleration * main_time_step
                 
                 # Reflects directionality via (negative: left, positive: right)
                 state.displace_angle = 270 * dimensionless
@@ -254,10 +253,10 @@ class PointToPoint(Analysis):
                     main_time_step
                 )
         
-                # Calculates total and resistive loss power
+                # Calculates total and resistive loss power (scaled dq space)
                 dq_power = state.dq_currents * state.dq_voltages
-                state.power = dq_power[0] + dq_power[1]
-                state.power_loss = state.dq_currents.magnitude ** 2 * state.resistance
+                state.power = 1.5 * (dq_power[0] + dq_power[1])
+                state.power_loss = 1.5 * state.dq_currents.magnitude ** 2 * state.resistance
                 
                 # Updates slot and pole temperature
                 thermal_count = self.motor.params.numerical.thermal_count.value

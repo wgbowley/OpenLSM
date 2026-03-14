@@ -38,16 +38,16 @@ core_eddy_co_efficient = 0 * EDDY_CO
 slot_b_max = 0.8 * FLUX_DENSITY
 slot_permeability = 1 * FREE_SPACE
 slot_conductivity = 5.8 * 10 ** 7 * CONDUCTIVITY
-total_slot_volume = 9.839 * MICRO * LENGTH ** 3
+total_slot_volume = 21.259 * MICRO * LENGTH ** 3
 volume_per_slot = total_slot_volume / 12
-slot_thickness = 3 * MILLI * LENGTH
+slot_thickness = 4.8 * MILLI * LENGTH
 slot_eddy_co_efficient = 6.67 * 10 ** 7 * EDDY_CO
 
 # Heat Sink is aluminum
 sink_b_max = 0.2 * FLUX_DENSITY
 sink_permeability = 1 * FREE_SPACE
 sink_conductivity = 3.5 * 10 ** 7 * CONDUCTIVITY
-heat_sink_volume = 21.488 * MICRO * LENGTH ** 3
+heat_sink_volume = 18.690 * MICRO * LENGTH ** 3
 sink_thickness = 5 * MILLI * LENGTH
 sink_eddy_co_efficient = 1.30 * 10 ** 7 * EDDY_CO
 
