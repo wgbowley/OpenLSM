@@ -12,10 +12,8 @@ Description:
     the pyfea (v0.1.0) api has been deprecated.                          
 """
 
-from operator import attrgetter
 from pathlib import Path
 
-import numpy as np
 import matplotlib.pyplot as plt
 from bayes_opt import BayesianOptimization
 
@@ -67,9 +65,9 @@ def trial(sink_radial: float, fin_radial: float, fin_axial: float, sink_spacing:
     try:
         TubularMotor.update_heat_sink_parameters(sr, fr, fa, ss)
         outputs = SolverOutputs()
-        outputs.add_thermal(TubularMotor.SLOT_ID, ThermalOptions.AVERAGE_TEMPERATURE)
-        outputs.add_thermal(TubularMotor.POLE_ID, ThermalOptions.AVERAGE_TEMPERATURE)
-        outputs.add_thermal(TubularMotor.HEAT_SINK_ID, ThermalOptions.VOLUME)
+        outputs.add_thermal(TubularMotor.SLOT_ID, ThermalOptions.average_temperature)
+        outputs.add_thermal(TubularMotor.POLE_ID, ThermalOptions.average_temperature)
+        outputs.add_thermal(TubularMotor.HEAT_SINK_ID, ThermalOptions.volume)
         
         # Builds the motor
         domain = TubularMotor.construct_domain(Thermal)
@@ -79,9 +77,9 @@ def trial(sink_radial: float, fin_radial: float, fin_axial: float, sink_spacing:
         # Solves and extract parameters
         thermal_results = Thermal.solve(outputs)
         
-        volume = attrgetter(f"element_{TubularMotor.HEAT_SINK_ID.value}.volume")(thermal_results).value
-        pole = attrgetter(f"element_{TubularMotor.POLE_ID.value}.average_temperature")(thermal_results).value
-        slot = attrgetter(f"element_{TubularMotor.SLOT_ID.value}.average_temperature")(thermal_results).value
+        # volume = thermal_results[TubularMotor.HEAT_SINK_ID].volume.value
+        pole = thermal_results[TubularMotor.POLE_ID].average_temperature.value
+        slot = thermal_results[TubularMotor.SLOT_ID].average_temperature.value
         
         temp = atmospheric_temp.value
         score = slot / temp + 2 * pole / temp #  + volume / initial_volume.value

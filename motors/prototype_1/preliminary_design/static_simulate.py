@@ -13,7 +13,6 @@ Description:
 """
 
 
-from operator import attrgetter
 from pathlib import Path
 
 from pyfea import watt
@@ -49,9 +48,9 @@ volumetric_heat = power_losses / static_results.slot_volume
 initial_volume = static_results.heat_sink_volume
 
 outputs = SolverOutputs()
-outputs.add_thermal(TubularMotor.SLOT_ID, ThermalOptions.AVERAGE_TEMPERATURE)
-outputs.add_thermal(TubularMotor.POLE_ID, ThermalOptions.AVERAGE_TEMPERATURE)
-outputs.add_thermal(TubularMotor.HEAT_SINK_ID, ThermalOptions.VOLUME)
+outputs.add_thermal(TubularMotor.SLOT_ID, ThermalOptions.average_temperature)
+outputs.add_thermal(TubularMotor.POLE_ID, ThermalOptions.average_temperature)
+outputs.add_thermal(TubularMotor.HEAT_SINK_ID, ThermalOptions.volume)
 
 # Builds the motor
 domain = TubularMotor.construct_domain(Thermal)
@@ -61,11 +60,14 @@ Thermal.update_heat_source(TubularMotor.armature_slots_material, volumetric_heat
 # Solves and extract parameters
 thermal_results = Thermal.solve(outputs)
 
-volume = attrgetter(f"element_{TubularMotor.HEAT_SINK_ID.value}.volume")(thermal_results)
-pole = attrgetter(f"element_{TubularMotor.POLE_ID.value}.average_temperature")(thermal_results)
-slot = attrgetter(f"element_{TubularMotor.SLOT_ID.value}.average_temperature")(thermal_results)
+volume = thermal_results[TubularMotor.HEAT_SINK_ID].volume
+pole = thermal_results[TubularMotor.POLE_ID].average_temperature
+slot =thermal_results[TubularMotor.SLOT_ID].average_temperature
 
 cost = TubularMotor.params.material_cost.aluminum
 mass = volume * TubularMotor.heat_sink_material.values().physical.density
 
-print(f"loss: {power_losses:.3f}, pole_temp: {pole:.3f}, slot_temp: {slot:.3f}, heat_sink: ${mass*cost:.3f}")
+print(
+    f"loss: {power_losses:.3f}, pole_temp: {pole:.3f}, "
+    f"slot_temp: {slot:.3f}, heat_sink: ${mass*cost:.3f}"
+)

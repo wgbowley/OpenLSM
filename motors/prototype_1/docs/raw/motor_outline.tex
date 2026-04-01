@@ -1,0 +1,32 @@
+\documentclass{article}
+
+\begin{document}
+
+\section{Introduction}
+This document aims to outline the requirements for prototype 1 and how it will be
+tested.
+
+\section{Requirements}
+The motor should be able to produce a continuous force of 4 to 8N at approximately 40 to 60c. The 
+design should be responsive allowing for fast changes in direction or velocity. The design should
+be able to run using step/dir/enable and also direct CAN-BUS communication. The design must be able
+to run in a x, y configuration with either 1 motor on each axis or 1 motor on the x-axis and two on the y-axis.
+
+\section{Constraints}
+A 3d printers main supply is 24 V limited though can push upto 15-20A depending on supply model. The magnet size
+is 10mm (axially) by 10mm (radially) due to pre-purchased before design cycle and to decrease the solution space.
+The wire sizes available is similar having been pre-purchased hence only 0.2, 0.3, 0.4 mm wire diameters are available.
+The AS5311 linear encoder due to being on hand is the encoder that will be used on this design.
+
+\section{Testing}
+To test the motor, it will be configured in a X-Y gantry this allows for collecting thermal, magnetic and electric data
+about how the motor operates. Which will inform simulation modelling decisions will also help with optimization of the motor.
+
+\vspace{0.5cm}
+Testing will begin with just measuring the BACK-EMF from back driving the motor to see if the phase alignment is correct. If it is
+than each phase should be 120 degrees out of phase with one another. Than the encoder will be tested to see if its working correctly
+and that the MCU can keep up with high down rates. After that the 3 phase driver will be connected to the motor and the encoder which
+will allow for true testing of the setup using forward driving from electrical to mechanical energy. If it boots up and jogs a bit than
+the PID loop for each axis can be tuned before running a test planar g-code to gather mix thermal, electrical and magnetic data.
+
+\end{document}

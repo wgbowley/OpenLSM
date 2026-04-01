@@ -11,7 +11,6 @@ Description:
 """
 
 from math import sin, pi
-from operator import attrgetter
 
 from module.sim_definitions import StaticEvaluation
 from model.tubular import TubularLinearMotor
@@ -39,13 +38,13 @@ def _simulate_magnet_flux(
     # Defines the required output for this simulation
     outputs = SolverOutputs()
     for phase in motor.PHASES: 
-        outputs.add_circuit(phase, CircuitOptions.FLUX_LINKAGE)
+        outputs.add_circuit(phase, CircuitOptions.flux_linkage)
     
     # Solves and get average flux linkage across all phases
     magnet_results = magnetic_solver.solve(outputs)
     magnet_flux = [] * (TM2 / A)
     for phase in motor.PHASES:
-        magnet_flux.append(attrgetter(f"{phase.name}.flux_linkage")(magnet_results))
+        magnet_flux.append(magnet_results[phase].flux_linkage)
 
     return magnet_flux
 
@@ -66,20 +65,20 @@ def _simulate_magnetic_variables(
 
     # Defines the required output for this simulation
     outputs = SolverOutputs()
-    outputs.add_magnetic(motor.SLOT_ID, MagneticOptions.FORCE_LORENTZ)
+    outputs.add_magnetic(motor.SLOT_ID, MagneticOptions.force_lorentz)
 
     for phase in motor.PHASES:
-        outputs.add_circuit(phase, CircuitOptions.FLUX_LINKAGE)
-        outputs.add_circuit(phase, CircuitOptions.RESISTANCE)
-        outputs.add_circuit(phase, CircuitOptions.CURRENT)    
+        outputs.add_circuit(phase, CircuitOptions.flux_linkage)
+        outputs.add_circuit(phase, CircuitOptions.resistance)
+        outputs.add_circuit(phase, CircuitOptions.current)    
 
     # Solves and extracts resistance and inductance
     results = magnetic_solver.solve(outputs)
     secant_inductance, resistance = 0 * H, 0 * ohm
     for index, phase in enumerate(motor.PHASES):
-        flux = attrgetter(f"{phase.name}.flux_linkage")(results)
-        current = attrgetter(f"{phase.name}.current")(results)
-        resistance += attrgetter(f"{phase.name}.resistance")(results)
+        flux = results[phase].flux_linkage
+        current = results[phase].current
+        resistance += results[phase].resistance
 
         secant_inductance += (abs(flux) - magnet_flux[index]) / current
     
@@ -87,7 +86,7 @@ def _simulate_magnetic_variables(
     secant_inductance /= len(motor.PHASES)
     
     # Calculates the lorentz force constant
-    force = attrgetter(f"element_{motor.SLOT_ID.value}.force_lorentz")(results)
+    force = results[motor.SLOT_ID].force_lorentz
     force_constant = force[1] / characterisation_current
     
     return resistance, secant_inductance, force_constant
@@ -99,18 +98,18 @@ def initial_state(
     """ Solves the initial state of the thermal problem without a heat source """
     # Defines the required output for this simulation
     outputs = SolverOutputs()
-    outputs.add_thermal(motor.SLOT_ID, ThermalOptions.VOLUME)
-    outputs.add_thermal(motor.CORE_ID, ThermalOptions.VOLUME)
-    outputs.add_thermal(motor.POLE_ID, ThermalOptions.VOLUME)
-    outputs.add_thermal(motor.HEAT_SINK_ID, ThermalOptions.VOLUME)
+    outputs.add_thermal(motor.SLOT_ID, ThermalOptions.volume)
+    outputs.add_thermal(motor.CORE_ID, ThermalOptions.volume)
+    outputs.add_thermal(motor.POLE_ID, ThermalOptions.volume)
+    outputs.add_thermal(motor.HEAT_SINK_ID, ThermalOptions.volume)
     
     # Solves and extract parameters
     results = solver.solve(outputs)
-    slot_volume = attrgetter(f"element_{motor.SLOT_ID.value}.volume")(results)
-    core_volume = attrgetter(f"element_{motor.CORE_ID.value}.volume")(results)
-    pole_volume = attrgetter(f"element_{motor.POLE_ID.value}.volume")(results)
-    heat_volume = attrgetter(f"element_{motor.HEAT_SINK_ID.value}.volume")(results)
-    
+    slot_volume = results[motor.SLOT_ID].volume
+    core_volume = results[motor.CORE_ID].volume
+    pole_volume = results[motor.POLE_ID].volume
+    heat_volume = results[motor.HEAT_SINK_ID].volume
+
     # Material density
     slot_density = motor.armature_slots_material.values().physical.density
     core_density = motor.armature_core_material.values().physical.density

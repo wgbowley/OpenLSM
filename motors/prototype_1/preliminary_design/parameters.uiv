@@ -14,7 +14,7 @@ unit_frame: si_metric.ut
 [numerical]
 pi_pd_solver_step:          0.1
 thermal_count:              5
-de_solver_maximum_steps:    1000
+de_solver_maximum_steps:    500
 characterisation_current:   0.50 (A)
 initial_current:            0 m(A)
 
