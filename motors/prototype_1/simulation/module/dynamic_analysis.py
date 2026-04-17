@@ -11,8 +11,6 @@ Description:
     configuration.uiv
 """
 
-from operator import attrgetter
-
 from module.dynamic_physics import *
 from module.suvat_feeding import SUVATFeeder
 from module.pd_pi_controller import CascadeController
@@ -56,19 +54,19 @@ class Analysis:
         
         # Magnetic requested outputs
         self.MagneticOutputs = SolverOutputs()
-        self.MagneticOutputs.add_magnetic(motor.SLOT_ID, MagneticOptions.FORCE_LORENTZ)
+        self.MagneticOutputs.add_magnetic(motor.SLOT_ID, MagneticOptions.force_lorentz)
         for phase in motor.PHASES:
             self.MagneticOutputs.add_circuit(
-                phase, (CircuitOptions.FLUX_LINKAGE, CircuitOptions.RESISTANCE)
+                phase, (CircuitOptions.flux_linkage, CircuitOptions.resistance)
             )
 
         # Thermal requested outputs
         self.ThermalOutputs = SolverOutputs()
         self.ThermalOutputs.add_thermal(
-            motor.POLE_ID, ThermalOptions.AVERAGE_TEMPERATURE
+            motor.POLE_ID, ThermalOptions.average_temperature
         )
         self.ThermalOutputs.add_thermal(
-            motor.SLOT_ID, ThermalOptions.AVERAGE_TEMPERATURE
+            motor.SLOT_ID, ThermalOptions.average_temperature
         )
         
     def _solve_magnetostatic(
@@ -88,7 +86,7 @@ class Analysis:
             self.motor.SLOT_ID, 
             self.motor.CORE_ID, 
             self.motor.HEAT_SINK_ID, 
-            self.motor.THERMAL_PASE_ID
+            self.motor.THERMAL_PASTE_ID,
         ]
         self.magnetic.move_elements(elements, delta, state.displace_angle)
         
@@ -103,14 +101,14 @@ class Analysis:
         resistance = 0 * ohm
         linkage = [] * weber
         for phase in self.motor.PHASES:
-            resistance += abs(attrgetter(f"{phase.name}.resistance")(results))
-            linkage.append(attrgetter(f"{phase.name}.flux_linkage")(results))
+            resistance += results[phase].resistance
+            linkage.append(results[phase].flux_linkage)
         
         # Averages out any numerical errors across the phases
         resistance /= len(self.motor.PHASES)
     
         # Extracts axial force component 
-        force = attrgetter(f"element_{self.motor.SLOT_ID.value}.force_lorentz")(results)[1]
+        force = results[self.motor.SLOT_ID].force_lorentz[1]
         
         return force, resistance, linkage
     
@@ -128,12 +126,8 @@ class Analysis:
             # Solves as a asymptotic model
             thermal_results = self.thermal.solve(self.ThermalOutputs)
             
-        pole = attrgetter(
-            f"element_{self.motor.POLE_ID.value}.average_temperature"
-        )(thermal_results)
-        slot = attrgetter(
-            f"element_{self.motor.SLOT_ID.value}.average_temperature"
-        )(thermal_results)
+        pole = thermal_results[self.motor.POLE_ID].average_temperature
+        slot = thermal_results[self.motor.SLOT_ID].average_temperature
         
         return slot, pole
 
@@ -183,6 +177,7 @@ class PointToPoint(Analysis):
                 )
                 self.controller.set_target_position(state.target_x)
                 
+
                 if verbose:
                     print(
                         f"Step {state.time/main_time_step:.0f}, Time: {state.time:.3f}, "

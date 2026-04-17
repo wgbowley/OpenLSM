@@ -36,7 +36,7 @@ The main insights from this prototype are that the flat linear motor is commerci
 
 This prototype is based on work done by cmore839 on his tubular linear motor ([DIY Linear Motor](https://github.com/cmore839/DIY-Linear-Motor)). This motor type is ideal for ironless designs as it geometrically guides flux rather than using highly permeable materials. Also simplifies construction due to everything being radially/axially referenced.
 
-[![Prototype 1: Tubular LSM](media/prototype_1/prototype_1_rev_1_whole.png)](https://a360.co/4bnGirH)
+[![Prototype 1: Tubular LSM](media/prototype_1/rev_1/whole.png)](https://a360.co/4bnGirH)
 
 The preliminary design phase begins with setting up a simulation stack aimed at acting as a "digital twin" of the motor. The specific architecture consisted of an kinematic trajectory feeder into a PD position controller into a PI current controller, which drove the FEA (finite element analysis) model. The FEA model itself was a quasi-transient electro-magneto-thermal-mechanical model, which allowed the thermal problems encountered in prototype 0 to be properly addressed. Once the simulation stack was numerically stable, an NSGA-3 optimization run was performed, requiring roughly ```1.05``` million FEA solutions across ```1,012``` motors. It should be noted, however, that due to controller instability and optimizer exploits, the position and K_m results are incorrect; the Pareto front ended up serving more as a spatial navigator than a direct optimization pipeline.
 

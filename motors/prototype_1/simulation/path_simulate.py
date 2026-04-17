@@ -26,9 +26,9 @@ from pyfea.solver.femm.domains.thermostatic.solver import FEMMThermostaticSolver
 
 # Defines configuration file and solver output path
 BASE_DIR = Path(__file__).parent.parent.parent  
-path_lib = BASE_DIR / "prototype_1/preliminary_design/parameters.uiv"
-solver_folder = BASE_DIR / "prototype_1/preliminary_design/outputs"
-csv_output = BASE_DIR / "prototype_1/preliminary_design/outputs/motor.csv"
+path_lib = BASE_DIR / "prototype_1/simulation/parameters.uiv"
+solver_folder = BASE_DIR / "prototype_1/simulation/outputs"
+csv_output = BASE_DIR / "prototype_1/simulation/outputs/motor.csv"
 
 # Defines the tubular linear motor via configuration parameters
 TubularMotor = TubularLinearMotor(path_lib)

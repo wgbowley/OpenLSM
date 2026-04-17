@@ -13,7 +13,7 @@ from picounits.constants import (
     IMPEDANCE, VOLTAGE, CURRENT, MILLI, NANO, CAPACITANCE, TIME, PICO
 )
 
-from standard_sizes import (
+from driver.armature_data_board.calculations.thermistor.standard_sizes import (
     standard_resistor_series
 )
 

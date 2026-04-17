@@ -48,7 +48,7 @@ class TubularLinearMotor:
     CORE_ID = 2 * dimensionless
     POLE_ID = 3 * dimensionless
     TUBE_ID = 4 * dimensionless
-    THERMAL_PASE_ID = 5 * dimensionless
+    THERMAL_PASTE_ID = 5 * dimensionless
     HEAT_SINK_ID = 6 * dimensionless
     
     # Phases within the motor
@@ -245,7 +245,7 @@ class TubularLinearMotor:
             msg = f"{path} does not exist or could not be resolved."
             raise ModelError("TubularLinearMotor._get_parameters()", msg)
 
-        return Parser.open(target, Configuration)
+        return Parser.open(target, loader_class=Configuration)
     
     def _load_material(self) -> None:
         """ Builds out the material manager with materials """
@@ -398,7 +398,7 @@ class ConstructMagnetic:
         
         parts.append(
             Builder.promote_to_part(
-                thermal_gap, MagneticData(motor.THERMAL_PASE_ID, motor.thermal_paste_material)
+                thermal_gap, MagneticData(motor.THERMAL_PASTE_ID, motor.thermal_paste_material)
             ) 
         )
         
@@ -459,7 +459,7 @@ class ConstructThermal:
         
         parts.append(
             Builder.promote_to_part(
-                thermal_gap, ThermalData(motor.THERMAL_PASE_ID, motor.thermal_paste_material)
+                thermal_gap, ThermalData(motor.THERMAL_PASTE_ID, motor.thermal_paste_material)
             ) 
         )
         

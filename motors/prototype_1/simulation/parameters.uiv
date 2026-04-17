@@ -14,7 +14,7 @@ unit_frame: si_metric.ut
 [numerical]
 pi_pd_solver_step:          0.1
 thermal_count:              5
-de_solver_maximum_steps:    1000
+de_solver_maximum_steps:    500
 characterisation_current:   0.50 (A)
 initial_current:            0 m(A)
 
@@ -26,12 +26,12 @@ velocity_tolerance:         0.005 m(m*s^-1)     # Maximal velocity to be conside
 position_tolerance:         0.05 m(m)           # Maximal position error to be considered on target
 
 [circuit]
-supply_voltage:             24  (kg*m^2*s^-3*A^-1)   # Volts
+supply_voltage:             24  (V)   # Volts
 current_limit:              10  (A)
 
 [thermal]
 atmospheric_temperature:    298.15 (K)
-convection_coefficient:     20 (kg*s^-3*K^-1)
+convection_coefficient:     20 (W*m^-2*K^-1)
 
 [model]
 # 'stc_air' is dry air at standard test conditions (25c / 298.15k / 1 atm)
