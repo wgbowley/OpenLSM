@@ -1,25 +1,21 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/wgbowley/OpenLSM/refs/heads/main/media/logos/logo.png" alt="OpenLSM" style="max-width:600px;">
   <br>
-  <em> High Performance Low Cost Linear Motors – Designed & built by <a href="https://github.com/wgbowley">William Bowley</a> & <a href="https://github.com/LawsonDG">Lawson Gallup</a> </em>
+  <em> Experimental Low-Cost Linear Motors Targeting 3D printing applications – Designed & built by <a href="https://github.com/wgbowley">William Bowley</a></em>
 </p>
-
----
-FDM 3D printers have evolved from commercial to household items, but they still rely on belts and pulleys, which wear out after a few thousand hours of use. Their motion system was perfect for nearly three decades, but micro-stepping can only take us so far. While AC servo motors address the micro-stepping problem, they depend on the same motion system. Furthermore, they cost upwards of 10 to 20 times more while also requiring dedicated driver boards.
-
 
 ## Overview
 ![Work in Progress](https://img.shields.io/badge/status-wip-orange)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-OpenLSM is a research project striving to produce high-performance linear motors while minimising complexity. The hybrid acronym “OpenLSM” stands for open linear synchronous motors, essentially the same technology used in modern drones and electric vehicles. Linear motors use the same fundamental principles; however, they are built with different geometries to achieve their linear motion.
+OpenLSM is a research project striving to produce low-cost Linear motors for 3D printing applications. The hybrid acronym “OpenLSM” stands for open linear synchronous motors, essentially the same technology used in modern drones and electric vehicles. Linear motors use the same fundamental principles; however, they are built with different geometries to achieve their linear motion.
 
-
-They should allow for continuous motion at the hardware level, while also having no expandability issues. Whereas for core-xy, it requires approximately 4mm of belt length for every 1 mm of extra travel distance. That leads to harmonic problems, which are resolved with belt tensioning. That ultimately stresses the frame while also wearing down the pulleys' teeth. However, it should be emphasized that these longevity issues are mostly a problem for large-format FDM printers. Linear motors avoid these problems due to their reliance on direct motion and minimal mechanical parts. 
+> [!NOTE]
+> This document reflects ongoing experimental work. Some system comparisons are simplified and will be replaced with quantified analysis in future revisions. Current results are preliminary and intended to guide design iteration.
 
 ## Prototype 0: The curse of blindly following standards
 
-The first prototype demonstrated poor force output with approximately ```0.5N``` at ```20W``` input power. Which is ```30``` times off the force target. However, it is not all doom and gloom; the general architecture of the “flat” linear motor did work, just very poorly. Even with speculative improvements, it would require ~```400W``` to reach the minimal target force for a single axis. 
+The first prototype demonstrated poor force output with approximately ```0.5N``` at ```20W``` input power. Which is ```~30``` times off the force target of ```~15N``` per axis. However, it is not all doom and gloom; the general architecture of the “flat” linear motor did work, just very poorly. Even with speculative improvements, it would require ~```400W``` to reach the minimal target force for a single axis. 
 
 <div align="center">
   <img src="media/prototype_0/prototype_0.png" alt="Prototype 0: flat linear motor" style="max-width: 600px; height: auto;">
@@ -42,7 +38,7 @@ The preliminary design phase begins with setting up a simulation stack aimed at 
 
 ![Optimization Pareto front](media/prototype_1/figure_2.png)
 
-The Pareto front was nonetheless integral to finding better solutions through manual pattern extraction and simulation. The design eventually arrived at had a force per amp of ```3.31 N/A```, phase resistance of ```4.574 Ω```, and phase inductance of ``` 32.0  mH```. This results in the motor having a peak force of ```~17.3N @ 376W``` which is ```~35``` times better than prototype 0 while costing ~```$70``` for 300mm. One problem remained, however: thermals. At only ```2 A```, approximately ```~54 W``` is lost in the armature, resulting in asymptotic temperatures of ```183.4 °C``` at the poles and ```240.9 °C``` in the slots, which is what will cause the motor to burn out if under asymptotic load conditions.
+The Pareto front was nonetheless integral to finding better solutions through manual pattern extraction and simulation. The final design had a force per amp of ```3.31 N/A```, phase resistance of ```4.574 Ω```, and phase inductance of ``` 32.0  mH```. This results in the motor having a peak force of ```~17.3N @ 376W``` which is ```~35``` times better than prototype 0 while costing ~```$70``` for 300mm. One problem remained, however: thermals. At only ```2 A```, approximately ```~54 W``` is lost in the armature, resulting in asymptotic temperatures of ```183.4 °C``` at the poles and ```240.9 °C``` in the slots, which is what will cause the motor to burn out if under asymptotic load conditions.
 
 Looking at the physics, the only solution was to increase the surface area using a thermally conductive material. The catch is that most thermally conductive materials are also electrically conductive, which is a well-known problem in motor design; eddy currents form, leading to joule heating and magnetic braking. Interestingly, though, examining the approximate eddy current formula, two terms stood out: frequency (f) and flux density (B):
 
@@ -52,12 +48,13 @@ The tubular linear motor's geometry is notable here. As mentioned above, flux is
 
 ![50 mm point to point simulation](media/prototype_1/figure_4.png)
 
-That covers the bulk of the electromechanical design work carried out between January and March. The next steps are finishing the armature data-boards and the ```5-15A``` triple H-bridge driver (delta), as well as building a coil winder capable of achieving a fill factor of ```0.75``` with inductance and resistance matching. After that, the motor can be built, validated, and released to the community. Thanks for reading — hopefully this was an interesting one. The next update should land around April–May with prototype 1 physically validated.
+That covers the bulk of the electromechanical design work carried out between January and March. The next steps are finishing the armature data-boards and the ```5-15A``` triple H-bridge driver (delta), as well as building a coil winder capable of achieving a fill factor of ```0.75``` with inductance and resistance matching. After that, the motor can be built, validated, and released to the community. Thanks for reading, the next update should land around May-June with prototype 1 physically validated.
 
 
 # Credits:
 
 ### Research & Development Enabled by:
+* [Lawson Gallup](https://github.com/LawsonDG) - Thank you for the concept and the materials. Thank you again for helping me with the mechanical design. In general, thanks mate.
 * [FEMM](https://www.femm.info/wiki/HomePage) - Thank you, Dr. Meeker, for creating FEMM; it was indispensable for prototype 1.
 * [SimpleFOC](https://simplefoc.com/) - Thank you, everyone, at simple-foc for developing such a wonderful driver, specifically Runger, for the encoder help.
 * Thank you, [Matthew Sorensen](https://sorens.in), for your research into the usage of the AS5311 for 3d printers
@@ -68,8 +65,8 @@ That covers the bulk of the electromechanical design work carried out between Ja
 ### Bibtex Citation:
 
 ```
-@misc{Bowley_Gallup_2026,
-  author = {Bowley, William and Gallup, Lawson},
+@misc{Bowley_2026,
+  author = {Bowley, William},
   title = {{openLSM}},
   url = {https://github.com/wgbowley/openLSM},
   year = {2026},
