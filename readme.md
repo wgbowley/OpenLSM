@@ -21,7 +21,7 @@ The methodology for openLSM is to design a reduced-order or finite element model
 
 ## Prototype Alpha
 
-An ironless flat linear motor with a polylactic acid (PLA) armature featuring 6 slots, wound using 0.2 mm diameter enameled copper wire with 2 slots in-series per phase. The stator, similar to the armature, was printed in PLA and had 4 pole pairs. The motor produced force, but the amount was not quantified before the PLA coil forms melted.
+An ironless flat linear motor with a polylactic acid (PLA) armature featuring 6 slots, hand wound using 0.2 mm diameter enameled copper wire with 2 slots in-series per phase. The stator, similar to the armature, was printed in PLA and had 4 pole pairs. The motor produced force, but the amount was not quantified before the PLA coil forms melted.
 
 <div align="center">
   <img src="media/prototype_alpha/side_view.jpg" alt="Prototype alpha top down view" style="max-width: 600px">
