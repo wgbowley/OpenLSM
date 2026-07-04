@@ -29,6 +29,17 @@ OpenLSM is an experimental project with the objective of designing low-cost perm
 
 The methodology for openLSM is to design a reduced-order or finite element model to compute the expected results for a specific motor topology. The resulting model is used to tune design parameters either manually or via algorithmic optimization. The parameters are then used to produce a CAD model, which is fabricated and experimentally tested. Discrepancies between predicted and observed performance are used to update the model for subsequent iterations.
 
+```
+Conceptual Design ↔ Reduced-order / FEA Model
+      ↓
+Design Parameters ↔ Detailed Design (CAD)
+      ↓
+Fabrication & Testing
+      ↓
+Post-Analysis & Model Validation
+      ↺
+```
+
 > [!IMPORTANT]
 > The computational models are topology-specific approximations whose validity is assessed through experimental iteration.
 
