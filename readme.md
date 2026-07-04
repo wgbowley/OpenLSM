@@ -51,6 +51,10 @@ Fabrication & Testing
 Post-Analysis & Model Validation
       ↺
 ```
+<div align="center">
+  <em>
+  Figure 1: OpenLSM design methodology. Computational models are iteratively refined through experimental validation.</em>
+</div>
 
 ## Prototype Alpha
 

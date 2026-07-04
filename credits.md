@@ -12,4 +12,3 @@
 ### Prior Research & Inspiration
 - [Matthew Sorensen](https://sorens.in) — Research into the usage of the AS5311 for 3D printers.
 - [cmore839](https://github.com/cmore839) — Research into tubular linear motors and the very informative Discord server.
-- [Screbuts @ World of Engineer](https://discord.gg/YFEveHYyeB) — Initial scoping help.

@@ -68,6 +68,9 @@
     "centi",
     "pbounds",
     "polylactic",
-    "Kapton"
+    "Kapton",
+    "Quasistatic",
+    "kicad",
+    "easyeda"
   ]
 }
