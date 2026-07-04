@@ -1,3 +1,15 @@
+<!--
+Color Palette:
+FFFFFF - pure white 
+FF8F0E - bold, warm orange with a strong golden-yellow undertone
+
+I'm going to do a little experiment here and not update the logo
+until someone raises an issue about light-mode readability.
+- William Bowley, 2026-07-05
+
+P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
+-->
+
 <p align="center">
   <img src="05_media/01_logos/logo.png" alt="OpenLSM" style="max-width:600px;">
   <br>
@@ -12,16 +24,16 @@
 ![Status](https://img.shields.io/badge/Status-WIP-FFFFFF?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-FFFFFF?style=flat-square&color=white)
 ![Focus](https://img.shields.io/badge/Focus-Simulation-FF8F0E?style=flat-square)
-![Domain](https://img.shields.io/badge/Domain-Hardware-FFFFFF?style=flat-square&color=FF8F0E)
+![Domain](https://img.shields.io/badge/Domain-Hardware-FF8F0E?style=flat-square&color=FF8F0E)
 
 OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with reduced-order and finite element models.
 
 ### Objectives
 
 > [!IMPORTANT]
-> - Design low-cost permanent magnet linear motors for Cartesian motion systems
-> - Develop validated reduced-order and finite element models
-> - Produce experimentally validated prototypes that achieve thermal steady-state under continuous load.
+> - Design low-cost permanent magnet linear motors for Cartesian motion systems.
+> - Develop computational models that are validated against experimental measurements.
+> - Demonstrate continuous thermal steady-state operation under defined operating conditions.
 >
 > *More specific targets `(Force density, Efficiency, Cost, Etc.)` to be defined as the domain becomes clearer.*
 
@@ -40,8 +52,10 @@ Post-Analysis & Model Validation
       ↺
 ```
 
-> [!IMPORTANT]
-> The computational models are topology-specific approximations whose validity is assessed through experimental iteration.
+<div align="center">
+  <em>
+  Figure 1: OpenLSM design methodology. Computational models are iteratively refined through experimental validation.</em>
+</div>
 
 ## Prototype Alpha
 
@@ -49,6 +63,7 @@ An ironless flat linear motor with a polylactic acid (PLA) armature featuring `6
 
 <div align="center">
   <img src="05_media/02_prototype_alpha/side_view.jpg" alt="Prototype alpha top down view" style="max-width: 600px">
+    <p><em>Figure 2: Prototype Alpha. Top-down view of the flat linear motor showing the slots & poles.</em></p>
 </div>
 
 The main conclusion from Prototype Alpha is that flat linear motors likely require laminated silicon steel armatures to produce force efficiently. In response, Prototype Beta shifts to an ironless tubular topology with the goal of quantifying force output and thermal performance.
@@ -57,4 +72,5 @@ The main conclusion from Prototype Alpha is that flat linear motors likely requi
 > Prototype Alpha documentation and in-depth analysis can be found [here](02_motors/01_prototype_alpha/readme.md).
 
 ## Prototype Beta
-<!-- Need to add a goal area for this like force target, input, asymptotic temperature, etc!-->
+
+<!-- Need to add a goal area for this like force target, input, asymptotic temperature, etc -->
