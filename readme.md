@@ -1,78 +1,107 @@
+<!--
+Color Palette:
+FFFFFF - pure white 
+FF8F0E - bold, warm orange with a strong golden-yellow undertone
+
+I'm going to do a little experiment here and not update the logo
+until someone raises an issue about light-mode readability.
+- William Bowley, 2026-07-05
+
+P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
+-->
+
 <p align="center">
-  <img src="https://raw.githubusercontent.com/wgbowley/OpenLSM/refs/heads/main/media/logos/logo.png" alt="OpenLSM" style="max-width:600px;">
+  <img src="05_media/01_logos/logo.png" alt="OpenLSM" style="max-width:600px;">
   <br>
-  <em> Experimental Low-Cost Linear Motors Targeting 3D printing applications – Designed & built by <a href="https://github.com/wgbowley">William Bowley</a></em>
+  <em>
+    Low Cost Linear Synchronous Motors – Designed & built by 
+    <a href="https://github.com/wgbowley">William Bowley</a> (primary) &amp; 
+    <a href="https://github.com/LawsonDG">Lawson Gallup</a>
+  </em>
 </p>
 
 ## Overview
 ![Status](https://img.shields.io/badge/Status-WIP-FFFFFF?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-FFFFFF?style=flat-square&color=white)
 ![Focus](https://img.shields.io/badge/Focus-Simulation-FF8F0E?style=flat-square)
-![Domain](https://img.shields.io/badge/Domain-Hardware-FFFFFF?style=flat-square&color=FF8F0E)
+![Domain](https://img.shields.io/badge/Domain-Hardware-FF8F0E?style=flat-square&color=FF8F0E)
 
-OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using accessible available materials and tooling, combined with reduced-order and finite element models.
+OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with reduced-order and finite element models.
 
-OpenLSM is a research project striving to produce low-cost Linear motors for 3D printing applications. The hybrid acronym “OpenLSM” stands for open linear synchronous motors, essentially the same technology used in modern drones and electric vehicles. Linear motors use the same fundamental principles; however, they are built with different geometries to achieve their linear motion.
+### Objectives
 
-> [!NOTE]
-> This document reflects ongoing experimental work. Some system comparisons are simplified and will be replaced with quantified analysis in future revisions. Current results are preliminary and intended to guide design iteration.
+> [!IMPORTANT]
+> - Design low-cost permanent magnet linear motors for Cartesian motion systems.
+> - Develop computational models that are validated against experimental measurements.
+> - Demonstrate continuous thermal steady-state operation under defined operating conditions.
+>
+> *More specific targets (force density, efficiency, cost, etc.) to be defined as the domain becomes clearer.*
+
+## Methodology
+
+The methodology for openLSM is to design a reduced-order or finite element model to compute the expected results for a specific motor topology. The resulting model is used to tune design parameters either manually or via algorithmic optimization. The parameters are then used to produce a CAD model, which is fabricated and experimentally tested. Discrepancies between predicted and observed performance are used to update the model for subsequent iterations.
+
+```
+Conceptual Design ↔ Reduced-order / FEA Model
+      ↓
+Design Parameters ↔ Detailed Design (CAD)
+      ↓
+Fabrication & Testing
+      ↓
+Post-Analysis & Model Validation
+      ↺
+```
+<div align="center">
+  <em>
+  Figure 1: OpenLSM design methodology. Computational models are iteratively refined through experimental validation.</em>
+</div>
 
 ## Prototype Alpha
 
-The first prototype demonstrated poor force output with approximately ```0.5N``` at ```20W``` input power. Which is ```~30``` times off the force target of ```~15N``` per axis. However, it is not all doom and gloom; the general architecture of the “flat” linear motor did work, just very poorly. Even with speculative improvements, it would require ~```400W``` to reach the minimal target force for a single axis. 
+An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, though the magnitude was not quantified before the PLA coil forms deformed due to thermal stress.
 
 <div align="center">
-  <img src="media/prototype_alpha/side_view.jpg" alt="Prototype alpha top down view" style="max-width: 600px">
+  <img src="05_media/02_prototype_alpha/side_view.jpg" alt="Prototype alpha top down view" style="max-width: 600px">
+    <p><em>Figure 2: Prototype Alpha. Top-down view of the planar linear motor showing the slots & poles.</em></p>
 </div>
 
-The main conclusion from Prototype Alpha is that flat linear motors most likely require laminated silicon steel armatures to produce force efficiently. Given the project's aims, ironless tubular motors were chosen for Prototype Beta, which aims to quantify force output and thermal performance.
+The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
 
-The main insights from this prototype are that the flat linear motor is commercially the standard, but must heavily rely on the usage of laminated silicon steel armatures. They are quite complex to manufacture, hence breaking the project objectives. A new architecture must be explored in the future. Another key insight is that thermal analysis must be considered with magneto analysis. Or risk the coil forms melting during testing again. Hence, a multi-physics approach is required for future design to succeed. Lastly, the high phase resistance led to the motor operating under voltage-limiting conditions, and thus, minimal current could be delivered. 
+## Prototype Beta
+*TBD (Conceptual). Revision 2 of the ironless tubular linear motor design. Not yet validated for fabrication.*
 
-  > [!NOTE]
-  > This path may still be revisited; limited documentation can be found in [prototype_0](/motors/prototype_0/)
+An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature featuring `12` slots, mechanically wound using `0.4 mm` diameter enameled copper wire, with `4` slots in-series per phase `(WYE)`. The stator, unlike the armature, is made of layered carbon fibre epoxy to form a tube with an internal radius of `5 mm` and outer radius of `6 mm`. The poles are `20 mm` in length and `5 mm` in radius such that they can be inserted into the stator tube in this pole arrangement `(N-S|S-N)`, using generic superglue to secure the end poles.
 
+<div align="center">
+  <img src="05_media/03_prototype_beta/rev_2/cross_section.png" alt="cross sectional analysis" style="max-width: 600px">
+    <p><em>Figure 3a: Prototype Beta REV 2. Cross-sectional view of the tubular linear motor showing the stator & armature.</em></p>
+</div>
 
-## Prototype 1: Experimentation rather than standards
+Revision 2 uses a radial heat-sink design which may improve steady-state characteristics, but the grade `6061` aluminum does introduce `eddy currents` which produce opposing magnetic fields that decrease efficiency. The design hypothesis is that thermal benefits outweigh eddy-current losses at the expected operating frequency. This is evaluated in the linked analysis.
 
-This prototype is based on work done by cmore839 on his tubular linear motor ([DIY Linear Motor](https://github.com/cmore839/DIY-Linear-Motor)). This motor type is ideal for ironless designs as it geometrically guides flux rather than using highly permeable materials. Also simplifies construction due to everything being radially/axially referenced.
+<div align="center">
+  <img src="05_media/03_prototype_beta/rev_2/heat_sink_cross_section.png" alt="cross sectional analysis of heat sink" style="max-width: 600px">
+    <p><em>Figure 3b: Prototype Beta REV 2. Close-up cross-sectional view of the radial heat-sink.</em></p>
+</div>
 
-[![Prototype 1: Tubular LSM](media/prototype_1/prototype_1_rev_1_whole.png)](https://a360.co/4bnGirH)
+The radial heat-sink is made of aluminum as mentioned above with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is intended to be generic thermal paste. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
 
-The preliminary design phase begins with setting up a simulation stack aimed at acting as a "digital twin" of the motor. The specific architecture consisted of an kinematic trajectory feeder into a PD position controller into a PI current controller, which drove the FEA (finite element analysis) model. The FEA model itself was a quasi-transient electro-magneto-thermal-mechanical model, which allowed the thermal problems encountered in prototype 0 to be properly addressed. Once the simulation stack was numerically stable, an NSGA-3 optimization run was performed, requiring roughly ```1.05``` million FEA solutions across ```1,012``` motors. It should be noted, however, that due to controller instability and optimizer exploits, the position and K_m results are incorrect; the Pareto front ended up serving more as a spatial navigator than a direct optimization pipeline.
-
-![Optimization Pareto front](media/prototype_1/figure_2.png)
-
-The Pareto front was nonetheless integral to finding better solutions through manual pattern extraction and simulation. The final design had a force per amp of ```3.31 N/A```, phase resistance of ```4.574 Ω```, and phase inductance of ``` 32.0  mH```. This results in the motor having a peak force of ```~17.3N @ 376W``` which is ```~35``` times better than prototype 0 while costing ~```$70``` for 300mm. One problem remained, however: thermals. At only ```2 A```, approximately ```~54 W``` is lost in the armature, resulting in asymptotic temperatures of ```183.4 °C``` at the poles and ```240.9 °C``` in the slots, which is what will cause the motor to burn out if under asymptotic load conditions.
-
-Looking at the physics, the only solution was to increase the surface area using a thermally conductive material. The catch is that most thermally conductive materials are also electrically conductive, which is a well-known problem in motor design; eddy currents form, leading to joule heating and magnetic braking. Interestingly, though, examining the approximate eddy current formula, two terms stood out: frequency (f) and flux density (B):
-
-$$ P_e \simeq K_e \cdot B^2 \cdot f^2 \cdot t^2 \cdot V $$
-
-The tubular linear motor's geometry is notable here. As mentioned above, flux is focused within the core, meaning flux density at the radial edge of the coils is only ```0.25 T```. Even more notably, the synchronous frequency at ```1 m/s``` is just ```25 Hz```. This leads to the conclusion that eddy currents and skin effects are a non-issue for this motor, owing to its geometry and low operating frequency. A 6061 aluminum heat sink was therefore partially designed via Bayesian optimization and then refined for ease of manufacturing, bringing asymptotic temperatures down to ```52.7 °C``` and```65.8 °C``` at the poles and slots, respectively. The improvement is significant, though it bears mentioning that these figures assume a convection coefficient of ```20 W/(m²K)```, which may be optimistic. Even at ```10 W/(m²K)```, temperatures reach ```88.24 °C``` and ``` 102.111 °C```, just into the thermal throttling territory, but this scenario assumes the motor is sustaining ```~6.6N``` continuously, which is highly atypical for a 3D printer. A more representative force/power curve for a standard 50 mm point-to-point path is shown below. 
-
-![50 mm point to point simulation](media/prototype_1/figure_4.png)
-
-That covers the bulk of the electromechanical design work carried out between January and March. The next steps are finishing the armature data-boards and the ```5-15A``` triple H-bridge driver (delta), as well as building a coil winder capable of achieving a fill factor of ```0.75``` with inductance and resistance matching. After that, the motor can be built, validated, and released to the community. Thanks for reading, the next update should land around May-June with prototype 1 physically validated.
+> [!IMPORTANT]
+> See the [motor design notes](/02_motors/02_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
 
 
-# Credits:
+## Documentation
 
-### Research & Development Enabled by:
-* [Lawson Gallup](https://github.com/LawsonDG) - Thank you for the concept and the materials. Thank you again for helping me with the mechanical design. In general, thanks mate.
-* [FEMM](https://www.femm.info/wiki/HomePage) - Thank you, Dr. Meeker, for creating FEMM; it was indispensable for prototype 1.
-* [SimpleFOC](https://simplefoc.com/) - Thank you, everyone, at simple-foc for developing such a wonderful driver, specifically Runger, for the encoder help.
-* Thank you, [Matthew Sorensen](https://sorens.in), for your research into the usage of the AS5311 for 3d printers
-* Thank you, [cmore839](https://github.com/cmore839), for your research into tubular linear motors and for creating your very informative Discord server.
-* Thank you, [Screbuts @ World of Engineer](https://discord.gg/YFEveHYyeB), for the initial scoping help.
+All internal documentation can be found within this repo's [issues](https://github.com/wgbowley/OpenLSM/issues). 
 
+### Credits:
+Acknowledgements and credits can be found in the [credits file](/credits.md).
 
 ### Bibtex Citation:
-
 ```
-@misc{Bowley_2026,
-  author = {Bowley, William},
-  title = {{openLSM}},
+@misc{openLSM_2026,
+  author = {William Bowley and Lawson Gallup},
+  title = {{openLSM: Low Cost Linear Synchronous Motors}},
   url = {https://github.com/wgbowley/openLSM},
   year = {2026},
   note = {GitHub repository},

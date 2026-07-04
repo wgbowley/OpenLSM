@@ -67,6 +67,10 @@
     "NSGA",
     "centi",
     "pbounds",
-    "polylactic"
+    "polylactic",
+    "Kapton",
+    "Quasistatic",
+    "kicad",
+    "easyeda"
   ]
 }

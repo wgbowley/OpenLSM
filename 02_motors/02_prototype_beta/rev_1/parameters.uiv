@@ -1,0 +1,69 @@
+[version]
+format: 0.1.0
+unit_frame: si_metric.ut
+
+[notes]
+model: "TUBULAR"
+type: "QUASI-STATIC-ONLY"
+status: "CONCEPTUAL-ONLY - DO-NOT-FABRICATE"
+
+development: "prototype_beta/rev_1_parameter_file"
+# The parameter file for the prototype_beta/rev_1 design, this parameter file can
+# be used to simulate the tubular synchronous linear motor within the `quasi-static`
+# solvers. The coordinate system is axial-symmetric (Z-R) (Axial-Radial).
+
+[model]
+environmental_material: "air"
+
+pole_pairs: 4           # (∅) pole pair = 2 poles per pair
+number_slots: 12        # (∅)
+
+[armature.core]
+# Material: PTFE is equivalent to air (low frequency EM)
+material: "air"
+
+# Axial Parameters
+axial_end_caps: 7.5 m(m)
+axial_slot_pitch: 6.833 m(m)
+
+# Radial parameters
+radial_clearance: 0.5 m(m)
+radial_thickness: 0.5 m(m)
+
+[armature.slots]
+material: "copper"
+wire_diameter: 0.4 m(m)
+fill_factor: 0.65
+
+axial_length: 4.83 m(m)
+radial_thickness: 3.00 m(m)
+
+""" THIS SECTION IS NOT MODELLED """
+[armature.heat_sink]
+material: "aluminum"
+alloy: 6061
+
+# No specific material hence the generic name
+interface_material: "transformer_oil"
+
+# Axial Parameters
+axial_fin_length: 1 m(m)
+axial_fin_pitch: 2 m(m)
+
+# Radial parameters
+radial_clearance: 3 m(m)
+radial_inner_thickness: 2 m(m)
+radial_fin_thickness: 5 m(m)
+
+""" BELOW IS MODELLED """
+[stator.tube]
+# Material: Layered Carbon Fibre Epoxy is equivalent to air (low frequency EM)
+material: "air"
+radial_thickness: 1 m(m)
+
+[stator.poles]
+material: "NdFeB"
+grade: "N52"
+
+radial_thickness: 5 m(m)
+axial_length: 20 m(m)
