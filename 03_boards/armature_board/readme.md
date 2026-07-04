@@ -1,4 +1,4 @@
-# Armature collector
+# Armature board
 
 
 
