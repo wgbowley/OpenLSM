@@ -5,22 +5,27 @@
 </p>
 
 ## Overview
-![Work in Progress](https://img.shields.io/badge/status-wip-orange)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/Status-WIP-FFFFFF?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-FFFFFF?style=flat-square&color=white)
+![Focus](https://img.shields.io/badge/Focus-Simulation-FF8F0E?style=flat-square)
+![Domain](https://img.shields.io/badge/Domain-Hardware-FFFFFF?style=flat-square&color=FF8F0E)
+
+OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using accessible available materials and tooling, combined with reduced-order and finite element models.
 
 OpenLSM is a research project striving to produce low-cost Linear motors for 3D printing applications. The hybrid acronym “OpenLSM” stands for open linear synchronous motors, essentially the same technology used in modern drones and electric vehicles. Linear motors use the same fundamental principles; however, they are built with different geometries to achieve their linear motion.
 
 > [!NOTE]
 > This document reflects ongoing experimental work. Some system comparisons are simplified and will be replaced with quantified analysis in future revisions. Current results are preliminary and intended to guide design iteration.
 
-## Prototype 0: The curse of blindly following standards
+## Prototype Alpha
 
 The first prototype demonstrated poor force output with approximately ```0.5N``` at ```20W``` input power. Which is ```~30``` times off the force target of ```~15N``` per axis. However, it is not all doom and gloom; the general architecture of the “flat” linear motor did work, just very poorly. Even with speculative improvements, it would require ~```400W``` to reach the minimal target force for a single axis. 
 
 <div align="center">
-  <img src="media/prototype_0/prototype_0.png" alt="Prototype 0: flat linear motor" style="max-width: 600px; height: auto;">
+  <img src="media/prototype_alpha/side_view.jpg" alt="Prototype alpha top down view" style="max-width: 600px">
 </div>
 
+The main conclusion from Prototype Alpha is that flat linear motors most likely require laminated silicon steel armatures to produce force efficiently. Given the project's aims, ironless tubular motors were chosen for Prototype Beta, which aims to quantify force output and thermal performance.
 
 The main insights from this prototype are that the flat linear motor is commercially the standard, but must heavily rely on the usage of laminated silicon steel armatures. They are quite complex to manufacture, hence breaking the project objectives. A new architecture must be explored in the future. Another key insight is that thermal analysis must be considered with magneto analysis. Or risk the coil forms melting during testing again. Hence, a multi-physics approach is required for future design to succeed. Lastly, the high phase resistance led to the motor operating under voltage-limiting conditions, and thus, minimal current could be delivered. 
 
