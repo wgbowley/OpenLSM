@@ -73,7 +73,7 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
     <p><em>Figure 3a: Prototype Beta REV 2. Cross-sectional view of the tubular linear motor showing the stator & armature.</em></p>
 </div>
 
-Revision 2 uses a radial heat-sink design which may improve steady-state characteristics, but the grade `6061` aluminum does introduce `eddy currents` which produce opposing magnetic fields that decrease efficiency. The design assumes the thermal benefit dominates eddy-current losses at the expected operating frequency. This assumption is evaluated in the linked analysis.
+Revision 2 uses a radial heat-sink design which may improve steady-state characteristics, but the grade `6061` aluminum does introduce `eddy currents` which produce opposing magnetic fields that decrease efficiency. The design hypothesis is that thermal benefits outweigh eddy-current losses at the expected operating frequency. This is evaluated in the linked analysis.
 
 <div align="center">
   <img src="05_media/03_prototype_beta/rev_2/heat_sink_cross_section.png" alt="cross sectional analysis of heat sink" style="max-width: 600px">
