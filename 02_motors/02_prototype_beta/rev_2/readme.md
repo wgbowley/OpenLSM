@@ -1,1 +1,23 @@
-hi, I am a placeholder. I was created by william bowley to be a placeholder :)
+# Prototype beta - rev 2
+
+## Eddy Current Analysis
+
+An interesting design note about `revision 2` is the use of a radial heat-sink made of `aluminum` specifically `6061` as conductive materials are often avoided. They are avoided because the armature produces a changing magnetic field to produce changes in energy density which lead to force. But as a consequence of this, swirling currents are induced within conductive materials near the source. These currents are called `eddy currents` or `Foucault currents` as they produce opposing magnetic fields that decrease efficiency. A proportional model is:
+
+$$ P_e \simeq K_e \cdot B^2 \cdot f^2 \cdot t^2 \cdot V $$
+
+Where `k_e` is a material constant, `B` is the magnetic flux density, `f` is the electrical frequency, `t` is thickness and `v` is volume. Hence the main contributing terms are:
+
+$$ P_{loss} \propto B^2, \quad \propto f^2, \quad \propto t^2 $$
+
+Hence, if it is assumed the electrical frequency and thickness of the fins are low and thin respectively, then using conductive materials isn't necessarily a poor electromagnetic design choice and does have thermal-conductivity benefits as most electrically conductive materials are also thermally conductive which may improve thermal steady-state performance.
+
+Therefore, thin radial fins should be used and the secondary electrical frequency assumption should be validated. Interestingly, this assumption is relatively straightforward to validate as synchronous motors have a frequency directly related to velocity via the pole pitch:
+
+$$ [\text{m s}^{-1}] = [\text{s}^{-1}] \cdot [\text{m}] \;\Rightarrow\; \frac{[\text{m s}^{-1}]}{[\text{m}]} = [\text{s}^{-1}] $$
+
+Hence the electrical frequency:
+
+$$ v = f \cdot p_{\text{pitch}} \;\rightarrow\; f = \frac{v}{p_{\text{pitch}}} $$
+
+Therefore, with a pole pitch of `20 mm` and an assumed velocity of `1 m/s`, the electrical frequency is `50 Hz`, which is very low for most electrical devices. Hence the radial heat-sink was chosen for this revision with the following parameters. The radial heat-sink is made of aluminum specifically `6061` with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is intended to be generic thermal paste. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
