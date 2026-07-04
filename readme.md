@@ -91,7 +91,7 @@ The radial heat-sink is made of aluminum as mentioned above with radial fins pit
 All internal documentation can be found within this repo's [issues](https://github.com/wgbowley/OpenLSM/issues). 
 
 ### Credits:
-Acknowledgements and credits can be found in the [credits file](/CREDITS.md).
+Acknowledgements and credits can be found in the [credits file](/credits.md).
 
 ### Bibtex Citation:
 ```
