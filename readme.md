@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/wgbowley/OpenLSM/refs/heads/main/media/logos/logo.png" alt="OpenLSM" style="max-width:600px;">
   <br>
-  <em> Low Cost Linear Synchronous Motors – Designed & built by <a href="https://github.com/wgbowley">William Bowley</a> </em>
+  <em> Experimental Low-Cost Linear Motors Targeting 3D printing applications – Designed & built by <a href="https://github.com/wgbowley">William Bowley</a></em>
 </p>
 
 ## Overview
@@ -12,16 +12,14 @@
 
 OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using accessible available materials and tooling, combined with reduced-order and finite element models.
 
-## Methodology
-
-The methodology for openLSM is to design a reduced-order or finite element model to compute the expected results for a specific motor topology. The resulting model is used to tune design parameters either manually or via algorithmic optimization. The parameters are than used to produce a CAD model, which is fabricated and experimentally tested. Discrepancies between predicted and observed performance are used to update the model for subsequent iterations.
+OpenLSM is a research project striving to produce low-cost Linear motors for 3D printing applications. The hybrid acronym “OpenLSM” stands for open linear synchronous motors, essentially the same technology used in modern drones and electric vehicles. Linear motors use the same fundamental principles; however, they are built with different geometries to achieve their linear motion.
 
 > [!NOTE]
-> The computational models are topology specific approximations whose validity is assessed through experimental iteration.
+> This document reflects ongoing experimental work. Some system comparisons are simplified and will be replaced with quantified analysis in future revisions. Current results are preliminary and intended to guide design iteration.
 
 ## Prototype Alpha
 
-An ironless flat linear motor with a polylactic acid (PLA) armature featuring 6 slots, hand wound using 0.2 mm diameter enameled copper wire with 2 slots in-series per phase. The stator, similar to the armature, was printed in PLA and had 4 pole pairs. The motor produced force, but the amount was not quantified before the PLA coil forms melted.
+The first prototype demonstrated poor force output with approximately ```0.5N``` at ```20W``` input power. Which is ```~30``` times off the force target of ```~15N``` per axis. However, it is not all doom and gloom; the general architecture of the “flat” linear motor did work, just very poorly. Even with speculative improvements, it would require ~```400W``` to reach the minimal target force for a single axis. 
 
 <div align="center">
   <img src="media/prototype_alpha/side_view.jpg" alt="Prototype alpha top down view" style="max-width: 600px">
@@ -29,8 +27,55 @@ An ironless flat linear motor with a polylactic acid (PLA) armature featuring 6 
 
 The main conclusion from Prototype Alpha is that flat linear motors most likely require laminated silicon steel armatures to produce force efficiently. Given the project's aims, ironless tubular motors were chosen for Prototype Beta, which aims to quantify force output and thermal performance.
 
-> [!NOTE]  
-> Prototype Alpha documentation and in-depth analysis can be found [here](docs/external/prototype_alpha/).
+The main insights from this prototype are that the flat linear motor is commercially the standard, but must heavily rely on the usage of laminated silicon steel armatures. They are quite complex to manufacture, hence breaking the project objectives. A new architecture must be explored in the future. Another key insight is that thermal analysis must be considered with magneto analysis. Or risk the coil forms melting during testing again. Hence, a multi-physics approach is required for future design to succeed. Lastly, the high phase resistance led to the motor operating under voltage-limiting conditions, and thus, minimal current could be delivered. 
 
-## Prototype Beta
-<!-- Need to add a goal area for this like force target, input, asymptotic temperature, etc!-->
+  > [!NOTE]
+  > This path may still be revisited; limited documentation can be found in [prototype_0](/motors/prototype_0/)
+
+
+## Prototype 1: Experimentation rather than standards
+
+This prototype is based on work done by cmore839 on his tubular linear motor ([DIY Linear Motor](https://github.com/cmore839/DIY-Linear-Motor)). This motor type is ideal for ironless designs as it geometrically guides flux rather than using highly permeable materials. Also simplifies construction due to everything being radially/axially referenced.
+
+[![Prototype 1: Tubular LSM](media/prototype_1/prototype_1_rev_1_whole.png)](https://a360.co/4bnGirH)
+
+The preliminary design phase begins with setting up a simulation stack aimed at acting as a "digital twin" of the motor. The specific architecture consisted of an kinematic trajectory feeder into a PD position controller into a PI current controller, which drove the FEA (finite element analysis) model. The FEA model itself was a quasi-transient electro-magneto-thermal-mechanical model, which allowed the thermal problems encountered in prototype 0 to be properly addressed. Once the simulation stack was numerically stable, an NSGA-3 optimization run was performed, requiring roughly ```1.05``` million FEA solutions across ```1,012``` motors. It should be noted, however, that due to controller instability and optimizer exploits, the position and K_m results are incorrect; the Pareto front ended up serving more as a spatial navigator than a direct optimization pipeline.
+
+![Optimization Pareto front](media/prototype_1/figure_2.png)
+
+The Pareto front was nonetheless integral to finding better solutions through manual pattern extraction and simulation. The final design had a force per amp of ```3.31 N/A```, phase resistance of ```4.574 Ω```, and phase inductance of ``` 32.0  mH```. This results in the motor having a peak force of ```~17.3N @ 376W``` which is ```~35``` times better than prototype 0 while costing ~```$70``` for 300mm. One problem remained, however: thermals. At only ```2 A```, approximately ```~54 W``` is lost in the armature, resulting in asymptotic temperatures of ```183.4 °C``` at the poles and ```240.9 °C``` in the slots, which is what will cause the motor to burn out if under asymptotic load conditions.
+
+Looking at the physics, the only solution was to increase the surface area using a thermally conductive material. The catch is that most thermally conductive materials are also electrically conductive, which is a well-known problem in motor design; eddy currents form, leading to joule heating and magnetic braking. Interestingly, though, examining the approximate eddy current formula, two terms stood out: frequency (f) and flux density (B):
+
+$$ P_e \simeq K_e \cdot B^2 \cdot f^2 \cdot t^2 \cdot V $$
+
+The tubular linear motor's geometry is notable here. As mentioned above, flux is focused within the core, meaning flux density at the radial edge of the coils is only ```0.25 T```. Even more notably, the synchronous frequency at ```1 m/s``` is just ```25 Hz```. This leads to the conclusion that eddy currents and skin effects are a non-issue for this motor, owing to its geometry and low operating frequency. A 6061 aluminum heat sink was therefore partially designed via Bayesian optimization and then refined for ease of manufacturing, bringing asymptotic temperatures down to ```52.7 °C``` and```65.8 °C``` at the poles and slots, respectively. The improvement is significant, though it bears mentioning that these figures assume a convection coefficient of ```20 W/(m²K)```, which may be optimistic. Even at ```10 W/(m²K)```, temperatures reach ```88.24 °C``` and ``` 102.111 °C```, just into the thermal throttling territory, but this scenario assumes the motor is sustaining ```~6.6N``` continuously, which is highly atypical for a 3D printer. A more representative force/power curve for a standard 50 mm point-to-point path is shown below. 
+
+![50 mm point to point simulation](media/prototype_1/figure_4.png)
+
+That covers the bulk of the electromechanical design work carried out between January and March. The next steps are finishing the armature data-boards and the ```5-15A``` triple H-bridge driver (delta), as well as building a coil winder capable of achieving a fill factor of ```0.75``` with inductance and resistance matching. After that, the motor can be built, validated, and released to the community. Thanks for reading, the next update should land around May-June with prototype 1 physically validated.
+
+
+# Credits:
+
+### Research & Development Enabled by:
+* [Lawson Gallup](https://github.com/LawsonDG) - Thank you for the concept and the materials. Thank you again for helping me with the mechanical design. In general, thanks mate.
+* [FEMM](https://www.femm.info/wiki/HomePage) - Thank you, Dr. Meeker, for creating FEMM; it was indispensable for prototype 1.
+* [SimpleFOC](https://simplefoc.com/) - Thank you, everyone, at simple-foc for developing such a wonderful driver, specifically Runger, for the encoder help.
+* Thank you, [Matthew Sorensen](https://sorens.in), for your research into the usage of the AS5311 for 3d printers
+* Thank you, [cmore839](https://github.com/cmore839), for your research into tubular linear motors and for creating your very informative Discord server.
+* Thank you, [Screbuts @ World of Engineer](https://discord.gg/YFEveHYyeB), for the initial scoping help.
+
+
+### Bibtex Citation:
+
+```
+@misc{Bowley_2026,
+  author = {Bowley, William},
+  title = {{openLSM}},
+  url = {https://github.com/wgbowley/openLSM},
+  year = {2026},
+  note = {GitHub repository},
+  license = {MIT}
+}
+```
