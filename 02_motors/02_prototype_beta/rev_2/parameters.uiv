@@ -5,7 +5,7 @@ unit_frame: si_metric.ut
 [notes]
 model: "TUBULAR"
 type: "QUASI-STATIC-ONLY"
-status: "TBD"
+status: "CONCEPTUAL-ONLY - DO-NOT-FABRICATE"
 
 development: "prototype_beta/rev_2_parameter_file"
 # The parameter file for the prototype_beta/rev_2 design, this parameter file can

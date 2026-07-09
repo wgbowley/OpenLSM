@@ -71,6 +71,7 @@
     "xlim",
     "xticklabels",
     "ylabel",
-    "yticklabels"
+    "yticklabels",
+    "electromagnetic"
   ]
 }

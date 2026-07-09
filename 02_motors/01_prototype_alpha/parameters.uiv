@@ -29,6 +29,8 @@ slot_core: 3 m(m)
 [armature.slots]
 material: "copper"
 wire_diameter: 0.2 m(m)
+
+# This is assumed factor for hand-winding. Fill factor = amount of copper in volume
 fill_factor: 0.65
 
 length: 3 m(m)

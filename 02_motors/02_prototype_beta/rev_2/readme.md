@@ -1,5 +1,10 @@
 # Prototype beta - rev 2
 
+> [!WARNING]
+> This is a conceptual design intended to explore design ideas and engineering trade-offs.
+> It has not been manufactured, experimentally validated, or verified for performance.
+> Do not assume the design is suitable for fabrication without further analysis.
+
 ## Eddy Current Analysis
 
 An interesting design note about `revision 2` is the use of a radial heat-sink made of `aluminum` specifically `6061` as conductive materials are often avoided. They are avoided because the armature produces a changing magnetic field to produce changes in energy density which lead to force. But as a consequence of this, swirling currents are induced within conductive materials near the source. These currents are called `eddy currents` or `Foucault currents` as they produce opposing magnetic fields that decrease efficiency. A proportional model is:
@@ -20,4 +25,4 @@ Hence the electrical frequency:
 
 $$ v = f \cdot p_{\text{pitch}} \;\rightarrow\; f = \frac{v}{p_{\text{pitch}}} $$
 
-Therefore, with a pole pitch of `20 mm` and an assumed velocity of `1 m/s`, the electrical frequency is `50 Hz`, which is very low for most electrical devices. Hence the radial heat-sink was chosen for this revision with the following parameters. The radial heat-sink is made of aluminum specifically `6061` with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is intended to be generic thermal paste. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
+Therefore, with a pole pitch of `20 mm` and an assumed velocity of `1 m/s`, the electrical frequency is `50 Hz`, which is can be considered low frequency electromagnetics. Hence the radial heat-sink was chosen for this revision with the following parameters. The radial heat-sink is made of aluminum specifically `6061` with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. Grade `6061` has a higher electrical resistance compared to most aluminum grades but is still a reasonable thermal conductor at ~`180 W/(mk)`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
