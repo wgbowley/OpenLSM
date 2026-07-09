@@ -1,9 +1,11 @@
 # Prototype Alpha
 
 > [!WARNING]
-> This is a legacy design intended to explore design ideas and engineering trade-offs.
-> It has been manufactured, experimentally validated, and performance verified.
-> Do not assume this design is suitable for real-world applications.
+> This is a conceptual design intended to explore design ideas and engineering trade-offs.
+> It has not been manufactured, experimentally validated, or verified for performance.
+> Do not assume the design is suitable for fabrication without further analysis.
+>
+> Revisions 1 and 2 share the same electromagnetic configuration, only the thermal management and mechanical systems have been modified.
 
 # Overview
 
