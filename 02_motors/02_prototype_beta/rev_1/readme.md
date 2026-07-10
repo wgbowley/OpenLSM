@@ -7,7 +7,10 @@
 >
 > Revisions 1 and 2 share the same electromagnetic configuration, only the thermal management and mechanical systems have been modified.
 
-## Thermal Interface Layer/Medium
+
+<div align="center"><img src="../../../05_media/03_prototype_beta/rev_1/cross_section.png" alt="Cross Sectional Analysis" style="max-width: 600px"></div>
+
+## Thermal interface
 
 A specific area that `revision 1` focused on was the thermal circuit of the motor, specifically how heat is dissipated radially from the coils. To achieve this, an outer heat-sink was proposed under the assumption that eddy currents wouldn't be a problem if it was far enough away from the stator magnets. However, to achieve this, there must be an interface material between the slots and the heat-sink. This material must have good thermal characteristics, it must move heat efficiently across the boundary, and also be easy to use within the tooling constraints of the project.
 

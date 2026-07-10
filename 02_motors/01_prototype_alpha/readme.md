@@ -1,15 +1,19 @@
 # Prototype Alpha
 
 > [!WARNING]
-> This is a conceptual design intended to explore design ideas and engineering trade-offs.
-> It has not been manufactured, experimentally validated, or verified for performance.
-> Do not assume the design is suitable for fabrication without further analysis.
->
-> Revisions 1 and 2 share the same electromagnetic configuration, only the thermal management and mechanical systems have been modified.
+> This is a legacy design intended to explore design ideas and engineering trade-offs.
+> It has been manufactured, experimentally validated, and performance verified.
+> Do not assume this design is suitable for real-world applications.
 
 # Overview
 
 Prototype Alpha is an `ironless planar linear motor` with a polylactic acid (PLA) armature featuring 6 slots, hand wound using 0.2 mm diameter enameled copper wire and 5 mm wide Kapton tape, with 2 slots in-series per phase (WYE). The stator, similar to the armature, was printed in PLA and had 4 pole pairs per armature length and 10 pole pairs total. 
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=l7kanxWzn5A">
+    <img src="../../05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="Side view on stand & link to video" style="max-width: 600px">
+  </a>
+</div>
 
 A linear encoder `(AS5311)` was used to measure the motor position and a SimpleFOC shield was used to control the motor's 3 phases using closed-loop control.
 

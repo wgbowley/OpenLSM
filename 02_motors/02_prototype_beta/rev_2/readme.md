@@ -4,6 +4,11 @@
 > This is a conceptual design intended to explore design ideas and engineering trade-offs.
 > It has not been manufactured, experimentally validated, or verified for performance.
 > Do not assume the design is suitable for fabrication without further analysis.
+>
+> Revisions 1 and 2 share the same electromagnetic configuration, only the thermal management and mechanical systems have been modified.
+
+
+<div align="center"><img src="../../../05_media/03_prototype_beta/rev_2/cross_section.png" alt="Cross Sectional Analysis" style="max-width: 600px"></div>
 
 ## Eddy Current Analysis
 
