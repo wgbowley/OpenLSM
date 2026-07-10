@@ -2,6 +2,7 @@
 format: 0.1.0
 unit_frame: si_metric.ut
 
+
 [notes]
 model: "PLANAR"
 status: "LEGACY"
@@ -11,12 +12,14 @@ development: "prototype_alpha/main_parameter_file"
 # Used to simulate the planar synchronous linear motor.
 # Coordinate system: Cartesian (x, y) with depth extension.
 
+
 [model]
 environmental_material: "air"
 depth: 40 m(m)
 
 pole_pairs: 4           # (∅) pole pair = 2 poles per pair
 number_slots: 6         # (∅)
+
 
 [armature.core]
 # Material: polylactic acid is equivalent to air (low frequency EM)

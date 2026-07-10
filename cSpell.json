@@ -72,6 +72,8 @@
     "xticklabels",
     "ylabel",
     "yticklabels",
-    "electromagnetic"
+    "electromagnetic",
+    "matweb",
+    "coercivity"
   ]
 }

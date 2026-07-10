@@ -2,6 +2,7 @@
 format: 0.1.0
 unit_frame: si_metric.ut
 
+
 [notes]
 model: "TUBULAR"
 type: "QUASI-STATIC-ONLY"
@@ -11,11 +12,13 @@ type: "QUASI-STATIC-ONLY"
 
 # The coordinate system is axial-symmetric (Z-R) (Axial-Radial).
 
+
 [model]
 environmental_material: "air"
 
 pole_pairs: 4           # (∅) pole pair = 2 poles per pair
 number_slots: 12        # (∅)
+
 
 [armature.core]
 # Material: Carbon Fibre Nylon is equivalent to air (low frequency EM)
@@ -37,24 +40,7 @@ fill_factor: 0.65
 axial_length: 4.83 m(m)
 radial_thickness: 3.00 m(m)
 
-""" THIS SECTION IS NOT MODELLED """
-[armature.heat_sink]
-material: "aluminum"
-alloy: 6061
 
-# No specific material hence the generic name
-interface_material: "thermal_paste"
-
-# Axial Parameters
-axial_fin_length: 0.50 m(m)
-axial_fin_pitch: 1.50 m(m)
-
-# Radial parameters
-radial_clearance: 1 m(m)
-radial_inner_thickness: 1.8 m(m)
-radial_fin_thickness: 7.30 m(m)
-
-""" BELOW IS MODELLED """
 [stator.tube]
 # Material: Layered Carbon Fibre Epoxy is equivalent to air (low frequency EM)
 material: "air"
