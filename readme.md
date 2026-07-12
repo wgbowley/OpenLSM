@@ -58,11 +58,19 @@ Post-Analysis & Model Validation
 
 ## Prototype Alpha
 
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=l7kanxWzn5A">
+    <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side video on test stand" style="max-width: 600px">
+  </a>
+  <p><small>⚠️ Video quality is poor due to lighting conditions / setup </small><br>
+  <em>Figure 2a: Prototype Alpha. Closed loop control demo.</em></p>
+</div>
+
 An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, though the magnitude was not quantified before the PLA coil forms deformed due to thermal stress.
 
 <div align="center">
-  <img src="05_media/02_prototype_alpha/side_view.jpg" alt="Prototype alpha top down view" style="max-width: 600px">
-    <p><em>Figure 2: Prototype Alpha. Top-down view of the planar linear motor showing the slots & poles.</em></p>
+  <img src="05_media/02_prototype_alpha/02_experimental/side_view.jpg" alt="Prototype alpha top down view" style="max-width: 600px">
+    <p><em>Figure 2b: Prototype Alpha. Top-down view of the planar linear motor showing the slots & poles.</em></p>
 </div>
 
 The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
@@ -84,7 +92,7 @@ Revision 2 uses a radial heat-sink design which may improve steady-state charact
     <p><em>Figure 3b: Prototype Beta REV 2. Close-up cross-sectional view of the radial heat-sink.</em></p>
 </div>
 
-The radial heat-sink is made of aluminum as mentioned above with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is intended to be generic thermal paste. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
+The radial heat-sink is made of aluminum as mentioned above with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
 
 > [!IMPORTANT]
 > See the [motor design notes](/02_motors/02_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.

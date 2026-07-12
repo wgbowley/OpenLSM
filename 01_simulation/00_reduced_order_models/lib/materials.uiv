@@ -1,0 +1,104 @@
+[version]
+format: 0.1.0
+unit_frame: metric.ut
+application: "Reduced Order Model | Tubular Ironless Linear Motor"
+type: "Material Definitions"
+
+[standards]
+temperature:    298.15 (K)
+pressure:       101.32 k(Pa)
+
+
+
+[air.meta]
+type: "gas"
+mixture: "Homogeneous"
+humidity: "Assume Dry (Percentage Unknown)"
+
+[air.physical]
+density:                1.184 (kg/m^3)
+absolute_viscosity:     18.6 u(Pa*s)
+
+[air.electrical]
+relative_permittivity: [1.0, 1.0]
+dielectric_breakdown: 3.1 M(V/m)
+
+temperature_conductivity: [
+  [200.0, 5.0],
+  [700.0, 5.0],
+  [1200.0, 5.0],
+  [1700.0, 5.0],
+] (K), f(S_m)
+
+[air.magnetic]
+relative_permeability: [1.0, 1.0]
+
+
+
+[copper.meta]
+type: "material"
+purity: "pure"
+note: "matweb.com: Annealed copper"
+
+[copper.physical]
+density:            8930 (kg/m^3)
+
+[copper.electrical]
+relative_permittivity: [1, 1] 
+temperature_conductivity: [
+  [273.0, 63],
+  [473.0, 34],
+  [673.0, 23],
+  [873.0, 17],
+  [1073.0, 14],
+  [1273.0, 11]
+] (K), M(S_m)
+
+[copper.magnetic]
+relative_permeability: [0.999, 0.999]
+
+
+
+[NdFeB.meta]
+type: "magnet_material"
+composition: "Sintered: Neodymium, Iron, Boron"
+temperature_grade: "Standard - non high temperature resistance"
+note: "matweb.com: `Alliance N-52 Sintered NdFeB Neodymium Magnet`; femm: N30-55 Series"
+
+[NdFeB.physical]
+density: 7500 (kg/m^3)
+
+[NdFeB.electrical]
+relative_permittivity: [1, 1]
+
+# Constructed table via p(t) = p_o * (1 + a * (t-to)); p_o = 0.667 M(S/m)
+temperature_conductivity: [
+  [273.0, 0.697],
+  [293.0, 0.667],
+  [323.0, 0.663],
+  [373.0, 0.656],
+  [423.0, 0.649],
+  [473.0, 0.643]
+] (K), M(S_m)
+
+[NdFeB.magnetic]
+relative_permeability: [1.05, 1.05]
+curie_temperature: 583.15 (K)
+
+# Refer: https://smmagnetics.com/pages/neodymium-material-specs
+# Temperature coefficients: %/K
+alpha_remanence: -0.12 (K^-1)
+beta_coercivity: -0.6 (K^-1)
+
+[NdFeB.grades]
+N30: [0.836, 1.10]  M(A_m), (T)
+N33: [0.879, 1.14]  M(A_m), (T)
+N35: [0.906, 1.17]  M(A_m), (T)
+N38: [0.945, 1.22]  M(A_m), (T)
+N40: [0.970, 1.25]  M(A_m), (T)
+N42: [0.995, 1.28]  M(A_m), (T)
+N45: [1.030, 1.32]  M(A_m), (T)
+N48: [1.015, 1.37]  M(A_m), (T)
+N50: [0.988, 1.40]  M(A_m), (T)
+N52: [0.956, 1.43]  M(A_m), (T)
+N55: [0.923, 1.47]  M(A_m), (T)

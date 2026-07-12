@@ -2,21 +2,24 @@
 format: 0.1.0
 unit_frame: si_metric.ut
 
+
 [notes]
 model: "TUBULAR"
 type: "QUASI-STATIC-ONLY"
-status: "TBD"
+status: "CONCEPTUAL-ONLY - DO-NOT-FABRICATE"
 
 development: "prototype_beta/rev_2_parameter_file"
 # The parameter file for the prototype_beta/rev_2 design, this parameter file can
 # be used to simulate the tubular synchronous linear motor within the `quasi-static`
 # solvers. The coordinate system is axial-symmetric (Z-R) (Axial-Radial).
 
+
 [model]
 environmental_material: "air"
 
 pole_pairs: 4           # (∅) pole pair = 2 poles per pair
 number_slots: 12        # (∅)
+
 
 [armature.core]
 # Material: Carbon Fibre Nylon is equivalent to air (low frequency EM)
@@ -56,6 +59,8 @@ radial_inner_thickness: 1.8 m(m)
 radial_fin_thickness: 7.30 m(m)
 
 """ BELOW IS MODELLED """
+
+
 [stator.tube]
 # Material: Layered Carbon Fibre Epoxy is equivalent to air (low frequency EM)
 material: "air"
