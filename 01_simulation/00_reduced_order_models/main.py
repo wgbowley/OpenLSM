@@ -10,7 +10,7 @@ Description:
 
 # This is a test to understand how to produce the b-field
 
-from src.physics.motor import compute_z_field_strength
+from src.physics.motor import compute_slot_z_field_strength
 from builtins import float as f
 import numpy as np
 import matplotlib.pyplot as plt
@@ -52,7 +52,7 @@ def armature_field(z_pos: float, state: MotorDynamics) -> float:
     for i in range(6):
         z_slot = i * state.slot_pitch
         
-        h_field += compute_z_field_strength(
+        h_field += compute_slot_z_field_strength(
             z_pos, 
             z_slot, 
             currents[i], 
@@ -66,8 +66,8 @@ def armature_field(z_pos: float, state: MotorDynamics) -> float:
     
     
 state = MotorDynamics(
-    slot_pitch=0.02,
-    slot_length=0.015,
+    slot_pitch=0.01, 
+    slot_length=0.01, 
     slot_radius=0.005,
     turns=200,
     rms_current=2,
