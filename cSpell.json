@@ -76,6 +76,9 @@
     "matweb",
     "coercivity",
     "axvline",
-    "ylim"
+    "ylim",
+    "numericalize",
+    "nullset",
+    "picounits"
   ]
 }

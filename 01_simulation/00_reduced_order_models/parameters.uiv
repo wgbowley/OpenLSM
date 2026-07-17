@@ -8,13 +8,20 @@ type: "Electromagnetic parameter file"
 application: "Reduced Order Model | Tubular Ironless Linear Motor"
 coordinate_system: "Axial-symmetric (Z-R) (Axial-Radial)"
 
+[numerics]
+time_step:      100 u(s)
+line_voltage:   24 (V)
+temperature:    300 (K)
+
+# Verbose output frequency
+msg_freq:  25  (s^-1)
+
 
 [model]
-voltage: 24 (V)
-current:  5 (A)
+# pole pair = 2 poles per pair
+pole_pairs: 4       (∅)
+number_slots: 12    (∅) 
 
-pole_pairs: 4           # (∅) pole pair = 2 poles per pair
-number_slots: 12        # (∅)
 
 [armature.core]
 axial_slot_pitch: 6.833 m(m)
@@ -35,8 +42,6 @@ radial_thickness: 3.00 m(m)
 radial_thickness: 1 m(m)
 
 [stator.poles]
-# Material: NdFeB
-grade: "N52"
-
+# Material: N52 -> NdFeB
 radial_thickness: 5 m(m)
 axial_length: 20 m(m)

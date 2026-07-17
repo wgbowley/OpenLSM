@@ -17,8 +17,8 @@ development: "prototype_beta/rev_2_parameter_file"
 [model]
 environmental_material: "air"
 
-pole_pairs: 4           # (∅) pole pair = 2 poles per pair
-number_slots: 12        # (∅)
+pole_pairs: 4   (∅) # pole pair = 2 poles per pair
+number_slots: 12    (∅)
 
 
 [armature.core]
