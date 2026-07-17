@@ -39,8 +39,8 @@ class ArmatureState(SimulationState):
         """ Returns name as attributes """
         return (
             "<Armature("
-            f"pos: {self.position:.3f}, "
-            f"vel: {self.position:.3f}, "
+            f"pos: {self.position:.3f} m, "
+            f"vel: {self.position:.3f} m/s, "
             f"pha: {self.phase_a:.3f}, "
             f"phb: {self.phase_b:.3f}, "
             f"phc: {self.phase_c:.3f})>"
@@ -63,11 +63,11 @@ class PhaseState(SimulationState):
         """ Returns name as attributes """
         return (
             "<Phase("
-            f"vol: {self.voltage:.3f}"
-            f"v_i: {self.induced_voltage:.3f}"
-            f"Cur: {self.current:.3f}"
+            f"vol: {self.voltage:.3f} V, "
+            f"v_i: {self.induced_voltage:.3f} V, "
+            f"Cur: {self.current:.3f} A, "
             f"Tur: {self.turns:.3f}, "
-            f"Ind: {self.inductance:.3f}, "
-            f"Res: {self.resistance:.3f}, "
-            f"Mas: {self.mass:.3f})>"
+            f"Ind: {self.inductance:.3f} H, "
+            f"Res: {self.resistance:.3f} Ω, "
+            f"Mas: {self.mass:.3f} kg)>"
         )

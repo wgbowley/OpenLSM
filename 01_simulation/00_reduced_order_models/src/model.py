@@ -11,12 +11,12 @@ from abc import ABC, abstractmethod
 from builtins import float as f
 
 from picounits import Quantity, Unit, strip_quantity, DynamicLoader
-from picounits import TIME, VOLTAGE, NULLSET, LENGTH, DENSITY, CONDUCTIVITY, CURRENT, TEMPERATURE
 
 from src.states import ArmatureState, PhaseState
 from src.physics import derived
 
-_, _ = ArmatureState, PhaseState
+_, _, _ = ArmatureState, PhaseState, derived
+
 
 class SimulationModel(ABC):
     """ Abstract base class for simulation models """ 
@@ -41,74 +41,15 @@ class TubularMotor(SimulationModel):
         self.parameters = parameters
         self.materials = materials
 
-        # Extract common variables and builds derived parameters
-        self._extract_validate()
+        # Constructs the model based on parameters & materials
         self._construction()
 
     @property
     def _name(self):
-        return super()._name
+        return "LINEAR MOTOR"
 
     def _construction(self) -> None:
         """ Constructs the tubular linear motor model """
-        turns = derived.compute_turns(
-            self.slot_axial_length, self.slot_thickness, self.slot_wire_diameter,
-            self.slot_fill_factor
-        )
-
-        mean_slot_radius = (
-            self.pole_thickness + self.armature_clearance + self.armature_thickness +
-            self.slot_thickness / 2
-        )
-        resistance = derived.compute_resistance(
-            turns, mean_slot_radius, self.slot_wire_diameter, 1/self.slot_conductivity
-        )
-
-        _ = resistance
-
-    def _extract_validate(self) -> None:
-        """ Extracts qualities from attribute tree and validates units """
-        # Extract qualities from the numeric attribute tree
-        numerics = self.parameters.numerics
-        self.time_step = self.numericalize(numerics.time_step, TIME)
-        self.line_voltage = self.numericalize(numerics.line_voltage, VOLTAGE)
-        self.temperature = self.numericalize(numerics.temperature, TEMPERATURE)
-
-        self.msg_frequency = self.numericalize(numerics.msg_freq, 1/TIME)
-
-        # Extract qualities from the model attribute tree
-        model = self.parameters.model
-        self.pole_pairs = self.numericalize(model.pole_pairs, NULLSET)
-        self.number_slots = self.numericalize(model.number_slots, NULLSET)
-
-        # Extract qualities from the armature attribute tree
-        armature = self.parameters.armature
-        self.armature_slot_pitch = self.numericalize(armature.core.axial_slot_pitch, LENGTH)
-        self.armature_clearance = self.numericalize(armature.core.radial_clearance, LENGTH)
-        self.armature_thickness = self.numericalize(armature.core.radial_thickness, LENGTH)
-
-        self.slot_wire_diameter = self.numericalize(armature.slots.wire_diameter, LENGTH)
-        self.slot_fill_factor = self.numericalize(armature.slots.fill_factor, NULLSET)
-        self.slot_axial_length = self.numericalize(armature.slots.axial_length, LENGTH)
-        self.slot_thickness = self.numericalize(armature.slots.radial_thickness, LENGTH)
-
-        # Extract qualities from the stator attribute tree
-        stator = self.parameters.stator
-        self.tube_thickness = self.numericalize(stator.tube.radial_thickness, LENGTH)
-        self.pole_thickness = self.numericalize(stator.poles.radial_thickness, LENGTH)
-        self.pole_axial_length = self.numericalize(stator.poles.axial_length, LENGTH)
-
-        # Extracts slot qualities from material attribute tree
-        self.slot_material = self.materials.copper
-        self.slot_density = self.numericalize(self.slot_material.physical.density, DENSITY)
-        self.slot_conductivity = self.linear_interpolate(
-            self.slot_material.electrical.temperature_conductivity,
-            numerics.temperature, CONDUCTIVITY
-        )
-
-        # Extracts pole qualities from material attribute tree
-        self.pole_material = self.materials.NdFeB
-        self.pole_coercivity = self._coercivity_at_temp(self.pole_material, numerics.temperature)
 
     @classmethod
     def linear_interpolate(cls, table: Quantity, value: Quantity, excepted: Unit) -> f:
@@ -140,6 +81,6 @@ class TubularMotor(SimulationModel):
 
         if temperature < curie_point:
             hc = ref_co * (1 + (beta_co / 100) * (temperature - ref_temp))
-            return cls.numericalize(hc, CURRENT / LENGTH)
+            return hc
 
-        return 0.0
+        return 0.0 * ref_co.unit
