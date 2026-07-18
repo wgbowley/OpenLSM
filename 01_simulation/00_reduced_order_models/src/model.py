@@ -70,6 +70,8 @@ class TubularMotor(SimulationModel):
         self.raw_slot_length = self.numericalize(params.armature.slots.axial_length, LENGTH)
         self.raw_slot_mean_radius = self.numericalize(self.mean_radius, LENGTH)
 
+        self.raw_effective_area = self.numericalize(self.effective_area, LENGTH ** 2)
+        
         # Extracts the phase values
         raw_inductance = self.numericalize(self.phase_inductance, INDUCTANCE)
         raw_resistance = self.numericalize(self.phase_resistance, RESISTANCE)
@@ -89,6 +91,7 @@ class TubularMotor(SimulationModel):
         params = self.parameters
         self.mean_radius = (
             params.stator.poles.radial_thickness +
+            params.stator.tube.radial_thickness +
             params.armature.core.radial_clearance +
             params.armature.core.radial_thickness +
             params.armature.slots.radial_thickness / 2
@@ -135,6 +138,18 @@ class TubularMotor(SimulationModel):
         self.phase_inductance = self.slots_per_phase * inductance
         self.phase_resistance = self.slots_per_phase * resistance
         self.phase_mass = self.slots_per_phase * slot_mass
+
+        # Calculates the interaction area
+        self.slot_inner_radius = (
+            params.stator.poles.radial_thickness +
+            params.stator.tube.radial_thickness +
+            params.armature.core.radial_clearance +
+            params.armature.core.radial_thickness
+        )
+
+        self.pole_area = pi * params.stator.poles.radial_thickness ** 2
+        self.slot_area = pi * self.slot_inner_radius ** 2
+        self.effective_area = self.slot_area - self.pole_area
 
     @classmethod
     def _linear_interpolate(cls, table: Quantity, value: Quantity) -> f:

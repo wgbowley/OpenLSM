@@ -16,7 +16,6 @@ from src.physics import dynamic
 class MagneticSolver:
     """ 
     Magnetic field solver for `TubularMotor`.
-
     Computes electromagnetic force using magnetic energy and virtual work methods.
     """
     def __init__(self, model: TubularMotor) -> None:
@@ -49,8 +48,7 @@ class MagneticSolver:
             energy += self.permeability * (h_armature + h_stator) ** 2 * dz
             z_pos += dz
 
-        radial_area = pi * self.model.raw_slot_mean_radius ** 2
-        return (radial_area/2) * energy
+        return (self.model.raw_effective_area/2) * energy
 
     def _armature_field(self, z_pos: f = 0.0) -> f:
         """ Solves for the armature field at a specific z-position """

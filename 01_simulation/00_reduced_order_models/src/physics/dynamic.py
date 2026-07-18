@@ -56,7 +56,7 @@ def compute_slot_z_field_strength(
     term2 = (slot_center - half_length) / denom2
 
     # Calculates maximal field_strength and returns position dependent strength
-    h_term = turns * current / 2
+    h_term = turns * current / (2 * pi * slot_len)
     return h_term * (term1 - term2)
 
 
