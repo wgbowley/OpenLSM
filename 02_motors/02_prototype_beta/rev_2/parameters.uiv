@@ -9,9 +9,8 @@ type: "QUASI-STATIC-ONLY"
 status: "CONCEPTUAL-ONLY - DO-NOT-FABRICATE"
 
 development: "prototype_beta/rev_2_parameter_file"
-# The parameter file for the prototype_beta/rev_2 design, this parameter file can
-# be used to simulate the tubular synchronous linear motor within the `quasi-static`
-# solvers. The coordinate system is axial-symmetric (Z-R) (Axial-Radial).
+# The parameter file for the prototype_beta/rev_2 design
+# The coordinate system is axial-symmetric (Z-R) (Axial-Radial).
 
 
 [model]
