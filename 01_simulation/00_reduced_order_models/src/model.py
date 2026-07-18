@@ -10,13 +10,14 @@ from typing import Any
 from abc import ABC, abstractmethod
 from builtins import float as f
 
+
+from math import pi
 from picounits import Quantity, Unit, strip_quantity, DynamicLoader
+from picounits import PERMEABILITY, INDUCTANCE, RESISTANCE, MASS, NULLSET
+from picounits import LENGTH, CURRENT, TIME, VOLTAGE
 
 from src.states import ArmatureState, PhaseState
 from src.physics import derived
-
-_, _, _ = ArmatureState, PhaseState, derived
-
 
 class SimulationModel(ABC):
     """ Abstract base class for simulation models """ 
@@ -35,24 +36,106 @@ class SimulationModel(ABC):
 
 
 class TubularMotor(SimulationModel):
-    """ Tubular linear synchronous motor model """
+    """ 3 Phase Tubular linear Synchronous Motor """
     def __init__(self, parameters: DynamicLoader, materials: DynamicLoader) -> None:
         """ Initializes the linear motor class """
         self.parameters = parameters
         self.materials = materials
 
-        # Constructs the model based on parameters & materials
-        self._construction()
+        # Important variables
+        self.permeability = 4 * pi * 10 ** -7 * PERMEABILITY
+        self.temperature = self.parameters.numerics.temperature
 
-    @property
-    def _name(self):
-        return "LINEAR MOTOR"
+        # Computes derived parameters
+        self._compute_derived_phase_parameters()
+        self.stator_field = self._coercivity_at_temp(self.materials.NdFeB, self.temperature)
 
-    def _construction(self) -> None:
-        """ Constructs the tubular linear motor model """
+        # Constructs the motor model
+        self._construct_model()
+
+        # Validates & Extracts Numerics Quantities
+        self.raw_time_step = self.numericalize(self.parameters.numerics.time_step, TIME)
+        self.raw_line_voltage = self.numericalize(self.parameters.numerics.line_voltage, VOLTAGE)
+        self.raw_msg_freq = self.numericalize(self.parameters.numerics.msg_freq, 1/TIME)
+
+    def _construct_model(self) -> None:
+        """ Validates, extracts and construct the model """
+        params = self.parameters
+        self.raw_number_slots = 3 * self.numericalize(self.slots_per_phase, NULLSET)
+        self.pole_pitch = self.numericalize(params.stator.poles.axial_length, LENGTH)
+        self.raw_stator_field = self.numericalize(self.stator_field, CURRENT/LENGTH)
+
+        self.slot_length = self.numericalize(params.armature.slots.axial_length, LENGTH)
+        self.slot_mean_radius = self.numericalize(self.mean_radius, LENGTH)
+
+        # Extracts the phase values
+        raw_inductance = self.numericalize(self.phase_inductance, INDUCTANCE)
+        raw_resistance = self.numericalize(self.phase_resistance, RESISTANCE)
+        raw_mass = self.numericalize(self.phase_mass, MASS)
+        raw_turns = self.numericalize(self.turns, NULLSET)
+
+        # Constructs the phases & Armature state
+        phase_a = PhaseState(raw_turns, raw_inductance, raw_resistance, raw_mass)
+        phase_b = PhaseState(raw_turns, raw_inductance, raw_resistance, raw_mass)
+        phase_c = PhaseState(raw_turns, raw_inductance, raw_resistance, raw_mass)
+
+        self.armature = ArmatureState(phase_a, phase_b, phase_c)
+
+    def _compute_derived_phase_parameters(self) -> None:
+        """ Computes derived parameters for the motor phases """
+        # Calculates the mean radius of turns within the slot
+        params = self.parameters
+        self.mean_radius = (
+            params.stator.poles.radial_thickness +
+            params.armature.core.radial_clearance +
+            params.armature.core.radial_thickness +
+            params.armature.slots.radial_thickness / 2
+        )
+
+        # Calculates the number of turns and inductance
+        self.turns = derived.compute_turns(
+            params.armature.slots.axial_length,
+            params.armature.slots.radial_thickness,
+            params.armature.slots.wire_diameter,
+            params.armature.slots.fill_factor
+        )
+
+        inductance = derived.compute_inductance(
+            self.turns,
+            params.armature.slots.axial_length,
+            self.mean_radius,
+            self.permeability
+        )
+
+        # Calculates resistivity at simulation temperature & slot resistance
+        table = self.materials.copper.electrical.temperature_conductivity
+        conductivity = self._linear_interpolate(table, self.temperature)
+        resistivity = 1/conductivity
+
+        resistance = derived.compute_resistance(
+            self.turns,
+            self.mean_radius,
+            params.armature.slots.wire_diameter,
+            resistivity
+        )
+
+        # Calculates slot volume and slot mass
+        slot_volume = derived.compute_slot_volume(
+            self.turns,
+            params.armature.slots.wire_diameter,
+            self.mean_radius
+        )
+        slot_mass = slot_volume * self.materials.copper.physical.density
+
+        # Final inductance, resistance and mass per phase
+        self.slots_per_phase = self.parameters.armature.core.number_slots / 3
+
+        self.phase_inductance = self.slots_per_phase * inductance
+        self.phase_resistance = self.slots_per_phase * resistance
+        self.phase_mass = self.slots_per_phase * slot_mass
 
     @classmethod
-    def linear_interpolate(cls, table: Quantity, value: Quantity, excepted: Unit) -> f:
+    def _linear_interpolate(cls, table: Quantity, value: Quantity) -> f:
         """ Linear interpolates a quantity list from a specific linked value """
         if value <= table[0][0]: return table[0][1]
         if value >= table[-1][0]: return table[-1][1]
@@ -65,7 +148,7 @@ class TubularMotor(SimulationModel):
             if x0 <= value <= x1:
                 slope = (y1 - y0) / (x1 - x0)
                 result = y0 + slope * (value - x0)
-                return cls.numericalize(result, excepted)
+                return result
 
         msg = f"Value {value!r} could not be interpolated within table range {table!r}"
         raise ValueError(msg)
@@ -84,3 +167,8 @@ class TubularMotor(SimulationModel):
             return hc
 
         return 0.0 * ref_co.unit
+
+    @property
+    def _name(self):
+        """ Tubular motor representation """
+        return "<TubularLinearSynchronousMotor()>"

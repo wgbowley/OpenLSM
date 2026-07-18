@@ -4,9 +4,10 @@ unit_frame: metric.ut
 
 
 [notes]
-type: "Electromagnetic parameter file"
+type: "Electromagnetic Parameter File"
 application: "Reduced Order Model | Tubular Ironless Linear Motor"
 coordinate_system: "Axial-symmetric (Z-R) (Axial-Radial)"
+
 
 [numerics]
 time_step:      100 u(s)
@@ -17,13 +18,8 @@ temperature:    300 (K)
 msg_freq:  25  (s^-1)
 
 
-[model]
-# pole pair = 2 poles per pair
-pole_pairs: 4       (∅)
-number_slots: 12    (∅) 
-
-
 [armature.core]
+number_slots: 12 (∅)
 axial_slot_pitch: 6.833 m(m)
 
 radial_clearance: 1 m(m)
@@ -31,7 +27,7 @@ radial_thickness: 1 m(m)
 
 [armature.slots]
 # Material: copper
-wire_diameter: 0.4 m(m)
+wire_diameter: 0.3 m(m)
 fill_factor: 0.65
 
 axial_length: 4.83 m(m)

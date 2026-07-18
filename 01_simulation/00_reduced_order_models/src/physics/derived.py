@@ -8,10 +8,10 @@ Description:
 """
 
 from math import pi, floor
-from builtins import float as f
+from picounits import q
 
 
-def compute_turns(length: f, thickness: f, wire_diameter: f, fill_factor: f) -> f:
+def compute_turns(length: q, thickness: q, wire_diameter: q, fill_factor: q) -> q:
     """ 
     Computes the number of turns while according for the insulation & stacking 
     Assumptions: Fill factor accounts for insulation & stacking
@@ -23,13 +23,13 @@ def compute_turns(length: f, thickness: f, wire_diameter: f, fill_factor: f) -> 
     return floor(effective_area / wire_section)
 
 
-def compute_inductance(turns: f, coil_len: f, mean_radius: f, permeability: f) -> f:
+def compute_inductance(turns: q, coil_len: q, mean_radius: q, permeability: q) -> q:
     """ Calculates the coils self-inductance independent of mutual inductance between coils """
     area = pi * mean_radius ** 2
     return (turns ** 2 * permeability * area) / coil_len
 
 
-def compute_resistance(turns: f, mean_rad: f, wire_dia: f, resistivity: f) -> f:
+def compute_resistance(turns: q, mean_rad: q, wire_dia: q, resistivity: q) -> q:
     """ 
     Computes the slots resistance by using mean radius & conductor cross section 
     Assumptions: Uses mean radius as an approximate for approximate turn length
@@ -40,7 +40,7 @@ def compute_resistance(turns: f, mean_rad: f, wire_dia: f, resistivity: f) -> f:
     return resistivity * turn_length / cross_section
 
 
-def compute_slot_volume(turns: f, wire_dia: f, mean_radius: f) -> f:
+def compute_slot_volume(turns: q, wire_dia: q, mean_radius: q) -> q:
     """ 
     Computes the volume of the slots using wire diameter & mean radius 
     Assumptions: Uses mean radius as an approximate for approximate turn length
@@ -50,13 +50,3 @@ def compute_slot_volume(turns: f, wire_dia: f, mean_radius: f) -> f:
     mean_turn_length = 2 * pi * mean_radius
 
     return total_area * mean_turn_length
-
-
-def compute_stator_field_strength(flux_density: f, relative_permeability: f, permeability: f) -> f:
-    """
-    Computes the stator field strength using B=u_o * u_r * H relationship.
-    Assumptions: 
-    This model works well for ironless machines as flux density and field strength are proportional
-    due to a lack of non-linear materials in them.
-    """
-    return flux_density / (relative_permeability * permeability)

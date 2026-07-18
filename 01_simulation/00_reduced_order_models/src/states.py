@@ -38,12 +38,12 @@ class ArmatureState(SimulationState):
     def _name(self):
         """ Returns name as attributes """
         return (
-            "<Armature("
-            f"pos: {self.position:.3f} m, "
-            f"vel: {self.position:.3f} m/s, "
-            f"pha: {self.phase_a:.3f}, "
-            f"phb: {self.phase_b:.3f}, "
-            f"phc: {self.phase_c:.3f})>"
+            "<Armature(\n"
+            f"pos: {self.position:.3f} m, \n"
+            f"vel: {self.position:.3f} m/s, \n"
+            f"pha: {self.phase_a}, \n"
+            f"phb: {self.phase_b}, \n"
+            f"phc: {self.phase_c}\n)>"
         )
 
 

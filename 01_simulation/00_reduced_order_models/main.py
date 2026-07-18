@@ -20,3 +20,4 @@ parameters = Parser.open(BASE_DIR / "parameters.uiv", BASE_DIR / "lib/metric.ut"
 
 # Load/Constructs tubular linear motor model
 model = TubularMotor(parameters, materials)
+print(model.armature)
