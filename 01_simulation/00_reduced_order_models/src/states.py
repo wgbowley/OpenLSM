@@ -13,6 +13,8 @@ from builtins import float as f
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
+from picounits import VOLTAGE, CURRENT, INDUCTANCE, RESISTANCE, NULLSET, MASS, LENGTH, TIME
+
 
 class SimulationState(ABC):
     """ Abstract base class for simulation states """
@@ -39,8 +41,8 @@ class ArmatureState(SimulationState):
         """ Returns name as attributes """
         return (
             "<Armature(\n"
-            f"pos: {self.position:.3f} m, \n"
-            f"vel: {self.position:.3f} m/s, \n"
+            f"pos: {self.position * LENGTH:.3f}, \n"
+            f"vel: {self.position * (LENGTH / TIME):.3f}, \n"
             f"pha: {self.phase_a}, \n"
             f"phb: {self.phase_b}, \n"
             f"phc: {self.phase_c}\n)>"
@@ -63,11 +65,11 @@ class PhaseState(SimulationState):
         """ Returns name as attributes """
         return (
             "<Phase("
-            f"vol: {self.voltage:.3f} V, "
-            f"v_i: {self.induced_voltage:.3f} V, "
-            f"Cur: {self.current:.3f} A, "
-            f"Tur: {self.turns:.3f}, "
-            f"Ind: {self.inductance:.3f} H, "
-            f"Res: {self.resistance:.3f} Ω, "
-            f"Mas: {self.mass:.3f} kg)>"
+            f"vol: {self.voltage * VOLTAGE:.3f}, "
+            f"v_i: {self.induced_voltage * VOLTAGE:.3f}, "
+            f"Cur: {self.current * CURRENT:.3f}, "
+            f"Tur: {self.turns * NULLSET:.3f}, "
+            f"Ind: {self.inductance * INDUCTANCE:.3f}, "
+            f"Res: {self.resistance * RESISTANCE:.3f}, "
+            f"Mas: {self.mass * MASS:.3f})>"
         )

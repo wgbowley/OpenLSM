@@ -38,7 +38,7 @@ class SimulationModel(ABC):
 class TubularMotor(SimulationModel):
     """ 3 Phase Tubular linear Synchronous Motor """
     def __init__(self, parameters: DynamicLoader, materials: DynamicLoader) -> None:
-        """ Initializes the linear motor class """
+        """ Initializes the model class """
         self.parameters = parameters
         self.materials = materials
 
@@ -61,12 +61,14 @@ class TubularMotor(SimulationModel):
     def _construct_model(self) -> None:
         """ Validates, extracts and construct the model """
         params = self.parameters
-        self.raw_number_slots = 3 * self.numericalize(self.slots_per_phase, NULLSET)
-        self.pole_pitch = self.numericalize(params.stator.poles.axial_length, LENGTH)
+        self.raw_number_slots = int(3 * self.numericalize(self.slots_per_phase, NULLSET))
+        self.raw_pole_pitch = self.numericalize(params.stator.poles.axial_length, LENGTH)
         self.raw_stator_field = self.numericalize(self.stator_field, CURRENT/LENGTH)
+        self.raw_stator_length = self.numericalize(params.stator.tube.length, LENGTH)
 
-        self.slot_length = self.numericalize(params.armature.slots.axial_length, LENGTH)
-        self.slot_mean_radius = self.numericalize(self.mean_radius, LENGTH)
+        self.raw_slot_pitch = self.numericalize(params.armature.core.axial_slot_pitch, LENGTH)
+        self.raw_slot_length = self.numericalize(params.armature.slots.axial_length, LENGTH)
+        self.raw_slot_mean_radius = self.numericalize(self.mean_radius, LENGTH)
 
         # Extracts the phase values
         raw_inductance = self.numericalize(self.phase_inductance, INDUCTANCE)
