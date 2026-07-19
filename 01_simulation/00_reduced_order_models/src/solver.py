@@ -38,22 +38,23 @@ class MagneticSolver:
     def _compute_energy_state(self, translate_pos: f, dz: f) -> f:
         """ Computes the energy distributed throughout the armature volume """
         energy = 0.0
+        z_pos = - self.model.raw_armature_length/2 + translate_pos
+        step_size = ceil(self.model.raw_armature_length / dz)
 
-        z_pos = - 1/2 * self.model.raw_stator_length
-        for _ in range(ceil(self.model.raw_stator_length / dz)):
-            h_armature = self._armature_field(z_pos - translate_pos)
+        for _ in range(step_size):
+            h_armature = self._armature_field(z_pos, translate_pos)
             h_stator = self._stator_field(z_pos)
 
-            # Calculates the energy using permeability
-            energy += self.permeability * (h_armature + h_stator) ** 2 * dz
+            # Calculates the co-energy using stator & armature field strength
+            energy += self.permeability * h_armature * h_stator * dz
             z_pos += dz
 
-        return (self.model.raw_effective_area/2) * energy
+        return self.model.raw_effective_area * energy
 
-    def _armature_field(self, z_pos: f = 0.0) -> f:
+    def _armature_field(self, z_pos: f = 0.0, translation: f = 0.0) -> f:
         """ Solves for the armature field at a specific z-position """
         phases = [self.armature.phase_a, self.armature.phase_b, self.armature.phase_c]
-        offset = - self.model.raw_slot_pitch * self.model.raw_number_slots / 2
+        offset = - self.model.raw_armature_length / 2
 
         field_strength = 0
         for index in range(0, self.model.raw_number_slots):
@@ -62,13 +63,12 @@ class MagneticSolver:
             polarity = +1 if index % 2 == 0 else -1
 
             # Computes the slot position
-            slot_start = offset + self.model.raw_slot_pitch * index
-            slot_end = slot_start + self.model.raw_slot_length
+            slot_start = offset + translation + self.model.raw_slot_pitch * index
 
             # Takes the sum of the fields at that position
             field_strength += dynamic.compute_slot_z_field_strength(
                 z_pos,
-                slot_end,
+                slot_start,
                 phase.current,
                 polarity * phase.turns,
                 self.model.raw_slot_length,
@@ -77,14 +77,21 @@ class MagneticSolver:
 
         return field_strength
 
-    def _stator_field(self, z_pos: f = 0.0, z_offset: f = 0.0) -> f:
-        """ Solves for the stator field at a specific z-position """
-        if abs(z_pos) > self.model.raw_stator_length / 2:
-            return 0.0
+    def _stator_field(self, z_pos: f = 0.0) -> f:
+        """ Solves for the stator field at a specific z-position. """
+        poles = int(self.model.raw_stator_length / self.model.raw_pole_pitch)
+        offset = - self.model.raw_stator_length / 2
 
-        return dynamic.compute_stator_z_field_strength(
-            z_pos,
-            z_offset,
-            self.model.raw_pole_pitch,
-            self.model.raw_stator_field
-        )
+        field_strength = 0
+        for index in range(0, poles):
+            # Computes the pole position
+            pole_start = offset + self.model.raw_pole_pitch * index
+
+            field_strength += (-1) ** index * dynamic.compute_stator_z_field_strength(
+                z_pos,
+                pole_start,
+                self.model.raw_pole_pitch,
+                self.model.raw_stator_field
+            )
+
+        return field_strength

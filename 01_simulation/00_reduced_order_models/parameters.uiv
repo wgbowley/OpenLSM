@@ -19,8 +19,8 @@ msg_freq:  25  (s^-1)
 
 
 [armature.core]
-number_slots: 6 (∅)
-axial_slot_pitch: 6.8 m(m)
+number_slots: 6     (∅)
+axial_slot_pitch: 6.666 m(m)
 
 radial_clearance: 1 m(m)
 radial_thickness: 1 m(m)
@@ -32,7 +32,6 @@ fill_factor: 0.68
 
 axial_length: 6 m(m)
 radial_thickness: 5.25 m(m)
-
 
 [stator.tube]
 length: 300 m(m)

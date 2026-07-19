@@ -71,12 +71,16 @@ class TubularMotor(SimulationModel):
         self.raw_slot_mean_radius = self.numericalize(self.mean_radius, LENGTH)
 
         self.raw_effective_area = self.numericalize(self.effective_area, LENGTH ** 2)
-        
+
         # Extracts the phase values
         raw_inductance = self.numericalize(self.phase_inductance, INDUCTANCE)
         raw_resistance = self.numericalize(self.phase_resistance, RESISTANCE)
         raw_mass = self.numericalize(self.phase_mass, MASS)
         raw_turns = self.numericalize(self.turns, NULLSET)
+
+        # Calculates the armature length
+        self.raw_armature_length = self.raw_slot_pitch * self.raw_number_slots
+
 
         # Constructs the phases & Armature state
         phase_a = PhaseState(raw_turns, raw_inductance, raw_resistance, raw_mass)
@@ -147,9 +151,7 @@ class TubularMotor(SimulationModel):
             params.armature.core.radial_thickness
         )
 
-        self.pole_area = pi * params.stator.poles.radial_thickness ** 2
-        self.slot_area = pi * self.slot_inner_radius ** 2
-        self.effective_area = self.slot_area - self.pole_area
+        self.effective_area = pi * self.slot_inner_radius ** 2
 
     @classmethod
     def _linear_interpolate(cls, table: Quantity, value: Quantity) -> f:

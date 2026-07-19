@@ -4,6 +4,13 @@ Filename: main.py
 Description:
     Reduced order model for tubular 
     linear synchronous motor. 
+    
+    NOTE:
+    This simulation model is still under development and 
+    has not yet been validated or completed. 
+
+    Do not assume the resulting design variables are suitable 
+    for fabrication or real-world use without further analysis.
 """
 
 from pathlib import Path
@@ -27,12 +34,10 @@ parameters = Parser.open(BASE_DIR / "parameters.uiv", BASE_DIR / "lib/metric.ut"
 model = TubularMotor(parameters, materials)
 solver = MagneticSolver(model)
 
-print(model.stator_field)
-
 pha, phb, phc = model.armature.phase_a, model.armature.phase_b, model.armature.phase_c
-# Set time to a fixed value (e.g., t=0)
 
-time = 0.0
+# Set time to a fixed value (e.g., t=0)
+time = 0
 pha.current = model.raw_line_voltage / pha.resistance * sin(time)
 phb.current = model.raw_line_voltage / pha.resistance * sin(time + 2 * pi/3)
 phc.current = model.raw_line_voltage / pha.resistance * sin(time + 4 * pi /3)
@@ -42,17 +47,15 @@ rms_current = (rms_current / 3) ** 1/2
 
 print(f"I_rms: {rms_current:.3f} A, copper_loss: {rms_current ** 2 * pha.resistance} W")
 
-
 # Create position array (in meters)
-position_array = np.linspace(-0.1, 0.1, 1000)
+position_array = np.linspace(-0.300, 0.300, 1000)
 force_array = []
 
 for position in position_array:
     force = solver.compute_force(position, 0.001)
     force_array.append(force)
 
-# Print model information & Plot
-print(model.armature)
+
 fig, ax = plt.subplots(figsize=(10, 6))
 ax.plot(position_array * 1000, force_array, 'b-', linewidth=2)
 

@@ -16,7 +16,8 @@ development: "prototype_alpha/main_parameter_file"
 environmental_material: "air"
 depth: 40 m(m)
 
-pole_pairs: 4           (∅) # pole pair = 2 poles per pair
+# pole pair = 2 poles per pair
+pole_pairs: 4           (∅)
 number_slots: 6         (∅)
 
 
