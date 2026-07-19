@@ -4,39 +4,40 @@ unit_frame: metric.ut
 
 
 [notes]
-type: "Electromagnetic parameter file"
+type: "Electromagnetic Parameter File"
 application: "Reduced Order Model | Tubular Ironless Linear Motor"
 coordinate_system: "Axial-symmetric (Z-R) (Axial-Radial)"
 
 
-[model]
-voltage: 24 (V)
-current:  5 (A)
+[numerics]
+time_step:      100 u(s)
+line_voltage:   24 (V)
+temperature:    300 (K)
 
-pole_pairs: 4           # (∅) pole pair = 2 poles per pair
-number_slots: 12        # (∅)
+# Verbose output frequency
+msg_freq:  25  (s^-1)
+
 
 [armature.core]
-axial_slot_pitch: 6.833 m(m)
+number_slots: 6     (∅)
+axial_slot_pitch: 6.666 m(m)
 
 radial_clearance: 1 m(m)
 radial_thickness: 1 m(m)
 
 [armature.slots]
 # Material: copper
-wire_diameter: 0.4 m(m)
-fill_factor: 0.65
+wire_diameter: 0.33 m(m)
+fill_factor: 0.68
 
-axial_length: 4.83 m(m)
-radial_thickness: 3.00 m(m)
-
+axial_length: 6 m(m)
+radial_thickness: 5.25 m(m)
 
 [stator.tube]
+length: 300 m(m)
 radial_thickness: 1 m(m)
 
 [stator.poles]
-# Material: NdFeB
-grade: "N52"
-
-radial_thickness: 5 m(m)
+# Material: N52 -> NdFeB
+radial_thickness: 6 m(m)
 axial_length: 20 m(m)

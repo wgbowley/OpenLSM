@@ -82,23 +82,14 @@ temperature_conductivity: [
 ] (K), M(S_m)
 
 [NdFeB.magnetic]
+coercivity: 0.956 M(A_m)
 relative_permeability: [1.05, 1.05]
-curie_temperature: 583.15 (K)
 
 # Refer: https://smmagnetics.com/pages/neodymium-material-specs
 # Temperature coefficients: %/K
 alpha_remanence: -0.12 (K^-1)
 beta_coercivity: -0.6 (K^-1)
 
-[NdFeB.grades]
-N30: [0.836, 1.10]  M(A_m), (T)
-N33: [0.879, 1.14]  M(A_m), (T)
-N35: [0.906, 1.17]  M(A_m), (T)
-N38: [0.945, 1.22]  M(A_m), (T)
-N40: [0.970, 1.25]  M(A_m), (T)
-N42: [0.995, 1.28]  M(A_m), (T)
-N45: [1.030, 1.32]  M(A_m), (T)
-N48: [1.015, 1.37]  M(A_m), (T)
-N50: [0.988, 1.40]  M(A_m), (T)
-N52: [0.956, 1.43]  M(A_m), (T)
-N55: [0.923, 1.47]  M(A_m), (T)
+[NdFeB.thermal]
+reference_temperature: 298.15 (K)
+curie_temperature: 583.15 (K)
