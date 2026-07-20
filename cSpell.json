@@ -79,6 +79,9 @@
     "ylim",
     "numericalize",
     "nullset",
-    "picounits"
+    "picounits",
+    "ATST",
+    "oversample",
+    "travelling",
   ]
 }

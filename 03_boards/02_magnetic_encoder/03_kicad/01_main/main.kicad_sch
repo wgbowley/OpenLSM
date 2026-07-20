@@ -1292,17 +1292,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 36.83) (xy 34.29 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "172e390c-e4a8-48ea-8731-788a7108cc87")
-	)
-	(wire
-		(pts
-			(xy 50.8 34.29) (xy 34.29 34.29)
+			(xy 34.29 34.29) (xy 50.8 34.29)
 		)
 		(stroke
 			(width 0)
@@ -1332,16 +1322,6 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 41.91) (xy 34.29 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1f535a3e-58ff-4c85-a1a6-16412c5c990e")
-	)
-	(wire
-		(pts
 			(xy 143.51 39.37) (xy 156.21 39.37)
 		)
 		(stroke
@@ -1349,16 +1329,6 @@
 			(type default)
 		)
 		(uuid "266223a9-b94a-45fa-9e19-0970ed2f7a3e")
-	)
-	(wire
-		(pts
-			(xy 35.56 39.37) (xy 34.29 39.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "27c00362-f5c1-46ab-9f68-2ab985133af8")
 	)
 	(wire
 		(pts
@@ -1472,6 +1442,16 @@
 	)
 	(wire
 		(pts
+			(xy 34.29 36.83) (xy 36.83 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8579f2f1-04e0-477d-9b91-c84b2aa912ec")
+	)
+	(wire
+		(pts
 			(xy 156.21 36.83) (xy 156.21 31.75)
 		)
 		(stroke
@@ -1579,6 +1559,26 @@
 			(type default)
 		)
 		(uuid "f6401970-ec8e-4c9a-8687-142dba7dbac8")
+	)
+	(wire
+		(pts
+			(xy 36.83 41.91) (xy 34.29 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fbc0d19b-5682-4bc4-8568-69e0c8cc5469")
+	)
+	(wire
+		(pts
+			(xy 36.83 39.37) (xy 34.29 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fe7d07fd-9c1c-430b-a2e9-fcedce131958")
 	)
 	(image
 		(at 207.01 172.72)
@@ -2485,7 +2485,7 @@
 	)
 	(global_label "INA"
 		(shape input)
-		(at 35.56 36.83 0)
+		(at 36.83 36.83 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2495,7 +2495,7 @@
 		)
 		(uuid "1875c16d-756d-4228-bdbf-aeff43bd046f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 41.5691 36.83 0)
+			(at 42.8391 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2533,7 +2533,7 @@
 	)
 	(global_label "INX"
 		(shape input)
-		(at 35.56 41.91 0)
+		(at 36.83 41.91 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2543,7 +2543,7 @@
 		)
 		(uuid "86aeb7ee-3117-4fbf-ae79-c9c879392293")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 41.69 41.91 0)
+			(at 42.96 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2557,7 +2557,7 @@
 	)
 	(global_label "INB"
 		(shape input)
-		(at 35.56 39.37 0)
+		(at 36.83 39.37 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2567,7 +2567,7 @@
 		)
 		(uuid "95af457e-020f-4571-a689-530961334d05")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 41.7505 39.37 0)
+			(at 43.0205 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2661,7 +2661,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_01005_0402Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 87.63 60.96 0)
 			(hide yes)
 			(show_name no)
@@ -2684,6 +2684,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 87.63 60.96 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
 			(at 87.63 60.96 0)
 			(hide yes)
 			(show_name no)
@@ -2821,7 +2832,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 50.8 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -2844,6 +2855,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 50.8 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
 			(at 50.8 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -2981,7 +3003,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_01005_0402Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 156.21 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -3004,6 +3026,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 156.21 50.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
 			(at 156.21 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -3060,7 +3093,7 @@
 				)
 			)
 		)
-		(property "Footprint" "TSSOP20_AS5311-ATST-500_AMS"
+		(property "Footprint" "AS5311:TSSOP20_AS5311-ATST-500_AMS"
 			(at 92.71 34.29 0)
 			(hide yes)
 			(show_name no)
@@ -3353,7 +3386,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_JST:JST_XA_B05B-XASK-1_1x05_P2.50mm_Vertical"
 			(at 29.21 39.37 0)
 			(hide yes)
 			(show_name no)

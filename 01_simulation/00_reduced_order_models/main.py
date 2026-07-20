@@ -23,14 +23,14 @@ from src.model import TubularMotor
 from src.solver import MagneticSolver
 
 # Loads unit system, material library & parameters
-ROOT_DIR = Path(__file__).resolve().parents[2]
+ROOT_DIR = Path(__file__).resolve().parents[0]
 
 # Materials & Parameter files
-parameters_path = ROOT_DIR / "01_simulation/00_reduced_order_models/parameters.uiv"
-materials_path = ROOT_DIR / "01_simulation/00_reduced_order_models/lib/materials.uiv"
+parameters_path = ROOT_DIR / "parameters.uiv"
+materials_path = ROOT_DIR / "lib/materials.uiv"
 
-materials = Parser.open(materials_path, ROOT_DIR / "metric.ut")
-parameters = Parser.open(parameters_path, ROOT_DIR / "metric.ut")
+materials = Parser.open(materials_path, ROOT_DIR / "lib/metric.ut")
+parameters = Parser.open(parameters_path, ROOT_DIR / "lib/metric.ut")
 
 
 # Load/Constructs motor model amd solver
