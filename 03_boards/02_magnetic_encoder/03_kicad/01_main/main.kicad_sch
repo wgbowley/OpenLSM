@@ -1442,16 +1442,6 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 36.83) (xy 36.83 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8579f2f1-04e0-477d-9b91-c84b2aa912ec")
-	)
-	(wire
-		(pts
 			(xy 156.21 36.83) (xy 156.21 31.75)
 		)
 		(stroke
@@ -1459,6 +1449,26 @@
 			(type default)
 		)
 		(uuid "8b117d50-58e0-4ec0-bdd6-f74f66042811")
+	)
+	(wire
+		(pts
+			(xy 34.29 41.91) (xy 36.83 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8bc68d35-8f32-4f11-9474-938b4f265d43")
+	)
+	(wire
+		(pts
+			(xy 34.29 36.83) (xy 36.83 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a9f5855-78c3-4fd8-8e0b-b28f44a3f137")
 	)
 	(wire
 		(pts
@@ -1559,16 +1569,6 @@
 			(type default)
 		)
 		(uuid "f6401970-ec8e-4c9a-8687-142dba7dbac8")
-	)
-	(wire
-		(pts
-			(xy 36.83 41.91) (xy 34.29 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fbc0d19b-5682-4bc4-8568-69e0c8cc5469")
 	)
 	(wire
 		(pts
@@ -2485,7 +2485,7 @@
 	)
 	(global_label "INA"
 		(shape input)
-		(at 36.83 36.83 0)
+		(at 36.83 41.91 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2495,7 +2495,7 @@
 		)
 		(uuid "1875c16d-756d-4228-bdbf-aeff43bd046f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 42.8391 36.83 0)
+			(at 42.8391 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2533,7 +2533,7 @@
 	)
 	(global_label "INX"
 		(shape input)
-		(at 36.83 41.91 0)
+		(at 36.83 36.83 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2543,7 +2543,7 @@
 		)
 		(uuid "86aeb7ee-3117-4fbf-ae79-c9c879392293")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 42.96 41.91 0)
+			(at 42.96 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
