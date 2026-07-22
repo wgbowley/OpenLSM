@@ -48,9 +48,26 @@ The `AS5311` has a pole pitch of `2 mm` and an A/B pulse ratio of `256`. With qu
 
 ## Mechanical Considerations
 
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="04_media/top_layer.png" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="04_media/bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+    </tr>
+    <tr>
+      <td><em>Top layer - Facing the magnetic scale</em></td>
+      <td><em>Bottom layer - JST XH 5-pin & Mounting side </em></td>
+    </tr>
+  </table>
+</div>
+
+
 The `linear scale` and `encoder head` should be aligned with each other's centre lines within `~0.5 mm`, and the vertical gap between them should be `~0.3 mm`. The `linear scale` should have a `1 mm` pole length and `2 mm` pole pitch, with a maximum surface flux of `40 mT`. The ambient temperature for a tolerance of `±10 µm` is `-30°C to 70°C`, and the maximum range is `-40°C to 125°C`.
 
 The `encoder board` is `30 mm` in length and `40 mm` in height. The board has a GND and power plane, with the traces embedded into the power plane layer. The board also has M2 bolt holes with a diameter of `~2.10 mm` in a rectangular mounting pattern of `23 mm` and `16.5 mm`
+
+> [!important]
+> The magnetic scale is currently centred on the die centre line. Offsetting the scale relative to the die is not required here, as the `~10 mm` scale width provides sufficient margin for alignment tolerances.
 
 ## Documentation
 
