@@ -23,6 +23,7 @@ Magnetic Linear Encoder
 ```
 
 
+
 ## Sampling frequencies
 
 The `AS5311` has a pole pitch of `2 mm` and an A/B pulse ratio of `256`. With quadrature decoding, this ratio is multiplied by `4`, giving `1024` pulses per pole pitch and a step size of `1.96 µm`. It is assumed that to measure the A, B, and Index inputs accurately, the armature board should oversample at `10×` the source frequency.
@@ -44,7 +45,7 @@ The `AS5311` has a pole pitch of `2 mm` and an A/B pulse ratio of `256`. With qu
 | 0.650 | 325.000 | 332.800 k | 3.250 k | 3.328 M |
 
 > [!important]
-> This sampling frequency table only covers up to `650 m(m/s)` as it is the `AS5311`'s maximum linear travel speed.
+> This sampling frequency table only covers up to `650 mm/s` as it is the `AS5311`'s maximum linear travel speed.
 
 ## Mechanical Considerations
 
@@ -55,20 +56,19 @@ The `AS5311` has a pole pitch of `2 mm` and an A/B pulse ratio of `256`. With qu
       <td><img src="04_media/bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
     </tr>
     <tr>
-      <td><em>Top layer - Facing the magnetic scale</em></td>
-      <td><em>Bottom layer - JST XH 5-pin & Mounting side </em></td>
+      <td><em>Top layer — Facing the magnetic scale</em></td>
+      <td><em>Bottom layer — JST XH 5-pin & mounting side</em></td>
     </tr>
   </table>
 </div>
 
-
 The `linear scale` and `encoder head` should be aligned with each other's centre lines within `~0.5 mm`, and the vertical gap between them should be `~0.3 mm`. The `linear scale` should have a `1 mm` pole length and `2 mm` pole pitch, with a maximum surface flux of `40 mT`. The ambient temperature for a tolerance of `±10 µm` is `-30°C to 70°C`, and the maximum range is `-40°C to 125°C`.
 
-The `encoder board` is `30 mm` in length and `40 mm` in height. The board has a GND and power plane, with the traces embedded into the power plane layer. The board also has M2 bolt holes with a diameter of `~2.10 mm` in a rectangular mounting pattern of `23 mm` and `16.5 mm`
+The `encoder board` is `30 mm` in length and `40 mm` in height. The board has a GND and power plane, with the traces embedded into the power plane layer. The board also has M2 bolt holes with a diameter of `~2.10 mm` in a rectangular mounting pattern of `23 mm` and `16.5 mm`. Each M2 bolt hole is directly connected to the GND plane with exposed copper around the entire hole.
 
 > [!important]
 > The magnetic scale is currently centred on the die centre line. Offsetting the scale relative to the die is not required here, as the `~10 mm` scale width provides sufficient margin for alignment tolerances.
 
 ## Documentation
 
-Design notes, validation results, design iterations, and implementation decisions are documented in [issue #10](https://github.com/wgbowley/OpenLSM/issues/10).
+Design notes and implementation decisions are documented in [issue #10](https://github.com/wgbowley/OpenLSM/issues/10).

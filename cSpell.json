@@ -83,5 +83,6 @@
     "ATST",
     "oversample",
     "travelling",
+    "thvenin",
   ]
 }

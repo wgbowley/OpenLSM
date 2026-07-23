@@ -1,2 +1,6 @@
-# Armature board
-Reference: [Move armature board from easyeda pro to kicad ](https://github.com/wgbowley/OpenLSM/issues/11)
+# Overview
+*(Work In progress)*
+
+## Documentation
+
+Design notes and implementation decisions are documented in [issue #11](https://github.com/wgbowley/OpenLSM/issues/11).
