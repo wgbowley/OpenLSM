@@ -5,7 +5,7 @@ application: "Reduced Order Model | Tubular Ironless Linear Motor"
 type: "Material Definitions"
 
 [standards]
-temperature:    298.15 (K)
+temperature:    298.15  (K)
 pressure:       101.32 k(Pa)
 
 
