@@ -9084,7 +9084,7 @@
 			)
 		)
 	)
-	(global_label "TA2"
+	(global_label "TA4"
 		(shape output)
 		(at 39.37 154.94 0)
 		(fields_autoplaced yes)
@@ -9372,7 +9372,7 @@
 			)
 		)
 	)
-	(global_label "TA6"
+	(global_label "TA8"
 		(shape output)
 		(at 71.12 177.8 0)
 		(fields_autoplaced yes)
@@ -9516,7 +9516,7 @@
 			)
 		)
 	)
-	(global_label "TA4"
+	(global_label "TA2"
 		(shape output)
 		(at 71.12 132.08 0)
 		(fields_autoplaced yes)
@@ -9636,7 +9636,7 @@
 			)
 		)
 	)
-	(global_label "TA3"
+	(global_label "TA7"
 		(shape output)
 		(at 40.64 177.8 0)
 		(fields_autoplaced yes)
@@ -9972,7 +9972,7 @@
 			)
 		)
 	)
-	(global_label "TA7"
+	(global_label "TA3"
 		(shape output)
 		(at 101.6 132.08 0)
 		(fields_autoplaced yes)
@@ -10380,7 +10380,7 @@
 			)
 		)
 	)
-	(global_label "TA8"
+	(global_label "TA6"
 		(shape output)
 		(at 101.6 154.94 0)
 		(fields_autoplaced yes)
@@ -10876,8 +10876,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "1497912d-4806-495d-8af7-c5eaa21c5ed5")
-		(property "Reference" "J9"
-			(at 51.562 170.688 0)
+		(property "Reference" "NTC8"
+			(at 52.832 170.688 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10938,7 +10938,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "J9")
+					(reference "NTC8")
 					(unit 1)
 				)
 			)
@@ -11109,8 +11109,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "1634732f-1512-49a2-90e4-6d2b095b5533")
-		(property "Reference" "J10"
-			(at 82.55 124.968 0)
+		(property "Reference" "NTC3"
+			(at 83.312 124.968 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11171,7 +11171,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "J10")
+					(reference "NTC3")
 					(unit 1)
 				)
 			)
@@ -11265,8 +11265,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "1a1ff821-df2f-4556-91b0-36d0ebc1363c")
-		(property "Reference" "J1"
-			(at 22.86 22.606 0)
+		(property "Reference" "INT1"
+			(at 22.86 23.368 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11276,7 +11276,7 @@
 			)
 		)
 		(property "Value" "01x04"
-			(at 22.86 24.638 0)
+			(at 24.13 25.146 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11333,7 +11333,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "J1")
+					(reference "INT1")
 					(unit 1)
 				)
 			)
@@ -12637,8 +12637,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3ea77fa3-49b6-4c2d-bf65-782c79b155a7")
-		(property "Reference" "J4"
-			(at 19.812 124.968 0)
+		(property "Reference" "NTC1"
+			(at 21.082 124.968 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -12699,7 +12699,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "J4")
+					(reference "NTC1")
 					(unit 1)
 				)
 			)
@@ -12896,7 +12896,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm"
+		(property "Footprint" "Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2"
 			(at 250.19 100.33 0)
 			(hide yes)
 			(show_name no)
@@ -13136,7 +13136,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm"
+		(property "Footprint" "Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2"
 			(at 210.82 100.33 0)
 			(hide yes)
 			(show_name no)
@@ -13589,8 +13589,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5ae37765-1b48-4558-9e3f-2866916518f5")
-		(property "Reference" "J7"
-			(at 51.562 147.828 0)
+		(property "Reference" "NTC5"
+			(at 52.832 147.828 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -13651,7 +13651,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "J7")
+					(reference "NTC5")
 					(unit 1)
 				)
 			)
@@ -14084,8 +14084,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "6a904ce1-1378-4335-b6d9-1767642edd23")
-		(property "Reference" "J6"
-			(at 19.812 147.828 0)
+		(property "Reference" "NTC4"
+			(at 21.082 147.828 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -14146,7 +14146,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "J6")
+					(reference "NTC4")
 					(unit 1)
 				)
 			)
@@ -14632,8 +14632,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7db33103-15c9-4646-8a71-ecf2bde7a9c3")
-		(property "Reference" "J8"
-			(at 21.082 170.688 0)
+		(property "Reference" "NTC7"
+			(at 22.352 170.688 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -14694,7 +14694,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "J8")
+					(reference "NTC7")
 					(unit 1)
 				)
 			)
@@ -16743,8 +16743,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a7258de6-669e-401b-9f2c-4feebb7154be")
-		(property "Reference" "J11"
-			(at 82.804 147.828 0)
+		(property "Reference" "NTC6"
+			(at 83.312 147.828 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -16805,7 +16805,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "J11")
+					(reference "NTC6")
 					(unit 1)
 				)
 			)
@@ -17647,8 +17647,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c214e01f-1bb5-4f0a-88ce-65ecd314889d")
-		(property "Reference" "J5"
-			(at 51.562 124.968 0)
+		(property "Reference" "NTC2"
+			(at 52.832 124.968 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -17709,7 +17709,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "J5")
+					(reference "NTC2")
 					(unit 1)
 				)
 			)
@@ -18770,8 +18770,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "de904eb1-cf9d-4848-97c8-07515819a1fc")
-		(property "Reference" "J3"
-			(at 22.86 84.328 0)
+		(property "Reference" "ENC1"
+			(at 23.114 85.344 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -18781,7 +18781,7 @@
 			)
 		)
 		(property "Value" "01x05"
-			(at 22.86 86.868 0)
+			(at 24.13 87.122 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -18841,7 +18841,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "J3")
+					(reference "ENC1")
 					(unit 1)
 				)
 			)
@@ -18858,8 +18858,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e1c4ecf7-549b-42a2-834a-2df2f657f45a")
-		(property "Reference" "J2"
-			(at 22.86 46.736 0)
+		(property "Reference" "PRO1"
+			(at 24.13 47.498 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -18869,7 +18869,7 @@
 			)
 		)
 		(property "Value" "01x06"
-			(at 22.86 48.514 0)
+			(at 24.384 49.276 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -18878,7 +18878,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_PH_B6B-PH-K_1x06_P2.00mm_Vertical"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical"
 			(at 22.86 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -18932,7 +18932,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "J2")
+					(reference "PRO1")
 					(unit 1)
 				)
 			)
