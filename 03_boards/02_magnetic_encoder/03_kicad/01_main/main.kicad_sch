@@ -3324,7 +3324,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AS5311:TSSOP20_AS5311-ATST-500_AMS"
+		(property "Footprint" "footprints:TSSOP20_AS5311-ATST-500_AMS"
 			(at 92.71 34.29 0)
 			(hide yes)
 			(show_name no)
@@ -3617,7 +3617,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_XA_B05B-XASK-1_1x05_P2.50mm_Vertical"
+		(property "Footprint" "Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical"
 			(at 29.21 39.37 0)
 			(hide yes)
 			(show_name no)

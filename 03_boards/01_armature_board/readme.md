@@ -6,7 +6,7 @@ The array consists of `8` NTC thermistors and an analog multiplexer, which feeds
 
 ## High-level topology
 
-The `armature board`'s main function is to collect the data from the integrated accelerometer, integrated thermal array and encoder board, then process the data into quantities and send it to the motor controller board. Given the locality to the armature slots and their tendency to produce electromagnetic noise, an `RS-422/RS-485` differential link was used. `Rx` and `Tx` are also available bypassing the transceiver, but this is not recommended for this application.
+The `armature board`'s main function is to collect the data from the integrated accelerometer, integrated thermal array and encoder board, then process the data into quantities and send it to the motor controller board. Given the locality to the armature slots and their tendency to produce electromagnetic noise, an `RS-422/RS-485` differential link was used.
 
 ```
 Interface (JST XH 4-pin 2.5mm Pitch Male Header)
