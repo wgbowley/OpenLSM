@@ -29,6 +29,20 @@ Thermistor Array (800 Hz), SPI Accelerometer, Linear Encoder Interconnect (350 k
 
 ## Mechanical Considerations
 
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="04_media/top_layer.png" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="04_media/bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+    </tr>
+    <tr>
+      <td><em>Top layer — STM32, Thermistor Array, Accelerometer & Encoder</em></td>
+      <td><em>Bottom layer — Basis resistors & decoupling caps for Thermistors</em></td>
+    </tr>
+  </table>
+</div>
+
+
 The `armature board` is intended to be located either tangentially to the armature or below the armature in parallel with the linear rail carriage face. The board is `60 mm` in length and `40 mm` in width. The board has a GND and power plane, with the traces embedded into the power plane layer. The board also has M2 bolt holes with a diameter of `~2.10 mm` in a rectangular mounting pattern of `54 mm` and `34 mm`. Each M2 bolt hole is directly connected to the GND plane with exposed copper around the entire hole.
 
 ## Software considerations

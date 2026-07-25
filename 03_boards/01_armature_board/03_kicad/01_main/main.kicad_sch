@@ -12449,7 +12449,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4534c705-6048-41db-9dfa-08a7eef990b7")
-		(property "Reference" "RESET"
+		(property "Reference" "RESET1"
 			(at 250.19 97.79 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12511,7 +12511,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "RESET")
+					(reference "RESET1")
 					(unit 1)
 				)
 			)
@@ -12689,7 +12689,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "482c141b-1bec-4968-9c3b-dc4401d98cd5")
-		(property "Reference" "BOOT"
+		(property "Reference" "BOOT1"
 			(at 210.82 97.79 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12751,7 +12751,7 @@
 		(instances
 			(project "main"
 				(path "/d7317114-a4fd-40b5-9eea-fb013c7aed3d"
-					(reference "BOOT")
+					(reference "BOOT1")
 					(unit 1)
 				)
 			)
@@ -13505,7 +13505,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
 			(at 252.73 80.01 0)
 			(hide yes)
 			(show_name no)
