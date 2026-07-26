@@ -82,5 +82,12 @@
     "ylabel",
     "ylim",
     "yticklabels",
+    "mosfet",
+    "DPAK",
+    "IRFR",
+    "TRLPBF",
+    "IRFS",
+    "digikey",
+    "CANBUS"
   ]
 }

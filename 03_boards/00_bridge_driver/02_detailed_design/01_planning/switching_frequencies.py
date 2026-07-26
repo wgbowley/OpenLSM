@@ -6,13 +6,15 @@ Description:
     fet using total gate charge and driver max supply current.
     
     NOTE:
-    Assumes no parasitic elements are affecting the raise/fall times. 
+    This script is for the arduino r3 reference design.
+    Assumes no parasitic elements are affecting the raise/fall times.
 """
 
 from picounits.constants import charge, time, milli, nano
 
-
 # parameters (max. not typ. or min.)
+
+# (IR2104 - Data sheet values)
 driver_turn_on_delay = 820 * nano * time
 driver_turn_off_delay = 220 * nano * time
 
@@ -22,6 +24,7 @@ driver_turn_off_fall = 90 * nano * time
 # typ. high side pulse current
 driver_peak_current = 210 * milli * (charge / time)
 
+# (NCE6005AS - Data sheet values)
 fet_turn_on_delay = 5.2 * nano * time
 fet_turn_off_delay = 17 * nano * time
 fet_turn_on_raise = 3 * nano * time

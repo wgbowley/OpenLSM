@@ -24,7 +24,7 @@ class SimulationState(ABC):
         """ Constructs a name based on implementation attributes """
 
     def __repr__(self) -> str: return self._name
-    def __str__(self) -> str: return str(self._name)
+    def __str__(self) -> str: return self._name
 
 
 @dataclass(slots=True)

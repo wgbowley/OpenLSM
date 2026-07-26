@@ -76,7 +76,8 @@ for res in (temperature_impedance):
 for res in OPERATING_RANGE:
     # Calculates the current through the divider
     current = supply_voltage / (res + thermistor_basis)
-
+    print("-" * 40)
+    print(f"Thermistor resistance: {res}")
     print(f"Thermistor basis loss: {current ** 2 * thermistor_basis:.3f}")
     print(f"Thermistor Power loss: {current**2 * res:.3f}")
     print(f"Total Resistance power loss: {current**2 * (res + thermistor_basis):.3f}")
