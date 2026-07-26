@@ -76,7 +76,7 @@ An `ironless planar linear` motor with a polylactic acid (PLA) armature featurin
 The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
 
 ## Prototype Beta
-*TBD (Conceptual). Revision 2 of the ironless tubular linear motor design. Not yet validated for fabrication.*
+*(Conceptual). Revision 2 of the ironless tubular linear motor design. Not yet validated for fabrication.*
 
 An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature featuring `12` slots, mechanically wound using `0.4 mm` diameter enameled copper wire, with `4` slots in-series per phase `(WYE)`. The stator, unlike the armature, is made of layered carbon fibre epoxy to form a tube with an internal radius of `5 mm` and outer radius of `6 mm`. The poles are `20 mm` in length and `5 mm` in radius such that they can be inserted into the stator tube in this pole arrangement `(N-S|S-N)`, using generic superglue to secure the end poles.
 
@@ -99,7 +99,6 @@ The radial heat-sink is made of aluminum as mentioned above with radial fins pit
 
 
 ## Documentation
-
 All internal documentation can be found within this repo's [issues](https://github.com/wgbowley/OpenLSM/issues). 
 
 ### Credits:

@@ -1,0 +1,5 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "ECS-80-20-18-TR") (type "KiCad") (uri "C:/Users/WBowl/Documents/Work/OpenLSM/03_boards/01_armature_board/03_kicad/02_components/ECS-80-18-23B-JTN-TR/ECS-80-20-18-TR.kicad_sym") (options "") (descr ""))
+	(lib (name "74HC4051") (type "KiCad") (uri "C:/Users/WBowl/Documents/Work/OpenLSM/03_boards/01_armature_board/03_kicad/02_components/74HC4051/74HC4051.kicad_sym") (options "") (descr ""))
+)
