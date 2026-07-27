@@ -48,7 +48,7 @@ phc.current = model.raw_line_voltage / pha.resistance * sin(time + 4 * pi /3)
 rms_current = pha.current ** 2 + phb.current ** 2 + phc.current ** 2
 rms_current = (rms_current / 3) ** 1/2
 
-print(f"I_rms: {rms_current:.3f} A, copper_loss: {rms_current ** 2 * pha.resistance} W")
+print(f"I_rms: {rms_current:.3f} A, copper_loss: {rms_current ** 2 * pha.resistance:.3f} W")
 
 # Create position array (in meters)
 position_array = np.linspace(-0.300, 0.300, 1000)
