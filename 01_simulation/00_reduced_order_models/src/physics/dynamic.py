@@ -7,33 +7,7 @@ Description:
 """
 
 from builtins import float as f
-from math import pi, cosh
-
-
-def compute_inductor_voltage(
-    supply_voltage: f, current: f, resistance: f, induced_voltage: f
-) -> f:
-    """ Computes the potential difference across the inductor """
-    voltage_drop = current * resistance
-    return supply_voltage - voltage_drop + induced_voltage
-
-
-def compute_current(
-    current: f, voltage: f, inductance: f, resistance: f, time_step: f
-) -> tuple[f, f]:
-    """ 
-    Computes the current using 2nd oder ralston's method however assumes the current changes.
-    Assumptions: Assumes induced voltage term does not change (semi-implicit integration)
-    """
-    k1 = voltage / inductance
-
-    # Updates the voltage for the next predicted frame
-    voltage = voltage - resistance * 3 / 4 * k1 * time_step
-    k2 = voltage / inductance
-
-    di_dt = 1/3 * k1 + 2/3 * k2
-    current += di_dt * time_step
-    return current, di_dt
+from math import pi, cosh, cos, sin, sqrt
 
 
 def compute_slot_z_field_strength(
@@ -83,3 +57,31 @@ def compute_stator_z_field_strength(z_pos: f, z_start, pole_len: f, h_field: f, 
 
     # Calculates the field strength at `z_pos`
     return h_field * (term1 - term2)
+
+
+def electrical_angle(displacement: f, pitch: f) -> f:
+    """ 
+    Calculates the electrical angle of the armature
+    Ref. θ_e = π * displacement / pitch
+    """
+    return pi * displacement / pitch
+
+
+def inverse_park_transform(i_d: f, i_q: f, electrical_angle: f) -> tuple[f, f]:
+    """ converts d-p frame currents to stationary a-b frame """
+    cos_t = cos(electrical_angle)
+    sin_t = sin(electrical_angle)
+
+    alpha = i_d * cos_t - i_q * sin_t
+    beta  = i_d * sin_t + i_q * cos_t
+    return alpha, beta
+
+
+def inverse_clarke_transform(alpha_beta: tuple[f, f]) -> tuple[f, f, f]:
+    """ Converts a-b stationary frame currents to three-phase (a,b,c) """
+    alpha, beta = alpha_beta
+
+    phase_a = alpha
+    phase_b = 0.5 * (sqrt(3) * beta - alpha)
+    phase_c= 0.5 * (-sqrt(3) * beta - alpha)
+    return phase_a, phase_b, phase_c

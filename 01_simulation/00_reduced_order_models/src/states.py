@@ -13,7 +13,7 @@ from builtins import float as f
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
-from picounits import VOLTAGE, CURRENT, INDUCTANCE, RESISTANCE, NULLSET, MASS, LENGTH, TIME
+from picounits import CURRENT, INDUCTANCE, RESISTANCE, NULLSET, MASS, LENGTH, TIME
 
 
 class SimulationState(ABC):
@@ -33,7 +33,6 @@ class ArmatureState(SimulationState):
     phase_a: PhaseState
     phase_b: PhaseState
     phase_c: PhaseState
-    velocity: f = 0.0
     position: f = 0.0
 
     @property
@@ -42,7 +41,6 @@ class ArmatureState(SimulationState):
         return (
             "<Armature(\n"
             f"pos: {self.position * LENGTH:.3f}, \n"
-            f"vel: {self.position * (LENGTH / TIME):.3f}, \n"
             f"pha: {self.phase_a}, \n"
             f"phb: {self.phase_b}, \n"
             f"phc: {self.phase_c}\n)>"
@@ -56,8 +54,6 @@ class PhaseState(SimulationState):
     inductance: f
     resistance: f
     mass: f
-    voltage: f = 0.0
-    induced_voltage: f = 0.0
     current: f = 0.0
 
     @property
@@ -65,8 +61,6 @@ class PhaseState(SimulationState):
         """ Returns name as attributes """
         return (
             "<Phase("
-            f"vol: {self.voltage * VOLTAGE:.3f}, "
-            f"v_i: {self.induced_voltage * VOLTAGE:.3f}, "
             f"Cur: {self.current * CURRENT:.3f}, "
             f"Tur: {self.turns * NULLSET:.3f}, "
             f"Ind: {self.inductance * INDUCTANCE:.3f}, "

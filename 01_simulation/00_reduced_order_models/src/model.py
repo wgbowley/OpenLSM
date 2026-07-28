@@ -19,6 +19,7 @@ from picounits import LENGTH, CURRENT, TIME, VOLTAGE
 from src.states import ArmatureState, PhaseState
 from src.physics import derived
 
+
 class SimulationModel(ABC):
     """ Abstract base class for simulation models """ 
     @classmethod
@@ -54,9 +55,7 @@ class TubularMotor(SimulationModel):
         self._construct_model()
 
         # Validates & Extracts Numerics Quantities
-        self.raw_time_step = self.numericalize(self.parameters.numerics.time_step, TIME)
         self.raw_line_voltage = self.numericalize(self.parameters.numerics.line_voltage, VOLTAGE)
-        self.raw_msg_freq = self.numericalize(self.parameters.numerics.msg_freq, 1/TIME)
 
     def _construct_model(self) -> None:
         """ Validates, extracts and construct the model """
@@ -190,4 +189,4 @@ class TubularMotor(SimulationModel):
     @property
     def _name(self):
         """ Tubular motor representation """
-        return "<TubularLinearSynchronousMotor()>"
+        return "<TubularLinearSynchronousMotor(MagneticSolver)>"

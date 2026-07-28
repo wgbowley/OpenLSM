@@ -10,12 +10,11 @@ coordinate_system: "Axial-symmetric (Z-R) (Axial-Radial)"
 
 
 [numerics]
-time_step:      100 u(s)
+displacement_steps:     100
+integration_step_size:  1 m(m)
+
 line_voltage:   24 (V)
 temperature:    300 (K)
-
-# Verbose output frequency
-msg_freq:  25  (s^-1)
 
 
 [armature.core]
@@ -32,6 +31,7 @@ fill_factor: 0.68
 
 axial_length: 6 m(m)
 radial_thickness: 5.25 m(m)
+
 
 [stator.tube]
 length: 300 m(m)
