@@ -1,9 +1,16 @@
 ## 00_reduced_order_models
 
-*(TBD) — Work in progress*
-
 > [!WARNING]
 > This simulation model is still under development and has not yet been validated or completed. Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
+
+## Mathematical Implementation
+*(TBD) — Work in progress*
+
+## Computational Implementation
+*(TBD) — Work in progress*
+
+## Model Validation
+*(TBD) — Work in progress*
 
 ## Documentation
 
