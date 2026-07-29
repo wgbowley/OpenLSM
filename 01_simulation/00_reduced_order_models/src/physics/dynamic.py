@@ -20,7 +20,7 @@ def compute_slot_z_field_strength(
     'z_slot' is in reference to the start of the slot. Hence center is shifted slot_len / 2
     """
     half_length = slot_len / 2
-    center = z_start + half_length
+    center = - z_start + half_length
 
     # Calculates the axial field components (term 1 & term 2)
     denom1 = ((z_pos - center + half_length) ** 2 + slot_rad ** 2) ** 0.5

@@ -13,25 +13,23 @@ coordinate_system: "Axial-symmetric (Z-R) (Axial-Radial)"
 displacement_steps:     300
 integration_step_size:  1 m(m)
 
-line_voltage:   24 (V)
+line_voltage:   12 (V)
 temperature:    300 (K)
 
-
 [armature.core]
-number_slots: 6     (∅)
-axial_slot_pitch: 6.666 m(m)
+number_slots: 9
+axial_slot_pitch: 6.667 m(m)
 
 radial_clearance: 1 m(m)
-radial_thickness: 1 m(m)
+radial_thickness: 0 m(m)
 
 [armature.slots]
 # Material: copper
-wire_diameter: 0.33 m(m)
-fill_factor: 0.68
+wire_diameter: 0.4 m(m)
+fill_factor: 0.65
 
 axial_length: 6 m(m)
-radial_thickness: 5.25 m(m)
-
+radial_thickness: 5 m(m)
 
 [stator.tube]
 length: 300 m(m)
@@ -39,5 +37,5 @@ radial_thickness: 1 m(m)
 
 [stator.poles]
 # Material: N52 -> NdFeB
-radial_thickness: 6 m(m)
+radial_thickness: 5 m(m)
 axial_length: 20 m(m)
