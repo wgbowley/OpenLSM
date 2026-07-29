@@ -14,7 +14,7 @@ from builtins import float as f
 from math import pi
 from picounits import Quantity, Unit, strip_quantity, DynamicLoader
 from picounits import PERMEABILITY, INDUCTANCE, RESISTANCE, MASS, NULLSET
-from picounits import LENGTH, CURRENT, TIME, VOLTAGE
+from picounits import LENGTH, CURRENT, VOLTAGE
 
 from src.states import ArmatureState, PhaseState
 from src.physics import derived
@@ -142,15 +142,8 @@ class TubularMotor(SimulationModel):
         self.phase_resistance = self.slots_per_phase * resistance
         self.phase_mass = self.slots_per_phase * slot_mass
 
-        # Calculates the interaction area
-        self.slot_inner_radius = (
-            params.stator.poles.radial_thickness +
-            params.stator.tube.radial_thickness +
-            params.armature.core.radial_clearance +
-            params.armature.core.radial_thickness
-        )
-
-        self.effective_area = pi * self.slot_inner_radius ** 2
+        # Calculates the interaction cross-sectional area
+        self.effective_area = pi * self.mean_radius**2
 
     @classmethod
     def _linear_interpolate(cls, table: Quantity, value: Quantity) -> f:

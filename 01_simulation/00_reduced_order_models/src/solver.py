@@ -28,28 +28,50 @@ class MagneticSolver:
         self.permeability = 4 * pi * 10 ** -7
 
     def compute_force(self, z_pos: f, dz: f) -> f:
-        """  Computes force using finite difference of the energy distribution """
+        """ Computes force using finite difference of the energy distribution """
         # Calculates the energy one step forward and one backward
         pos = self._compute_energy_state(z_pos + dz, dz)
         neg = self._compute_energy_state(z_pos - dz, dz)
 
         return - (pos - neg) / (2 * dz)
 
-    def _compute_energy_state(self, translate_pos: f, dz: f) -> f:
-        """ Computes the energy distributed throughout the armature volume """
-        energy = 0.0
-        z_pos = - self.model.raw_armature_length/2 + translate_pos
-        step_size = ceil(self.model.raw_armature_length / dz)
+    def _compute_energy_state(
+        self, translate: f, dz: f, epsilon: float = 1e-8, window: int = 5
+    ) -> f:
+        """ Computes the co-energy interaction over the relevant domain. """
+        positive = self._integrate_sample(dz, translate, epsilon, window)
+        negative = self._integrate_sample(-dz, translate, epsilon, window)
 
-        for _ in range(step_size):
-            h_armature = self._armature_field(z_pos, translate_pos)
-            h_stator = self._stator_field(z_pos)
+        # Integrate cached values
+        sum_energy = sum(positive) + sum(negative)
+        energy = self.model.raw_effective_area * self.permeability * sum_energy * dz
+        return energy
 
-            # Calculates the co-energy using stator & armature field strength
-            energy += self.permeability * h_armature * h_stator * dz
-            z_pos += dz
+    def _integrate_sample(self, dz: f, translate: f, epsilon: f, window: int) -> list[f]:
+        """ Integrates the co-energy interaction in one direction """
+        interactions = []
+        z = 0.0
+        below_epsilon = 0
 
-        return self.model.raw_effective_area * energy
+        while True:
+            h_armature = self._armature_field(z, translate)
+            h_stator = self._stator_field(z)
+            interaction = h_armature * h_stator
+
+            interactions.append(interaction)
+
+            if abs(interaction) <= epsilon:
+                below_epsilon += 1
+            else:
+                below_epsilon = 0
+
+            # Breaks loop if below epsilon for more than window iterations
+            if below_epsilon >= window: break
+
+            # Moves along the z-axis
+            z += dz
+
+        return interactions
 
     def _armature_field(self, z_pos: f = 0.0, translation: f = 0.0) -> f:
         """ Solves for the armature field at a specific z-position """

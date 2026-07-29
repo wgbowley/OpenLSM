@@ -10,7 +10,7 @@ coordinate_system: "Axial-symmetric (Z-R) (Axial-Radial)"
 
 
 [numerics]
-displacement_steps:     100
+displacement_steps:     300
 integration_step_size:  1 m(m)
 
 line_voltage:   24 (V)

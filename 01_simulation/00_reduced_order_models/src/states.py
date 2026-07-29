@@ -13,7 +13,7 @@ from builtins import float as f
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
-from picounits import CURRENT, INDUCTANCE, RESISTANCE, NULLSET, MASS, LENGTH, TIME
+from picounits import CURRENT, INDUCTANCE, RESISTANCE, NULLSET, MASS, LENGTH
 
 
 class SimulationState(ABC):
