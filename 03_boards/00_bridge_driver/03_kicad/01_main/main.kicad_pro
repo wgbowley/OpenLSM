@@ -414,14 +414,9 @@
         "filename": "main.kicad_sch",
         "name": "main",
         "uuid": "221b5544-ca14-4503-b001-a85fc346b8a9"
-      },
-      {
-        "filename": "triple_bridge.kicad_sch",
-        "name": "Triple Bridge",
-        "uuid": "90376a0e-0b27-408d-8ff7-ea0819deca60"
       }
     ],
-    "used_designators": "U1-3,#PWR4-9,#PWR13-14,D2-15,C3-9,Q3-6,R4-9",
+    "used_designators": "",
     "variants": []
   },
   "sheets": [
@@ -430,8 +425,8 @@
       "main"
     ],
     [
-      "90376a0e-0b27-408d-8ff7-ea0819deca60",
-      "Triple Bridge"
+      "3706a100-89fe-4fa1-ae16-5f6bace485f6",
+      "Drivers"
     ]
   ],
   "text_variables": {},

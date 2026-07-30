@@ -2,44 +2,47 @@
 Filename: bootstrap.py
 
 Description:
-    Calculates the size of the bootstrap 
-    capacitor and the bootstrap resistor 
-    for the a single half bridge.
-    
-    NOTE: This model really needs to be updated
+    Calculates the size of the bootstrap capacitor 
+    and the bootstrap resistor for the a single half bridge.
 """
 
-from picounits import voltage, charge, micro, nano, time, kilo
+from picounits import time, nullset, voltage, charge, current, nano, micro, kilo
 
-# Parameters
-f_sw = 20 * kilo * (1/time)
-f_motor_start = 5 * (1/time)
-duty_cycle = 0.5
+# System Parameters
+switch_frequency = 20 * kilo * (1/time)
+duty_cycle = 0.5 * nullset
 
-driver_supply_voltage = 16 * voltage
-diode_forward_voltage = 1 * voltage
+boot_current = 5 * current
+resistor_drop = 0.2 * voltage
+diode_forward = 1 * voltage
 
-# From the SUD90330E data-sheet
-total_fet_gate_charge = 33 * nano * charge
+# Driver, Diode & Mosfet parameters
+driver_voltage = 16 * voltage
+driver_leakage = 50 * micro * current
+driver_quiescent = 55 * micro * current
+driver_minimum_voltage = 9 * voltage
 
-# From the IRS2104 data-sheet
-I_hbs = 50 * micro * (charge/time)
-I_hb = 55 * micro * (charge/time)
+max_gate_charge = 33 * nano * charge
 
-HB_falling = 9 * voltage
+# Computes the maximum voltage delta
+delta_v = driver_voltage - diode_forward - driver_minimum_voltage - resistor_drop
 
-# Computes the minimum capacitance for the system
-delta_v_hb = driver_supply_voltage - diode_forward_voltage - HB_falling
-Q_total = total_fet_gate_charge + (I_hbs * duty_cycle / f_motor_start) + (I_hb / f_motor_start)
+# Computes the minimum capacitance at minimum frequency
+frequency = 1 * (1 /time)
+step_size = 500 * (1 / time)
 
-boot_cap = Q_total / delta_v_hb
+# Calculates the minimum capacitance @ that switching frequency
+Q_quiescent = driver_quiescent * duty_cycle / frequency
+Q_leakage = driver_leakage * duty_cycle / frequency
 
-# Computes the boot resistor size
-t_low_side_on = (1.0 - duty_cycle) / f_sw
-boot_res = t_low_side_on / (5 * boot_cap)
+# Total charge and required capacitor size
+total = max_gate_charge + Q_leakage + Q_quiescent
+boot_capacitor = total / delta_v
 
-energy_dissipated = 0.5 * boot_cap * (driver_supply_voltage - diode_forward_voltage) ** 2
-current_peak = (driver_supply_voltage - diode_forward_voltage) / boot_res
+boot_resistor = resistor_drop / (boot_current)
 
-print(f"Boot Capacitance: {boot_cap:.3f}, Boot Resistance: {boot_res:.3f}")
-print(f"Energy Dissipated: {energy_dissipated:.3f}, I_peak: {current_peak:.3f}")
+print(f"Switch: {frequency:.3f}, Capacitor > {boot_capacitor:.3f}, Resistor: {boot_resistor:.3f}")
+
+# Calculates the circuit time constant
+time_constant = boot_resistor * boot_capacitor / duty_cycle
+print(f"Boot circuit time constant: {time_constant:.3f}")
