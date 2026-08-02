@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from model.field_equations import compute_dipole_field_strength
+from model.physics.field import compute_dipole_field_strength
 
 # Parameters
 translation = 0.05

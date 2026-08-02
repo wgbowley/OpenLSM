@@ -1,9 +1,9 @@
 """
-Filename: field_equations.py
+Filename: field.py
 
 Description:
-    Equations for modelling the
-    tubular linear motor.
+    Field Equations for modelling 
+    the tubular linear motor.
 """
 
 from builtins import float as f
