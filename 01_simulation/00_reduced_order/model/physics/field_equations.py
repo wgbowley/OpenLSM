@@ -9,6 +9,7 @@ Description:
 from builtins import float as f
 from math import cosh
 
+
 def compute_slot_field_strength(
     pos: f, translation: f, current: f, turns: f, length: f, radius: f
 ) -> f:

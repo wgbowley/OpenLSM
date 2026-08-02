@@ -12,11 +12,11 @@ coordinate_system: "axisymmetric (Z-R) (Axial-Radial)"
 [numerics]
 integration_step_size:  0.1 m(m)
 derivative_step_size: 0.1 m(m)
-displacement_step_size: 0.5 m(m)
+displacement_step_size: 5 m(m)
 
-sampling_size: 300 m(m)
+sampling_size: 400 m(m)
 line_voltage:   12 (V)
-
+time: 0 (s)
 
 [armature.core]
 number_slots: 9
@@ -38,8 +38,8 @@ radial_thickness: 5 m(m)
 length: 300 m(m)
 radial_thickness: 1 m(m)
 
-[stator.poles]
+[stator.dipole]
 coercivity: 0.956 M(A_m)
 
-radial_thickness: 5 m(m)
 axial_length: 20 m(m)
+radial_thickness: 5 m(m)
