@@ -7,7 +7,7 @@ Description:
 """
 
 from builtins import float as f
-from math import pi, floor, sin
+from math import pi, floor
 
 from picounits import DynamicLoader, strip_quantity as validate
 from picounits import length, voltage, conductivity, coercivity, nullset

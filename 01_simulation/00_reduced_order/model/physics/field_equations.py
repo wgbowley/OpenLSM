@@ -52,16 +52,16 @@ def compute_pole_field_strength(
     half_length = length / 2
 
     # Integral Bounds
-    pos_bounds = half_length - translation
-    neg_bounds = - half_length - translation
+    z_upper = translation + half_length
+    z_lower = translation - half_length
 
     # Calculates the axial field components via integration
-    term1 = (pos + pos_bounds) / (radius ** 2 + (pos + pos_bounds) ** 2) ** 0.5
-    term2 = (pos + neg_bounds) / (radius ** 2 + (pos + neg_bounds) ** 2) ** 0.5
+    term1 = (pos + z_upper) / (radius ** 2 + (pos + z_upper) ** 2) ** 0.5
+    term2 = (pos + z_lower) / (radius ** 2 + (pos + z_lower) ** 2) ** 0.5
 
     # Calculates maximal field strength and returns position dependent strength
     h_term = turns * current / (2 * length)
-    return h_term * (term1 - term2)
+    return h_term * (term2 - term1)
 
 
 def compute_dipole_field_strength(
