@@ -10,38 +10,6 @@ from builtins import float as f
 from math import cosh
 
 
-def compute_slot_field_strength(
-    pos: f, translation: f, current: f, turns: f, length: f, radius: f
-) -> f:
-    """ 
-    Computes the field strength at a position z along the slot using
-    the two finite pole models in axial-symmetric modelling (Z-R)
-    """
-    field_strength = 0.0
-    half_length = length / 2
-
-    # Calculates the positive pole
-    field_strength += compute_pole_field_strength(
-        pos + half_length,
-        translation,
-        current,
-        turns / 2,
-        half_length,
-        radius
-    )
-
-    # Calculates the negative pole
-    field_strength += compute_pole_field_strength(
-        pos - half_length,
-        translation,
-        - current,
-        turns / 2,
-        half_length,
-        radius
-    )
-    return field_strength
-
-
 def compute_pole_field_strength(
     pos: f, translation: f, current: f, turns: f, length: f, radius: f
 ) -> f:

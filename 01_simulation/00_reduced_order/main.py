@@ -36,14 +36,14 @@ offset = - z_sample / 2
 displacement_data = []
 force = []
 for index in range(0, steps):
-    # Calculates the electrical angle of the armature (Assumes stator, armature alignment)
+    # Calculates the armature position
     z_pos = index * step_size + offset
-    electrical_angle = field_oriented_control.electrical_angle(z_pos, solver.dipole_axial_length)
-    solver.update_currents(electrical_angle)
+    solver.update_currents(0)
 
     # Calculates force over z distance
     force.append(solver.compute_force(z_pos))
     displacement_data.append(z_pos)
+    print(f"Position: {z_pos:.3f}")
 
 
 plt.figure(figsize=(10, 5))

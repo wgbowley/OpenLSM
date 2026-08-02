@@ -45,6 +45,9 @@ class Solver:
 
     def compute_force(self, z_pos: f) -> f:
         """ Computes force using finite difference of the energy distribution """
+        electrical_angle = field_oriented_control.electrical_angle(z_pos, self.dipole_axial_length)
+        self.update_currents(electrical_angle)
+
         # Calculates the energy one step forward and one backward
         pos = self._compute_energy_state(z_pos + self.der_step_size, self.int_step_size)
         neg = self._compute_energy_state(z_pos - self.der_step_size, self.int_step_size)
@@ -106,7 +109,7 @@ class Solver:
             slot_pos = offset + translation + self.axial_slot_pitch * index
 
             # Takes the sum of the fields at that position
-            field_strength += field_equations.compute_slot_field_strength(
+            field_strength += field_equations.compute_pole_field_strength(
                 pos,
                 slot_pos,
                 phase,

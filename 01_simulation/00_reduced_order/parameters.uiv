@@ -12,14 +12,14 @@ coordinate_system: "axisymmetric (Z-R) (Axial-Radial)"
 [numerics]
 integration_step_size:  0.1 m(m)
 derivative_step_size: 0.1 m(m)
-displacement_step_size: 5 m(m)
+displacement_step_size: 1 m(m)
 
 sampling_size: 400 m(m)
 line_voltage:   12 (V)
 time: 0 (s)
 
 [armature.core]
-number_slots: 9
+number_slots: 6
 axial_slot_pitch: 6.667 m(m)
 
 radial_clearance: 1 m(m)
