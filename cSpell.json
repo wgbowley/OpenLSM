@@ -28,6 +28,7 @@
     "TLSM",
     "VDDA",
     "axhline",
+    "axisymmetric",
     "axvline",
     "behaviour",
     "centi",
@@ -88,6 +89,6 @@
     "TRLPBF",
     "IRFS",
     "digikey",
-    "CANBUS"
+    "CANBUS",
   ]
 }

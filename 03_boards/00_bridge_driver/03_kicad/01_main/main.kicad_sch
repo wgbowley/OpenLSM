@@ -913,6 +913,52 @@
 			"RK5CYII="
 		)
 	)
+	(sheet
+		(at 238.76 144.78)
+		(size 26.67 3.81)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "3706a100-89fe-4fa1-ae16-5f6bace485f6")
+		(property "Sheetname" "Drivers"
+			(at 238.76 144.0684 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Drivers.kicad_sch"
+			(at 238.76 149.1746 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "main"
+				(path "/221b5544-ca14-4503-b001-a85fc346b8a9"
+					(page "3")
+				)
+			)
+		)
+	)
 	(sheet_instances
 		(path "/"
 			(page "1")

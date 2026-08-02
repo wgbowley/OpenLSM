@@ -6,17 +6,17 @@ unit_frame: metric.ut
 [notes]
 type: "Electromagnetic Parameter File"
 application: "Reduced Order Model | Tubular Ironless Linear Motor"
-coordinate_system: "Axial-symmetric (Z-R) (Axial-Radial)"
+coordinate_system: "axisymmetric (Z-R) (Axial-Radial)"
 
 
 [numerics]
-time_step:      100 u(s)
+integration_step_size:  0.1 m(m)
+derivative_step_size: 0.1 m(m)
+displacement_step_size: 1 m(m)
+
+sampling_size: 400 m(m)
 line_voltage:   24 (V)
-temperature:    300 (K)
-
-# Verbose output frequency
-msg_freq:  25  (s^-1)
-
+time: 0 (s)
 
 [armature.core]
 number_slots: 6     (∅)
@@ -26,18 +26,20 @@ radial_clearance: 1 m(m)
 radial_thickness: 1 m(m)
 
 [armature.slots]
-# Material: copper
 wire_diameter: 0.33 m(m)
+conductivity: 63 M(S_m)
 fill_factor: 0.68
 
 axial_length: 6 m(m)
 radial_thickness: 5.25 m(m)
 
+
 [stator.tube]
 length: 300 m(m)
 radial_thickness: 1 m(m)
 
-[stator.poles]
-# Material: N52 -> NdFeB
-radial_thickness: 6 m(m)
+[stator.dipole]
+coercivity: 0.956 M(A_m)
+
 axial_length: 20 m(m)
+radial_thickness: 6 m(m)
