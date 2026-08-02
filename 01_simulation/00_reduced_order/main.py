@@ -6,11 +6,10 @@ Description:
 """
 
 from pathlib import Path
-from picounits import Parser
+from picounits import Parser, current, resistance
 from matplotlib import pyplot as plt
 
 from model.solver import Solver
-from model.physics import field_oriented_control
 
 
 # Loads unit system, material library & parameters
@@ -31,6 +30,11 @@ step_size = parameters.numerics.displacement_step_size.stripped
 
 steps = int(z_sample / step_size)
 offset = - z_sample / 2
+
+print("-" * 20)
+print(f"Turns: {solver.slot_turns}, Line Res: {solver.l2l_resistance * resistance}")
+print(f"Line Current: {solver.l2l_peak_current * current}")
+print("-" * 20)
 
 # List to store
 displacement_data = []

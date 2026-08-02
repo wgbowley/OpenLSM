@@ -7,7 +7,7 @@ Description:
 """
 
 from builtins import float as f
-from math import cosh
+from math import cosh, pi
 
 
 def compute_pole_field_strength(
@@ -28,7 +28,8 @@ def compute_pole_field_strength(
     term2 = (pos + z_lower) / (radius ** 2 + (pos + z_lower) ** 2) ** 0.5
 
     # Calculates maximal field strength and returns position dependent strength
-    h_term = turns * current / (2 * length)
+    # Need to derive the formula again to check if pi cancels out or not.
+    h_term = turns * current / (2 * pi * length)
     return h_term * (term2 - term1)
 
 
