@@ -6,16 +6,19 @@ Description:
     motor for usage in FEM simulation
 """
 
+from math import ceil
+
 from pyfea import nullset, ampere, mm
 from pyfea.domain.units import DynamicLoader
 
 from pyfea.domain.materials.manager import MaterialManager
 from pyfea.domain.geometry.definitions import CoordinateSystem
 from pyfea.domain.geometry.builder import Builder, VectorGeometry, Part
-from pyfea.domain.geometry.domain import Domain, BoundaryType
-
-from pyfea.solver.solver_interface import BaseSolver, MagneticSolver
 from pyfea.domain.circuits.builder import StaticCircuit, Configuration as CircuitConfig
+
+from pyfea.domain.geometry.domain import Domain, BoundaryType
+from pyfea.solver.solver_interface import BaseSolver, MagneticSolver
+from pyfea.domain.geometry.elements.metadata import MagneticData
 
 
 class ModelError(Exception):
@@ -52,7 +55,7 @@ class PCBArmatureMotor:
 
         for solver in solver_interfaces:
             if solver == MagneticSolver:
-                return None # Temp.
+                return ConstructMagnetic.build(self)
 
         msg = f"{solver_interfaces!r} is not supported by {self.__class__.__name__!r}"
         raise ModelError("PCBArmatureMotor.construct_domain()", msg)
@@ -64,11 +67,11 @@ class PCBArmatureMotor:
         number_layers = self.sub_slots * self.number_slots * self.pcb_layers
         for index in range(0, int(number_layers.value)):
             offset = - self.armature_length / 2
-            bottom_left = offset + index * (self.pcb_trace_thickness + self.pcb_substrate)
+            bottom_left = offset + index * (self.pcb_trace_axi_thickness + self.pcb_substrate)
 
             slot_shape = Builder.rectangle(
                 (self.winding_inner_radius, bottom_left),
-                self.winding_thickness, self.pcb_trace_thickness
+                self.winding_thickness, self.pcb_trace_axi_thickness
             )
             slots.append(slot_shape)
 
@@ -102,9 +105,9 @@ class PCBArmatureMotor:
 
         # Finds the materials in the .uiv material library
         self.env_material = manager.use_material(self.params.model.environmental_material)
-        self.stator_material = manager.use_material(self.params.armature.sub_slot.material)
+        self.armature_material = manager.use_material(self.params.armature.sub_slot.material)
 
-        self.armature_material = manager.use_material(
+        self.stator_material = manager.use_material(
             self.params.stator.dipole.material,
             grade=self.params.stator.dipole.grade
         )
@@ -122,10 +125,10 @@ class PCBArmatureMotor:
 
         # Computes the number of pcb's within each slot
         self.pcb_layers = self.params.armature.sub_slot.axi_layers
-        self.pcb_trace_thickness = self.params.armature.sub_slot.trace_thickness
+        self.pcb_trace_axi_thickness = self.params.armature.sub_slot.trace_axi_thickness
         self.pcb_substrate = self.params.armature.sub_slot.axi_len_substrate
 
-        self.pcb_axi_thickness = self.pcb_layers * self.pcb_trace_thickness + self.pcb_substrate
+        self.pcb_axi_thickness = self.pcb_layers * self.pcb_trace_axi_thickness + self.pcb_substrate
         self.sub_slots = self.slot_pitch // self.pcb_axi_thickness
 
         # Computes the armature length
@@ -140,3 +143,75 @@ class PCBArmatureMotor:
 
         self.winding_thickness = self.params.armature.slot.rad_thickness
         self.winding_outer_radius = self.winding_inner_radius + self.winding_thickness
+
+
+class ConstructMagnetic:
+    """ Constructs the magnetic domain via adding magnetic metadata to geometry"""
+    @classmethod
+    def build(cls, motor: PCBArmatureMotor) -> Domain:
+        """ Builds the magnetic simulation via adding metadata to geometry """
+        dipoles = motor.build_stator()
+        slots = motor.build_armature()
+        boundary = motor.build_boundary()
+
+        # Defines simulation parts via promoting and metadata
+        parts = []
+
+        # Adds the slots to the domain
+        turns = cls.calculate_number_turns(motor)
+        for index, slot in enumerate(slots):
+            # Sets the phase of slots in pattern
+            repeat = int(motor.sub_slots * motor.pcb_layers)
+            pattern_index = index % repeat
+
+            # Determines the phase and polarity of the layer
+            phase = [motor.PA, motor.PB, motor.PC][pattern_index % 3]
+            polarity = -1 if pattern_index % 2 == 0 else 1
+
+            # Constructs meta-data and promotes to part while appending to domain
+            metadata = MagneticData(
+                motor.ARMATURE_ID, motor.armature_material, phase, turns * polarity,
+                motor.params.armature.sub_slot.trace_axi_thickness
+            )
+            parts.append(Builder.promote_to_part(slot, metadata))
+
+        # Adds the poles to the domain
+        pole_magnetization = 0
+        for index, dipole in enumerate(dipoles):
+            # Alternate magnetization direction every pole (e.g. NS-SN-NS-SN)
+            pole_magnetization = 90 if index % 2 == 0 else - 90
+
+            # Constructs meta-data and promotes to part while appending to domain  
+            metadata = MagneticData(
+                motor.STATOR_ID, motor.stator_material, magnetization = pole_magnetization * nullset
+            )
+            parts.append(Builder.promote_to_part(dipole, metadata))
+
+        meta = MagneticData(motor.ENVIRONMENT_ID, motor.env_material)
+        return Domain(
+            parts,
+            BoundaryType.DIRICHLET,
+            meta,
+            motor.coordinate_system,
+            boundary,
+            motor.params.model.environmental_temperature
+        )
+
+    @classmethod
+    def calculate_number_turns(cls, motor: PCBArmatureMotor) -> int:
+        """ Calculates the approximate number of turns within a layer """
+        params = motor.params
+
+        # Extracts the slot and wire parameters
+        slot_rad = params.armature.slot.rad_thickness
+        wire_rad = params.armature.sub_slot.trace_rad_thickness
+
+        # Calculates the effective number of turns within the area
+        effective_copper = slot_rad * params.armature.sub_slot.rad_fill_factor
+        turns = ceil(effective_copper/wire_rad)
+
+        if turns < 0:
+            msg = f"Derived parameter 'turns' cannot be {turns}. Slots must have non-zero area"
+            raise ModelError("ConstructMagnetic.calculate_number_turns", msg)
+
+        return turns

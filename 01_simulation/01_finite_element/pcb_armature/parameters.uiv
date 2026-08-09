@@ -9,6 +9,7 @@ coordinate_system: "axisymmetric (Z-R) (Axial-Radial)"
 
 
 [model]
+environmental_temperature: 293.15 (K)
 environmental_material: "air"
 line_voltage:   24 (V)
 
@@ -24,8 +25,10 @@ rad_thickness: 5 m(m)
 
 [armature.sub_slot]
 material:           "copper"
-trace_thickness:    35  u(m)
 rad_fill_factor:    0.8
+
+trace_axi_thickness: 35  u(m)
+trace_rad_thickness: 0.5 m(m)
 
 axi_len_substrate:  1 m(m)
 axi_layers:         2 (∅)
