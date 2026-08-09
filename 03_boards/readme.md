@@ -4,13 +4,13 @@
 
 ---
 
-#### [00_bridge_driver](/00_bridge_driver) — Triple Half-Bridge Driver
+#### [00_bridge_driver](/00_bridge_driver) — Triple Half-Bridge Driver (WIP)
 
 A triple half-bridge driver with an operating voltage of `0–96 V` and current of `0–25 A`. It supports `step/dir` and `CANBUS` input interfaces, incremental encoder and Hall-effect sensor inputs from the motor, and `RS-485/RS-422` for the armature board.
 
 ---
 
-#### [01_armature_board](/01_armature_board) — Sensor Board
+#### [01_armature_board](/01_armature_board) — Sensor Board (Ordered)
 
 <div align="center">
   <table>
@@ -29,7 +29,7 @@ A sensor board that connects to the driver over `RS-485/RS-422`. It features `8`
 
 ---
 
-#### [02_magnetic_encoder](/02_magnetic_encoder) — Linear Encoder Breakout
+#### [02_magnetic_encoder](/02_magnetic_encoder) — Linear Encoder Breakout (Ordered)
 
 <div align="center">
   <table>
