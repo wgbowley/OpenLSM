@@ -10,9 +10,7 @@ from pathlib import Path
 from pyfea.domain.units import Parser
 
 from pyfea.solver.femm.domains.magnetostatic.solver import FEMMMagnetostaticSolver
-
 from pcb_armature.model import PCBArmatureMotor
-
 
 # Imports parameters from .uiv parameter file with units
 BASE_DIR = Path(__file__).parents[0]
@@ -26,3 +24,5 @@ motor = PCBArmatureMotor(parameters)
 magnetic = FEMMMagnetostaticSolver(solver_folder)
 domain = motor.construct_domain(magnetic)
 magnetic.setup(domain)
+
+### Generates the FEMM file for now which than can be edited within the FEMM GUI

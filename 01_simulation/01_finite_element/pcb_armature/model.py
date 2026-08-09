@@ -64,16 +64,23 @@ class PCBArmatureMotor:
         """ Builds the slots within the armature """
         slots = []
 
-        number_layers = self.sub_slots * self.number_slots * self.pcb_layers
-        for index in range(0, int(number_layers.value)):
-            offset = - self.armature_length / 2
-            bottom_left = offset + index * (self.pcb_trace_axi_thickness + self.pcb_substrate)
+        slots_per_layer_group = int(self.sub_slots * self.pcb_layers)
+        start_offset = -self.armature_length / 2
 
-            slot_shape = Builder.rectangle(
-                (self.winding_inner_radius, bottom_left),
-                self.winding_thickness, self.pcb_trace_axi_thickness
-            )
-            slots.append(slot_shape)
+        for index in range(0, int(self.number_slots)):
+            # Base position for this slot group
+            base_position = start_offset + index * self.slot_pitch
+
+            for jndex in range(0, slots_per_layer_group):
+                layer_offset = jndex * (self.slot_pitch / slots_per_layer_group)
+                position = base_position + layer_offset
+
+                slot_shape = Builder.rectangle(
+                    (self.winding_inner_radius, position),
+                    self.winding_thickness,
+                    self.pcb_trace_axi_thickness
+                )
+                slots.append(slot_shape)
 
         return slots
 
@@ -81,9 +88,9 @@ class PCBArmatureMotor:
         """ Builds the poles within the stator """
         dipoles = []
 
+        offset = - self.stator_axi_len / 2
         for index in range(0, int(self.number_dipoles.value)):
-            offset = - self.stator_axi_len / 2
-            bottom_left = offset + index * self.dipole_pitch + self.dipole_pitch / 2
+            bottom_left = offset + index * self.dipole_pitch
 
             dipoles_shape = Builder.rectangle(
                 (0 * mm, bottom_left), self.dipole_radius, self.dipole_pitch
@@ -161,12 +168,12 @@ class ConstructMagnetic:
         turns = cls.calculate_number_turns(motor)
         for index, slot in enumerate(slots):
             # Sets the phase of slots in pattern
-            repeat = int(motor.sub_slots * motor.pcb_layers)
-            pattern_index = index % repeat
-
+            slots_per_group = int(motor.sub_slots * motor.pcb_layers)
+            group_index = index // slots_per_group
+    
             # Determines the phase and polarity of the layer
-            phase = [motor.PA, motor.PB, motor.PC][pattern_index % 3]
-            polarity = -1 if pattern_index % 2 == 0 else 1
+            phase = [motor.PA, motor.PB, motor.PC][group_index % 3]
+            polarity = -1 if group_index  % 2 == 0 else 1
 
             # Constructs meta-data and promotes to part while appending to domain
             metadata = MagneticData(
