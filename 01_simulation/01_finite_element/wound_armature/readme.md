@@ -1,4 +1,4 @@
-# 00_wound_coils
+# wound_armature
 
 > [!WARNING]
 > pyFEA is functionally working and produces physically consistent results.

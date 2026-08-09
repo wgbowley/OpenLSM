@@ -15,25 +15,24 @@ line_voltage:   24 (V)
 
 [armature.core]
 number_slots:       6 (∅)
-number_sub_slots:   5 (∅)
 
 rad_clearance:      1 m(m)
-pcb_edge_clearance: 0.5 m(m)
+pcb_edge:           0.5 m(m)
 
 [armature.slot]
 rad_thickness: 5 m(m)
 
 [armature.sub_slot]
 material:           "copper"
-trace_thickness:    70  u(m)
+trace_thickness:    35  u(m)
 rad_fill_factor:    0.8
 
-axi_len_substrate:  1.0 m(m)
+axi_len_substrate:  1 m(m)
 axi_layers:         2 (∅)
 
 
 [stator.tube]
-length: 300 m(m)
+axi_length: 300 m(m)
 rad_thickness: 1 m(m)
 
 [stator.dipole]

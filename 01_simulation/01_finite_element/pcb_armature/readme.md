@@ -1,4 +1,4 @@
-# 01_pcb_coils
+# pcb_armature
 
 > [!WARNING]
 > pyFEA is functionally working and produces physically consistent results.
