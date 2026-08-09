@@ -1,9 +1,8 @@
 ## 00_reduced_order
 
-> Investigate fields formulation and FOC integration
-
 > [!IMPORTANT]
 > Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
+> NOTE: Investigate fields formulation and FOC integration
 
 ## Mathematical Implementation
 *(TBD) — Work in progress*
