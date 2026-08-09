@@ -1,0 +1,46 @@
+[version]
+format: 0.1.0
+
+
+[notes]
+type: "Electromagnetic Parameter File"
+application: "Finite Element Model | Tubular Ironless PCB Armature Linear Motor"
+coordinate_system: "axisymmetric (Z-R) (Axial-Radial)"
+
+
+[model]
+environmental_temperature: 293.15 (K)
+environmental_material: "air"
+line_voltage:   24 (V)
+
+
+[armature.core]
+number_slots:       6 (∅)
+
+rad_clearance:      1 m(m)
+pcb_edge:           0.5 m(m)
+
+[armature.slot]
+rad_thickness: 5 m(m)
+
+[armature.sub_slot]
+material:           "copper"
+rad_fill_factor:    0.8
+
+trace_axi_thickness: 35  u(m)
+trace_rad_thickness: 0.5 m(m)
+
+axi_len_substrate:  1 m(m)
+axi_layers:         2 (∅)
+
+
+[stator.tube]
+axi_length: 100 m(m)
+rad_thickness: 1 m(m)
+
+[stator.dipole]
+material: "NdFeB"
+grade: "N52"
+
+axi_length: 10 m(m)
+rad_thickness: 5 m(m)

@@ -97,6 +97,10 @@ The radial heat-sink is made of aluminum as mentioned above with radial fins pit
 > [!IMPORTANT]
 > See the [motor design notes](/02_motors/02_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
 
+---
+
+> [!note]
+> See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
 
 ## Documentation
 All internal documentation can be found within this repo's [issues](https://github.com/wgbowley/OpenLSM/issues). 
