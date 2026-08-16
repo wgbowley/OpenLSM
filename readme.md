@@ -107,15 +107,3 @@ All internal documentation can be found within this repo's [issues](https://gith
 
 ### Credits:
 Acknowledgements and credits can be found in the [credits file](/credits.md).
-
-### Bibtex Citation:
-```
-@misc{openLSM_2026,
-  author = {William Bowley and Lawson Gallup},
-  title = {{openLSM: Low Cost Linear Synchronous Motors}},
-  url = {https://github.com/wgbowley/openLSM},
-  year = {2026},
-  note = {GitHub repository},
-  license = {MIT}
-}
-```
