@@ -17,7 +17,7 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
     Low Cost Linear Synchronous Motors
     <br>
     Designed & built by 
-    <a href="https://github.com/wgbowley">William Bowley</a> (primary) &amp; 
+    <a href="https://github.com/wgbowley">William Bowley</a> &amp; 
     <a href="https://github.com/LawsonDG">Lawson Gallup</a>
   </em>
 </p>
