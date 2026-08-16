@@ -22,3 +22,10 @@ Prototype Beta explores thermal management strategies for the `ironless tubular 
 > [Revision 2](/02_motors/02_prototype_beta/rev_2/readme.md) — Radial heat-sink design study (aluminum 6061, eddy current analysis)
 
 ---
+
+*(TBD) — Work in progress*
+
+> [!important]
+> [Revision 2](/02_motors/02_prototype_beta/rev_3/readme.md)
+
+---
