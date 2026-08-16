@@ -1,5 +1,19 @@
 ## Overview
 
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="04_media/top_layer.png" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="04_media/bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+    </tr>
+    <tr>
+      <td><em>Top layer — STM32, Thermistor Array, Accelerometer & Encoder</em></td>
+      <td><em>Bottom layer — Basis resistors & decoupling caps for Thermistors</em></td>
+    </tr>
+  </table>
+</div>
+
+
 OpenLSM uses `closed-loop control` to position the motor's armature. This requires a device to measure the armature's position: [an encoder board](../02_magnetic_encoder). OpenLSM also requires acceleration and thermal data for validating the motor's transient behaviour during operation. To achieve this, an `SPI` accelerometer is used to collect `3-axis` acceleration data, and an array of `8` thermistors across the motor's `z-axis` is used to collect temperature data `T(z, t)`.
 
 The array consists of `8` NTC thermistors and an analog multiplexer, which feeds into the ADC pin on the peripheral controller. The data collected from these sensors is then processed into relevant quantities and sent over the `RS-485/RS-422` link to the motor controller board.
