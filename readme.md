@@ -14,13 +14,16 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
   <img src="05_media/01_logos/logo.png" alt="OpenLSM" style="max-width:600px;">
   <br>
   <em>
-    Low Cost Linear Synchronous Motors – Designed & built by 
+    Low Cost Linear Synchronous Motors
+    <br>
+    Designed & built by 
     <a href="https://github.com/wgbowley">William Bowley</a> (primary) &amp; 
     <a href="https://github.com/LawsonDG">Lawson Gallup</a>
   </em>
 </p>
 
 ## Overview
+
 ![Status](https://img.shields.io/badge/Status-WIP-FFFFFF?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-FF8F0E?style=flat-square&color=FF8F0E)
 ![Focus](https://img.shields.io/badge/Focus-Simulation-FFFFFF?style=flat-square)
