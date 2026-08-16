@@ -3,8 +3,8 @@
 <div align="center">
   <table>
     <tr>
-      <td><img src="04_media/top_layer.png" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="04_media/bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+      <td><img src="04_media/bare_pcb_front.jpg" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="04_media/bare_pcb_back.jpg" alt="Bottom layer" style="max-width:400px;"></td>
     </tr>
     <tr>
       <td><em>Top layer — STM32, Thermistor Array, Accelerometer & Encoder</em></td>

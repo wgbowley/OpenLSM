@@ -10,7 +10,7 @@ A triple half-bridge driver with an operating voltage of `0–96 V` and current 
 
 ---
 
-#### [01_armature_board](/01_armature_board) — Sensor Board (Ordered)
+#### [01_armature_board](/01_armature_board) — Sensor Board (Manufacturing)
 
 <div align="center">
   <table>
@@ -29,7 +29,7 @@ A sensor board that connects to the driver over `RS-485/RS-422`. It features `8`
 
 ---
 
-#### [02_magnetic_encoder](/02_magnetic_encoder) — Linear Encoder Breakout (Ordered)
+#### [02_magnetic_encoder](/02_magnetic_encoder) — Linear Encoder Breakout (Manufacturing)
 
 <div align="center">
   <table>

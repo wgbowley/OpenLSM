@@ -66,6 +66,7 @@ An `ironless planar linear` motor with a polylactic acid (PLA) armature featurin
 
 <div align="center">
   <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side video on test stand" style="max-width: 600px">
+  <br>
   <em>Figure 2: Prototype Alpha. Side view on test stand</em>
 </div>
 
@@ -85,7 +86,23 @@ The radial heat-sink is made of aluminum as mentioned above with radial fins pit
 
 ## Integrated Sensor Boards
 
-*(TBD) — Work in progress*
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="03_boards/01_armature_board/04_media/bare_pcb_front.jpg" alt="Armature Board" style="max-width:400px;"></td>
+      <td><img src="03_boards/02_magnetic_encoder/04_media/bare_pcb_top.jpg" alt="Encoder Board" style="max-width:350px;"></td>
+    </tr>
+    <tr>
+      <td><em>Top layer — Bare PCB Armature Data Board</em></td>
+      <td><em>Top layer — Bare PCB Encoder Board</em></td>
+    </tr>
+  </table>
+</div>
+
+The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
+
+> [!note]
+> See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
 
 ## Documentation
 All internal documentation can be found within this repo's [issues](https://github.com/wgbowley/OpenLSM/issues). 
