@@ -66,7 +66,7 @@ An `ironless planar linear` motor with a polylactic acid (PLA) armature featurin
 
 <div align="center">
   <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side video on test stand" style="max-width: 600px">
-  <em>Figure 2a: Prototype Alpha. Side view on test stand</em>
+  <em>Figure 2: Prototype Alpha. Side view on test stand</em>
 </div>
 
 The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
@@ -78,7 +78,7 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
 
 <div align="center">
   <img src="05_media/03_prototype_beta/rev_2/cross_section.png" alt="cross sectional analysis" style="max-width: 600px">
-    <p><em>Figure 3a: Prototype Beta REV 2. Cross-sectional view of the tubular linear motor showing the stator & armature.</em></p>
+    <p><em>Figure 3: Prototype Beta REV 2. Cross-sectional view of the tubular linear motor showing the stator & armature.</em></p>
 </div>
 
 The radial heat-sink is made of aluminum as mentioned above with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
