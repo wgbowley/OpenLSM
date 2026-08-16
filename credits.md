@@ -1,10 +1,9 @@
 ### Tooling Acknowledgements
-- [PicoUnits](https://github.com/wgbowley/PicoUnits)
-- [PyFEA](https://github.com/wgbowley/PyFEA)
-- [UIV Language](https://github.com/wgbowley/uiv-language)
+- [PicoUnits](https://github.com/Bowley-Systems/PicoUnits)
+- [PyFEA](https://github.com/Bowley-Systems/PyFEA)
+- [UIV Language](https://github.com/Bowley-Systems/UnitValues)
 - [Fusion 360](https://www.autodesk.com/products/fusion-360)
-- [EasyEDA](https://easyeda.com)
-
+- [KiCad](https://github.com/KiCad)
 
 ### Research & Development Enabled by:
 - [FEMM](https://www.femm.info/wiki/HomePage) — Thank you, Dr. Meeker, for creating FEMM. It was indispensable for all prototypes.

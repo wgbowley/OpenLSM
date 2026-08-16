@@ -170,7 +170,7 @@ class ConstructMagnetic:
             # Sets the phase of slots in pattern
             slots_per_group = int(motor.sub_slots * motor.pcb_layers)
             group_index = index // slots_per_group
-    
+
             # Determines the phase and polarity of the layer
             phase = [motor.PA, motor.PB, motor.PC][group_index % 3]
             polarity = -1 if group_index  % 2 == 0 else 1
@@ -188,7 +188,7 @@ class ConstructMagnetic:
             # Alternate magnetization direction every pole (e.g. NS-SN-NS-SN)
             pole_magnetization = 90 if index % 2 == 0 else - 90
 
-            # Constructs meta-data and promotes to part while appending to domain  
+            # Constructs meta-data and promotes to part while appending to domain
             metadata = MagneticData(
                 motor.STATOR_ID, motor.stator_material, magnetization = pole_magnetization * nullset
             )

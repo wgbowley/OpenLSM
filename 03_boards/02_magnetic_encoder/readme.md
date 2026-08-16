@@ -1,5 +1,18 @@
 ## Overview
 
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="04_media/bare_pcb_top.jpg" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="04_media/bare_pcb_back.jpg" alt="Bottom layer" style="max-width:400px;"></td>
+    </tr>
+    <tr>
+      <td><em>Top layer — Facing the magnetic scale</em></td>
+      <td><em>Bottom layer — JST XH 5-pin & mounting side</em></td>
+    </tr>
+  </table>
+</div>
+
 OpenLSM uses `closed-loop control` to position the motors armature. This requires a device to measure the armature's position: an encoder. There are many types, magnetic, optical, etc. but OpenLSM uses magnetic linear encoders.
 
 These consist of a linear scale and an encoder head. The encoder measures the magnetic flux density over a `pole pair` (N|S) of the scale to determine its location. This data is output as `A` and `B` binary signals, `90°` out of phase with each other, enabling quadrature decoding `(4× resolution)`. The encoder also outputs a pulse at every `pole pair` transition.

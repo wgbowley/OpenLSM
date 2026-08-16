@@ -14,16 +14,19 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
   <img src="05_media/01_logos/logo.png" alt="OpenLSM" style="max-width:600px;">
   <br>
   <em>
-    Low Cost Linear Synchronous Motors – Designed & built by 
-    <a href="https://github.com/wgbowley">William Bowley</a> (primary) &amp; 
+    Low Cost Linear Synchronous Motors
+    <br>
+    Designed & built by 
+    <a href="https://github.com/wgbowley">William Bowley</a> &amp; 
     <a href="https://github.com/LawsonDG">Lawson Gallup</a>
   </em>
 </p>
 
 ## Overview
+
 ![Status](https://img.shields.io/badge/Status-WIP-FFFFFF?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-FFFFFF?style=flat-square&color=white)
-![Focus](https://img.shields.io/badge/Focus-Simulation-FF8F0E?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-FF8F0E?style=flat-square&color=FF8F0E)
+![Focus](https://img.shields.io/badge/Focus-Simulation-FFFFFF?style=flat-square)
 ![Domain](https://img.shields.io/badge/Domain-Hardware-FF8F0E?style=flat-square&color=FF8F0E)
 
 OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with reduced-order and finite element models.
@@ -58,19 +61,13 @@ Post-Analysis & Model Validation
 
 ## Prototype Alpha
 
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=l7kanxWzn5A">
-    <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side video on test stand" style="max-width: 600px">
-  </a>
-  <p><small>⚠️ Video quality is poor due to lighting conditions / setup </small><br>
-  <em>Figure 2a: Prototype Alpha. Closed loop control demo.</em></p>
-</div>
-
 An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, though the magnitude was not quantified before the PLA coil forms deformed due to thermal stress.
 
+
 <div align="center">
-  <img src="05_media/02_prototype_alpha/02_experimental/side_view.jpg" alt="Prototype alpha top down view" style="max-width: 600px">
-    <p><em>Figure 2b: Prototype Alpha. Top-down view of the planar linear motor showing the slots & poles.</em></p>
+  <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side video on test stand" style="max-width: 600px">
+  <br>
+  <em>Figure 2: Prototype Alpha. Side view on test stand</em>
 </div>
 
 The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
@@ -82,14 +79,7 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
 
 <div align="center">
   <img src="05_media/03_prototype_beta/rev_2/cross_section.png" alt="cross sectional analysis" style="max-width: 600px">
-    <p><em>Figure 3a: Prototype Beta REV 2. Cross-sectional view of the tubular linear motor showing the stator & armature.</em></p>
-</div>
-
-Revision 2 uses a radial heat-sink design which may improve steady-state characteristics, but the grade `6061` aluminum does introduce `eddy currents` which produce opposing magnetic fields that decrease efficiency. The design hypothesis is that thermal benefits outweigh eddy-current losses at the expected operating frequency. This is evaluated in the linked analysis.
-
-<div align="center">
-  <img src="05_media/03_prototype_beta/rev_2/heat_sink_cross_section.png" alt="cross sectional analysis of heat sink" style="max-width: 600px">
-    <p><em>Figure 3b: Prototype Beta REV 2. Close-up cross-sectional view of the radial heat-sink.</em></p>
+    <p><em>Figure 3: Prototype Beta REV 2. Cross-sectional view of the tubular linear motor showing the stator & armature.</em></p>
 </div>
 
 The radial heat-sink is made of aluminum as mentioned above with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
@@ -97,25 +87,26 @@ The radial heat-sink is made of aluminum as mentioned above with radial fins pit
 > [!IMPORTANT]
 > See the [motor design notes](/02_motors/02_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
 
----
+## Integrated Sensor Boards
+
+The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
+
+
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="03_boards/01_armature_board/04_media/bare_pcb_front.jpg" alt="Armature Board" style="max-width:400px;"></td>
+      <td><img src="03_boards/02_magnetic_encoder/04_media/bare_pcb_top.jpg" alt="Encoder Board" style="max-width:350px;"></td>
+    </tr>
+    <tr>
+      <td><em>Top layer — Bare PCB Armature Data Board</em></td>
+      <td><em>Top layer — Bare PCB Encoder Board</em></td>
+    </tr>
+  </table>
+</div>
 
 > [!note]
 > See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
 
 ## Documentation
 All internal documentation can be found within this repo's [issues](https://github.com/wgbowley/OpenLSM/issues). 
-
-### Credits:
-Acknowledgements and credits can be found in the [credits file](/credits.md).
-
-### Bibtex Citation:
-```
-@misc{openLSM_2026,
-  author = {William Bowley and Lawson Gallup},
-  title = {{openLSM: Low Cost Linear Synchronous Motors}},
-  url = {https://github.com/wgbowley/openLSM},
-  year = {2026},
-  note = {GitHub repository},
-  license = {MIT}
-}
-```

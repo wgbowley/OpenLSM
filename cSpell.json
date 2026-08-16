@@ -93,6 +93,15 @@
     "xticklabels",
     "ylabel",
     "ylim",
-    "yticklabels"
+    "yticklabels",
+    "SSOP",
+    "XTAL",
+    "ADXL",
+    "BEAD",
+    "Datasheet",
+    "SOIC",
+    "LQFP",
+    "BEADC1608X95N",
+    "TSSOP20_AS5311"
   ]
 }
