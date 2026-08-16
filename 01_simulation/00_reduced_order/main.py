@@ -3,6 +3,9 @@ Filename: main.py
 
 Description:
     Reduced order model for tubular linear synchronous motor. 
+    
+    Do not assume the resulting design variables are suitable for 
+    fabrication or real-world use without further analysis.
 """
 
 from pathlib import Path
