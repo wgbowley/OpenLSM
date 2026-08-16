@@ -84,7 +84,13 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
 
 The radial heat-sink is made of aluminum as mentioned above with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
 
+> [!IMPORTANT]
+> See the [motor design notes](/02_motors/02_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
+
 ## Integrated Sensor Boards
+
+The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
+
 
 <div align="center">
   <table>
@@ -98,8 +104,6 @@ The radial heat-sink is made of aluminum as mentioned above with radial fins pit
     </tr>
   </table>
 </div>
-
-The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
 > [!note]
 > See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
