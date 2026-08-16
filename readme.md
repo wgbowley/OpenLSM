@@ -81,25 +81,11 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
     <p><em>Figure 3a: Prototype Beta REV 2. Cross-sectional view of the tubular linear motor showing the stator & armature.</em></p>
 </div>
 
-Revision 2 uses a radial heat-sink design which may improve steady-state characteristics, but the grade `6061` aluminum does introduce `eddy currents` which produce opposing magnetic fields that decrease efficiency. The design hypothesis is that thermal benefits outweigh eddy-current losses at the expected operating frequency. This is evaluated in the linked analysis.
-
-<div align="center">
-  <img src="05_media/03_prototype_beta/rev_2/heat_sink_cross_section.png" alt="cross sectional analysis of heat sink" style="max-width: 600px">
-    <p><em>Figure 3b: Prototype Beta REV 2. Close-up cross-sectional view of the radial heat-sink.</em></p>
-</div>
-
 The radial heat-sink is made of aluminum as mentioned above with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
 
-> [!IMPORTANT]
-> See the [motor design notes](/02_motors/02_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
+## Integrated Sensor Boards
 
----
-
-> [!note]
-> See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
+*(TBD) — Work in progress*
 
 ## Documentation
 All internal documentation can be found within this repo's [issues](https://github.com/wgbowley/OpenLSM/issues). 
-
-### Credits:
-Acknowledgements and credits can be found in the [credits file](/credits.md).
