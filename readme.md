@@ -58,13 +58,12 @@ Post-Analysis & Model Validation
 
 ## Prototype Alpha
 
+
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=l7kanxWzn5A">
-    <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side video on test stand" style="max-width: 600px">
-  </a>
-  <p><small>⚠️ Video quality is poor due to lighting conditions / setup </small><br>
-  <em>Figure 2a: Prototype Alpha. Closed loop control demo.</em></p>
+  <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side video on test stand" style="max-width: 600px">
+  <em>Figure 2a: Prototype Alpha. Side view on test stand</em>
 </div>
+
 
 An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, though the magnitude was not quantified before the PLA coil forms deformed due to thermal stress.
 
