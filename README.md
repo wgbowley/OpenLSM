@@ -91,6 +91,7 @@ The radial heat-sink is made of aluminum as mentioned above with radial fins pit
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
+<!-- Need to update those images with the populated PCBs and also they need to be cleaned up -->
 
 <div align="center">
   <table>
