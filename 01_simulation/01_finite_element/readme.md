@@ -3,8 +3,8 @@
 *(TBD) — Work in progress*
 
 > [!WARNING]
-> pyFEA is functionally working and produces physically consistent results.
-> However, the API and abstraction boundaries are still under active development and may change.
+>
+> PyFEA is functionally working and produces physically consistent results.
 > It is not yet stable as a public-facing dependency.
 
 ## Documentation

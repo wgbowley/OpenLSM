@@ -9,6 +9,7 @@ OpenLSM code is developed using:
 - `CSpell` for spell checking (Code Spell Checker, Bundled Dictionaries)
 
 > [!note]
+>
 > Ensure that you add words to `OpenLSM` cSpell.json, not your personal dictionary.
 
 ---

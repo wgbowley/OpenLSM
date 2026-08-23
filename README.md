@@ -34,6 +34,7 @@ OpenLSM is an experimental project with the objective of designing low-cost perm
 ### Objectives
 
 > [!IMPORTANT]
+>
 > - Design low-cost permanent magnet linear motors for Cartesian motion systems.
 > - Develop computational models that are validated against experimental measurements.
 > - Demonstrate continuous thermal steady-state operation under defined operating conditions.
@@ -86,6 +87,7 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
 The radial heat-sink is made of aluminum as mentioned above with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
 
 > [!IMPORTANT]
+>
 > See the [motor design notes](/02_motors/02_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
 
 ## Integrated Sensor Boards
@@ -109,6 +111,7 @@ The integrated sensor boards are a platform for measuring the motor's position, 
 </div>
 
 > [!note]
+>
 > See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
 
 ## Documentation

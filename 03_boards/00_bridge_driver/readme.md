@@ -5,6 +5,7 @@
 ## Driver & Switches 
 
 > [!important]
+>
 > Uses the `IRS2104` gate driver for each half bridge and the `SUD90330E` n-channel mosfet for the switches.
 
 *(TBD) — Work in progress*
