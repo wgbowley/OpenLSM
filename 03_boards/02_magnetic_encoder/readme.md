@@ -1,5 +1,8 @@
 ## Overview
 
+<!-- Need to update those images with the populated PCBs and also they need to be cleaned up -->
+<!-- They need to be updated in general. Those images are pretty poor quality --> 
+
 <div align="center">
   <table>
     <tr>
