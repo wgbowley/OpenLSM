@@ -914,7 +914,7 @@
 		)
 	)
 	(sheet
-		(at 238.76 144.78)
+		(at 252.73 157.48)
 		(size 26.67 3.81)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -929,8 +929,8 @@
 			(color 0 0 0 0)
 		)
 		(uuid "3706a100-89fe-4fa1-ae16-5f6bace485f6")
-		(property "Sheetname" "Drivers"
-			(at 238.76 144.0684 0)
+		(property "Sheetname" "drivers"
+			(at 252.73 156.7684 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -941,7 +941,7 @@
 			)
 		)
 		(property "Sheetfile" "Drivers.kicad_sch"
-			(at 238.76 149.1746 0)
+			(at 252.73 161.8746 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
