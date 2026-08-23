@@ -20,7 +20,7 @@ ROOT_DIR = Path(__file__).resolve().parents[0]
 
 # Materials & Parameter files
 parameters_path = ROOT_DIR / "parameters.uiv"
-parameters = Parser.open(parameters_path, ROOT_DIR / "metric.ut")
+parameters = Parser.open(parameters_path, ROOT_DIR / "../metric.ut")
 
 # Magnetic Solver for tubular linear motor
 solver = Solver(parameters)
