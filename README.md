@@ -38,6 +38,7 @@ OpenLSM is an experimental project with the objective of designing low-cost perm
 > - Design low-cost permanent magnet linear motors for Cartesian motion systems.
 > - Develop computational models that are validated against experimental measurements.
 > - Demonstrate continuous thermal steady-state operation under defined operating conditions.
+> - Scope a `Prototype Gemma` as entry point for contributors to extend.
 >
 > *More specific targets (force density, efficiency, cost, etc.) to be defined as the domain becomes clearer.*
 
