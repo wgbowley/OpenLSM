@@ -74,6 +74,7 @@ The main conclusion from Prototype Alpha is that `planar linear motors` likely r
 
 ## Prototype Beta
 *(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*
+*Note: Revision 3 of the ironless tubular linear motor will be fabricated.*
 
 An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature featuring `12` slots, mechanically wound using `0.4 mm` diameter enameled copper wire, with `4` slots in-series per phase `(WYE)`. The stator, unlike the armature, is made of layered carbon fibre epoxy to form a tube with an internal radius of `5 mm` and outer radius of `6 mm`. The poles are `20 mm` in length and `5 mm` in radius such that they can be inserted into the stator tube in this pole arrangement `(N-S|S-N)`, using generic superglue to secure the end poles.
 
