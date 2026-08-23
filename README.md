@@ -110,9 +110,7 @@ The integrated sensor boards are a platform for measuring the motor's position, 
   </table>
 </div>
 
-> [!note]
->
-> See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
+See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
 
 ## Documentation
 
