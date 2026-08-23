@@ -115,4 +115,5 @@ The integrated sensor boards are a platform for measuring the motor's position, 
 > See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
 
 ## Documentation
-All internal documentation can be found within this repo's [issues](https://github.com/wgbowley/OpenLSM/issues). 
+
+Each section of the repo is self-documenting. For internal documentation, credits, and contributors, refer to: [04_docs](./04_docs/).
