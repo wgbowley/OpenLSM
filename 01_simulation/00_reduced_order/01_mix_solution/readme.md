@@ -1,16 +1,17 @@
-## 00_reduced_order
+## 01_mix_solution
 
 *(TBD) — Work in progress*
 
 > [!WARNING]
 > Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
 
-## 00_analytical
-
+## Mathematical Implementation
 *(TBD) — Work in progress*
 
-## 01_mix_solution
+## Computational Implementation
+*(TBD) — Work in progress*
 
+## Model Validation
 *(TBD) — Work in progress*
 
 ## Documentation
