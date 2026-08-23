@@ -26,6 +26,6 @@ Prototype Beta explores thermal management strategies for the `ironless tubular 
 *(TBD) — Work in progress*
 
 > [!important]
-> [Revision 2](/02_motors/02_prototype_beta/rev_3/readme.md)
+> [Revision 3](/02_motors/02_prototype_beta/rev_3/readme.md) — Implementation of prototype beta and validation of the thermal studies.
 
 ---
