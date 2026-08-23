@@ -7,6 +7,7 @@
 #### [00_bridge_driver](00_bridge_driver/readme.md) — Triple Half-Bridge Driver (WIP)
 
 A triple half-bridge driver with an operating voltage of `0–96 V` and current of `0–25 A`. It supports `step/dir` and `CANBUS` input interfaces, incremental encoder and Hall-effect sensor inputs from the motor, and `RS-485/RS-422` for the armature board. The board has two main domains: the `12 V` input and the `0–96 V` driver input. It features isolation between the MCU, the bridge driver, and the current sensor chips.
+
 ---
 
 #### [01_armature_board](01_armature_board/readme.md) — Sensor Board (Manufacturing)
