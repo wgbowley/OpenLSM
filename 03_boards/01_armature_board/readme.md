@@ -1,5 +1,8 @@
 ## Overview
 
+<!-- Need to update those images with the populated PCBs and also they need to be cleaned up -->
+<!-- They need to be updated in general. Those images are pretty poor quality --> 
+
 <div align="center">
   <table>
     <tr>
@@ -64,6 +67,7 @@ The `armature board` is intended to be located either tangentially to the armatu
 *(TBD) — Work in progress*
 
 > [!important]
+>
 > Programming is done via a `2×3 pin`, `2.54 mm` vertical male connector on the armature board, located near the `STM32G431K8Tx`.
 
 ## Documentation

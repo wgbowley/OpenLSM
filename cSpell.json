@@ -2,7 +2,7 @@
   "version": "0.2",
   "language": "en-US",
   "ignorePaths": [
-    "**/*.{asc,lib,asy}"
+    "**/*.{asc,lib,asy,step,kicad_mod,kicad_sym,kicad_csh,kicad_prl,kicad_pro,kicad_sch}"
   ],
   "words": [
     "ADXL345",

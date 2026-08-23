@@ -1,18 +1,22 @@
 # Prototype Alpha
 
+<div align="center">
+    <img src="../../05_media/02_prototype_alpha/02_experimental/side_view_with_mounting.jpg" alt="Side view on stand with wiring" style="max-width: 600px">
+</div>
+
+
+# Overview
+
 > [!WARNING]
+>
 > This is a legacy design intended to explore design ideas and engineering trade-offs.
 > It has been manufactured, experimentally validated, and performance verified.
 > Do not assume this design is suitable for real-world applications.
 
-# Overview
-
 Prototype Alpha is an `ironless planar linear motor` with a polylactic acid (PLA) armature featuring 6 slots, hand wound using 0.2 mm diameter enameled copper wire and 5 mm wide Kapton tape, with 2 slots in-series per phase (WYE). The stator, similar to the armature, was printed in PLA and had 4 pole pairs per armature length and 10 pole pairs total. 
 
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=l7kanxWzn5A">
-    <img src="../../05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="Side view on stand & link to video" style="max-width: 600px">
-  </a>
+    <img src="../../05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="Side view on stand" style="max-width: 600px">
 </div>
 
 A linear encoder `(AS5311)` was used to measure the motor position and a SimpleFOC shield was used to control the motor's 3 phases using closed-loop control.
@@ -33,6 +37,10 @@ Due to the `6 slots - 8 poles` configuration, this motor is a fractional-slot co
 
 The armature slots were wound individually with approximately the same number of turns. The first slot was then connected in series with the 4th slot, the second slot with the 5th slot, etc. Those `2 slot` phases were then connected in a WYE configuration using a proto-board, and a 3-pin JST connector was used as the motor input. The neutral phase tap was left exposed as a common reference point for measuring.
 
+<div align="center">
+    <img src="../../05_media/02_prototype_alpha/02_experimental/side_view.jpg" alt="Side view of the armature and stator" style="max-width: 600px">
+</div>
+
 The stator was constructed using through-thickness magnetized N52 poles, with each pole rotated `180 degrees` with respect to the last to produce an effective stator field. The poles were attached using generic superglue, and an `MG-series` linear rail was mounted to the back of the stator, which connected the armature and stator together via U-shaped mounting plates.
 
 ## Results
@@ -44,3 +52,7 @@ The control scheme seemed to work well, but the exact precision was not quantifi
 ## Conclusions 
 
 The `planar` linear motor did work and produce force, but the amount could not be quantified, nor could the control scheme be fully tested. Future iterations should focus on improving thermal characteristics by managing phase resistance, as `ironless` motors lose a lot of energy to `copper losses`. Beyond thermal considerations, future iterations should aim for similar inductance and resistance for each of the motor's phases to potentially improve control characteristics.
+
+<div align="center">
+    <img src="../../05_media/02_prototype_alpha/02_experimental/stand_and_motor.png" alt="Stand & Motor" style="max-width: 600px">
+</div>

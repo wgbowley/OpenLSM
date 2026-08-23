@@ -1,8 +1,9 @@
-## 00_reduced_order
+## 00_analytical
 
 *(TBD) — Work in progress*
 
 > [!WARNING]
+>
 > Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
 
 ## Mathematical Implementation
@@ -17,6 +18,3 @@
 ## Documentation
 
 Reference: [Build a reduced order model for tubular linear synchronous motors](https://github.com/wgbowley/OpenLSM/issues/7)
-
-
-

@@ -22,8 +22,7 @@ number_slots: 12    (∅)
 
 
 [armature.core]
-# Material: Carbon Fibre Nylon is equivalent to air (low frequency EM)
-material: "air"
+material: "Carbon Fibre Nylon"
 
 # Axial Parameters
 axial_end_caps: 5.00 m(m)
@@ -41,7 +40,6 @@ fill_factor: 0.65
 axial_length: 4.83 m(m)
 radial_thickness: 3.00 m(m)
 
-""" THIS SECTION IS NOT MODELLED """
 [armature.heat_sink]
 material: "aluminum"
 alloy: 6061
@@ -58,12 +56,9 @@ radial_clearance: 1 m(m)
 radial_inner_thickness: 1.8 m(m)
 radial_fin_thickness: 7.30 m(m)
 
-""" BELOW IS MODELLED """
-
 
 [stator.tube]
-# Material: Layered Carbon Fibre Epoxy is equivalent to air (low frequency EM)
-material: "air"
+material: "Layered Carbon Fibre Epoxy"
 radial_thickness: 1 m(m)
 
 [stator.poles]
