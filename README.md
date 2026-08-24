@@ -56,11 +56,9 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
     <p><em>Prototype Beta REV 2: Cross-sectional view of the tubular linear motor showing the stator & armature.</em></p>
 </div>
 
-The radial heat-sink is made of aluminum as mentioned above with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
-
-> [!IMPORTANT]
->
 > See the [motor design notes](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
+
+The radial heat-sink is made of aluminum as mentioned above with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
 
 ## Integrated Sensor Boards
 
@@ -68,6 +66,8 @@ The integrated sensor boards are a platform for measuring the motor's position, 
 
 <!-- Need to update those images with the populated PCBs and also they need to be cleaned up -->
 <!-- They need to be updated in general. Those images are pretty poor quality --> 
+
+> See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
 
 <div align="center">
   <table>
@@ -81,8 +81,6 @@ The integrated sensor boards are a platform for measuring the motor's position, 
     </tr>
   </table>
 </div>
-
-See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
 
 ## Documentation
 
