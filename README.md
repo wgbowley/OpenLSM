@@ -39,7 +39,7 @@ OpenLSM is an experimental project with the objective of designing low-cost perm
 - Reach an asymptote temperature of 60°C under standard use-cases.
 - Validate the driver board and linear encoder board for linear motor applications.
 - Validate motor performance and generate performance curves for each voltage range.
-- Scope a Prototype Gamma as an entry point for contributors to extend.
+- Scope a Prototype Gamma as an entry point for contributors to extend beyond OpenLSM.
 ```
 ---
 
@@ -63,8 +63,9 @@ See the [alpha notes](/02_motors/00_prototype_alpha/readme.md) for the full repo
 ---
 
 ### Beta ($\beta$)
-*(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*<br>
-*Note: Revision 3 of the ironless tubular linear motor will be fabricated.*
+
+> *(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*<br>
+> *(Note). Revision 3 of the ironless tubular linear motor will be fabricated.*
 
 An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature featuring `12` slots, mechanically wound using `0.4 mm` diameter enameled copper wire, with `4` slots in-series per phase `(WYE)`. The stator, unlike the armature, is made of layered carbon fibre epoxy to form a tube with an internal radius of `5 mm` and outer radius of `6 mm`. The poles are `20 mm` in length and `5 mm` in radius such that they can be inserted into the stator tube in this pole arrangement `(N-S|S-N)`, using generic superglue to secure the end poles.
 
