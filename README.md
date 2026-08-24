@@ -14,7 +14,7 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
   <img src="05_media/01_logos/logo.png" alt="OpenLSM" style="width:100%; max-width:100%; display:block;">
   <br>
   <em>
-    Low Cost Linear Synchronous Motors Platform
+    Low Cost Linear Synchronous Permanent Motors Platform
     <br>
     Engineered by 
     <a href="https://github.com/wgbowley">William Bowley</a>, 
@@ -26,10 +26,9 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 ### Overview
 
 ![Status](https://img.shields.io/badge/Status-WIP-FFFFFF?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-FF8F0E?style=flat-square&color=FF8F0E)
-![Focus](https://img.shields.io/badge/Focus-Simulation-FFFFFF?style=flat-square)
-![Domain](https://img.shields.io/badge/Domain-Hardware-FF8F0E?style=flat-square&color=FF8F0E)
-
+![License](https://img.shields.io/badge/License-MIT-FF8F0E?style=flat-square)
+![Focus](https://img.shields.io/badge/Focus-Linear%20Motors-FFFFFF?style=flat-square)
+![Scope](https://img.shields.io/badge/Scope-Design%20%26%20Validation-FF8F0E?style=flat-square)
 
 OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with analytical and hybrid models.
 
