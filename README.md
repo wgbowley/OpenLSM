@@ -29,7 +29,7 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 ![Focus](https://img.shields.io/badge/Focus-Simulation-FFFFFF?style=flat-square)
 ![Domain](https://img.shields.io/badge/Domain-Hardware-FF8F0E?style=flat-square&color=FF8F0E)
 
-OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with analytical and hybrid FEM models.
+OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with analytical and hybrid models.
 
 ## Methodology
 
