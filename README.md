@@ -34,7 +34,7 @@ OpenLSM is an experimental project with the objective of designing low-cost perm
 
 ---
 
-### Alpha
+### Alpha ($\alpha$)
 
 
 An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, though the magnitude was not quantified before the PLA coil forms deformed due to thermal stress.
@@ -53,7 +53,7 @@ The main conclusion from Prototype Alpha is that `planar linear motors` likely r
 
 ---
 
-### Beta
+### Beta ($\beta$)
 *(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*<br>
 *Note: Revision 3 of the ironless tubular linear motor will be fabricated.*
 
@@ -84,8 +84,8 @@ The integrated sensor boards are a platform for measuring the motor's position, 
       <td><img src="03_boards/02_magnetic_encoder/04_media/bare_pcb_top.jpg" alt="Encoder Board" style="max-width:350px;"></td>
     </tr>
     <tr>
-      <td><em>Top layer — Bare PCB Armature Data Board</em></td>
-      <td><em>Top layer — Bare PCB Encoder Board</em></td>
+      <td><em>Armature Data Board</em></td>
+      <td><em>Encoder Board</em></td>
     </tr>
   </table>
 </div>
