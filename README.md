@@ -14,7 +14,7 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
   <img src="05_media/01_logos/logo.png" alt="OpenLSM" style="width:100%; max-width:100%; display:block;">
   <br>
   <em>
-    Low Cost Linear Synchronous Motors
+    Low Cost Linear Synchronous Motors Platform
     <br>
     Designed & built by 
     <a href="https://github.com/wgbowley">William Bowley</a> &amp; 
@@ -29,7 +29,7 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 ![Focus](https://img.shields.io/badge/Focus-Simulation-FFFFFF?style=flat-square)
 ![Domain](https://img.shields.io/badge/Domain-Hardware-FF8F0E?style=flat-square&color=FF8F0E)
 
-OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with reduced-order and finite element models.
+OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with analytical and hybrid FEM models.
 
 ### Objectives
 
@@ -44,10 +44,10 @@ OpenLSM is an experimental project with the objective of designing low-cost perm
 
 ## Methodology
 
-The methodology for openLSM is to design a reduced-order or finite element model to compute the expected results for a specific motor topology. The resulting model is used to tune design parameters either manually or via algorithmic optimization. The parameters are then used to produce a CAD model, which is fabricated and experimentally tested. Discrepancies between predicted and observed performance are used to update the model for subsequent iterations.
+The methodology for openLSM is to design a analytical or hybrid model to compute the expected results for a specific motor topology. The resulting model is used to tune design parameters either manually or via algorithmic optimization. The parameters are then used to produce a CAD model, which is fabricated and experimentally tested. Discrepancies between predicted and observed performance are used to update the model for subsequent iterations.
 
 ```
-Conceptual Design ↔ Reduced-order / FEA Model
+Conceptual Design ↔ Analytical / Hybrid Models
       ↓
 Design Parameters ↔ Detailed Design (CAD)
       ↓
