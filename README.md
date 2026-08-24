@@ -22,8 +22,6 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
   </em>
 </p>
 
----
-
 ### Overview
 
 ![Status](https://img.shields.io/badge/Status-WIP-FFFFFF?style=flat-square)
