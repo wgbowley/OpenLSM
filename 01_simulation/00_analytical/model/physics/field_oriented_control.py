@@ -2,8 +2,7 @@
 Filename: field_oriented_control.py
 
 Description:
-    FOC equations for the reduced order
-    model of the tubular linear motor.
+    FOC equations for the analytical tubular linear motor.
 """
 
 from builtins import float as f
