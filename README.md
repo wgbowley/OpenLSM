@@ -53,7 +53,7 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
 
 <div align="center">
   <img src="05_media/03_prototype_beta/rev_2/cross_section.png" alt="cross sectional analysis" style="max-width: 600px">
-    <p><em>Prototype Beta REV 2: Cross-sectional view of the tubular linear motor showing the stator & armature.</em></p>
+    <p><em>Prototype Beta: Cross-sectional view of the tubular linear motor showing the stator & armature.</em></p>
 </div>
 
 > See the [motor design notes](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
