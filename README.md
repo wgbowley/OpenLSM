@@ -34,7 +34,8 @@ OpenLSM is an experimental project with the objective of designing low-cost perm
 
 ---
 
-### Prototype Alpha
+### Alpha
+
 
 An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, though the magnitude was not quantified before the PLA coil forms deformed due to thermal stress.
 
@@ -42,15 +43,17 @@ An `ironless planar linear` motor with a polylactic acid (PLA) armature featurin
 <div align="center">
   <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side video on test stand" style="max-width: 600px">
   <br>
-  <em>Prototype Alpha: Side view on test stand</em>
+  <em>Alpha: Side view on test stand</em>
 </div>
 <br>
 
 The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
 
+> See the [motor notes](/02_motors/00_prototype_alpha/readme.md) for the full report on Prototype Alpha.
+
 ---
 
-### Prototype Beta
+### Beta
 *(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*<br>
 *Note: Revision 3 of the ironless tubular linear motor will be fabricated.*
 
@@ -58,7 +61,7 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
 
 <div align="center">
   <img src="05_media/03_prototype_beta/rev_2/cross_section.png" alt="cross sectional analysis" style="max-width: 600px">
-    <p><em>Prototype Beta: Cross-sectional view of the tubular linear motor showing the stator & armature.</em></p>
+    <p><em>Beta: Cross-sectional view of the tubular linear motor showing the stator & armature.</em></p>
 </div>
 
 > See the [motor design notes](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
