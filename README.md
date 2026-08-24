@@ -11,7 +11,7 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 -->
 
 <p align="center">
-  <img src="05_media/01_logos/logo.png" alt="OpenLSM" style="max-width:600px;">
+  <img src="05_media/01_logos/logo.png" alt="OpenLSM" style="width:80%; max-width:100%; display:block;">
   <br>
   <em>
     Low Cost Linear Synchronous Motors
