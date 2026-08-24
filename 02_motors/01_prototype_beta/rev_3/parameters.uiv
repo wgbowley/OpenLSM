@@ -1,3 +1,9 @@
 [version]
 format: 0.1.0
 unit_frame: si_metric.ut
+
+[notes]
+parameters: "prototype_beta/rev_3 design"
+system: "Axisymmetric (Z-R) (Axial-Radial)"
+
+# ---------------------------------------------

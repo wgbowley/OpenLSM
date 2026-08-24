@@ -1,57 +1,56 @@
 [version]
-format: 0.1.0
+format:     0.1.0
 unit_frame: si_metric.ut
 
 
 [notes]
-model: "PLANAR"
-status: "LEGACY"
+parameters: "prototype_alpha design"
+system:     "Cartesian (x, y) (length, width)"
 
-development: "prototype_alpha/main_parameter_file"
-# PLANAR motor parameter file for prototype_alpha/main design.
-# Coordinate system: Cartesian (x, y) with depth extension.
-
+# ---------------------------------------------
 
 [model]
 environmental_material: "air"
-depth: 40 m(m)
+depth:                  40 m(m)
 
 # pole pair = 2 poles per pair
-pole_pairs: 4           (∅)
-number_slots: 6         (∅)
+pole_pairs:             4 (∅)
+number_slots:           6 (∅)
 
+# ---------------------------------------------
 
 [armature.core]
-material: "polylactic acid"
-height_clearance: 1.15 m(m)
+material:           "polylactic acid"
+height_clearance:   1.15 m(m)
 
-slot_pitch: 18.66 m(m)
-slot_core: 3 m(m)
+slot_pitch:         18.66 m(m)
+slot_core:          3 m(m)
 
 [armature.slots]
-material: "copper"
-wire_diameter: 0.2 m(m)
+material:       "copper"
+wire_diameter:  0.2 m(m)
+fill_factor:    0.65
 
-# This is assumed factor for hand-winding. Fill factor = amount of copper in volume
-fill_factor: 0.65
+length:         3 m(m)
+height:         6 m(m)
 
-length: 3 m(m)
-height: 6 m(m)
-
+# ---------------------------------------------
 
 [stator.backplate]
-material: "polylactic acid"
-height: 5 m(m)
+material:   "polylactic acid"
+height:     5 m(m)
 
 [stator.backplate.teeth]
-height: 2 m(m)
-width: 4 m(m)
+height:     2 m(m)
+width:      4 m(m)
 
 [stator.poles]
-material: "NdFeB"
-grade: "N52"
+material:   "NdFeB"
+grade:      "N52"
 
-length: 10 m(m)
-height: 2 m(m)
+length:     10 m(m)
+height:     2 m(m)
 
-pitch: 14 m(m)
+pitch:      14 m(m)
+
+# ---------------------------------------------

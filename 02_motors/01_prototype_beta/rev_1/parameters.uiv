@@ -4,14 +4,10 @@ unit_frame: si_metric.ut
 
 
 [notes]
-model: "TUBULAR"
-type: "QUASI-STATIC-ONLY"
-status: "CONCEPTUAL-ONLY - DO-NOT-FABRICATE"
+parameters: "prototype_beta/rev_1 design"
+system: "Axisymmetric (Z-R) (Axial-Radial)"
 
-development: "prototype_beta/rev_1_parameter_file"
-# The parameter file for the prototype_beta/rev_1 design
-# The coordinate system is axial-symmetric (Z-R) (Axial-Radial).
-
+# ---------------------------------------------
 
 [model]
 environmental_material: "air"
@@ -20,6 +16,7 @@ environmental_material: "air"
 pole_pairs: 4       (∅)
 number_slots: 12    (∅)
 
+# ---------------------------------------------
 
 [armature.core]
 Material: "PTFE"
@@ -56,6 +53,7 @@ radial_clearance: 3 m(m)
 radial_inner_thickness: 2 m(m)
 radial_fin_thickness: 5 m(m)
 
+# ---------------------------------------------
 
 [stator.tube]
 material: "Layered Carbon Fibre Epoxy"
@@ -67,3 +65,5 @@ grade: "N52"
 
 radial_thickness: 5 m(m)
 axial_length: 20 m(m)
+
+# ---------------------------------------------

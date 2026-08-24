@@ -10,7 +10,8 @@
 
 *(TBD) — Work in progress*
 
-This simulation uses only analytical methods to approximate the motor's behaviour for computational efficiency.
+This analytical model uses 1D field approximations and inverse- clark, park transformers to move
+the motor armature along the stator to get a force vs position curve.
 
 ---
 
