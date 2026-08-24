@@ -31,25 +31,6 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 
 OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with analytical and hybrid models.
 
-## Methodology
-
-The methodology for openLSM is to design a analytical or hybrid model to compute the expected results for a specific motor topology. The resulting model is used to tune design parameters either manually or via algorithmic optimization. The parameters are then used to produce a CAD model, which is fabricated and experimentally tested. Discrepancies between predicted and observed performance are used to update the model for subsequent iterations.
-
-```
-Conceptual Design ↔ Analytical / Hybrid Models
-      ↓
-Design Parameters ↔ Detailed Design (CAD)
-      ↓
-Fabrication & Testing
-      ↓
-Post-Analysis & Model Validation
-      ↺
-```
-<div align="center">
-  <em>
-  Figure 1: OpenLSM design methodology. Computational models are iteratively refined through experimental validation.</em>
-</div>
-
 ## Prototype Alpha
 
 An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, though the magnitude was not quantified before the PLA coil forms deformed due to thermal stress.
