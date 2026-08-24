@@ -22,7 +22,7 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
   </em>
 </p>
 
-## Overview
+---
 
 ![Status](https://img.shields.io/badge/Status-WIP-FFFFFF?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-FF8F0E?style=flat-square&color=FF8F0E)
