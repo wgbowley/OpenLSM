@@ -1,11 +1,5 @@
-# Prototype Alpha
 
-<div align="center">
-    <img src="../../05_media/02_prototype_alpha/02_experimental/side_view_with_mounting.jpg" alt="Side view on stand with wiring" style="max-width: 600px">
-</div>
-
-
-# Overview
+## Overview
 
 > [!WARNING]
 >
@@ -13,13 +7,18 @@
 > It has been manufactured, experimentally validated, and performance verified.
 > Do not assume this design is suitable for real-world applications.
 
-Prototype Alpha is an `ironless planar linear motor` with a polylactic acid (PLA) armature featuring 6 slots, hand wound using 0.2 mm diameter enameled copper wire and 5 mm wide Kapton tape, with 2 slots in-series per phase (WYE). The stator, similar to the armature, was printed in PLA and had 4 pole pairs per armature length and 10 pole pairs total. 
+
+Prototype Alpha is an `ironless planar linear motor` with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase (WYE). The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total.
 
 <div align="center">
     <img src="../../05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="Side view on stand" style="max-width: 600px">
 </div>
 
 A linear encoder `(AS5311)` was used to measure the motor position and a SimpleFOC shield was used to control the motor's 3 phases using closed-loop control.
+
+<div align="center">
+    <img src="../../05_media/02_prototype_alpha/02_experimental/side_view_with_mounting.jpg" alt="Side view on stand with wiring" style="max-width: 600px">
+</div>
 
 ## Mechanical & Thermal
 
