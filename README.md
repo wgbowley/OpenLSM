@@ -89,7 +89,7 @@ The radial heat-sink is made of aluminum as mentioned above with radial fins pit
 
 > [!IMPORTANT]
 >
-> See the [motor design notes](/02_motors/02_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
+> See the [motor design notes](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
 
 ## Integrated Sensor Boards
 

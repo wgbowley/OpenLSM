@@ -1,28 +1,29 @@
-## 00_reduced_order
-
-*(TBD) — Work in progress*
+## Simulations
 
 > [!WARNING]
 >
 > Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
+---
 
-## 00_analytical
 
-*(TBD) — Work in progress*
-
-> [!IMPORTANT]
->
-> Overview: This simulation uses only analytical methods to approximate the motor's behaviour for computational efficiency.
-
-## 01_hybrid
+#### [00_analytical](./00_analytical/readme.md) — Analytical Tubular Linear Motor Model
 
 *(TBD) — Work in progress*
 
-> [!IMPORTANT]
->
-> Overview: This simulation uses finite element analysis for the magnets and the Biot–Savart law for the coils.
+This simulation uses only analytical methods to approximate the motor's behaviour for computational efficiency.
 
-## Documentation
+---
+
+#### [00_hybrid](./01_hybrid/readme.md) — FEM & Analytical Tubular Linear Motor Model
+
+*(TBD) — Work in progress*
+
+This simulation uses finite element analysis for the magnets and the Biot–Savart law for the coils. 
+
+Finite Element Solution Tool: [FEMMInterpreter](https://github.com/wgbowley/FEMMInterpreter)
+
+---
+
+### Documentation
 
 Reference: [Build a reduced order model for tubular linear synchronous motors](https://github.com/wgbowley/OpenLSM/issues/7)  
-Reduced Order Modelling tool: [FEMMInterpreter](https://github.com/wgbowley/FEMMInterpreter)

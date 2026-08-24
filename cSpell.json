@@ -102,6 +102,8 @@
     "SOIC",
     "LQFP",
     "BEADC1608X95N",
-    "TSSOP20_AS5311"
+    "TSSOP20_AS5311",
+    "biot",
+    "savart"
   ]
 }
