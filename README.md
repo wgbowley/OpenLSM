@@ -24,14 +24,19 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 
 ---
 
+### Overview
+
 ![Status](https://img.shields.io/badge/Status-WIP-FFFFFF?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-FF8F0E?style=flat-square&color=FF8F0E)
 ![Focus](https://img.shields.io/badge/Focus-Simulation-FFFFFF?style=flat-square)
 ![Domain](https://img.shields.io/badge/Domain-Hardware-FF8F0E?style=flat-square&color=FF8F0E)
 
+
 OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with analytical and hybrid models.
 
-## Prototype Alpha
+---
+
+### Prototype Alpha
 
 An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, though the magnitude was not quantified before the PLA coil forms deformed due to thermal stress.
 
@@ -45,7 +50,9 @@ An `ironless planar linear` motor with a polylactic acid (PLA) armature featurin
 
 The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
 
-## Prototype Beta
+---
+
+### Prototype Beta
 *(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*<br>
 *Note: Revision 3 of the ironless tubular linear motor will be fabricated.*
 
@@ -60,7 +67,9 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
 
 The radial heat-sink is made of aluminum as mentioned above with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
 
-## Integrated Sensor Boards
+---
+
+### Integrated Sensor Boards
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
@@ -82,6 +91,8 @@ The integrated sensor boards are a platform for measuring the motor's position, 
 
 > See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
 
-## Documentation
+---
+
+### Documentation
 
 Each section of the repo is self-documenting. <br>For internal documentation, credits, and contributors, refer to: [here](./04_docs/).
