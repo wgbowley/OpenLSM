@@ -97,3 +97,5 @@ The integrated sensor boards are a platform for measuring the motor's position, 
 ### Documentation
 
 Each section of the repo is self-documenting. <br>For internal documentation, credits, and contributors, refer to: [here](./04_docs/).
+
+---
