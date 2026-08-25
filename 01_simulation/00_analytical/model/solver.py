@@ -21,6 +21,7 @@ class Solver:
     Magnetic Solver for linear tubular motor problem.
     Computes electromagnetic force using magnetic energy and virtual work methods.
     """
+
     def __init__(self, parameters: DynamicLoader) -> None:
         """ Initializes the solver class """
         self._extract_validate(parameters)
@@ -146,10 +147,11 @@ class Solver:
         tube_outer_radius = self.dipole_radial_thickness + self.tube_radial_thickness
         core_inner_radius = tube_outer_radius + self.radial_clearance
         slot_inner_radius = core_inner_radius + self.core_radial_thickness
+        slot_outer_radius = slot_inner_radius + self.slot_radial_thickness
 
         # Calculates the mean radius & effective area
         self.slot_mean_radius = slot_inner_radius + self.slot_radial_thickness / 2
-        self.effective_area = pi * self.slot_mean_radius ** 2
+        self.effective_area = pi * (tube_outer_radius - slot_outer_radius) ** 2
 
         # Calculates the number of turns and inductance
         self.slot_turns = self._compute_turns()

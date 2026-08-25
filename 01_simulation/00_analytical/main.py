@@ -7,7 +7,7 @@ Description:
 """
 
 from pathlib import Path
-from picounits import CURRENT, RESISTANCE, LENGTH, FORCE, INDUCTANCE, Parser
+from picounits import CURRENT, RESISTANCE, LENGTH, FORCE, INDUCTANCE, POWER, Parser
 from matplotlib import pyplot as plt
 
 from model.solver import Solver
@@ -38,6 +38,7 @@ print("-" * 20)
 # List to store
 displacement = []
 force_magnitude = []
+
 for index in range(0, steps):
     # Calculates the armature position
     z_pos = index * step_size + offset
@@ -60,6 +61,7 @@ print(f"Turns:              {solver.slot_turns:.3f}")
 print(f"Line Resistance:    {solver.l2l_resistance * RESISTANCE:.3f}")
 print(f"Line Inductance:    {solver.l2l_inductance * INDUCTANCE:.3f}")
 print(f"Line Current:       {solver.l2l_peak_current * CURRENT:.3f}")
+print(f"Copper Losses:      {solver.l2l_peak_current ** 2 * solver.l2l_resistance * POWER:.3f}")
 print("-" * 20)
 
 # Plotting position Vs magnitude of force

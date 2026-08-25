@@ -6,7 +6,12 @@ Description:
 """
 
 from builtins import float as f
-from math import cosh, pi
+from math import cosh
+
+
+def _anti_derivative_function(z: f, pos: f, radius: f) -> f:
+    """Computes the anti-derivative of the axial Biot-Savart pole field."""
+    return (z - pos) / (radius ** 2 + (z - pos) ** 2) ** 0.5
 
 
 def compute_pole_field_strength(
@@ -23,21 +28,17 @@ def compute_pole_field_strength(
     z_lower = translation - half_length
 
     # Calculates the axial field components via integration
-    term1 = (pos + z_upper) / (radius ** 2 + (pos + z_upper) ** 2) ** 0.5
-    term2 = (pos + z_lower) / (radius ** 2 + (pos + z_lower) ** 2) ** 0.5
+    term2 = _anti_derivative_function(z_upper, pos, radius)
+    term1 = _anti_derivative_function(z_lower, pos, radius)
 
-    # Calculates maximal field strength and returns position dependent strength
-    # Need to derive the formula again to check if pi cancels out or not.
-    h_term = turns * current / (2 * pi * length)
+    h_term = turns * current / (2 * length)
     return h_term * (term2 - term1)
 
 
 def compute_dipole_field_strength(
     pos: f, start, h_field: f, length: f, n: int = 4
 ) -> f:
-    """ 
-    Computes the field strength at a position z along the dipole using a sech approximation.
-    """
+    """ Computes the field strength at a position z along the dipole using a sech approximation. """
     def _sech(x):
         """ Hyperbolic Secant Function """
         try:
