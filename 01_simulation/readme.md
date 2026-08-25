@@ -3,8 +3,8 @@
 > [!WARNING]
 >
 > Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
----
 
+---
 
 #### [00_analytical](./00_analytical/readme.md) — Analytical Tubular Linear Motor Model
 
@@ -28,3 +28,5 @@ Finite Element Solution Tool: [FEMMInterpreter](https://github.com/wgbowley/FEMM
 ### Documentation
 
 Reference: [Build a reduced order model for tubular linear synchronous motors](https://github.com/wgbowley/OpenLSM/issues/7)  
+
+---

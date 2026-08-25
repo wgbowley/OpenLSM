@@ -35,6 +35,7 @@ print(f"Solving Geometry for {parameters.numerics.displacement:.3f} sample")
 print(f"Steps: {steps}, Sample Range: ({offset * LENGTH:.3f}, {-offset * LENGTH:.3f})")
 print("-" * 20)
 
+
 # List to store
 displacement = []
 force_magnitude = []
@@ -63,6 +64,7 @@ print(f"Line Inductance:    {solver.l2l_inductance * INDUCTANCE:.3f}")
 print(f"Line Current:       {solver.l2l_peak_current * CURRENT:.3f}")
 print(f"Copper Losses:      {solver.l2l_peak_current ** 2 * solver.l2l_resistance * POWER:.3f}")
 print("-" * 20)
+
 
 # Plotting position Vs magnitude of force
 plt.figure(figsize=(10, 5))

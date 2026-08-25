@@ -2,7 +2,7 @@
 Filename: field.py
 
 Description:
-    1D field equations for a tubular linear motor.
+    1D field equations for a analytical tubular linear motor.
 """
 
 from builtins import float as f

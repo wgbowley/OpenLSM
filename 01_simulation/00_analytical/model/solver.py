@@ -2,8 +2,8 @@
 Filename: solver.py
 
 Description:
-    Magnetic solver class for calculating the force of a tubular
-    linear motor using virtual work methods.
+    Magnetic solver class for calculating the force of a 
+    tubular linear motor using virtual work methods.
 """
 
 from builtins import float as f
