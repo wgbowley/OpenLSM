@@ -7,7 +7,7 @@ Description:
 """
 
 from builtins import float as f
-from math import pi, floor
+from math import pi, floor, sqrt
 
 from picounits import DynamicLoader, strip_quantity as validate
 from picounits import length, voltage, conductivity, coercivity, nullset
@@ -37,7 +37,7 @@ class Solver:
 
     def update_currents(self, angle: f) -> None:
         """ Updates phase currents based on time """
-        ab_ref = field_oriented_control.inverse_park_transform(0, self.l2l_peak_current, angle)
+        ab_ref = field_oriented_control.inverse_park_transform(0, self.phase_peak_current, angle)
         a, b, c = field_oriented_control.inverse_clarke_transform(ab_ref)
 
         # Updates currents
@@ -57,9 +57,7 @@ class Solver:
         force = - (pos - neg) / (2 * self.der_step_size)
         return abs(force)
 
-    def _compute_energy_state(
-        self, translate: f, dz: f, epsilon: float = 1e-8, window: int = 5
-    ) -> f:
+    def _compute_energy_state(self, translate: f, dz: f, epsilon: float = 1e-8, window: int = 5) -> f:
         """ Computes the co-energy interaction over the relevant domain. """
         positive = self._integrate_sample(dz, translate, epsilon, window)
         negative = self._integrate_sample(-dz, translate, epsilon, window)
@@ -90,7 +88,8 @@ class Solver:
                 below_epsilon = 0
 
             # Breaks loop if below epsilon for more than window iterations
-            if below_epsilon >= window: break
+            if below_epsilon >= window:
+                break
 
             # Moves along the z-axis
             z += dz
@@ -165,16 +164,21 @@ class Solver:
         self.phase_slots = self.number_slots // 3
         self.phase_resistance = self.phase_slots * self.slot_resistance
         self.phase_inductance = self.phase_slots * self.slot_inductance
+        self.phase_voltage = self.line_voltage / sqrt(3)
 
-        # Calculate l2l res, ind and peak current
+        # Calculates the rms and peak currents for WYE
+        self.phase_rms_current = self.phase_voltage / self.phase_resistance
+        self.phase_peak_current = sqrt(2) * self.phase_rms_current
+
+        # Calculate line-to-line resistance & inductance
         self.l2l_resistance = 2 * self.phase_resistance
         self.l2l_inductance = 2 * self.phase_inductance
-        self.l2l_peak_current = self.line_voltage / self.l2l_resistance
+
+        # Calculates the copper losses
+        self.average_losses = 3 * self.phase_rms_current**2 * self.phase_resistance
 
     def _compute_turns(self) -> f:
-        """
-        Computes the number of turns while according for the insulation & stacking. 
-        """
+        """ Computes the number of turns while according for the insulation & stacking. """
         slot_section = self.slot_axial_length * self.slot_radial_thickness
         wire_section = pi * (self.wire_diameter / 2) ** 2
 
@@ -182,17 +186,12 @@ class Solver:
         return floor(effective_area / wire_section)
 
     def _compute_inductance(self) -> f:
-        """ 
-        Calculates the coils self-inductance 
-        independent of mutual inductance between coils. 
-        """
+        """ Calculates the coils self-inductance independent of mutual inductance between coils. """
         term = self.slot_turns ** 2 * self.permeability * self.effective_area
         return term / self.slot_axial_length
 
     def _compute_resistance(self, resistivity: f) -> f:
-        """ 
-        Computes the slots resistance by using mean radius & conductor cross section. 
-        """
+        """ Computes the slots resistance by using mean radius & conductor cross section. """
         turn_length = 2 * pi * self.slot_turns * self.slot_mean_radius
         cross_section = pi * (self.wire_diameter / 2) ** 2
 

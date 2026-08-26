@@ -7,10 +7,11 @@ Description:
 """
 
 from pathlib import Path
-from picounits import CURRENT, RESISTANCE, LENGTH, FORCE, INDUCTANCE, POWER, Parser
+from picounits import CURRENT, RESISTANCE, LENGTH, FORCE, INDUCTANCE, POWER, NULLSET, Parser
 from matplotlib import pyplot as plt
 
 from model.solver import Solver
+
 
 # Loads unit system, material library & parameters
 ROOT_DIR = Path(__file__).resolve().parents[0]
@@ -53,16 +54,16 @@ for index in range(0, steps):
 
     # Prints position every interval
     if index % parameters.numerics.output.interval.stripped == 0:
-        print(f"Position: {z_pos * LENGTH:.3f} = Force: {force * FORCE:.3f}")
+        print(f"Position: {z_pos * LENGTH:.3f} | Force: {force * FORCE:.3f}")
 
 
 # Prints a few different system parameters
 print("-" * 20)
-print(f"Turns:              {solver.slot_turns:.3f}")
+print(f"Slot Turns:         {solver.slot_turns * NULLSET:.3f}")
 print(f"Line Resistance:    {solver.l2l_resistance * RESISTANCE:.3f}")
 print(f"Line Inductance:    {solver.l2l_inductance * INDUCTANCE:.3f}")
-print(f"Line Current:       {solver.l2l_peak_current * CURRENT:.3f}")
-print(f"Copper Losses:      {solver.l2l_peak_current ** 2 * solver.l2l_resistance * POWER:.3f}")
+print(f"Line Current:       {solver.phase_rms_current * CURRENT:.3f}")
+print(f"System Losses:      {solver.average_losses * POWER:.3f}")
 print("-" * 20)
 
 

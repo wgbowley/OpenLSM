@@ -35,9 +35,7 @@ def compute_pole_field_strength(
     return h_term * (term2 - term1)
 
 
-def compute_dipole_field_strength(
-    pos: f, start, h_field: f, length: f, n: int = 4
-) -> f:
+def compute_dipole_field_strength(pos: f, start, h_field: f, length: f, n: int = 4) -> f:
     """ Computes the field strength at a position z along the dipole using a sech approximation. """
     def _sech(x):
         """ Hyperbolic Secant Function """

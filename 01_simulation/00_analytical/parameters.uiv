@@ -8,18 +8,18 @@ system:     "Axisymmetric (Z-R) (Axial-Radial)"
 
 # ---------------------------------------------
 [numerics]
-line_voltage: 24 (V)
-displacement: 500 m(m)
+line_voltage: 12 (V)
+displacement: 300 m(m)
 
 [numerics.samples]
-displacement_size:  5 m(m)
+displacement_size:  1 m(m)
 
 [numerics.solver]
-integration_step:   0.1 m(m)
-derivative_step:    0.1 m(m)
+integration_step:   0.2 m(m)
+derivative_step:    0.2 m(m)
 
 [numerics.output]
-interval: 10 (∅)
+interval: 30 (∅)
 
 # ---------------------------------------------
 

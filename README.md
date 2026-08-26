@@ -14,7 +14,7 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
   <img src="05_media/01_logos/logo.png" alt="OpenLSM" style="width:100%; max-width:100%; display:block;">
   <br>
   <em>
-    Low Cost Linear Synchronous Permanent Motors Platform
+    Low-Cost Linear Synchronous Permanent-Magnet Motor Platform
     <br>
     Engineered by 
     <a href="https://github.com/wgbowley">William Bowley</a>, 
