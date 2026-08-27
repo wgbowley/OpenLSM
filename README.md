@@ -25,7 +25,7 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 
 ### Overview
 
-![Status](https://img.shields.io/badge/Status-WIP-FFFFFF?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Active-FFFFFF?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-FF8F0E?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Linear%20Motors-FFFFFF?style=flat-square)
 ![Scope](https://img.shields.io/badge/Scope-Design%20%26%20Validation-FF8F0E?style=flat-square)
