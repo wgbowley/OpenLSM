@@ -1,5 +1,6 @@
-## Boards
+### Boards
 
+---
 
 #### [00_bridge_driver](00_bridge_driver/readme.md) — Triple Half-Bridge Driver (WIP)
 
