@@ -28,12 +28,12 @@ L3 -> Testing & validation of prototype
 
 Miscellaneous:
 ----------------------------------------------------
-DS -> De-scoped feature, de-scoped analysis
-AC -> Architectural change
-ES -> Electrical systems
-SD -> System development / Architectural development
+DS  -> De-scoped feature, de-scoped analysis
+AC  -> Architectural change
+ES  -> Electrical systems
+SD  -> System development / Architectural development
 SIM -> Simulations & modelling
-AN -> Weekly application notes
+AN  -> Weekly application notes
 ----------------------------------------------------
 ```
 
