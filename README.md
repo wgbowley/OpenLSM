@@ -83,7 +83,7 @@ The radial heat-sink is made of aluminum with radial fins pitched at `1.50 mm`, 
 
 ---
 
-### Analytical & Hybrid Simulations
+### Simulations
 
 #### Analytical
 
