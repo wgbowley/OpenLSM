@@ -34,8 +34,6 @@ OpenLSM is an experimental project with the objective of designing low-cost perm
 
 > This project has no commercial aspirations. Its designs and contributions will remain available under the `MIT` License.
 
----
-
 ### Objectives
 
 ```
