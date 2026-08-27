@@ -1,6 +1,6 @@
 [version]
 format:     0.1.1
-unit_frame: metric.ut
+unit_frame: derived.ut
 
 [notes]
 simulation: "Analytical Model"
