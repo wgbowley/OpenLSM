@@ -1,8 +1,10 @@
-## Prototype Beta
+### Prototype Beta
 
 Prototype Beta explores thermal management strategies for the `ironless tubular linear` motor topology. Two conceptual design revisions were developed to inform decisions for Revision 3, which is currently being designed.
 
-## Revisions
+---
+
+#### Revisions
 
 > [!WARNING]
 >

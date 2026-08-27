@@ -1,5 +1,5 @@
 
-## Overview
+### Overview
 
 > [!WARNING]
 >
@@ -20,11 +20,15 @@ A linear encoder `(AS5311)` was used to measure the motor position and a SimpleF
     <img src="../../05_media/02_prototype_alpha/02_experimental/side_view_with_mounting.jpg" alt="Side view on stand with wiring" style="max-width: 600px">
 </div>
 
-## Mechanical & Thermal
+---
+
+### Mechanical & Thermal
 
 The pole length was `10 mm`, pole width was `40 mm` and the pole-to-pole pitch was `14 mm`. The armature had slot lengths of `9 mm` with slot thickness of `3 mm` and a slot holder thickness of `3 mm`. The slot heights were `6 mm` and the slot-to-slot pitch was `18.66 mm`. This design had no passive or active thermal design, instead relying on convection from the coil surfaces to the atmosphere to dissipate heat.
 
-## Electromagnetic
+---
+
+### Electromagnetic
 
 As stated above, the pole pitch was `14 mm` and the slot pitch was `18.66 mm`, with `2 slots` in series per phase and 4 pole pairs per armature length, achieving a pole-slot ratio of `6 slots - 8 poles` and hence a synchronous frequency:
 
@@ -32,7 +36,9 @@ $$ v = f \cdot 2 \cdot p_{\text{pitch}} \;\rightarrow\; f = \frac{v}{2 \cdot p_{
 
 Due to the `6 slots - 8 poles` configuration, this motor is a fractional-slot concentrated motor, which may have helped decrease cogging torque because the poles and slots do not line up evenly and hence have no preferred configuration.
 
-## Construction
+---
+
+### Construction
 
 The armature slots were wound individually with approximately the same number of turns. The first slot was then connected in series with the 4th slot, the second slot with the 5th slot, etc. Those `2 slot` phases were then connected in a WYE configuration using a proto-board, and a 3-pin JST connector was used as the motor input. The neutral phase tap was left exposed as a common reference point for measuring.
 
@@ -42,16 +48,22 @@ The armature slots were wound individually with approximately the same number of
 
 The stator was constructed using through-thickness magnetized N52 poles, with each pole rotated `180 degrees` with respect to the last to produce an effective stator field. The poles were attached using generic superglue, and an `MG-series` linear rail was mounted to the back of the stator, which connected the armature and stator together via U-shaped mounting plates.
 
-## Results
+---
+
+### Results
 
 The motor moved and was able to move `1 kg` load with ease, but the amount of precision and force is unknown. The coil forms collapsed in on themselves due to thermal stress, which caused the slots to detach from the armature and increase friction against the stator. 
 
 The control scheme seemed to work well, but the exact precision was not quantified due to thermal stress. It seemed to have issues with deriving `PID` control parameters, possibly due to the fractional-slot configuration or inconsistent resistance and inductance per phase.
 
-## Conclusions 
+---
+
+### Conclusions 
 
 The `planar` linear motor did work and produce force, but the amount could not be quantified, nor could the control scheme be fully tested. Future iterations should focus on improving thermal characteristics by managing phase resistance, as `ironless` motors lose a lot of energy to `copper losses`. Beyond thermal considerations, future iterations should aim for similar inductance and resistance for each of the motor's phases to potentially improve control characteristics.
 
 <div align="center">
     <img src="../../05_media/02_prototype_alpha/02_experimental/stand_and_motor.png" alt="Stand & Motor" style="max-width: 600px">
 </div>
+
+---

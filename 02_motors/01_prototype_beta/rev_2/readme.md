@@ -1,4 +1,4 @@
-## Overview
+### Overview
 
 > [!WARNING]
 >
@@ -11,7 +11,9 @@
 
 <div align="center"><img src="../../../05_media/03_prototype_beta/rev_2/cross_section.png" alt="Cross Sectional Analysis" style="max-width: 600px"></div>
 
-## Eddy Current Analysis
+---
+
+### Eddy Current Analysis
 
 An interesting design note about `revision 2` is the use of a radial heat-sink made of `aluminum` specifically `6061` as conductive materials are often avoided. They are avoided because the armature produces a changing magnetic field to produce changes in energy density which lead to force. But as a consequence of this, swirling currents are induced within conductive materials near the source. These currents are called `eddy currents` or `Foucault currents` as they produce opposing magnetic fields that decrease efficiency. A proportional model is:
 
@@ -41,3 +43,5 @@ Therefore, with a pole pitch of `20 mm` and an assumed velocity of `1 m/s`, the 
 This is an extension of the work described above. The graph shows 296 motor designs transitioning from point A to point B at a target velocity of `200 mm/s`. The goal of this study was to optimize the motor design using evolutionary algorithms. The simulation ran for 7 days and solved approximately `1.5 million` finite element frames, as each point-to-point simulation was a quasi-transient loop.
 
 The code is not included in this repository because it would be practically impossible to validate, and the PD-PI loop contained a few errors that shifted the results.
+
+---

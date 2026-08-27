@@ -1,4 +1,4 @@
-## Overview
+### Overview
 
 > [!WARNING]
 >
@@ -12,6 +12,10 @@ alongside it. This prototype is intended to serve to prove the thermal analysis 
 This prototype will most likely use an outer radial heat sink made of `aluminum`, with coils potted into that
 heat sink and the final inner bore hole being machined out.
 
-## Documentation
+---
+
+### Documentation
 
 Reference: [Defining constraints and success metrics for prototype beta rev 3](https://github.com/wgbowley/OpenLSM/issues/5)
+
+---

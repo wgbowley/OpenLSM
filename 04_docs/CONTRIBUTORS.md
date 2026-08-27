@@ -1,5 +1,5 @@
 
-## Contributors
+### Contributors
 
 OpenLSM code is developed using:
 - `pylint` as the linter
@@ -22,3 +22,5 @@ My personal VS Code workflow also includes:
 - `isort`
 - `Python Indent`
 - `UnitValues` for syntax highlighting for `.ut` and `.uiv`
+
+---
