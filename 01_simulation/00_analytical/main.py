@@ -36,25 +36,25 @@ print(f"Solving Geometry for {parameters.numerics.displacement:.3f} sample")
 print(f"Steps: {steps}, Sample Range: ({offset * LENGTH:.3f}, {-offset * LENGTH:.3f})")
 print("-" * 20)
 
-
 # List to store
 displacement = []
 force_magnitude = []
 
 for index in range(0, steps):
     # Calculates the armature position
-    z_pos = index * step_size + offset
+    z_output = index * step_size + offset
+    z_solver = z_output - solver.armature_offset
 
     # Updates the currents & calculates force
-    force = solver.compute_force(z_pos)
+    force = solver.compute_force(z_solver)
 
     # Calculates force over z distance
     force_magnitude.append(force)
-    displacement.append(z_pos)
+    displacement.append(z_output)
 
     # Prints position every interval
     if index % parameters.numerics.output.interval.stripped == 0:
-        print(f"Position: {z_pos * LENGTH:.3f} | Force: {force * FORCE:.3f}")
+        print(f"Position: {z_output * LENGTH:.3f} | Force: {force * FORCE:.3f}")
 
 
 # Prints a few different system parameters
@@ -62,7 +62,7 @@ print("-" * 20)
 print(f"Slot Turns:         {solver.slot_turns * NULLSET:.3f}")
 print(f"Line Resistance:    {solver.l2l_resistance * RESISTANCE:.3f}")
 print(f"Line Inductance:    {solver.l2l_inductance * INDUCTANCE:.3f}")
-print(f"Line Current:       {solver.phase_rms_current * CURRENT:.3f}")
+print(f"Line Current:       {solver.phase_rms_current * CURRENT:.3f} (RMS)")
 print(f"System Losses:      {solver.average_losses * POWER:.3f}")
 print("-" * 20)
 

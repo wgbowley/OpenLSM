@@ -55,7 +55,7 @@ class Solver:
         neg = self._compute_energy_state(z_pos - self.der_step_size, self.int_step_size)
 
         force = - (pos - neg) / (2 * self.der_step_size)
-        return abs(force)
+        return force
 
     def _compute_energy_state(self, translate: f, dz: f, epsilon: float = 1e-8, window: int = 5) -> f:
         """ Computes the co-energy interaction over the relevant domain. """
@@ -99,7 +99,8 @@ class Solver:
     def _armature_field(self, pos: f = 0.0, translation: f = 0.0) -> f:
         """ Solves for the armature field at a specific z-position """
         phases = [self.i_pha, self.i_phb, self.i_phc]
-        offset = - self.number_slots * self.axial_slot_pitch / 2
+        half_length = - self.number_slots * self.axial_slot_pitch / 2
+        offset = self.armature_offset + half_length
 
         field_strength = 0.0
         for index in range(0, self.number_slots):
@@ -111,7 +112,7 @@ class Solver:
             slot_pos = offset + translation + self.axial_slot_pitch * index
 
             # Takes the sum of the fields at that position
-            field_strength += field_equations.compute_pole_field_strength(
+            field_strength += field_equations.pole_field_strength(
                 pos,
                 slot_pos,
                 phase,
@@ -122,22 +123,27 @@ class Solver:
 
         return field_strength
 
-    def _stator_field(self, pos: f = 0.0) -> f:
-        """ Solves for the stator field at a specific z-position. """
-        poles = int(self.tube_length / self.dipole_axial_length)
-        offset = - self.tube_length / 2
-
-        field_strength = 0
-        for index in range(0, poles):
-            # Calculates the next pole position along the z-axis
-            pole_pos = offset + self.dipole_axial_length * index
-
-            field_strength += (-1) ** index * field_equations.compute_dipole_field_strength(
+    def _stator_dipole(self, index: int, pos: float, pole_pos: float) -> float:
+        """ Single dipole within the motors stator """
+        return (-1) ** index * (
+            field_equations.dipole_field_strength(
                 pos,
                 pole_pos,
                 self.coercivity,
                 self.dipole_axial_length
             )
+        )
+
+    def _stator_field(self, pos: f = 0.0) -> f:
+        """ Solves for the stator field at a specific z-position. """
+        poles = int(self.tube_length / self.dipole_axial_length)
+        half_poles = poles // 2
+
+        # Include both positive and negative
+        field_strength = 0
+        for index in range(-half_poles + 1, half_poles):
+            pole_pos = self.dipole_axial_length * index
+            field_strength += self._stator_dipole(index, pos, pole_pos)
 
         return field_strength
 
@@ -146,11 +152,10 @@ class Solver:
         tube_outer_radius = self.dipole_radial_thickness + self.tube_radial_thickness
         core_inner_radius = tube_outer_radius + self.radial_clearance
         slot_inner_radius = core_inner_radius + self.core_radial_thickness
-        slot_outer_radius = slot_inner_radius + self.slot_radial_thickness
 
         # Calculates the mean radius & effective area
         self.slot_mean_radius = slot_inner_radius + self.slot_radial_thickness / 2
-        self.effective_area = pi * (tube_outer_radius - slot_outer_radius) ** 2
+        self.effective_area = pi * self.slot_radial_thickness ** 2
 
         # Calculates the number of turns and inductance
         self.slot_turns = self._compute_turns()
@@ -176,6 +181,9 @@ class Solver:
 
         # Calculates the copper losses
         self.average_losses = 3 * self.phase_rms_current**2 * self.phase_resistance
+
+        # Armature Offsets (z_0)
+        self.armature_offset = self.dipole_axial_length / 2
 
     def _compute_turns(self) -> f:
         """ Computes the number of turns while according for the insulation & stacking. """

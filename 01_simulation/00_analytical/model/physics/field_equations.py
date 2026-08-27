@@ -14,13 +14,10 @@ def _anti_derivative_function(z: f, pos: f, radius: f) -> f:
     return (z - pos) / (radius ** 2 + (z - pos) ** 2) ** 0.5
 
 
-def compute_pole_field_strength(
+def pole_field_strength(
     pos: f, translation: f, current: f, turns: f, length: f, radius: f
 ) -> f:
-    """
-    Computes the field strength at a position z along the pole using
-    the finite pole model in axial-symmetric modelling (Z-R)
-    """
+    """ Computes the field strength at a position z along the pole using the finite pole model """
     half_length = length / 2
 
     # Integral Bounds
@@ -35,20 +32,31 @@ def compute_pole_field_strength(
     return h_term * (term2 - term1)
 
 
-def compute_dipole_field_strength(pos: f, start, h_field: f, length: f, n: int = 4) -> f:
-    """ Computes the field strength at a position z along the dipole using a sech approximation. """
-    def _sech(x):
-        """ Hyperbolic Secant Function """
-        try:
-            return 1 / cosh(x)
-        except OverflowError:
-            return 0.0
+def _sech(z: float) -> float:
+    """ Hyperbolic Secant Function """
+    try:
+        return 1 / cosh(z)
 
+    except OverflowError:
+        return 0.0
+
+
+def _derived_pole_function(pos: f, offset: f, length: f, n: int) -> f:
+    """ Computes the field strength at a position z along the pole """
+    return _sech(n * (pos - offset) / length) ** 2
+
+
+def dipole_field_strength(pos: f, start, h_field: f, length: f, n: int = 4) -> f:
+    """ Computes the field strength at a position z along the dipole using a sech approximation. """
     half_length = length / 2
 
+    # Pole locations
+    z_upper = start - half_length
+    z_lower = start + half_length
+
     # Calculates the axial field components (term 1 & term 2)
-    term1 = _sech(n * ((pos - start) + half_length) / length) ** 2
-    term2 = _sech(n * ((pos - start) - half_length) / length) ** 2
+    term2 = _derived_pole_function(pos, z_upper, length, n)
+    term1 = _derived_pole_function(pos, z_lower, length, n)
 
     # Calculates the field strength at `z_pos`
-    return h_field * (term1 - term2)
+    return h_field * (term2 - term1)
