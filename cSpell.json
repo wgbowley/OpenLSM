@@ -104,6 +104,7 @@
     "BEADC1608X95N",
     "TSSOP20_AS5311",
     "biot",
-    "savart"
+    "savart",
+    "matplotlib"
   ]
 }

@@ -12,7 +12,7 @@ over the z-axis to compute force.
 
 ---
 
-#### [00_hybrid](./01_hybrid/readme.md) — FEM & Analytical Tubular Linear Motor Model
+#### [00_hybrid](./01_hybrid/readme.md) — Hybrid Tubular Linear Motor Model
 
 *(TBD) — Work in progress*
 
