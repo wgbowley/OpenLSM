@@ -94,6 +94,7 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
   <p><em>1D field approximation and FOC showing position (linear) vs force (linear).</em></p>
 </div>
 
+See the [Analytical Model](./01_simulation/00_analytical/readme.md) for the mathematical/computational implementation.
 
 ### Hybrid
 
