@@ -19,7 +19,7 @@ integration_step:   0.2 m(m)
 derivative_step:    0.2 m(m)
 
 [numerics.output]
-interval: 30 (∅)
+interval: 20 (∅)
 
 # ---------------------------------------------
 

@@ -23,7 +23,6 @@ parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
 # Magnetic Solver for tubular linear motor
 solver = Solver(parameters)
 
-
 # Calculates the sampling domain & step sizes
 z_sample = parameters.numerics.displacement.stripped
 step_size = parameters.numerics.samples.displacement_size.stripped
@@ -71,10 +70,18 @@ plt.figure(figsize=(10, 5))
 plt.plot(displacement, force_magnitude, color="black")
 
 # Graph styling details
-plt.title("Analytical Model: Force vs Position")
+plt.title(f"Analytical FOC Model: Force vs Position @ {solver.phase_rms_current * CURRENT:.3f} (RMS)")
 plt.xlabel("Position (m)")
 plt.ylabel("|Force| (N)")
 
+# Vertical lines at stator boundaries
+stator = parameters.stator.length.stripped
+stator_half = stator / 2
+
+plt.axvline(x=-stator_half, color='red', linestyle='--', linewidth=2, label='Stator End')
+plt.axvline(x=stator_half, color='red', linestyle='--', linewidth=2)
+
+plt.legend()
 plt.grid(True, linestyle=':', alpha=0.6)
 plt.tight_layout()
 
