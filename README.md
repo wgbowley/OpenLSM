@@ -32,8 +32,6 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 
 OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with analytical and hybrid models.
 
-> This project has no commercial aspirations. Its designs and contributions will remain available under the `MIT` License.
-
 ### Objectives
 
 ```
@@ -44,6 +42,8 @@ OpenLSM is an experimental project with the objective of designing low-cost perm
 - Validate motor performance and generate performance curves for each voltage range.
 - Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
 ```
+
+> This project has no commercial aspirations. Its designs and contributions will remain available under the `MIT` License.
 
 ---
 
