@@ -32,7 +32,6 @@ steps = int(z_sample / step_size)
 offset = - z_sample / 2
 
 # Begins position vs force sampling
-print(f"Solving Geometry for {parameters.numerics.displacement:.3f} sample")
 print(f"Steps: {steps}, Sample Range: ({offset * LENGTH:.3f}, {-offset * LENGTH:.3f})")
 print("-" * 20)
 
@@ -63,7 +62,7 @@ print(f"Slot Turns:         {solver.slot_turns * NULLSET:.3f}")
 print(f"Line Resistance:    {solver.l2l_resistance * RESISTANCE:.3f}")
 print(f"Line Inductance:    {solver.l2l_inductance * INDUCTANCE:.3f}")
 print(f"Line Current:       {solver.phase_rms_current * CURRENT:.3f} (RMS)")
-print(f"System Losses:      {solver.average_losses * POWER:.3f}")
+print(f"System Losses:      {solver.average_losses * POWER:.3f} (Copper)")
 print("-" * 20)
 
 

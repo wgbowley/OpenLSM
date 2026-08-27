@@ -89,7 +89,7 @@ The radial heat-sink is made of aluminum with radial fins pitched at `1.50 mm`, 
 
 ``Analytical``
 
-This analytical model uses 1D field approximations and inverse Clarke and Park transforms to move the motor armature along the stator to produce a force vs position curve.
+This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
 
 ``Hybrid``
 

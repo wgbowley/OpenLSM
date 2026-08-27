@@ -9,7 +9,7 @@ system:     "Axisymmetric (Z-R) (Axial-Radial)"
 # ---------------------------------------------
 [numerics]
 line_voltage: 12 (V)
-displacement: 300 m(m)
+displacement: 400 m(m)
 
 [numerics.samples]
 displacement_size:  1 m(m)
