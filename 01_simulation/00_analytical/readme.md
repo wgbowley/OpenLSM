@@ -3,6 +3,25 @@
 This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, then uses 1D field 
 approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
 
+#### High Level Topology
+
+```
+Z-axis Position (z)
+    ↓
+Electrical Angle (Radians)
+    ↓
+Phase Currents (I_a, I_b, I_c)
+    ↓
+1D Magnetostatic Fields (Armature, Stator)
+    ↓
+Integration of Fields for Co-Energy
+    ↓
+Spatial Derivative of Co-Energy Along Z-axis
+    ↓
+Force on Armature at That Position
+    ↺ (Moves to next position)
+```
+
 > Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
 
 ---
