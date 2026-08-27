@@ -1,9 +1,5 @@
 ### Simulations
 
-> [!WARNING]
->
-> Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
-
 ---
 
 #### [00_analytical](./00_analytical/readme.md) — Analytical Tubular Linear Motor Model
