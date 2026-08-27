@@ -93,7 +93,7 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
 
 ``Hybrid``
 
-This hybrid model is proposed to use finite element methods to produce a vector potential field for the magnets, and then use the Biot–Savart law analytically for the coils.
+*(TBD) — Work in progress*
 
 ---
 

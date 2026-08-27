@@ -2,8 +2,6 @@
 
 *(TBD) — Work in progress*
 
-> [!WARNING]
->
 > Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
 
 ---
@@ -25,7 +23,7 @@
 
 ### Documentation
 
-Reference: [Build a reduced order model for tubular linear synchronous motors](https://github.com/wgbowley/OpenLSM/issues/7)
+Reference: [Build a reduced order model for tubular linear synchronous motors](https://github.com/wgbowley/OpenLSM/issues/7)<br>
 Reduced Order Modelling tool: [FEMMInterpreter](https://github.com/wgbowley/FEMMInterpreter)
 
 ---

@@ -16,8 +16,6 @@ over the z-axis to compute force.
 
 *(TBD) — Work in progress*
 
-This simulation uses finite element analysis for the magnets and the Biot–Savart law for the coils. 
-
 Finite Element Solution Tool: [FEMMInterpreter](https://github.com/wgbowley/FEMMInterpreter)
 
 ---
