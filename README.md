@@ -85,13 +85,13 @@ The radial heat-sink is made of aluminum with radial fins pitched at `1.50 mm`, 
 
 ### Analytical & Hybrid Simulations
 
-*(TBD) — Work in progress*
+*(Work in progress)*
 
-#### Analytical
+``Analytical``
 
 This analytical model uses 1D field approximations and inverse Clarke and Park transforms to move the motor armature along the stator to produce a force vs position curve.
 
-#### Hybrid
+``Hybrid``
 
 This hybrid model is proposed to use finite element methods to produce a vector potential field for the magnets, and then use the Biot–Savart law analytically for the coils. This proposed workflow may produce more accurate dynamics than the 1D analytical model.
 
