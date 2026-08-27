@@ -100,13 +100,13 @@ See the [Model Notes](./01_simulation/00_analytical/readme.md) for the mathemati
 
 ### Hybrid
 
-*(TBD) — Work in progress*
+> *(Work in progress). This hybrid simulation is currently be designed and implemented.*
 
 ---
 
 ### Bridge Driver
 
-*(Work in progress)*
+> *(Work in progress). This board is currently be designed and implemented.*
 
 A triple half-bridge driver with an operating voltage of `0–96 V` and current of `0–25 A`. It supports `step/dir` and `CANBUS` input interfaces, incremental encoder and Hall-effect sensor inputs from the motor, and `RS-485/RS-422` for the armature board.
 
