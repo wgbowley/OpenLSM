@@ -93,7 +93,7 @@ This analytical model uses 1D field approximations and inverse Clarke and Park t
 
 ``Hybrid``
 
-This hybrid model is proposed to use finite element methods to produce a vector potential field for the magnets, and then use the Biot–Savart law analytically for the coils. This proposed workflow may produce more accurate dynamics than the 1D analytical model.
+This hybrid model is proposed to use finite element methods to produce a vector potential field for the magnets, and then use the Biot–Savart law analytically for the coils.
 
 ---
 
