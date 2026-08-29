@@ -71,9 +71,13 @@ The `armature board` is intended to be located either tangentially to the armatu
 
 *(TBD) — Work in progress*
 
-> [!important]
+> [!IMPORTANT]
 >
 > Programming is done via a `2×3 pin`, `2.54 mm` vertical male connector on the armature board, located near the `STM32G431K8Tx`.
+
+> [!WARNING]
+>
+> SWO is connected to the wrong pin PB3 instead of PA3 hence SWO will not work if not soldered across with a jumper.
 
 ---
 

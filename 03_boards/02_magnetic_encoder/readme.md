@@ -85,7 +85,7 @@ The `linear scale` and `encoder head` should be aligned with each other's centre
 
 The `encoder board` is `30 mm` in length and `40 mm` in height. The board has a GND and power plane, with the traces embedded into the power plane layer. The board also has M2 bolt holes with a diameter of `~2.10 mm` in a rectangular mounting pattern of `23 mm` and `16.5 mm`. Each M2 bolt hole is directly connected to the GND plane with exposed conductive material around the entire hole.
 
-> [!important]
+> [!IMPORTANT]
 >
 > The magnetic scale is currently centred on the die centre line. Offsetting the scale relative to the die is not required here, as the `~10 mm` scale width provides sufficient margin for alignment tolerances.
 
