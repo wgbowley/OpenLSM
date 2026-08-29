@@ -15,8 +15,13 @@ Uses the `IRS2104` gate driver for each half bridge and the `SUD90330E` n-channe
 ### Power topology
 
 ```
-Main 12 V -> 3.3 V MCU source |  Isolated 12 V & 3.3 V
-Driver up to 96 V for the motor.
+Control Side:
+INPUT (24v) -> LM2596S-12 (12v) LM2596S-5 (5v) -> LD1117V33 (3.3v) 
+
+---
+Isolated Side:
+Input (up to 96V)
+
 ```
 
 ---
