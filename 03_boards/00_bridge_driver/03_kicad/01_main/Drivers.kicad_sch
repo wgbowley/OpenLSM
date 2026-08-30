@@ -6,6 +6,7 @@
 	(paper "A4")
 	(title_block
 		(title "Phase Drivers & Isolation")
+		(rev "0")
 	)
 	(lib_symbols
 		(symbol "2026-07-25_11-21-53:ISO7740DWR"
@@ -1950,6 +1951,26 @@
 		)
 		(uuid "133dd8dd-1db5-4943-88d0-d891413ad076")
 	)
+	(text "F, C"
+		(exclude_from_sim no)
+		(at 145.034 68.834 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "312db493-54c8-4deb-b956-b3aac1005905")
+	)
+	(text "F, C"
+		(exclude_from_sim no)
+		(at 51.308 91.186 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "5b863c99-af16-4d85-9f42-466882c301c0")
+	)
 	(text "Triple Half bridges \nPhase A"
 		(exclude_from_sim no)
 		(at 21.59 22.352 0)
@@ -1960,6 +1981,26 @@
 			(justify left)
 		)
 		(uuid "847ea21d-daab-4b35-a1f5-238fcecd89f8")
+	)
+	(text "F, C"
+		(exclude_from_sim no)
+		(at 148.59 91.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "948fd542-b737-40e7-8f82-6ed20eaceb32")
+	)
+	(text "F, C"
+		(exclude_from_sim no)
+		(at 72.898 70.612 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "9e5113a9-7088-4565-a51c-72e22f8a96a4")
 	)
 	(text "Phase B"
 		(exclude_from_sim no)

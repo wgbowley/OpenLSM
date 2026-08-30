@@ -11,6 +11,7 @@
 *.aux
 *.lck
 *.zip
+*.raw
 
 # Ignore folders
 .history
