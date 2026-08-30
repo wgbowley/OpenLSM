@@ -81,7 +81,7 @@ $$
 
 where $N$ is the number of turns within a slot and $I$ is the current moving through that slot's phase. This field is then used as a pole primitive to produce the armature fields via superposition:
 
-$$H_{\text{armature}}(z) = \sum_{i=0}^{N_{\text{slots}}} (-1)^{i+1} \cdot h_{\text{coil}}\left(z, \, z_i, \, I_{\text{ph}(i)}, \, N_{\text{turns}}\right)$$
+$$H_{\text{armature}}(z) = \sum_{i=0}^{N_{\text{slots}}} (-1)^{i+1} \cdot h_{\text{coil}}\left(z, z_i, I_{\text{ph}(i)}, N_{\text{turns}}\right)$$
 
 where $N_{\text{slots}}$ is the number of slots and $(-1)^{i+1}$ encodes the slot polarity within the armature.
 
