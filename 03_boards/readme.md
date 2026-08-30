@@ -43,3 +43,5 @@ A sensor board that connects to the driver over `RS-485/RS-422`. It features `8`
 </div>
 
 A breakout and mechanical interface for the `AS5311` linear encoder, providing a resolution of `1.95 µm` and an estimated accuracy of `10–20 µm`, depending on mechanical implementation factors. The encoder operates from `0–600 mm/s` and is an incremental `A`, `B`, `Index` type.
+
+---

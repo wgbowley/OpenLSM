@@ -1,28 +1,22 @@
-## 00_reduced_order
+### Simulations
+
+---
+
+#### [00_analytical](./00_analytical/readme.md) — Analytical Tubular Linear Motor Model
+
+<div align="center">
+  <img src="../05_media/00_simulation/00_analytical/example.png" alt="Analytical model" style="max-width: 600px">
+  <p><em>1D field approximation and FOC showing position (linear) vs force (linear).</em></p>
+</div>
+
+This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, 
+then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative 
+over the z-axis to compute force.
+
+---
+
+#### [00_hybrid](./01_hybrid/readme.md) — Hybrid Tubular Linear Motor Model
 
 *(TBD) — Work in progress*
 
-> [!WARNING]
->
-> Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
-
-## 00_analytical
-
-*(TBD) — Work in progress*
-
-> [!IMPORTANT]
->
-> Overview: This simulation uses only analytical methods to approximate the motor's behaviour for computational efficiency.
-
-## 01_hybrid
-
-*(TBD) — Work in progress*
-
-> [!IMPORTANT]
->
-> Overview: This simulation uses finite element analysis for the magnets and the Biot–Savart law for the coils.
-
-## Documentation
-
-Reference: [Build a reduced order model for tubular linear synchronous motors](https://github.com/wgbowley/OpenLSM/issues/7)  
-Reduced Order Modelling tool: [FEMMInterpreter](https://github.com/wgbowley/FEMMInterpreter)
+---

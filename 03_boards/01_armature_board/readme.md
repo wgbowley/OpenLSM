@@ -1,4 +1,4 @@
-## Overview
+### Overview
 
 <!-- Need to update those images with the populated PCBs and also they need to be cleaned up -->
 <!-- They need to be updated in general. Those images are pretty poor quality --> 
@@ -21,7 +21,9 @@ OpenLSM uses `closed-loop control` to position the motor's armature. This requir
 
 The array consists of `8` NTC thermistors and an analog multiplexer, which feeds into the ADC pin on the peripheral controller. The data collected from these sensors is then processed into relevant quantities and sent over the `RS-485/RS-422` link to the motor controller board.
 
-## High-level topology
+---
+
+### High-level topology
 
 The `armature board`'s main function is to collect the data from the integrated accelerometer, integrated thermal array and encoder board, then process the data into quantities and send it to the motor controller board. Given the locality to the armature slots and their tendency to produce electromagnetic noise, an `RS-422/RS-485` differential link was used.
 
@@ -43,8 +45,9 @@ Thermistor Array (800 Hz), SPI Accelerometer, Linear Encoder Interconnect (350 k
 -------------------------------------------------
 ```
 
+---
 
-## Mechanical Considerations
+### Mechanical Considerations
 
 <div align="center">
   <table>
@@ -62,14 +65,24 @@ Thermistor Array (800 Hz), SPI Accelerometer, Linear Encoder Interconnect (350 k
 
 The `armature board` is intended to be located either tangentially to the armature or below the armature in parallel with the linear rail carriage face. The board is `60 mm` in length and `40 mm` in width. The board has a GND and power plane, with the traces embedded into the power plane layer. The board also has M2 bolt holes with a diameter of `~2.10 mm` in a rectangular mounting pattern of `54 mm` and `34 mm`. Each M2 bolt hole is directly connected to the GND plane with exposed copper around the entire hole.
 
-## Software considerations
+---
+
+### Software considerations
 
 *(TBD) — Work in progress*
 
-> [!important]
+> [!IMPORTANT]
 >
 > Programming is done via a `2×3 pin`, `2.54 mm` vertical male connector on the armature board, located near the `STM32G431K8Tx`.
 
-## Documentation
+> [!WARNING]
+>
+> SWO is connected to the wrong pin PB3 instead of PA3 hence SWO will not work if not soldered across with a jumper.
+
+---
+
+### Documentation
 
 Design notes and implementation decisions are documented in [issue #11](https://github.com/wgbowley/OpenLSM/issues/11).
+
+---

@@ -2,14 +2,12 @@
 Filename: main.py
 
 Description:
-    Reduced order model for tubular linear synchronous motor. 
-    
-    Do not assume the resulting design variables are suitable for 
-    fabrication or real-world use without further analysis.
+    1D analytical simulation for
+    a tubular linear synchronous motor. 
 """
 
 from pathlib import Path
-from picounits import Parser, current, resistance
+from picounits import CURRENT, RESISTANCE, LENGTH, FORCE, INDUCTANCE, POWER, NULLSET, Parser
 from matplotlib import pyplot as plt
 
 from model.solver import Solver
@@ -20,47 +18,70 @@ ROOT_DIR = Path(__file__).resolve().parents[0]
 
 # Materials & Parameter files
 parameters_path = ROOT_DIR / "parameters.uiv"
-parameters = Parser.open(parameters_path, ROOT_DIR / "../metric.ut")
+parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
 
 # Magnetic Solver for tubular linear motor
 solver = Solver(parameters)
 
-time = parameters.numerics.time.stripped
-
 # Calculates the sampling domain & step sizes
-z_sample = parameters.numerics.sampling_size.stripped
-step_size = parameters.numerics.displacement_step_size.stripped
+z_sample = parameters.numerics.displacement.stripped
+step_size = parameters.numerics.samples.displacement_size.stripped
 
 steps = int(z_sample / step_size)
 offset = - z_sample / 2
 
-print("-" * 20)
-print(f"Turns: {solver.slot_turns}, Line Res: {solver.l2l_resistance * resistance}")
-print(f"Line Current: {solver.l2l_peak_current * current}")
+# Begins position vs force sampling
+print(f"Steps: {steps}, Sample Range: ({offset * LENGTH:.3f}, {-offset * LENGTH:.3f})")
 print("-" * 20)
 
 # List to store
-displacement_data = []
-force = []
+displacement = []
+force_magnitude = []
+
 for index in range(0, steps):
     # Calculates the armature position
-    z_pos = index * step_size + offset
-    solver.update_currents(0)
+    z_output = index * step_size + offset
+    z_solver = z_output - solver.armature_offset
+
+    # Updates the currents & calculates force
+    force = solver.compute_force(z_solver)
 
     # Calculates force over z distance
-    force.append(solver.compute_force(z_pos))
-    displacement_data.append(z_pos)
-    print(f"Position: {z_pos:.3f}")
+    force_magnitude.append(force)
+    displacement.append(z_output)
+
+    # Prints position every interval
+    if index % parameters.numerics.output.interval.stripped == 0:
+        print(f"Position: {z_output * LENGTH:.3f} | Force: {force * FORCE:.3f}")
 
 
+# Prints a few different system parameters
+print("-" * 20)
+print(f"Slot Turns:         {solver.slot_turns * NULLSET:.3f}")
+print(f"Line Resistance:    {solver.l2l_resistance * RESISTANCE:.3f}")
+print(f"Line Inductance:    {solver.l2l_inductance * INDUCTANCE:.3f}")
+print(f"Line Current:       {solver.phase_rms_current * CURRENT:.3f} (RMS)")
+print(f"System Losses:      {solver.average_losses * POWER:.3f} (Copper)")
+print("-" * 20)
+
+
+# Plotting position Vs magnitude of force
 plt.figure(figsize=(10, 5))
-plt.plot(displacement_data, force, label="Reduced Order Model", color="blue", linewidth=2)
+plt.plot(displacement, force_magnitude, color="black")
 
 # Graph styling details
-plt.title("Reduced Order Model: Force vs Position", fontsize=12)
-plt.xlabel("Position (m)", fontsize=10)
-plt.ylabel("Force (N)", fontsize=10)
+plt.title(f"Analytical FOC Model: Force vs Position @ {solver.phase_rms_current * CURRENT:.3f} (RMS)")
+plt.xlabel("Position (m)")
+plt.ylabel("|Force| (N)")
 
+# Vertical lines at stator boundaries
+stator = parameters.stator.length.stripped
+stator_half = stator / 2
+
+plt.axvline(x=-stator_half, color='red', linestyle='--', linewidth=2, label='Stator End')
+plt.axvline(x=stator_half, color='red', linestyle='--', linewidth=2)
+
+plt.legend()
 plt.grid(True, linestyle=':', alpha=0.6)
 plt.tight_layout()
 

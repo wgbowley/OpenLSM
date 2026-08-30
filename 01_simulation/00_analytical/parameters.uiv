@@ -1,45 +1,60 @@
 [version]
-format: 0.1.0
-unit_frame: metric.ut
-
+format:     0.1.1
+unit_frame: derived.ut
 
 [notes]
-type: "Electromagnetic Parameter File"
-application: "Reduced Order Model | Tubular Ironless Linear Motor"
-coordinate_system: "axisymmetric (Z-R) (Axial-Radial)"
+simulation: "Analytical Model"
+system:     "Axisymmetric (Z-R) (Axial-Radial)"
 
-
+# ---------------------------------------------
 [numerics]
-integration_step_size:  0.1 m(m)
-derivative_step_size: 0.1 m(m)
-displacement_step_size: 1 m(m)
+line_voltage: 12 (V)
+displacement: 400 m(m)
 
-sampling_size: 400 m(m)
-line_voltage:   24 (V)
-time: 0 (s)
+[numerics.samples]
+displacement_size:  1 m(m)
+
+[numerics.solver]
+integration_step:   0.2 m(m)
+derivative_step:    0.2 m(m)
+
+[numerics.output]
+interval: 20 (∅)
+
+# ---------------------------------------------
+
+[armature]
+number_slots:       6 (∅)
+radial_clearance:   1 m(m)
 
 [armature.core]
-number_slots: 6     (∅)
-axial_slot_pitch: 6.666 m(m)
-
-radial_clearance: 1 m(m)
-radial_thickness: 1 m(m)
+radial_wall_thickness: 1 m(m)
 
 [armature.slots]
-wire_diameter: 0.33 m(m)
-conductivity: 63 M(S_m)
-fill_factor: 0.68
+axial_pitch:    6.666 m(m)
+axial_length:   6 m(m)
 
-axial_length: 6 m(m)
-radial_thickness: 5.25 m(m)
+radial_thickness: 5 m(m)
 
+[armature.slots.material]
+wire_diameter:  0.33 m(m)
+fill_factor:    0.70 (∅)
+
+conductivity:   63 M(S_m)
+
+# ---------------------------------------------
+
+[stator]
+length: 300 m(m)
 
 [stator.tube]
-length: 300 m(m)
-radial_thickness: 1 m(m)
+radial_wall_thickness:  1 m(m)
 
 [stator.dipole]
-coercivity: 0.956 M(A_m)
-
 axial_length: 20 m(m)
 radial_thickness: 6 m(m)
+
+[stator.dipole.material]
+coercivity: 0.956 M(A_m)
+
+# ---------------------------------------------

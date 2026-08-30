@@ -2,12 +2,12 @@
 Filename: solver.py
 
 Description:
-    Solver class designed for solving tubular
-    linear motor problem using virtual work methods.
+    Magnetic solver class for calculating the force of a 
+    tubular linear motor using virtual work methods.
 """
 
 from builtins import float as f
-from math import pi, floor
+from math import pi, floor, sqrt
 
 from picounits import DynamicLoader, strip_quantity as validate
 from picounits import length, voltage, conductivity, coercivity, nullset
@@ -15,11 +15,13 @@ from picounits import length, voltage, conductivity, coercivity, nullset
 from model.physics import field_equations
 from model.physics import field_oriented_control
 
+
 class Solver:
     """
     Magnetic Solver for linear tubular motor problem.
     Computes electromagnetic force using magnetic energy and virtual work methods.
     """
+
     def __init__(self, parameters: DynamicLoader) -> None:
         """ Initializes the solver class """
         self._extract_validate(parameters)
@@ -35,7 +37,7 @@ class Solver:
 
     def update_currents(self, angle: f) -> None:
         """ Updates phase currents based on time """
-        ab_ref = field_oriented_control.inverse_park_transform(0, self.l2l_peak_current, angle)
+        ab_ref = field_oriented_control.inverse_park_transform(0, self.phase_peak_current, angle)
         a, b, c = field_oriented_control.inverse_clarke_transform(ab_ref)
 
         # Updates currents
@@ -52,11 +54,10 @@ class Solver:
         pos = self._compute_energy_state(z_pos + self.der_step_size, self.int_step_size)
         neg = self._compute_energy_state(z_pos - self.der_step_size, self.int_step_size)
 
-        return - (pos - neg) / (2 * self.der_step_size)
+        force = - (pos - neg) / (2 * self.der_step_size)
+        return force
 
-    def _compute_energy_state(
-        self, translate: f, dz: f, epsilon: float = 1e-8, window: int = 5
-    ) -> f:
+    def _compute_energy_state(self, translate: f, dz: f, epsilon: float = 1e-8, window: int = 5) -> f:
         """ Computes the co-energy interaction over the relevant domain. """
         positive = self._integrate_sample(dz, translate, epsilon, window)
         negative = self._integrate_sample(-dz, translate, epsilon, window)
@@ -87,7 +88,8 @@ class Solver:
                 below_epsilon = 0
 
             # Breaks loop if below epsilon for more than window iterations
-            if below_epsilon >= window: break
+            if below_epsilon >= window:
+                break
 
             # Moves along the z-axis
             z += dz
@@ -97,7 +99,8 @@ class Solver:
     def _armature_field(self, pos: f = 0.0, translation: f = 0.0) -> f:
         """ Solves for the armature field at a specific z-position """
         phases = [self.i_pha, self.i_phb, self.i_phc]
-        offset = - self.number_slots * self.axial_slot_pitch / 2
+        half_length = - self.number_slots * self.axial_slot_pitch / 2
+        offset = self.armature_offset + half_length
 
         field_strength = 0.0
         for index in range(0, self.number_slots):
@@ -109,7 +112,7 @@ class Solver:
             slot_pos = offset + translation + self.axial_slot_pitch * index
 
             # Takes the sum of the fields at that position
-            field_strength += field_equations.compute_pole_field_strength(
+            field_strength += field_equations.pole_field_strength(
                 pos,
                 slot_pos,
                 phase,
@@ -120,22 +123,27 @@ class Solver:
 
         return field_strength
 
-    def _stator_field(self, pos: f = 0.0) -> f:
-        """ Solves for the stator field at a specific z-position. """
-        poles = int(self.tube_length / self.dipole_axial_length)
-        offset = - self.tube_length / 2
-
-        field_strength = 0
-        for index in range(0, poles):
-            # Calculates the next pole position along the z-axis
-            pole_pos = offset + self.dipole_axial_length * index
-
-            field_strength += (-1) ** index * field_equations.compute_dipole_field_strength(
+    def _stator_dipole(self, index: int, pos: float, pole_pos: float) -> float:
+        """ Single dipole within the motors stator """
+        return (-1) ** index * (
+            field_equations.dipole_field_strength(
                 pos,
                 pole_pos,
                 self.coercivity,
                 self.dipole_axial_length
             )
+        )
+
+    def _stator_field(self, pos: f = 0.0) -> f:
+        """ Solves for the stator field at a specific z-position. """
+        poles = int(self.tube_length / self.dipole_axial_length)
+        half_poles = poles // 2
+
+        # Include both positive and negative
+        field_strength = 0
+        for index in range(-half_poles + 1, half_poles):
+            pole_pos = self.dipole_axial_length * index
+            field_strength += self._stator_dipole(index, pos, pole_pos)
 
         return field_strength
 
@@ -147,7 +155,7 @@ class Solver:
 
         # Calculates the mean radius & effective area
         self.slot_mean_radius = slot_inner_radius + self.slot_radial_thickness / 2
-        self.effective_area = pi * self.slot_mean_radius ** 2
+        self.effective_area = pi * self.slot_radial_thickness ** 2
 
         # Calculates the number of turns and inductance
         self.slot_turns = self._compute_turns()
@@ -161,16 +169,24 @@ class Solver:
         self.phase_slots = self.number_slots // 3
         self.phase_resistance = self.phase_slots * self.slot_resistance
         self.phase_inductance = self.phase_slots * self.slot_inductance
+        self.phase_voltage = self.line_voltage / sqrt(3)
 
-        # Calculate l2l res, ind and peak current
+        # Calculates the rms and peak currents for WYE
+        self.phase_rms_current = self.phase_voltage / self.phase_resistance
+        self.phase_peak_current = sqrt(2) * self.phase_rms_current
+
+        # Calculate line-to-line resistance & inductance
         self.l2l_resistance = 2 * self.phase_resistance
         self.l2l_inductance = 2 * self.phase_inductance
-        self.l2l_peak_current = self.line_voltage / self.l2l_resistance
+
+        # Calculates the copper losses
+        self.average_losses = 3 * self.phase_rms_current**2 * self.phase_resistance
+
+        # Armature Offsets (z_0)
+        self.armature_offset = self.dipole_axial_length / 2
 
     def _compute_turns(self) -> f:
-        """
-        Computes the number of turns while according for the insulation & stacking. 
-        """
+        """ Computes the number of turns while according for the insulation & stacking. """
         slot_section = self.slot_axial_length * self.slot_radial_thickness
         wire_section = pi * (self.wire_diameter / 2) ** 2
 
@@ -178,17 +194,12 @@ class Solver:
         return floor(effective_area / wire_section)
 
     def _compute_inductance(self) -> f:
-        """ 
-        Calculates the coils self-inductance 
-        independent of mutual inductance between coils. 
-        """
+        """ Calculates the coils self-inductance independent of mutual inductance between coils. """
         term = self.slot_turns ** 2 * self.permeability * self.effective_area
         return term / self.slot_axial_length
 
     def _compute_resistance(self, resistivity: f) -> f:
-        """ 
-        Computes the slots resistance by using mean radius & conductor cross section. 
-        """
+        """ Computes the slots resistance by using mean radius & conductor cross section. """
         turn_length = 2 * pi * self.slot_turns * self.slot_mean_radius
         cross_section = pi * (self.wire_diameter / 2) ** 2
 
@@ -197,28 +208,28 @@ class Solver:
     def _extract_validate(self, parameters: DynamicLoader) -> None:
         """ Extracts qualities from attribute tree and validates units """
         # Numerical
-        self.int_step_size = validate(parameters.numerics.integration_step_size, length)
-        self.der_step_size = validate(parameters.numerics.derivative_step_size, length)
+        self.int_step_size = validate(parameters.numerics.solver.integration_step, length)
+        self.der_step_size = validate(parameters.numerics.solver.derivative_step, length)
         self.line_voltage = validate(parameters.numerics.line_voltage, voltage)
 
         # Armature
-        self.number_slots = validate(parameters.armature.core.number_slots, nullset)
-        self.axial_slot_pitch = validate(parameters.armature.core.axial_slot_pitch, length)
-        self.radial_clearance = validate(parameters.armature.core.radial_clearance, length)
-        self.core_radial_thickness = validate(parameters.armature.core.radial_thickness, length)
+        self.number_slots = validate(parameters.armature.number_slots, nullset)
+        self.axial_slot_pitch = validate(parameters.armature.slots.axial_pitch, length)
+        self.radial_clearance = validate(parameters.armature.radial_clearance, length)
+        self.core_radial_thickness = validate(parameters.armature.core.radial_wall_thickness, length)
 
         # Armature Slots
-        self.fill_factor = validate(parameters.armature.slots.fill_factor, nullset)
-        self.wire_diameter = validate(parameters.armature.slots.wire_diameter, length)
+        self.fill_factor = validate(parameters.armature.slots.material.fill_factor, nullset)
+        self.wire_diameter = validate(parameters.armature.slots.material.wire_diameter, length)
         self.slot_axial_length = validate(parameters.armature.slots.axial_length, length)
-        self.conductivity = validate(parameters.armature.slots.conductivity, conductivity)
+        self.conductivity = validate(parameters.armature.slots.material.conductivity, conductivity)
         self.slot_radial_thickness = validate(parameters.armature.slots.radial_thickness, length)
 
         # Stator Tube
-        self.tube_length = validate(parameters.stator.tube.length, length)
-        self.tube_radial_thickness = validate(parameters.stator.tube.radial_thickness, length)
+        self.tube_length = validate(parameters.stator.length, length)
+        self.tube_radial_thickness = validate(parameters.stator.tube.radial_wall_thickness, length)
 
         # Stator Dipole
-        self.coercivity = validate(parameters.stator.dipole.coercivity, coercivity)
+        self.coercivity = validate(parameters.stator.dipole.material.coercivity, coercivity)
         self.dipole_axial_length = validate(parameters.stator.dipole.axial_length, length)
         self.dipole_radial_thickness = validate(parameters.stator.dipole.radial_thickness, length)

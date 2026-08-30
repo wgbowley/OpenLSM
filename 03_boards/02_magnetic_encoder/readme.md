@@ -1,4 +1,4 @@
-## Overview
+### Overview
 
 <!-- Need to update those images with the populated PCBs and also they need to be cleaned up -->
 <!-- They need to be updated in general. Those images are pretty poor quality --> 
@@ -20,7 +20,9 @@ OpenLSM uses `closed-loop control` to position the motors armature. This require
 
 These consist of a linear scale and an encoder head. The encoder measures the magnetic flux density over a `pole pair` (N|S) of the scale to determine its location. This data is output as `A` and `B` binary signals, `90°` out of phase with each other, enabling quadrature decoding `(4× resolution)`. The encoder also outputs a pulse at every `pole pair` transition.
 
-## High-level Topology
+---
+
+### High-level Topology
 
 The `encoder board`'s main function is to align the encoder mechanically with the magnetic scale. Beyond that, the board sends the `A`, `B`, and `Index` lines to an `STM32` located on the `armature` board.
 
@@ -38,9 +40,9 @@ Magnetic Linear Encoder
 --------------------------------------------
 ```
 
+---
 
-
-## Sampling frequencies
+### Sampling frequencies
 
 The `AS5311` has a pole pitch of `2 mm` and an A/B pulse ratio of `256`. With quadrature decoding, this ratio is multiplied by `4`, giving `1024` pulses per pole pitch and a step size of `1.96 µm`. It is assumed that to measure the A, B, and Index inputs accurately, the armature board should oversample at `10×` the source frequency.
 
@@ -60,11 +62,11 @@ The `AS5311` has a pole pitch of `2 mm` and an A/B pulse ratio of `256`. With qu
 | 0.600 | 300.000 | 307.200 k | 3.000 k | 3.072 M |
 | 0.650 | 325.000 | 332.800 k | 3.250 k | 3.328 M |
 
-> [!important]
->
 > This sampling frequency table only covers up to `650 mm/s` as it is the `AS5311`'s maximum linear travel speed.
 
-## Mechanical Considerations
+---
+
+### Mechanical Considerations
 
 <div align="center">
   <table>
@@ -83,10 +85,14 @@ The `linear scale` and `encoder head` should be aligned with each other's centre
 
 The `encoder board` is `30 mm` in length and `40 mm` in height. The board has a GND and power plane, with the traces embedded into the power plane layer. The board also has M2 bolt holes with a diameter of `~2.10 mm` in a rectangular mounting pattern of `23 mm` and `16.5 mm`. Each M2 bolt hole is directly connected to the GND plane with exposed conductive material around the entire hole.
 
-> [!important]
+> [!IMPORTANT]
 >
 > The magnetic scale is currently centred on the die centre line. Offsetting the scale relative to the die is not required here, as the `~10 mm` scale width provides sufficient margin for alignment tolerances.
 
-## Documentation
+---
+
+### Documentation
 
 Design notes and implementation decisions are documented in [issue #10](https://github.com/wgbowley/OpenLSM/issues/10).
+
+---
