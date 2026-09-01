@@ -1,11 +1,11 @@
-### Encoder Board - Bill of Materials (BOM)
+### Encoder Board — Bill of Materials (BOM)
 
 | Reference | Qty | Value | Footprint | Notes / Datasheet |
 |-----------|-----|-------|-----------|-------------------|
 | C1, C3 | 2 | 100nF | Capacitor_SMD:C_0402_1005Metric | |
 | C2 | 1 | 10µF | Capacitor_SMD:C_1206_3216Metric | |
 | J1 | 1 | 01x05 | Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical | |
-| R1 | 1 | 0Ω | Resistor_SMD:R_0402_1005Metric | Can be ignored. Just solder it. |
+| R1 | 1 | 0Ω | Resistor_SMD:R_0402_1005Metric | Can be ignored — Just solder it. |
 | U1 | 1 | AS5311-ATST-500 | footprints:TSSOP20_AS5311-ATST-500_AMS | |
 
 ---

@@ -1,4 +1,4 @@
-### Armature Board - Bill of Materials (BOM)
+### Armature Board — Bill of Materials (BOM)
 
 | Reference | Qty | Value | Footprint | Notes / Datasheet |
 |-----------|-----|-------|-----------|-------------------|
