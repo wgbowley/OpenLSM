@@ -126,8 +126,8 @@ The integrated sensor boards are a platform for measuring the motor's position, 
 <div align="center">
   <table>
     <tr>
-      <td><img src="03_boards/01_armature_board/04_media/bare_pcb_front.jpg" alt="Armature Board" style="max-width:400px;"></td>
-      <td><img src="03_boards/02_magnetic_encoder/04_media/bare_pcb_top.jpg" alt="Encoder Board" style="max-width:350px;"></td>
+      <td><img src="03_boards/01_armature_board/05_media/bare_pcb_front.jpg" alt="Armature Board" style="max-width:400px;"></td>
+      <td><img src="03_boards/02_magnetic_encoder/05_media/bare_pcb_top.jpg" alt="Encoder Board" style="max-width:350px;"></td>
     </tr>
     <tr>
       <td><em>Armature Data Board</em></td>

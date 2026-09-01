@@ -13,8 +13,8 @@ The board has two main domains: the `12 V` input and the `0–96 V` driver input
 <div align="center">
   <table>
     <tr>
-      <td><img src="01_armature_board/04_media/top_layer.png" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="01_armature_board/04_media/bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+      <td><img src="01_armature_board/05_media/top_layer.png" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="01_armature_board/05_media/bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
     </tr>
     <tr>
       <td><em>Top layer — STM32, thermistor array, accelerometer & encoder</em></td>
@@ -34,8 +34,8 @@ The board also includes a `3-axis SPI accelerometer` and processes data from the
 <div align="center">
   <table>
     <tr>
-      <td><img src="02_magnetic_encoder/04_media/top_layer.png" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="02_magnetic_encoder/04_media/bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+      <td><img src="02_magnetic_encoder/05_media/top_layer.png" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="02_magnetic_encoder/05_media/bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
     </tr>
     <tr>
       <td><em>Top layer — facing the magnetic scale</em></td>
