@@ -58,8 +58,8 @@ Thermistor Array (800 Hz), SPI Accelerometer, Linear Encoder Interconnect (350 k
 <div align="center">
   <table>
     <tr>
-      <td><img src="05_media/top_layer.png" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="05_media/bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+      <td><img src="05_media/kicad_top_layer.png" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="05_media/kicad_bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
     </tr>
     <tr>
       <td><em>Top layer — STM32, Thermistor Array, Accelerometer & Encoder</em></td>

@@ -77,8 +77,8 @@ the armature board should oversample at `10×` the source frequency.
 <div align="center">
   <table>
     <tr>
-      <td><img src="05_media/top_layer.png" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="05_media/bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+      <td><img src="05_media/kicad_top_layer.png" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="05_media/kicad_bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
     </tr>
     <tr>
       <td><em>Top layer — Facing the magnetic scale</em></td>
