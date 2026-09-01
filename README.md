@@ -45,7 +45,7 @@ OpenLSM is an experimental project with the objective of designing low-cost perm
 - [ ] Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
 ```
 
-> *(Note). `[ ]` Not started. `[/]` In progress. `[x]` Complete*
+> *(Note). `[ ]` Not started. `[/]` In progress. `[x]` Complete.*
 
 ---
 
