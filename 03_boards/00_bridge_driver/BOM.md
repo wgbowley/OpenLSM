@@ -2,11 +2,12 @@
 
 *(TBD) — Work in progress*
 
+---
+
 | Status | Reference | Qty | Value | Footprint | Notes / Datasheet |
 |--------|-----------|-----|-------|-----------|-------------------|
 | [ ] | N/A | N/A | N/A | N/A | N/A | N/A |
 
-
-> *(Note). `[ ]` Not Ordered. `[x]` Ordered.*
+> *(Note). `[ ]` Not Ordered. `[-]` Not Required. `[x]` Ordered.*
 
 ---

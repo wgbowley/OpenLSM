@@ -1,5 +1,9 @@
 ### Armature Board — Bill of Materials (BOM)
 
+*(TBD) — Work in progress*
+
+---
+
 | Status | Reference | Qty | Value | Footprint | Notes / Datasheet |
 |--------|-----------|-----|-------|-----------|-------------------|
 | [ ] | BOOT1, RESET1 | 2 | SW_Push | Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2 | |
@@ -28,6 +32,6 @@
 | [ ] | U5 | 1 | 74HC4051 | 74HC4051:SSOP-16 | |
 | [ ] | Y1 | 1 | ECS-80-20-18-TR | ECS-80-18-23B-JTN-TR:XTAL_ECS-80-20-18-TR | |
 
-> *(Note). `[ ]` Not Ordered. `[x]` Ordered.*
+> *(Note). `[ ]` Not Ordered. `[-]` Not Required. `[x]` Ordered.*
 
 ---
