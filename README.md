@@ -37,7 +37,7 @@ OpenLSM is an experimental project with the objective of designing low-cost perm
 ### Objectives
 
 ```
-- [/] Support voltage ranges of `12 V`, `24 V`, and `48 V`.
+- [x] Support voltage ranges of `12 V`, `24 V`, and `48 V`.
 - [/] Achieve a target force per amp of `3.0 N/A` (rms).
 - [/] Reach an asymptote temperature of `60°C` under standard use-cases.
 - [/] Validate the driver board and linear encoder board for linear motor applications.
