@@ -710,7 +710,7 @@
         "uuid": "d7317114-a4fd-40b5-9eea-fb013c7aed3d"
       }
     ],
-    "used_designators": "BOOT1,R4,R18-19,ENC1,INT1,RESET1,PRO1",
+    "used_designators": "R4,R18-19,BOOT1,ENC1,INT1,PRO1,RESET1",
     "variants": []
   },
   "sheets": [
