@@ -1,6 +1,7 @@
 ### Encoder Board — Bill of Materials (BOM)
 
-The procurement file `04_procurement/digikey.csv` is for `2x` boards and does not include the JST socket or the R1 `0 Ω` resistor.
+The procurement file [`04_procurement/digikey.csv`](./04_procurement/digikey.csv) is 
+for `2x` boards and does not include the JST socket or the R1 `0 Ω` resistor.
 
 ---
 
