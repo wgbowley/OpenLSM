@@ -1,4 +1,4 @@
-### Simulations
+### 01_simulations
 
 #### [00_analytical](./00_analytical/readme.md) — Analytical Tubular Linear Motor Model
 

@@ -143,6 +143,6 @@ See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable
 ### Documentation
 
 Each section of the repo is self-documenting.  
-For internal documentation, credits, and contributors, refer to [04_docs](./04_docs/).
+For internal documentation, credits, and contributors, refer to [00_docs](./00_docs/).
 
 ---

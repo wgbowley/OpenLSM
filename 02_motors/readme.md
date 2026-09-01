@@ -1,4 +1,4 @@
-### Motors
+### 02_motors
 
 #### [00_prototype_alpha](./00_prototype_alpha/readme.md) — Ironless Planar Linear Motor
 
