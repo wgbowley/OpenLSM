@@ -106,6 +106,7 @@
     "TSSOP20_AS5311",
     "biot",
     "savart",
-    "matplotlib"
+    "matplotlib",
+    "pylintrc"
   ]
 }

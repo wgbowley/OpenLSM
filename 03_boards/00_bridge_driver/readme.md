@@ -27,6 +27,7 @@ Input (up to 96V), Isolated 12V & Isolated 3.3V
 ---
 
 ### Documentation
-Reference: [Design and build triple bridge driver based on SimpleFOC shield](https://github.com/wgbowley/OpenLSM/issues/12)
+
+Design notes and implementation decisions are documented in [issue #12](https://github.com/wgbowley/OpenLSM/issues/12).
 
 ---

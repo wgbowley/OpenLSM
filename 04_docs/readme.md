@@ -25,7 +25,11 @@ L1 -> System level design, topology and interfaces
 L2 -> Detailed design & prototyping
 L3 -> Testing & validation of prototype
 ----------------------------------------------------
+```
 
+<br>
+
+```
 Miscellaneous:
 ----------------------------------------------------
 DS  -> De-scoped feature, de-scoped analysis

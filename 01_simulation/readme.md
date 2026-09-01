@@ -1,7 +1,5 @@
 ### Simulations
 
----
-
 #### [00_analytical](./00_analytical/readme.md) — Analytical Tubular Linear Motor Model
 
 <div align="center">

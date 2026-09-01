@@ -1,3 +1,5 @@
+# .gitignore
+
 # Ignore Files
 *.log
 *.ans

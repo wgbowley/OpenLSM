@@ -1,3 +1,4 @@
+# OpenLSM Simulation Development | Derived Units
 [version]
 format: 0.1.0
 
@@ -31,3 +32,5 @@ A_m:    A*m^-1
 [Heat]
 k:      kg*m*s^-3*K^-1
 c:      m^2*s^-2*K^-1
+
+# ---------------------------------------------

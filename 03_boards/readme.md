@@ -1,10 +1,10 @@
 ### Boards
 
----
-
 #### [00_bridge_driver](00_bridge_driver/readme.md) — Triple Half-Bridge Driver (WIP)
 
-A triple half-bridge driver with an operating voltage of `0–96 V` and current of `0–25 A`. It supports `step/dir` and `CANBUS` input interfaces, incremental encoder and Hall-effect sensor inputs from the motor, and `RS-485/RS-422` for the armature board. The board has two main domains: the `12 V` input and the `0–96 V` driver input. It features isolation between the MCU, the bridge driver, and the current sensor chips.
+A triple half-bridge driver with an operating voltage of `0–96 V` and current of `0–25 A`. It supports `step/dir` and `CANBUS` input interfaces, 
+incremental encoder and Hall-effect sensor inputs from the motor, and `RS-485/RS-422` for the armature board. 
+The board has two main domains: the `12 V` input and the `0–96 V` driver input. It features isolation between the MCU, the bridge driver, and the current sensor chips.
 
 ---
 
@@ -23,7 +23,9 @@ A triple half-bridge driver with an operating voltage of `0–96 V` and current 
   </table>
 </div>
 
-A sensor board that connects to the driver over `RS-485/RS-422`. It features `8` NTC thermistors switched via an analog multiplexer to produce a thermal profile `T(z, t)`. The board also includes a `3-axis SPI accelerometer` and processes data from the encoder board.
+A sensor board that connects to the driver over `RS-485/RS-422`. 
+It features `8` NTC thermistors switched via an analog multiplexer to produce a thermal profile `T(z, t)`. 
+The board also includes a `3-axis SPI accelerometer` and processes data from the encoder board.
 
 ---
 
