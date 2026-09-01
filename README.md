@@ -32,18 +32,21 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 
 OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with analytical and hybrid models.
 
+> This project has no commercial aspirations. Its contents will remain available under the `MIT` License.
+
 ### Objectives
 
 ```
-- Support voltage ranges of `12 V`, `24 V`, and `48 V`.
-- Achieve a target force per amp of `3.0 N/A` (rms).
-- Reach an asymptote temperature of `60°C` under standard use-cases.
-- Validate the driver board and linear encoder board for linear motor applications.
-- Validate motor performance and generate performance curves for each voltage range.
-- Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
+- [/] Support voltage ranges of `12 V`, `24 V`, and `48 V`.
+- [/] Achieve a target force per amp of `3.0 N/A` (rms).
+- [/] Reach an asymptote temperature of `60°C` under standard use-cases.
+- [/] Validate the driver board and linear encoder board for linear motor applications.
+- [ ] Validate motor performance and generate performance curves for each voltage range.
+- [ ] Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
 ```
 
-> This project has no commercial aspirations. Its contents will remain available under the `MIT` License.
+> *(Note).* <br>
+> `[ ]` Not started. `[/]` In progress. `[x]` Complete
 
 ---
 
