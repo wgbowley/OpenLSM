@@ -41,4 +41,26 @@ AN  -> Weekly application notes
 ----------------------------------------------------
 ```
 
+#### Application Notes
+
+```
+0x1 = Week 1
+0x2 = Week 2
+0x3 = Week 3
+0x4 = Week 4
+0x5 = Week 5
+0x6 = Week 6
+0x7 = Week 7
+0x8 = Week 8
+0x9 = Week 9        <- Currently Here
+0xA = Week 10
+0xB = Week 11
+0xC = Week 12
+0xD = Week 13
+0xE = Week 14
+0xF = Week 15
+```
+
+> Check [here](https://github.com/wgbowley/OpenLSM/issues?q=is%3Aissue%20label%3AAN) to view the weekly application notes.
+
 ---
