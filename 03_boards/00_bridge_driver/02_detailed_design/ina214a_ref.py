@@ -13,7 +13,7 @@ from picounits import Q, expects, NULLSET, CURRENT, VOLTAGE, IMPEDANCE, MILLI
 
 # Imports derived units
 ROOT_DIR = Path(__file__).resolve().parents[0]
-parameters = Parser.import_derived(ROOT_DIR / "../../metric.ut")
+parameters = Parser.import_derived(ROOT_DIR / "../../derived.ut")
 
 # System parameters
 current_size = 300 * MILLI * CURRENT
