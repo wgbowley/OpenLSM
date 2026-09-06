@@ -102,7 +102,7 @@ See the [Model Notes](./01_simulation/00_analytical/readme.md) for the mathemati
 
 ### Hybrid
 
-> *(Paused). This hybrid simulation is currently paused until PCB development finishes.*
+> *(Paused). This hybrid simulation is currently paused until PCB design finishes.*
 
 ---
 
