@@ -50,7 +50,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 1.0
         }
       },
       "diff_pair_dimensions": [
@@ -196,7 +196,7 @@
       "track_widths": [
         0.0,
         0.2,
-        0.6,
+        1.0,
         2.0
       ],
       "tuning_pattern_settings": {
@@ -732,7 +732,7 @@
         "uuid": "221b5544-ca14-4503-b001-a85fc346b8a9"
       }
     ],
-    "used_designators": "Q2-7,#PWR66,#PWR97,L5,J2-3",
+    "used_designators": "PGND1,PVCC1,VCC1",
     "variants": []
   },
   "sheets": [

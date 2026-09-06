@@ -1,7 +1,7 @@
 ### Overview
 
 <div align="center">
-  <img src="" alt="Initial mock-up PCB" style="max-width: 600px">
+  <img src="05_media/mock_up_board_forward.png" alt="Initial mock-up PCB" style="max-width: 600px">
   <p><em>Initial mock-up PCB of the bridge driver board. Began modelling on 7th September.</em></p>
 </div>
 

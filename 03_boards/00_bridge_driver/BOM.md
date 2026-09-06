@@ -21,7 +21,7 @@
 | [ ] | C26 | 1 | 0.68uF | Capacitor_SMD:C_1206_3216Metric | |
 | [ ] | C27 | 1 | 4.7uF | Capacitor_SMD:C_1206_3216Metric | |
 | [ ] | CAN1, STEP1 | 2 | 01x02 | Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical | |
-| [ ] | D1–D15 | 15 | ES1D | ES1D:DIOM4325X250N | |
+| [ ] | D1–D9 | 15 | ES1D | ES1D:DIOM4325X250N | |
 | [ ] | D16 | 1 | LED | LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder | |
 | [ ] | D17, D18 | 2 | 1N5824 | Diode_SMD:D_SMC | |
 | [ ] | FB1 | 1 | BLM18AG601SN1D | BLM18AG601SN1D:BEADC1608X95N | |

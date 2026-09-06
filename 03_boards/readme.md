@@ -3,7 +3,7 @@
 #### [00_bridge_driver](00_bridge_driver/readme.md) — Triple Half-Bridge Driver (WIP)
 
 <div align="center">
-  <img src="" alt="Initial mock-up PCB" style="max-width: 600px">
+  <img src="00_bridge_driver/05_media/mock_up_board_forward.png" alt="Initial mock-up PCB" style="max-width: 600px">
   <p><em>Initial mock-up PCB of the bridge driver board. Began modelling on 7th September.</em></p>
 </div>
 
