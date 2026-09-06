@@ -123,7 +123,7 @@ See [03_boards/00_bridge_driver](/03_boards/00_bridge_driver/) for the detailed 
 
 ### Integrated Sensor Boards
 
-> *(Fabrication). These boards have been made and components ordered, but they haven't been populated or validated yet.*
+> *(Fabrication). These boards haven't been populated or validated yet. (Components & PCBs ordered.)*
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
