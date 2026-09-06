@@ -3,10 +3,17 @@
 #### [00_bridge_driver](00_bridge_driver/readme.md) — Triple Half-Bridge Driver (WIP)
 
 <div align="center">
-  <img src="00_bridge_driver/05_media/mock_up_board_forward.png" alt="Initial mock-up PCB" style="max-width: 600px">
-  <p><em>Initial mock-up PCB of the bridge driver board. Began modelling on 7th September.</em></p>
+  <table>
+    <tr>
+      <td><img src="00_bridge_driver/05_media/mock_up_board_forward.png" alt="Driver Board TOP" style="max-width:375px;"></td>
+      <td><img src="00_bridge_driver/05_media/mock_up_board_back.png" alt="Driver Board Bottom" style="max-width:375px;"></td>
+    </tr>
+    <tr>
+      <td><em>Top-side</em></td>
+      <td><em>Bottom-Side</em></td>
+    </tr>
+  </table>
 </div>
-
 An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and a power domain of `12-96 V (RMS)`, with current up to `20 A (RMS)`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for communication with external input boards for encoders, Hall-effect sensors, etc. 
 
 ---

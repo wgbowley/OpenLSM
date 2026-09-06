@@ -1,8 +1,16 @@
 ### Overview
 
 <div align="center">
-  <img src="05_media/mock_up_board_forward.png" alt="Initial mock-up PCB" style="max-width: 600px">
-  <p><em>Initial mock-up PCB of the bridge driver board. Began modelling on 7th September.</em></p>
+  <table>
+    <tr>
+      <td><img src="05_media/mock_up_board_forward.png" alt="Driver Board TOP" style="max-width:375px;"></td>
+      <td><img src="05_media/mock_up_board_back.png" alt="Driver Board Bottom" style="max-width:375px;"></td>
+    </tr>
+    <tr>
+      <td><em>Top-side</em></td>
+      <td><em>Bottom-Side</em></td>
+    </tr>
+  </table>
 </div>
 
 OpenLSM uses `field-oriented control` to position the motor's armature. 
