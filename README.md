@@ -108,15 +108,22 @@ See the [Model Notes](./01_simulation/00_analytical/readme.md) for the mathemati
 
 ### Bridge Driver
 
-> *(Work in progress). This board is currently be designed and implemented.*
+> *(Work in progress). The schematic is finished, and the footprints are done. The PCB is currently being modelled.*
 
-A triple half-bridge driver with an operating voltage of `0–96 V` and current of `0–25 A`. It supports `step/dir` and `CANBUS` input interfaces, incremental encoder and Hall-effect sensor inputs from the motor, and `RS-485/RS-422` for the armature board.
+An isolated triple half-bridge driver with an MCU-side domain of `24 V` and a power domain of `12-96 V`, with current up to `20 A`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for communication with external input boards for encoders, Hall-effect sensors, etc. The board is supported by the integrated sensor board, which provides a thermal profile `T(z, t)`, an accelerometer, and a `~10–20 µm` encoder. More can be found [here](#integrated-sensor-boards).
+
+<div align="center">
+  <img src="" alt="Initial mock-up PCB" style="max-width: 600px">
+  <p><em>Initial mock-up PCB of the bridge driver board. Began modelling on 7th September.</em></p>
+</div>
+
+See [03_boards/00_bridge_driver](/03_boards/00_bridge_driver/) for the detailed design, schematic, PCB, and BOM.
 
 ---
 
 ### Integrated Sensor Boards
 
-> *(Fabrication). These boards have been made, but they haven't been populated or validated yet.*
+> *(Fabrication). These boards have been made and components ordered, but they haven't been populated or validated yet.*
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
