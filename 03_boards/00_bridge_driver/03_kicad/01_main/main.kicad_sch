@@ -10084,7 +10084,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Wire:SolderWire-2.5sqmm_1x03_P7.2mm_D2.4mm_OD3.6mm_Relief"
 			(at 20.32 162.56 0)
 			(hide yes)
 			(show_name no)
@@ -12338,7 +12338,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Wire:SolderWire-1sqmm_1x02_P7.8mm_D1.4mm_OD3.9mm"
 			(at 21.59 33.02 0)
 			(hide yes)
 			(show_name no)
@@ -13017,7 +13017,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-223"
 			(at 82.55 99.06 0)
 			(hide yes)
 			(show_name no)
@@ -14202,7 +14202,7 @@
 				)
 			)
 		)
-		(property "Value" "68uH"
+		(property "Value" "82683C"
 			(at 114.554 144.272 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14272,7 +14272,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9980f9ed-83df-48e4-8d9e-9a978df216cb")
-		(property "Reference" "L5"
+		(property "Reference" "L4"
 			(at 114.3 168.91 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14336,7 +14336,7 @@
 		(instances
 			(project "main"
 				(path "/221b5544-ca14-4503-b001-a85fc346b8a9"
-					(reference "L5")
+					(reference "L4")
 					(unit 1)
 				)
 			)
@@ -15230,7 +15230,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_THT:D_DO-201AD_P15.24mm_Horizontal"
+		(property "Footprint" "Diode_SMD:D_SMC"
 			(at 86.995 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -17943,7 +17943,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_THT:D_DO-201AD_P15.24mm_Horizontal"
+		(property "Footprint" "Diode_SMD:D_SMC"
 			(at 86.995 39.37 0)
 			(hide yes)
 			(show_name no)
