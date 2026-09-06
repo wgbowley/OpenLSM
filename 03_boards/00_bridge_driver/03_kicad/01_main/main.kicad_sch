@@ -5240,9 +5240,9 @@
 		)
 		(uuid "8a3910aa-bb59-49d6-b320-dc5d7bd232c8")
 	)
-	(text "Isolated 12V Supply"
+	(text "Isolated 3.3V Supply"
 		(exclude_from_sim no)
-		(at 60.198 134.366 0)
+		(at 60.706 134.366 0)
 		(effects
 			(font
 				(size 1.27 1.27)

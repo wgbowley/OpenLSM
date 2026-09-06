@@ -110,7 +110,7 @@ See the [Model Notes](./01_simulation/00_analytical/readme.md) for the mathemati
 
 > *(Design). The schematic is finished, and the footprints are done. The PCB is currently being modelled.*
 
-An isolated triple half-bridge driver with an MCU-side domain of `24 V` and a power domain of `12-96 V`, with current up to `20 A`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for communication with external input boards for encoders, Hall-effect sensors, etc. 
+An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and a power domain of `12-96 V (RMS)`, with current up to `20 A (RMS)`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for communication with external input boards for encoders, Hall-effect sensors, etc. 
 
 <div align="center">
   <img src="" alt="Initial mock-up PCB" style="max-width: 600px">

@@ -1318,9 +1318,9 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "Phase Connections (upto 20 A)\n"
+	(text "Phase Connections (upto 30 A (PEAK))\n"
 		(exclude_from_sim no)
-		(at 157.226 18.796 0)
+		(at 161.036 18.796 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1328,9 +1328,9 @@
 		)
 		(uuid "055a9800-7fe5-4d9e-a2a1-a7448bd01aec")
 	)
-	(text "Phase Connections (upto 2.0 A)\n"
+	(text "Phase Connections (upto 5.0 A (PEAK))\n"
 		(exclude_from_sim no)
-		(at 33.274 18.796 0)
+		(at 36.83 18.796 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1368,9 +1368,9 @@
 		)
 		(uuid "81c1744f-3420-417f-a4c5-1583f4a49c2e")
 	)
-	(text "Phase Connections (upto 6.6 A)\n"
+	(text "Phase Connections (upto 16.6 A (PEAK))\n"
 		(exclude_from_sim no)
-		(at 95.504 18.796 0)
+		(at 99.822 18.796 0)
 		(effects
 			(font
 				(size 1.27 1.27)
