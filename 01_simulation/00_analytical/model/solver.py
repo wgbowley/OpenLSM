@@ -9,8 +9,8 @@ Description:
 from builtins import float as f
 from math import pi, floor, sqrt
 
-from picounits import DynamicLoader, strip_quantity as validate
-from picounits import length, voltage, conductivity, coercivity, nullset
+from picounits import Q, DynamicLoader, strip_quantity as validate
+from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, COERCIVITY, NULLSET, FORCE
 
 from model.physics import field_equations
 from model.physics import field_oriented_control
@@ -45,8 +45,11 @@ class Solver:
         self.i_phb = b
         self.i_phc = c
 
-    def compute_force(self, z_pos: f) -> f:
+    def compute_force(self, z_pos: Q) -> Q:
         """ Computes force using finite difference of the energy distribution """
+        # Validates the unit of z_pos and removes units
+        z_pos = validate(z_pos, LENGTH)
+
         electrical_angle = field_oriented_control.electrical_angle(z_pos, self.dipole_axial_length)
         self.update_currents(electrical_angle)
 
@@ -55,7 +58,7 @@ class Solver:
         neg = self._compute_energy_state(z_pos - self.der_step_size, self.int_step_size)
 
         force = - (pos - neg) / (2 * self.der_step_size)
-        return force
+        return force * FORCE
 
     def _compute_energy_state(self, translate: f, dz: f, epsilon: float = 1e-8, window: int = 5) -> f:
         """ Computes the co-energy interaction over the relevant domain. """
@@ -208,28 +211,28 @@ class Solver:
     def _extract_validate(self, parameters: DynamicLoader) -> None:
         """ Extracts qualities from attribute tree and validates units """
         # Numerical
-        self.int_step_size = validate(parameters.numerics.solver.integration_step, length)
-        self.der_step_size = validate(parameters.numerics.solver.derivative_step, length)
-        self.line_voltage = validate(parameters.numerics.line_voltage, voltage)
+        self.int_step_size = validate(parameters.numerics.solver.integration_step, LENGTH)
+        self.der_step_size = validate(parameters.numerics.solver.derivative_step, LENGTH)
+        self.line_voltage = validate(parameters.numerics.line_voltage, VOLTAGE)
 
         # Armature
-        self.number_slots = validate(parameters.armature.number_slots, nullset)
-        self.axial_slot_pitch = validate(parameters.armature.slots.axial_pitch, length)
-        self.radial_clearance = validate(parameters.armature.radial_clearance, length)
-        self.core_radial_thickness = validate(parameters.armature.core.radial_wall_thickness, length)
+        self.number_slots = validate(parameters.armature.number_slots, NULLSET)
+        self.axial_slot_pitch = validate(parameters.armature.slots.axial_pitch, LENGTH)
+        self.radial_clearance = validate(parameters.armature.radial_clearance, LENGTH)
+        self.core_radial_thickness = validate(parameters.armature.core.radial_wall_thickness, LENGTH)
 
         # Armature Slots
-        self.fill_factor = validate(parameters.armature.slots.material.fill_factor, nullset)
-        self.wire_diameter = validate(parameters.armature.slots.material.wire_diameter, length)
-        self.slot_axial_length = validate(parameters.armature.slots.axial_length, length)
-        self.conductivity = validate(parameters.armature.slots.material.conductivity, conductivity)
-        self.slot_radial_thickness = validate(parameters.armature.slots.radial_thickness, length)
+        self.fill_factor = validate(parameters.armature.slots.material.fill_factor, NULLSET)
+        self.wire_diameter = validate(parameters.armature.slots.material.wire_diameter, LENGTH)
+        self.slot_axial_length = validate(parameters.armature.slots.axial_length, LENGTH)
+        self.conductivity = validate(parameters.armature.slots.material.conductivity, CONDUCTIVITY)
+        self.slot_radial_thickness = validate(parameters.armature.slots.radial_thickness, LENGTH)
 
         # Stator Tube
-        self.tube_length = validate(parameters.stator.length, length)
-        self.tube_radial_thickness = validate(parameters.stator.tube.radial_wall_thickness, length)
+        self.tube_length = validate(parameters.stator.length, LENGTH)
+        self.tube_radial_thickness = validate(parameters.stator.tube.radial_wall_thickness, LENGTH)
 
         # Stator Dipole
-        self.coercivity = validate(parameters.stator.dipole.material.coercivity, coercivity)
-        self.dipole_axial_length = validate(parameters.stator.dipole.axial_length, length)
-        self.dipole_radial_thickness = validate(parameters.stator.dipole.radial_thickness, length)
+        self.coercivity = validate(parameters.stator.dipole.material.coercivity, COERCIVITY)
+        self.dipole_axial_length = validate(parameters.stator.dipole.axial_length, LENGTH)
+        self.dipole_radial_thickness = validate(parameters.stator.dipole.radial_thickness, LENGTH)
