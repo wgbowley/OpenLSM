@@ -1349,12 +1349,10 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Simulation_SPICE:NMOS"
-			(pin_numbers
-				(hide yes)
-			)
+		(symbol "Transistor_FET:Q_NMOS_GSD"
 			(pin_names
 				(offset 0)
+				(hide yes)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1362,7 +1360,7 @@
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "Q"
-				(at 5.08 1.27 0)
+				(at 5.08 1.905 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -1372,8 +1370,8 @@
 					(justify left)
 				)
 			)
-			(property "Value" "NMOS"
-				(at 5.08 -1.27 0)
+			(property "Value" "Q_NMOS_GSD"
+				(at 5.08 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -1394,18 +1392,7 @@
 					)
 				)
 			)
-			(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#cha_MOSFETs"
-				(at 0 -12.7 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "N-MOSFET transistor, drain/source/gate"
+			(property "Datasheet" ""
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1416,40 +1403,7 @@
 					)
 				)
 			)
-			(property "Sim.Device" "NMOS"
-				(at 0 -17.145 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Sim.Type" "VDMOS"
-				(at 0 -19.05 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Sim.Pins" "1=D 2=G 3=S"
-				(at 0 -15.24 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "transistor NMOS N-MOS N-MOSFET simulation"
+			(property "Description" "N-MOSFET transistor, gate/source/drain"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1460,7 +1414,18 @@
 					)
 				)
 			)
-			(symbol "NMOS_0_1"
+			(property "ki_keywords" "transistor NMOS N-MOS N-MOSFET"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Q_NMOS_GSD_0_1"
 				(polyline
 					(pts
 						(xy 0.254 1.905) (xy 0.254 -1.905)
@@ -1604,7 +1569,7 @@
 				)
 				(polyline
 					(pts
-						(xy 2.794 0.508) (xy 2.921 0.381) (xy 3.683 0.381) (xy 3.81 0.254)
+						(xy 2.921 0.381) (xy 3.683 0.381)
 					)
 					(stroke
 						(width 0)
@@ -1627,11 +1592,11 @@
 					)
 				)
 			)
-			(symbol "NMOS_1_1"
-				(pin passive line
-					(at 2.54 5.08 270)
+			(symbol "Q_NMOS_GSD_1_1"
+				(pin input line
+					(at -5.08 0 0)
 					(length 2.54)
-					(name "D"
+					(name "G"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1646,10 +1611,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at -5.08 0 0)
+				(pin passive line
+					(at 2.54 -5.08 90)
 					(length 2.54)
-					(name "G"
+					(name "S"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1665,9 +1630,9 @@
 					)
 				)
 				(pin passive line
-					(at 2.54 -5.08 90)
+					(at 2.54 5.08 270)
 					(length 2.54)
-					(name "S"
+					(name "D"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1951,26 +1916,6 @@
 		)
 		(uuid "133dd8dd-1db5-4943-88d0-d891413ad076")
 	)
-	(text "F, C"
-		(exclude_from_sim no)
-		(at 145.034 68.834 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "312db493-54c8-4deb-b956-b3aac1005905")
-	)
-	(text "F, C"
-		(exclude_from_sim no)
-		(at 51.308 91.186 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "5b863c99-af16-4d85-9f42-466882c301c0")
-	)
 	(text "Triple Half bridges \nPhase A"
 		(exclude_from_sim no)
 		(at 21.59 22.352 0)
@@ -1981,26 +1926,6 @@
 			(justify left)
 		)
 		(uuid "847ea21d-daab-4b35-a1f5-238fcecd89f8")
-	)
-	(text "F, C"
-		(exclude_from_sim no)
-		(at 148.59 91.44 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "948fd542-b737-40e7-8f82-6ed20eaceb32")
-	)
-	(text "F, C"
-		(exclude_from_sim no)
-		(at 72.898 70.612 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "9e5113a9-7088-4565-a51c-72e22f8a96a4")
 	)
 	(text "Phase B"
 		(exclude_from_sim no)
@@ -2025,34 +1950,10 @@
 		(uuid "f3263d36-e9a9-49b6-a856-28c80b233df0")
 	)
 	(junction
-		(at 82.55 41.91)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "03685d6c-43d6-4a75-b5b8-c5e4d144a5f6")
-	)
-	(junction
-		(at 201.93 40.64)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0852f5e4-da59-45da-8b43-3af4279c5e0b")
-	)
-	(junction
 		(at 78.74 96.52)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "19390f85-65a6-4f39-83c4-3c1f179688f1")
-	)
-	(junction
-		(at 82.55 54.61)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1b20f104-3683-4d2c-a728-f39059720301")
-	)
-	(junction
-		(at 92.71 41.91)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1d9c4668-c013-4726-b58f-a8038ab6940c")
 	)
 	(junction
 		(at 102.87 48.26)
@@ -2089,12 +1990,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "651dca70-4742-4506-83ba-2d648e77a7b1")
-	)
-	(junction
-		(at 92.71 111.76)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "65e587b7-6bb5-49ff-8530-267c9501fef3")
 	)
 	(junction
 		(at 102.87 121.92)
@@ -2145,22 +2040,10 @@
 		(uuid "8b848abb-bbcf-4e5b-8529-1d203cc9a971")
 	)
 	(junction
-		(at 212.09 40.64)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "947c73b3-e881-44f3-838f-2edd4e204c43")
-	)
-	(junction
 		(at 222.25 30.48)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9e2ef554-1e4e-421c-b3fb-061f06965efc")
-	)
-	(junction
-		(at 92.71 99.06)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a3db99b6-0af9-4d8d-80bb-8fa769ddecb1")
 	)
 	(junction
 		(at 240.03 93.98)
@@ -2169,22 +2052,10 @@
 		(uuid "a92d3f22-91b6-444a-b3b1-cfe6233cf3e5")
 	)
 	(junction
-		(at 82.55 99.06)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "abd0fc77-0522-4160-81d5-688de067c750")
-	)
-	(junction
 		(at 120.65 105.41)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b0d51d77-f131-4fa4-933e-c0b00eacc150")
-	)
-	(junction
-		(at 82.55 111.76)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b4fd4816-bd7c-4de8-a8d4-eff6c5aa7faa")
 	)
 	(junction
 		(at 78.74 39.37)
@@ -2197,12 +2068,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c0ee1237-7f96-4e5e-97a0-1a3e898899de")
-	)
-	(junction
-		(at 201.93 53.34)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c792775a-946f-4bcf-b5d3-a20ac8e8d451")
 	)
 	(junction
 		(at 170.18 134.62)
@@ -2223,12 +2088,6 @@
 		(uuid "ce0e469c-a8a3-4498-a5c7-ac99b37aec70")
 	)
 	(junction
-		(at 92.71 54.61)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d56c8eca-9f2b-4405-8041-58f3541d9097")
-	)
-	(junction
 		(at 102.87 64.77)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2239,12 +2098,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dec7fa6f-0d8c-4333-a3fe-a365848fc45c")
-	)
-	(junction
-		(at 212.09 53.34)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e51795f7-f21e-4490-a305-edfecda595a8")
 	)
 	(junction
 		(at 227.33 96.52)
@@ -2310,16 +2163,6 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 31.75) (xy 92.71 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "090de97f-5e2e-44a3-bf99-39530b073a65")
-	)
-	(wire
-		(pts
 			(xy 35.56 123.19) (xy 35.56 124.46)
 		)
 		(stroke
@@ -2337,6 +2180,16 @@
 			(type default)
 		)
 		(uuid "0a19ed0f-3fda-4565-96ab-b36873fbe751")
+	)
+	(wire
+		(pts
+			(xy 102.87 106.68) (xy 102.87 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a1d06b1-0c19-4c0c-ba8d-758f56947e4b")
 	)
 	(wire
 		(pts
@@ -2360,16 +2213,6 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 121.92) (xy 92.71 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0c4c3b06-9266-4608-af1f-c3978b2c0b8b")
-	)
-	(wire
-		(pts
 			(xy 102.87 104.14) (xy 102.87 105.41)
 		)
 		(stroke
@@ -2390,7 +2233,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 54.61) (xy 95.25 54.61)
+			(xy 91.44 54.61) (xy 95.25 54.61)
 		)
 		(stroke
 			(width 0)
@@ -2400,33 +2243,13 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 30.48) (xy 212.09 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "102e0217-ce76-4438-bc8d-2a1fa435002c")
-	)
-	(wire
-		(pts
-			(xy 201.93 40.64) (xy 203.2 40.64)
+			(xy 187.96 40.64) (xy 203.2 40.64)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "12aca59f-d634-4778-b21a-b72302adb8e4")
-	)
-	(wire
-		(pts
-			(xy 82.55 54.61) (xy 83.82 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "135adc5e-ffa8-40a3-b40c-d842b06ac82d")
 	)
 	(wire
 		(pts
@@ -2510,17 +2333,7 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 111.76) (xy 92.71 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "26031300-39e1-48cb-ab35-e3873b9b9cf2")
-	)
-	(wire
-		(pts
-			(xy 68.58 41.91) (xy 82.55 41.91)
+			(xy 68.58 41.91) (xy 83.82 41.91)
 		)
 		(stroke
 			(width 0)
@@ -2560,26 +2373,6 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 40.64) (xy 214.63 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2ccc439d-be6a-47e1-9629-b472b7e8766a")
-	)
-	(wire
-		(pts
-			(xy 203.2 63.5) (xy 201.93 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2eb3f1ce-c84b-4367-acdc-e2408c2322c1")
-	)
-	(wire
-		(pts
 			(xy 25.4 123.19) (xy 35.56 123.19)
 		)
 		(stroke
@@ -2600,7 +2393,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 111.76) (xy 95.25 111.76)
+			(xy 91.44 111.76) (xy 95.25 111.76)
 		)
 		(stroke
 			(width 0)
@@ -2620,33 +2413,13 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 99.06) (xy 82.55 99.06)
+			(xy 68.58 99.06) (xy 83.82 99.06)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "380e217f-33ba-4e0f-9935-5ada7c3a1b26")
-	)
-	(wire
-		(pts
-			(xy 92.71 41.91) (xy 95.25 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "389ef5d3-1446-4d8e-8ad6-47db1a93ca0e")
-	)
-	(wire
-		(pts
-			(xy 82.55 121.92) (xy 82.55 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "38fa08d5-acd9-47a9-93e6-66e3ac403b3e")
 	)
 	(wire
 		(pts
@@ -2670,63 +2443,13 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 99.06) (xy 83.82 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3bdae15a-92c0-4309-9b5e-ea08f8b7ec9d")
-	)
-	(wire
-		(pts
-			(xy 91.44 41.91) (xy 92.71 41.91)
+			(xy 91.44 41.91) (xy 95.25 41.91)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "3ca82167-214a-4611-83f5-1ab0b4c4001f")
-	)
-	(wire
-		(pts
-			(xy 82.55 31.75) (xy 83.82 31.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3cf23ab0-18dc-4f73-8163-da877bac0b6d")
-	)
-	(wire
-		(pts
-			(xy 82.55 64.77) (xy 82.55 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3fa89fee-3b74-46c9-be3a-7559f1484758")
-	)
-	(wire
-		(pts
-			(xy 92.71 121.92) (xy 91.44 121.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "42fb2978-153e-4827-b632-810c574ed930")
-	)
-	(wire
-		(pts
-			(xy 83.82 121.92) (xy 82.55 121.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "435cc6ff-578d-4726-8f32-e5a6fab1d14c")
 	)
 	(wire
 		(pts
@@ -2750,7 +2473,7 @@
 	)
 	(wire
 		(pts
-			(xy 201.93 53.34) (xy 203.2 53.34)
+			(xy 187.96 53.34) (xy 203.2 53.34)
 		)
 		(stroke
 			(width 0)
@@ -2770,7 +2493,7 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 53.34) (xy 214.63 53.34)
+			(xy 210.82 53.34) (xy 214.63 53.34)
 		)
 		(stroke
 			(width 0)
@@ -2787,16 +2510,6 @@
 			(type default)
 		)
 		(uuid "4d05d8ef-bba5-4e92-a2d7-09e52f5dfdea")
-	)
-	(wire
-		(pts
-			(xy 222.25 58.42) (xy 222.25 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4f2882e0-7ef1-480a-a66a-7a1b882ff439")
 	)
 	(polyline
 		(pts
@@ -2820,7 +2533,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 99.06) (xy 95.25 99.06)
+			(xy 91.44 99.06) (xy 95.25 99.06)
 		)
 		(stroke
 			(width 0)
@@ -2910,17 +2623,7 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 41.91) (xy 83.82 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5c62a5c9-353d-4ec5-b9dc-5cb9953cff45")
-	)
-	(wire
-		(pts
-			(xy 68.58 54.61) (xy 82.55 54.61)
+			(xy 68.58 54.61) (xy 83.82 54.61)
 		)
 		(stroke
 			(width 0)
@@ -3000,7 +2703,7 @@
 	)
 	(wire
 		(pts
-			(xy 210.82 40.64) (xy 212.09 40.64)
+			(xy 210.82 40.64) (xy 214.63 40.64)
 		)
 		(stroke
 			(width 0)
@@ -3020,16 +2723,6 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 64.77) (xy 92.71 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6e5a8728-31ce-4510-b1c5-a3e468417d59")
-	)
-	(wire
-		(pts
 			(xy 120.65 105.41) (xy 127 105.41)
 		)
 		(stroke
@@ -3037,26 +2730,6 @@
 			(type default)
 		)
 		(uuid "7117384d-a3eb-40ed-a47a-3835a810e208")
-	)
-	(wire
-		(pts
-			(xy 91.44 99.06) (xy 92.71 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "726df6b0-b1bb-4538-9e23-5124330061a2")
-	)
-	(wire
-		(pts
-			(xy 201.93 63.5) (xy 201.93 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "72cbc7d1-2be6-4b5e-a644-7278184aa980")
 	)
 	(polyline
 		(pts
@@ -3077,16 +2750,6 @@
 			(type default)
 		)
 		(uuid "745e2e25-99a8-4718-9e9b-91cc3dc41203")
-	)
-	(wire
-		(pts
-			(xy 91.44 54.61) (xy 92.71 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "74874734-f8ac-438e-ba82-9a9210ccaec6")
 	)
 	(polyline
 		(pts
@@ -3180,16 +2843,6 @@
 	)
 	(wire
 		(pts
-			(xy 210.82 53.34) (xy 212.09 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "88d76de2-40c6-48a3-add3-93a4ee03654a")
-	)
-	(wire
-		(pts
 			(xy 240.03 46.99) (xy 246.38 46.99)
 		)
 		(stroke
@@ -3217,26 +2870,6 @@
 			(type solid)
 		)
 		(uuid "8b565e7f-b435-4a72-938b-9b22b4bf4718")
-	)
-	(wire
-		(pts
-			(xy 82.55 31.75) (xy 82.55 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8b870f5f-25ae-4f55-a0ae-bd59bc292a19")
-	)
-	(wire
-		(pts
-			(xy 212.09 63.5) (xy 212.09 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8c0e2355-6339-4696-ab3a-8905fca879d0")
 	)
 	(polyline
 		(pts
@@ -3330,16 +2963,6 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 111.76) (xy 83.82 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9cdadfcf-4c9e-434b-88a2-a665e0362d8e")
-	)
-	(wire
-		(pts
 			(xy 35.56 27.94) (xy 35.56 43.18)
 		)
 		(stroke
@@ -3347,26 +2970,6 @@
 			(type default)
 		)
 		(uuid "9e0cd86b-36cc-4166-9170-2ab9eda9dc6c")
-	)
-	(wire
-		(pts
-			(xy 82.55 88.9) (xy 82.55 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a22cbfd4-3829-445d-966b-4ceda36249f5")
-	)
-	(wire
-		(pts
-			(xy 210.82 30.48) (xy 212.09 30.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a2a9b863-0f6c-4af7-b3c0-c135d880832b")
 	)
 	(wire
 		(pts
@@ -3480,16 +3083,6 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 63.5) (xy 210.82 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ac52c363-6c71-48f9-980d-5e176c7de238")
-	)
-	(wire
-		(pts
 			(xy 154.94 64.77) (xy 180.34 64.77)
 		)
 		(stroke
@@ -3590,36 +3183,6 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 88.9) (xy 83.82 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bac9f127-0cc5-44ba-bf26-19ae94259309")
-	)
-	(wire
-		(pts
-			(xy 187.96 40.64) (xy 201.93 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bba7b56b-b671-4bf6-a7cb-9e008196111a")
-	)
-	(wire
-		(pts
-			(xy 92.71 88.9) (xy 92.71 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bbc738ef-75cf-4954-9b49-249dc511ecde")
-	)
-	(wire
-		(pts
 			(xy 180.34 25.4) (xy 180.34 26.67)
 		)
 		(stroke
@@ -3627,16 +3190,6 @@
 			(type default)
 		)
 		(uuid "bc999328-d489-4a69-a26b-ca432b3f7c84")
-	)
-	(wire
-		(pts
-			(xy 201.93 30.48) (xy 201.93 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c06abdbf-af92-4d0c-9106-0d816ebcfa6f")
 	)
 	(wire
 		(pts
@@ -3650,7 +3203,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 111.76) (xy 82.55 111.76)
+			(xy 68.58 111.76) (xy 83.82 111.76)
 		)
 		(stroke
 			(width 0)
@@ -3677,16 +3230,6 @@
 			(type default)
 		)
 		(uuid "c957f5ff-6433-4128-bc3f-067da31edf05")
-	)
-	(wire
-		(pts
-			(xy 91.44 88.9) (xy 92.71 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cc815c9b-6850-41e5-aa24-e589a080e031")
 	)
 	(polyline
 		(pts
@@ -3780,16 +3323,6 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 31.75) (xy 92.71 31.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "de1994bf-2971-4517-abf1-5e3eb980a310")
-	)
-	(wire
-		(pts
 			(xy 222.25 45.72) (xy 222.25 46.99)
 		)
 		(stroke
@@ -3810,16 +3343,6 @@
 	)
 	(wire
 		(pts
-			(xy 201.93 30.48) (xy 203.2 30.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dee388d2-34ef-4ba2-8ec3-49a579f6d927")
-	)
-	(wire
-		(pts
 			(xy 68.58 96.52) (xy 78.74 96.52)
 		)
 		(stroke
@@ -3837,16 +3360,6 @@
 			(type default)
 		)
 		(uuid "dfd901b7-b77b-432d-868f-f3c81d2da786")
-	)
-	(wire
-		(pts
-			(xy 83.82 64.77) (xy 82.55 64.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e0487656-a832-4414-86d3-008123fdb35d")
 	)
 	(wire
 		(pts
@@ -3890,16 +3403,6 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 105.41) (xy 102.87 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e2fcb4df-25db-4f5f-a030-aa6a0e2cc51d")
-	)
-	(wire
-		(pts
 			(xy 102.87 116.84) (xy 102.87 121.92)
 		)
 		(stroke
@@ -3920,13 +3423,13 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 64.77) (xy 91.44 64.77)
+			(xy 222.25 58.42) (xy 222.25 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e5c82a2a-a1f4-4218-a59f-16180f4219e8")
+		(uuid "e759ab40-88e6-495f-be16-0715f6f5fbdb")
 	)
 	(wire
 		(pts
@@ -4007,16 +3510,6 @@
 			(type default)
 		)
 		(uuid "ef228c91-0276-46b8-9052-ffb973826465")
-	)
-	(wire
-		(pts
-			(xy 187.96 53.34) (xy 201.93 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f05123fb-29a6-418e-af19-2da2eb57ba78")
 	)
 	(wire
 		(pts
@@ -5411,7 +4904,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 120.65 111.76 0)
 			(hide yes)
 			(show_name no)
@@ -5590,7 +5083,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 186.69 28.448 90)
 			(hide yes)
 			(show_name no)
@@ -5716,124 +5209,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Simulation_SPICE:NMOS")
-		(at 219.71 40.64 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "18f6e547-ccdb-4343-bd97-b25de9886f71")
-		(property "Reference" "Q5"
-			(at 226.06 39.3699 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SUD90330E"
-			(at 226.06 41.9099 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 224.79 38.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#cha_MOSFETs"
-			(at 219.71 53.34 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "N-MOSFET transistor, drain/source/gate"
-			(at 219.71 40.64 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "NMOS"
-			(at 219.71 57.785 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Type" "VDMOS"
-			(at 219.71 59.69 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=D 2=G 3=S"
-			(at 219.71 55.88 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "3"
-			(uuid "b69baa0b-3596-4c44-93ef-2933e7779246")
-		)
-		(pin "1"
-			(uuid "7727aa33-f58a-42f3-911c-efd43c68a4b1")
-		)
-		(pin "2"
-			(uuid "a9c7e3d6-4bfe-4a4e-94e7-1d9f240af10d")
-		)
-		(instances
-			(project "main"
-				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
-					(reference "Q5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 144.78 45.72 0)
 		(unit 1)
@@ -5866,7 +5241,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 145.7452 49.53 0)
 			(hide yes)
 			(show_name no)
@@ -5947,7 +5322,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 60.96 46.99 0)
 			(hide yes)
 			(show_name no)
@@ -6199,7 +5574,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 87.63 43.688 90)
 			(hide yes)
 			(show_name no)
@@ -6280,7 +5655,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 240.9952 106.68 0)
 			(hide yes)
 			(show_name no)
@@ -6359,7 +5734,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 87.63 100.838 90)
 			(hide yes)
 			(show_name no)
@@ -6799,7 +6174,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 120.65 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -6864,226 +6239,6 @@
 			(project "main"
 				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
 					(reference "D4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:D")
-		(at 207.01 63.5 0)
-		(mirror x)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "4d40ff34-f2b4-4830-bf5c-4686c7e9ff38")
-		(property "Reference" "D8"
-			(at 207.01 60.96 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "ES1D"
-			(at 207.01 66.548 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 207.01 63.5 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 207.01 63.5 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Diode"
-			(at 207.01 63.5 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "D"
-			(at 207.01 63.5 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 207.01 63.5 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "6f4ea1a5-af78-4bf7-8835-e4604e1d17fc")
-		)
-		(pin "1"
-			(uuid "d3c60038-0407-40a7-a8e7-73a28e5e157a")
-		)
-		(instances
-			(project "main"
-				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
-					(reference "D8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Simulation_SPICE:NMOS")
-		(at 100.33 99.06 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "50af5c19-51ea-4346-a0f9-b9da082d4d82")
-		(property "Reference" "Q3"
-			(at 106.68 97.7899 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SUD90330E"
-			(at 106.68 100.3299 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 105.41 96.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#cha_MOSFETs"
-			(at 100.33 111.76 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "N-MOSFET transistor, drain/source/gate"
-			(at 100.33 99.06 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "NMOS"
-			(at 100.33 116.205 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Type" "VDMOS"
-			(at 100.33 118.11 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=D 2=G 3=S"
-			(at 100.33 114.3 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "3"
-			(uuid "9998b402-0d81-4220-8ab6-972db774d7c9")
-		)
-		(pin "1"
-			(uuid "3c0e4a65-8641-4286-9b9b-12cc807f86fe")
-		)
-		(pin "2"
-			(uuid "12fbf230-69a7-43c6-a0db-2b193df1df3f")
-		)
-		(instances
-			(project "main"
-				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
-					(reference "Q3")
 					(unit 1)
 				)
 			)
@@ -7199,7 +6354,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 26.3652 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -7278,7 +6433,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 74.93 27.94 0)
 			(hide yes)
 			(show_name no)
@@ -7343,6 +6498,91 @@
 			(project "main"
 				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
 					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:Q_NMOS_GSD")
+		(at 100.33 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5cb53215-04f8-4a13-9fd5-3d9891a82406")
+		(property "Reference" "Q6"
+			(at 106.68 110.4899 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SUD90330E"
+			(at 106.68 113.0299 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "sud90330e:TO-252-2"
+			(at 105.41 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 100.33 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "N-MOSFET transistor, gate/source/drain"
+			(at 100.33 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "39f2ed03-34f1-49c8-ba2e-a884caebb5d8")
+		)
+		(pin "2"
+			(uuid "947af8f9-bf95-4b1b-b964-6c7589176a7f")
+		)
+		(pin "1"
+			(uuid "e538f282-c70e-4de1-a216-0bcd8744754f")
+		)
+		(instances
+			(project "main"
+				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
+					(reference "Q6")
 					(unit 1)
 				)
 			)
@@ -7459,7 +6699,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 60.96 104.14 0)
 			(hide yes)
 			(show_name no)
@@ -7521,124 +6761,6 @@
 			(project "main"
 				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
 					(reference "U2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Simulation_SPICE:NMOS")
-		(at 100.33 41.91 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "5e6ea9f1-4b0b-449e-a235-4769219aec94")
-		(property "Reference" "Q1"
-			(at 106.68 40.6399 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SUD90330E"
-			(at 106.68 43.1799 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 105.41 39.37 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#cha_MOSFETs"
-			(at 100.33 54.61 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "N-MOSFET transistor, drain/source/gate"
-			(at 100.33 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "NMOS"
-			(at 100.33 59.055 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Type" "VDMOS"
-			(at 100.33 60.96 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=D 2=G 3=S"
-			(at 100.33 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "3"
-			(uuid "5f6d882d-02d1-4aa1-9f33-bf09ef64b412")
-		)
-		(pin "1"
-			(uuid "6c465126-848b-4b19-bf86-1fcff3068fd8")
-		)
-		(pin "2"
-			(uuid "c0a76b80-f6c7-480c-81b9-419edaae47dc")
-		)
-		(instances
-			(project "main"
-				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
-					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -7753,7 +6875,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 67.31 29.718 90)
 			(hide yes)
 			(show_name no)
@@ -8066,7 +7188,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 199.0852 49.53 0)
 			(hide yes)
 			(show_name no)
@@ -8145,7 +7267,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 194.31 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -8247,7 +7369,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 120.65 99.06 0)
 			(hide yes)
 			(show_name no)
@@ -8396,124 +7518,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Simulation_SPICE:NMOS")
-		(at 100.33 54.61 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8c39d48f-db17-4604-aed4-6357991820f2")
-		(property "Reference" "Q2"
-			(at 106.68 53.3399 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SUD90330E"
-			(at 106.68 55.8799 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 105.41 52.07 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#cha_MOSFETs"
-			(at 100.33 67.31 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "N-MOSFET transistor, drain/source/gate"
-			(at 100.33 54.61 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "NMOS"
-			(at 100.33 71.755 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Type" "VDMOS"
-			(at 100.33 73.66 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=D 2=G 3=S"
-			(at 100.33 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "3"
-			(uuid "a34811ee-b80a-4254-aa5f-ca7ecceac77a")
-		)
-		(pin "1"
-			(uuid "e360c885-2961-4b4a-9e8b-769b53f03388")
-		)
-		(pin "2"
-			(uuid "ae28ee1e-c1df-4162-85aa-385c41864bd4")
-		)
-		(instances
-			(project "main"
-				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
-					(reference "Q2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 67.31 85.09 90)
 		(unit 1)
@@ -8544,7 +7548,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 67.31 86.868 90)
 			(hide yes)
 			(show_name no)
@@ -8625,7 +7629,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 180.34 45.72 0)
 			(hide yes)
 			(show_name no)
@@ -8725,7 +7729,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 79.7052 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -8768,107 +7772,6 @@
 			(project "main"
 				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
 					(reference "C2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:D")
-		(at 87.63 88.9 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "975a84e4-2c9e-4878-96f5-377765d574c7")
-		(property "Reference" "D12"
-			(at 87.63 85.852 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "ES1D"
-			(at 87.63 91.186 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 87.63 88.9 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 87.63 88.9 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Diode"
-			(at 87.63 88.9 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "D"
-			(at 87.63 88.9 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 87.63 88.9 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "47f45849-d535-44d5-adf9-8454e7d87087")
-		)
-		(pin "1"
-			(uuid "b7bc2096-3f57-4534-b0c4-da43ab56b30f")
-		)
-		(instances
-			(project "main"
-				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
-					(reference "D12")
 					(unit 1)
 				)
 			)
@@ -8983,7 +7886,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 120.65 53.34 0)
 			(hide yes)
 			(show_name no)
@@ -9048,6 +7951,91 @@
 			(project "main"
 				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
 					(reference "D5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:Q_NMOS_GSD")
+		(at 100.33 54.61 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9fe28871-c476-4a05-8dc7-50eda0858586")
+		(property "Reference" "Q2"
+			(at 106.68 53.3399 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SUD90330E"
+			(at 106.68 55.8799 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "sud90330e:TO-252-2"
+			(at 105.41 52.07 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 100.33 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "N-MOSFET transistor, gate/source/drain"
+			(at 100.33 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "4e2aef6f-ec28-41e7-af95-023a3522d580")
+		)
+		(pin "2"
+			(uuid "2bf6e491-9cb5-4ddd-86bc-c9c94370bf65")
+		)
+		(pin "1"
+			(uuid "2dbc1a23-400d-455e-afd6-21608ac17b32")
+		)
+		(instances
+			(project "main"
+				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
+					(reference "Q2")
 					(unit 1)
 				)
 			)
@@ -9132,6 +8120,91 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_FET:Q_NMOS_GSD")
+		(at 219.71 40.64 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a740a3b5-59b0-4adc-8930-e64c8331e953")
+		(property "Reference" "Q3"
+			(at 226.06 39.3699 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SUD90330E"
+			(at 226.06 41.9099 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "sud90330e:TO-252-2"
+			(at 224.79 38.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 219.71 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "N-MOSFET transistor, gate/source/drain"
+			(at 219.71 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "d6f90c28-d21c-45fc-a48e-d0bdb8c2ea85")
+		)
+		(pin "2"
+			(uuid "a1243a38-94e3-45d0-a54f-130d2490d062")
+		)
+		(pin "1"
+			(uuid "f1f064c4-0ac7-4671-8456-4a8427b6a69f")
+		)
+		(instances
+			(project "main"
+				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
+					(reference "Q3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 78.74 104.14 0)
 		(unit 1)
@@ -9164,7 +8237,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 79.7052 107.95 0)
 			(hide yes)
 			(show_name no)
@@ -9207,225 +8280,6 @@
 			(project "main"
 				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
 					(reference "C6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Simulation_SPICE:NMOS")
-		(at 100.33 111.76 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "aa0c61e3-e83b-47c4-898b-e77a73e8bd62")
-		(property "Reference" "Q4"
-			(at 106.68 110.4899 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SUD90330E"
-			(at 106.68 113.0299 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 105.41 109.22 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#cha_MOSFETs"
-			(at 100.33 124.46 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "N-MOSFET transistor, drain/source/gate"
-			(at 100.33 111.76 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "NMOS"
-			(at 100.33 128.905 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Type" "VDMOS"
-			(at 100.33 130.81 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=D 2=G 3=S"
-			(at 100.33 127 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "3"
-			(uuid "f3cae394-a1f7-404f-b523-f2216667f743")
-		)
-		(pin "1"
-			(uuid "41f00ee5-1b4d-4fe8-97cb-cc77548d75cd")
-		)
-		(pin "2"
-			(uuid "8fbd62a1-9cc2-411f-a859-8b23d45ee090")
-		)
-		(instances
-			(project "main"
-				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
-					(reference "Q4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:D")
-		(at 87.63 31.75 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "ba97dd57-8aca-44ec-8817-c166bba5f52c")
-		(property "Reference" "D2"
-			(at 87.63 28.448 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "ES1D"
-			(at 87.63 34.544 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 87.63 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 87.63 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Diode"
-			(at 87.63 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "D"
-			(at 87.63 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 87.63 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "047b2355-53cd-418c-974f-d7f4e03f83bb")
-		)
-		(pin "1"
-			(uuid "bda7cd40-e848-405d-8e75-7a914aee8ce6")
-		)
-		(instances
-			(project "main"
-				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
-					(reference "D2")
 					(unit 1)
 				)
 			)
@@ -9510,108 +8364,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:D")
-		(at 87.63 121.92 0)
-		(mirror x)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "bbe56882-ccf6-4e74-8b60-52806ce42251")
-		(property "Reference" "D13"
-			(at 87.63 124.714 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "ES1D"
-			(at 87.63 119.126 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 87.63 121.92 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 87.63 121.92 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Diode"
-			(at 87.63 121.92 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "D"
-			(at 87.63 121.92 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 87.63 121.92 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "0f203564-b4fd-4f41-9dd2-8f11feeaad76")
-		)
-		(pin "1"
-			(uuid "b5c04ea4-730b-4502-aa59-b652c173593f")
-		)
-		(instances
-			(project "main"
-				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
-					(reference "D13")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Polarized")
 		(at 35.56 46.99 0)
 		(unit 1)
@@ -9634,7 +8386,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100uF"
+		(property "Value" "220uF"
 			(at 39.37 47.3709 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9645,7 +8397,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
 			(at 36.5252 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -9724,7 +8476,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 87.63 52.832 90)
 			(hide yes)
 			(show_name no)
@@ -9795,7 +8547,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100uF"
+		(property "Value" "220uF"
 			(at 158.75 46.1009 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9806,7 +8558,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
 			(at 155.9052 49.53 0)
 			(hide yes)
 			(show_name no)
@@ -9877,7 +8629,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100uF"
+		(property "Value" "220uF"
 			(at 39.37 104.5209 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9888,7 +8640,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
 			(at 36.5252 107.95 0)
 			(hide yes)
 			(show_name no)
@@ -10045,7 +8797,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 207.01 51.562 90)
 			(hide yes)
 			(show_name no)
@@ -10125,7 +8877,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 240.03 53.34 0)
 			(hide yes)
 			(show_name no)
@@ -10196,6 +8948,91 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_FET:Q_NMOS_GSD")
+		(at 219.71 53.34 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d1f9c443-7b34-4187-84c4-5d65ea11e953")
+		(property "Reference" "Q4"
+			(at 226.06 52.0699 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SUD90330E"
+			(at 226.06 54.6099 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "sud90330e:TO-252-2"
+			(at 224.79 50.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 219.71 53.34 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "N-MOSFET transistor, gate/source/drain"
+			(at 219.71 53.34 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "65425642-faf6-4fca-bd44-515f77d1e8e4")
+		)
+		(pin "2"
+			(uuid "958ee6b3-c485-40de-bf71-cd56bfe10536")
+		)
+		(pin "1"
+			(uuid "da27ee63-65cf-4fba-bb45-6a97d66fc56d")
+		)
+		(instances
+			(project "main"
+				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
+					(reference "Q4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:D")
 		(at 240.03 40.64 90)
 		(mirror x)
@@ -10227,7 +9064,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 240.03 40.64 0)
 			(hide yes)
 			(show_name no)
@@ -10375,8 +9212,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Simulation_SPICE:NMOS")
-		(at 219.71 53.34 0)
+		(lib_id "Transistor_FET:Q_NMOS_GSD")
+		(at 100.33 41.91 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -10385,9 +9222,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "d58b99cf-e83c-4dd8-ab82-8cdf4755b960")
-		(property "Reference" "Q6"
-			(at 226.06 52.0699 0)
+		(uuid "d9ea915b-3bba-4b05-a6d5-5b302fe98b84")
+		(property "Reference" "Q1"
+			(at 106.68 40.6399 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10398,7 +9235,7 @@
 			)
 		)
 		(property "Value" "SUD90330E"
-			(at 226.06 54.6099 0)
+			(at 106.68 43.1799 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10408,8 +9245,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 224.79 50.8 0)
+		(property "Footprint" "sud90330e:TO-252-2"
+			(at 105.41 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10419,8 +9256,8 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#cha_MOSFETs"
-			(at 219.71 66.04 0)
+		(property "Datasheet" ""
+			(at 100.33 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10430,41 +9267,8 @@
 				)
 			)
 		)
-		(property "Description" "N-MOSFET transistor, drain/source/gate"
-			(at 219.71 53.34 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "NMOS"
-			(at 219.71 70.485 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Type" "VDMOS"
-			(at 219.71 72.39 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=D 2=G 3=S"
-			(at 219.71 68.58 0)
+		(property "Description" "N-MOSFET transistor, gate/source/drain"
+			(at 100.33 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10475,18 +9279,18 @@
 			)
 		)
 		(pin "3"
-			(uuid "f4b04b02-ca51-4f16-93a7-8411cd6ad20d")
-		)
-		(pin "1"
-			(uuid "8066dca5-2ccb-4dc6-a820-7cb35df288f6")
+			(uuid "2de3f9ed-6874-4fae-84a9-273049473f96")
 		)
 		(pin "2"
-			(uuid "98468bb3-a223-4a46-9cd2-71bb4e502a37")
+			(uuid "2e45ea5f-9ea4-482a-8682-1f5723e631dd")
+		)
+		(pin "1"
+			(uuid "b434a1d2-a42f-4a2a-974d-8fc67334319f")
 		)
 		(instances
 			(project "main"
 				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
-					(reference "Q6")
+					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -10523,7 +9327,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 151.892 104.14 90)
 			(hide yes)
 			(show_name no)
@@ -10602,7 +9406,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 207.01 42.418 90)
 			(hide yes)
 			(show_name no)
@@ -10683,7 +9487,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 228.2952 106.68 0)
 			(hide yes)
 			(show_name no)
@@ -10762,7 +9566,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 87.63 109.982 90)
 			(hide yes)
 			(show_name no)
@@ -10805,209 +9609,6 @@
 			(project "main"
 				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
 					(reference "R6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:D")
-		(at 207.01 30.48 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "e9eafe36-0f4c-4bda-9223-baf2f6508c46")
-		(property "Reference" "D7"
-			(at 207.01 33.528 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "ES1D"
-			(at 207.01 27.178 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 207.01 30.48 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 207.01 30.48 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Diode"
-			(at 207.01 30.48 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "D"
-			(at 207.01 30.48 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 207.01 30.48 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "74c257ec-8128-4e69-b69e-34a7b4896c6f")
-		)
-		(pin "1"
-			(uuid "c4b16004-d998-438d-85fa-4225c38c8c0c")
-		)
-		(instances
-			(project "main"
-				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
-					(reference "D7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:D")
-		(at 87.63 64.77 0)
-		(mirror x)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "ee019668-65a4-4a94-ba47-b880635e2983")
-		(property "Reference" "D3"
-			(at 87.63 62.23 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "ES1D"
-			(at 87.63 67.818 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 87.63 64.77 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 87.63 64.77 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Diode"
-			(at 87.63 64.77 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "D"
-			(at 87.63 64.77 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 87.63 64.77 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "2bbd6b4b-6079-4b87-8164-411bf84f0548")
-		)
-		(pin "1"
-			(uuid "3e24a0c8-3aff-441d-ba76-c20796a6d3eb")
-		)
-		(instances
-			(project "main"
-				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
-					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -11086,6 +9687,91 @@
 			(project "main"
 				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
 					(reference "#PWR012")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:Q_NMOS_GSD")
+		(at 100.33 99.06 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f8426745-572e-4645-bf8b-c4138ef9e429")
+		(property "Reference" "Q5"
+			(at 106.68 97.7899 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SUD90330E"
+			(at 106.68 100.3299 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "sud90330e:TO-252-2"
+			(at 105.41 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 100.33 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "N-MOSFET transistor, gate/source/drain"
+			(at 100.33 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "3c0ecc46-a549-4e88-8d7e-3815437f875d")
+		)
+		(pin "2"
+			(uuid "cacc2a3c-28d6-4733-9f89-9d15cd44a329")
+		)
+		(pin "1"
+			(uuid "9462e391-10be-4c11-a612-88bd968a17cb")
+		)
+		(instances
+			(project "main"
+				(path "/221b5544-ca14-4503-b001-a85fc346b8a9/3706a100-89fe-4fa1-ae16-5f6bace485f6"
+					(reference "Q5")
 					(unit 1)
 				)
 			)
@@ -11201,7 +9887,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 26.3652 107.95 0)
 			(hide yes)
 			(show_name no)
@@ -11280,7 +9966,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 74.93 85.09 0)
 			(hide yes)
 			(show_name no)

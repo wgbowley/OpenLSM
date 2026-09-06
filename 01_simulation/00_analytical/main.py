@@ -7,9 +7,10 @@ Description:
 """
 
 from pathlib import Path
-from picounits import CURRENT, RESISTANCE, LENGTH, FORCE, INDUCTANCE, POWER, NULLSET, Parser
-from matplotlib import pyplot as plt
+from picounits import Parser
+from picounits import CURRENT, RESISTANCE, LENGTH, INDUCTANCE, POWER, NULLSET
 
+from matplotlib import pyplot as plt
 from model.solver import Solver
 
 
@@ -24,55 +25,55 @@ parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
 solver = Solver(parameters)
 
 # Calculates the sampling domain & step sizes
-z_sample = parameters.numerics.displacement.stripped
-step_size = parameters.numerics.samples.displacement_size.stripped
+z_sample = parameters.numerics.displacement
+step_size = parameters.numerics.samples.displacement_size
 
 steps = int(z_sample / step_size)
 offset = - z_sample / 2
 
 # Begins position vs force sampling
-print(f"Steps: {steps}, Sample Range: ({offset * LENGTH:.3f}, {-offset * LENGTH:.3f})")
-print("-" * 20)
+print("-" * 50)
+print(f"Steps: {steps}, Sample Range: ({offset:.3f}, {-offset:.3f})")
+print("-" * 50)
 
 # List to store
 displacement = []
-force_magnitude = []
+force_result = []
 
 for index in range(0, steps):
     # Calculates the armature position
     z_output = index * step_size + offset
-    z_solver = z_output - solver.armature_offset
+    z_solver = z_output - solver.armature_offset * LENGTH
 
     # Updates the currents & calculates force
     force = solver.compute_force(z_solver)
 
-    # Calculates force over z distance
-    force_magnitude.append(force)
+    force_result.append(force)
     displacement.append(z_output)
 
     # Prints position every interval
     if index % parameters.numerics.output.interval.stripped == 0:
-        print(f"Position: {z_output * LENGTH:.3f} | Force: {force * FORCE:.3f}")
+        print(f"Position: {z_output} | Force: {force}")
 
 
 # Prints a few different system parameters
-print("-" * 20)
-print(f"Slot Turns:         {solver.slot_turns * NULLSET:.3f}")
-print(f"Line Resistance:    {solver.l2l_resistance * RESISTANCE:.3f}")
-print(f"Line Inductance:    {solver.l2l_inductance * INDUCTANCE:.3f}")
-print(f"Line Current:       {solver.phase_rms_current * CURRENT:.3f} (RMS)")
-print(f"System Losses:      {solver.average_losses * POWER:.3f} (Copper)")
-print("-" * 20)
+print("-" * 50)
+print(f"Slot Turns:         {solver.slot_turns * NULLSET}")
+print(f"Line Resistance:    {solver.l2l_resistance * RESISTANCE}")
+print(f"Line Inductance:    {solver.l2l_inductance * INDUCTANCE}")
+print(f"Line Current:       {solver.phase_rms_current * CURRENT} (RMS)")
+print(f"System Losses:      {solver.average_losses * POWER}  (1st order)")
+print("-" * 50)
 
 
-# Plotting position Vs magnitude of force
+# Plotting position Vs force
 plt.figure(figsize=(10, 5))
-plt.plot(displacement, force_magnitude, color="black")
+plt.plot(displacement, force_result, color="black")
 
 # Graph styling details
-plt.title(f"Analytical FOC Model: Force vs Position @ {solver.phase_rms_current * CURRENT:.3f} (RMS)")
+plt.title(f"Analytical FOC Model: Force vs Position @ {solver.phase_rms_current * CURRENT} (RMS)")
 plt.xlabel("Position (m)")
-plt.ylabel("|Force| (N)")
+plt.ylabel("Force (N)")
 
 # Vertical lines at stator boundaries
 stator = parameters.stator.length.stripped

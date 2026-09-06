@@ -6,8 +6,8 @@
 <div align="center">
   <table>
     <tr>
-      <td><img src="04_media/bare_pcb_front.jpg" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="04_media/bare_pcb_back.jpg" alt="Bottom layer" style="max-width:400px;"></td>
+      <td><img src="05_media/bare_pcb_front.jpg" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="05_media/bare_pcb_back.jpg" alt="Bottom layer" style="max-width:400px;"></td>
     </tr>
     <tr>
       <td><em>Top layer — STM32, Thermistor Array, Accelerometer & Encoder</em></td>
@@ -17,15 +17,21 @@
 </div>
 
 
-OpenLSM uses `closed-loop control` to position the motor's armature. This requires a device to measure the armature's position: [an encoder board](../02_magnetic_encoder). OpenLSM also requires acceleration and thermal data for validating the motor's transient behaviour during operation. To achieve this, an `SPI` accelerometer is used to collect `3-axis` acceleration data, and an array of `8` thermistors across the motor's `z-axis` is used to collect temperature data `T(z, t)`.
+OpenLSM uses `closed-loop control` to position the motor's armature. 
+This requires a device to measure the armature's position: [an encoder board](../02_magnetic_encoder). 
+OpenLSM also requires acceleration and thermal data for validating the motor's transient behaviour during operation. To achieve this, 
+an `SPI` accelerometer is used to collect `3-axis` acceleration data, and an array of `8` thermistors across the motor's `z-axis` is used to collect temperature data `T(z, t)`.
 
-The array consists of `8` NTC thermistors and an analog multiplexer, which feeds into the ADC pin on the peripheral controller. The data collected from these sensors is then processed into relevant quantities and sent over the `RS-485/RS-422` link to the motor controller board.
+The array consists of `8` NTC thermistors and an analog multiplexer, which feeds into the ADC pin on the peripheral controller. 
+The data collected from these sensors is then processed into relevant quantities and sent over the `RS-485/RS-422` link to the motor controller board.
 
 ---
 
 ### High-level topology
 
-The `armature board`'s main function is to collect the data from the integrated accelerometer, integrated thermal array and encoder board, then process the data into quantities and send it to the motor controller board. Given the locality to the armature slots and their tendency to produce electromagnetic noise, an `RS-422/RS-485` differential link was used.
+The `armature board`'s main function is to collect the data from the integrated accelerometer, integrated thermal array and encoder board, 
+then process the data into quantities and send it to the motor controller board. Given the locality to the armature slots and 
+their tendency to produce electromagnetic noise, an `RS-422/RS-485` differential link was used.
 
 ```
 Interface (JST XH 4-pin 2.5mm Pitch Male Header)
@@ -52,8 +58,8 @@ Thermistor Array (800 Hz), SPI Accelerometer, Linear Encoder Interconnect (350 k
 <div align="center">
   <table>
     <tr>
-      <td><img src="04_media/top_layer.png" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="04_media/bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+      <td><img src="05_media/kicad_top_layer.png" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="05_media/kicad_bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
     </tr>
     <tr>
       <td><em>Top layer — STM32, Thermistor Array, Accelerometer & Encoder</em></td>
@@ -63,7 +69,10 @@ Thermistor Array (800 Hz), SPI Accelerometer, Linear Encoder Interconnect (350 k
 </div>
 
 
-The `armature board` is intended to be located either tangentially to the armature or below the armature in parallel with the linear rail carriage face. The board is `60 mm` in length and `40 mm` in width. The board has a GND and power plane, with the traces embedded into the power plane layer. The board also has M2 bolt holes with a diameter of `~2.10 mm` in a rectangular mounting pattern of `54 mm` and `34 mm`. Each M2 bolt hole is directly connected to the GND plane with exposed copper around the entire hole.
+The `armature board` is intended to be located either tangentially to the armature or below the armature in parallel with the linear rail carriage face. 
+The board is `60 mm` in length and `40 mm` in width. The board has a GND and power plane, with the traces embedded into the power plane layer. 
+The board also has M2 bolt holes with a diameter of `~2.10 mm` in a rectangular mounting pattern of `54 mm` and `34 mm`. 
+Each M2 bolt hole is directly connected to the GND plane with exposed copper around the entire hole.
 
 ---
 
@@ -71,18 +80,17 @@ The `armature board` is intended to be located either tangentially to the armatu
 
 *(TBD) — Work in progress*
 
-> [!IMPORTANT]
->
-> Programming is done via a `2×3 pin`, `2.54 mm` vertical male connector on the armature board, located near the `STM32G431K8Tx`.
+> Programming is done via a `2×3 pin`, `2.54 mm` vertical male connector on the board, located near the `STM32G431K8Tx`.
 
-> [!WARNING]
->
 > SWO is connected to the wrong pin PB3 instead of PA3 hence SWO will not work if not soldered across with a jumper.
 
 ---
 
 ### Documentation
 
-Design notes and implementation decisions are documented in [issue #11](https://github.com/wgbowley/OpenLSM/issues/11).
+Design notes and implementation decisions are documented in [issue #11](https://github.com/wgbowley/OpenLSM/issues/11). <br>
+Implementation and validation notes are documented in [issue #36](https://github.com/wgbowley/OpenLSM/issues/36)
+
+> BOM can be found here [BOM.md](BOM.md)
 
 ---

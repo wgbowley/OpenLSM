@@ -4,10 +4,8 @@ Prototype Beta explores thermal management strategies for the `ironless tubular 
 
 ---
 
-#### Revisions
+### Revisions
 
-> [!WARNING]
->
 > Revisions 1 and 2 are conceptual designs not intended to be fabricated. Revision 3 takes learnings from both and is currently being designed.
 
 #### [Revision 1](/02_motors/01_prototype_beta/rev_1/readme.md) — Thermal interface study (transformer oil, PTFE armature)
@@ -34,7 +32,6 @@ This is Revision 2, which was designed to develop a thermal management strategy 
 
 #### [Revision 3](/02_motors/01_prototype_beta/rev_3/readme.md) — Implementation of Prototype Beta and validation of the thermal studies
 
-> [!important]
 > Proposed Design:
 >
 > This prototype will most likely use an outer radial heat sink made of `aluminum`, with coils potted into that

@@ -2,7 +2,7 @@
   "version": "0.2",
   "language": "en-US",
   "ignorePaths": [
-    "**/*.{asc,lib,asy,step,kicad_mod,kicad_sym,kicad_csh,kicad_prl,kicad_pro,kicad_sch}"
+    "**/*.{asc,lib,asy,step,kicad_mod,kicad_sym,kicad_csh,kicad_prl,kicad_pro,kicad_sch,csv,net}"
   ],
   "words": [
     "mathrm",
@@ -38,6 +38,8 @@
     "IRFS",
     "ironless",
     "isort",
+    "vout",
+    "jtem",
     "Kapton",
     "kicad",
     "kilpper",
@@ -106,6 +108,12 @@
     "TSSOP20_AS5311",
     "biot",
     "savart",
-    "matplotlib"
+    "matplotlib",
+    "pylintrc",
+    "PGND",
+    "BIOM",
+    "USMFLAB",
+    "DWVR",
+    "DIOM4"
   ]
 }

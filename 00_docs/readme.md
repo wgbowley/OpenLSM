@@ -1,4 +1,4 @@
-### Documentation
+### 00_docs
 
 A credits list for tooling and individuals can be found here: [credits.md](./credits.md)
 
@@ -25,7 +25,11 @@ L1 -> System level design, topology and interfaces
 L2 -> Detailed design & prototyping
 L3 -> Testing & validation of prototype
 ----------------------------------------------------
+```
 
+<br>
+
+```
 Miscellaneous:
 ----------------------------------------------------
 DS  -> De-scoped feature, de-scoped analysis
@@ -36,5 +40,27 @@ SIM -> Simulations & modelling
 AN  -> Weekly application notes
 ----------------------------------------------------
 ```
+
+#### Application Notes
+
+```
+0x1 = Week 1
+0x2 = Week 2
+0x3 = Week 3
+0x4 = Week 4
+0x5 = Week 5
+0x6 = Week 6
+0x7 = Week 7
+0x8 = Week 8
+0x9 = Week 9
+0xA = Week 10   <- Current State
+0xB = Week 11
+0xC = Week 12
+0xD = Week 13
+0xE = Week 14
+0xF = Week 15   <- Terminal State
+```
+
+> Check [here](https://github.com/wgbowley/OpenLSM/issues?q=is%3Aissue%20label%3AAN) to view the weekly application notes.
 
 ---

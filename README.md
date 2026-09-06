@@ -32,18 +32,20 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 
 OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. The project will fulfill this goal by using readily available materials and tooling, combined with analytical and hybrid models.
 
+> This project has no commercial aspirations. Its contents will remain available under the `MIT` License.
+
 ### Objectives
 
 ```
-- Support voltage ranges of `12 V`, `24 V`, and `48 V`.
-- Achieve a target force per amp of `3.0 N/A` (rms).
-- Reach an asymptote temperature of `60°C` under standard use-cases.
-- Validate the driver board and linear encoder board for linear motor applications.
-- Validate motor performance and generate performance curves for each voltage range.
-- Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
+- [x] Support voltage ranges of `12 V`, `24 V`, and `48 V`.
+- [/] Achieve a target force per amp of `3.0 N/A` (rms).
+- [/] Reach an asymptote temperature of `60°C` under standard use-cases.
+- [/] Validate the driver board and linear encoder board for linear motor applications.
+- [ ] Validate motor performance and generate performance curves for each voltage range.
+- [ ] Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
 ```
 
-> This project has no commercial aspirations. Its contents will remain available under the `MIT` License.
+> *(Note). `[ ]` Not started. `[/]` In progress. `[x]` Complete.*
 
 ---
 
@@ -100,21 +102,36 @@ See the [Model Notes](./01_simulation/00_analytical/readme.md) for the mathemati
 
 ### Hybrid
 
-> *(Work in progress). This hybrid simulation is currently be designed and implemented.*
+> *(Paused). This hybrid simulation is currently paused until PCB design finishes.*
 
 ---
 
 ### Bridge Driver
 
-> *(Work in progress). This board is currently be designed and implemented.*
+> *(Design). The schematic is finished, and the footprints are done. The PCB is currently being modelled.*
 
-A triple half-bridge driver with an operating voltage of `0–96 V` and current of `0–25 A`. It supports `step/dir` and `CANBUS` input interfaces, incremental encoder and Hall-effect sensor inputs from the motor, and `RS-485/RS-422` for the armature board.
+An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and a power domain of `12-96 V (RMS)`, with current up to `20 A (RMS)`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for communication with external input boards for encoders, Hall-effect sensors, etc. 
+
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="./03_boards/00_bridge_driver/05_media/mock_up_board_forward.png" alt="Driver Board TOP" style="max-width:375px;"></td>
+      <td><img src="./03_boards/00_bridge_driver/05_media/mock_up_board_back.png" alt="Driver Board Bottom" style="max-width:375px;"></td>
+    </tr>
+    <tr>
+      <td><em>Top-side</em></td>
+      <td><em>Bottom-Side</em></td>
+    </tr>
+  </table>
+</div>
+
+See [03_boards/00_bridge_driver](/03_boards/00_bridge_driver/) for the detailed design, schematic, PCB, and BOM.
 
 ---
 
 ### Integrated Sensor Boards
 
-> *(Fabrication). These boards have been made, but they haven't been populated or validated yet.*
+> *(Fabrication). These boards haven't been populated or validated yet. (Components & PCBs ordered.)*
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
@@ -124,8 +141,8 @@ The integrated sensor boards are a platform for measuring the motor's position, 
 <div align="center">
   <table>
     <tr>
-      <td><img src="03_boards/01_armature_board/04_media/bare_pcb_front.jpg" alt="Armature Board" style="max-width:400px;"></td>
-      <td><img src="03_boards/02_magnetic_encoder/04_media/bare_pcb_top.jpg" alt="Encoder Board" style="max-width:350px;"></td>
+      <td><img src="03_boards/01_armature_board/05_media/bare_pcb_front.jpg" alt="Armature Board" style="max-width:400px;"></td>
+      <td><img src="03_boards/02_magnetic_encoder/05_media/bare_pcb_top.jpg" alt="Encoder Board" style="max-width:350px;"></td>
     </tr>
     <tr>
       <td><em>Armature Data Board</em></td>
@@ -141,6 +158,6 @@ See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable
 ### Documentation
 
 Each section of the repo is self-documenting.  
-For internal documentation, credits, and contributors, refer to [04_docs](./04_docs/).
+For internal documentation, credits, and contributors, refer to [00_docs](./00_docs/).
 
 ---

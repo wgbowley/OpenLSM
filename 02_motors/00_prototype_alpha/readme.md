@@ -1,8 +1,6 @@
 
 ### Overview
 
-> [!WARNING]
->
 > This is a legacy design intended to explore design ideas and engineering trade-offs.
 > It has been manufactured, experimentally validated, and performance verified.
 > Do not assume this design is suitable for real-world applications.

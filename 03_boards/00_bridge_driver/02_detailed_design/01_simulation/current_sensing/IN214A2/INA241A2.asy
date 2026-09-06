@@ -4,8 +4,8 @@ RECTANGLE Normal -64 -72 80 72
 WINDOW 0 8 -72 Bottom 2
 WINDOW 3 8 72 Top 2
 SYMATTR Prefix X
-SYMATTR Value INA241A1
-SYMATTR ModelFile C:\Users\WBowl\Documents\Work\OpenLSM\03_boards\00_bridge_driver\02_detailed_design\01_simulation\current_sensing\INA214\INA241A1.lib
+SYMATTR Value INA241A2
+SYMATTR ModelFile C:\Users\WBowl\Documents\Work\OpenLSM\03_boards\00_bridge_driver\02_detailed_design\01_simulation\current_sensing\IN214A2\INA241A2.lib
 PIN -64 -32 LEFT 8
 PINATTR PinName IN+
 PINATTR SpiceOrder 1

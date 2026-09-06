@@ -1,15 +1,19 @@
-# OpenLSM Derived Units - PCB board Units
+# OpenLSM Board Development | Derived Units
 [version]
 format: 0.1.0
 
+# ---------------------------------------------
 
 [Mechanics]
 N:      kg*m*s^-2
 J:      kg*m^2*s^-2
 W:      kg*m^2*s^-3
 
+# ---------------------------------------------
 
 [Electricity]
 V:      kg*m^2*s^-3*A^-1
 F:      kg^-1*m^-2*s^4*A^2
 Ω:      kg*m^2*s^-3*A^-2
+
+# ---------------------------------------------
