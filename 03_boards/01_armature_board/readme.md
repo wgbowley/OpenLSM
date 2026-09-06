@@ -80,7 +80,7 @@ Each M2 bolt hole is directly connected to the GND plane with exposed copper aro
 
 *(TBD) — Work in progress*
 
-> Programming is done via a `2×3 pin`, `2.54 mm` vertical male connector on the armature board, located near the `STM32G431K8Tx`.
+> Programming is done via a `2×3 pin`, `2.54 mm` vertical male connector on the board, located near the `STM32G431K8Tx`.
 
 > SWO is connected to the wrong pin PB3 instead of PA3 hence SWO will not work if not soldered across with a jumper.
 
