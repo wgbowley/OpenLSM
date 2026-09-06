@@ -91,4 +91,6 @@ Each M2 bolt hole is directly connected to the GND plane with exposed copper aro
 Design notes and implementation decisions are documented in [issue #11](https://github.com/wgbowley/OpenLSM/issues/11). <br>
 Implementation and validation notes are documented in [issue #36](https://github.com/wgbowley/OpenLSM/issues/36)
 
+> BOM can be found here [BOM.md](BOM.md)
+
 ---

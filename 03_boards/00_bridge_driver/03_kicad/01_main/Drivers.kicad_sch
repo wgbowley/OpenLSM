@@ -5336,7 +5336,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 120.65 111.76 0)
 			(hide yes)
 			(show_name no)
@@ -5673,7 +5673,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 145.7452 49.53 0)
 			(hide yes)
 			(show_name no)
@@ -6087,7 +6087,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 240.9952 106.68 0)
 			(hide yes)
 			(show_name no)
@@ -6606,7 +6606,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 120.65 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -6708,7 +6708,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 207.01 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -6888,7 +6888,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 26.3652 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -6967,7 +6967,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 74.93 27.94 0)
 			(hide yes)
 			(show_name no)
@@ -7722,7 +7722,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 199.0852 49.53 0)
 			(hide yes)
 			(show_name no)
@@ -7801,7 +7801,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 194.31 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -7903,7 +7903,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 120.65 99.06 0)
 			(hide yes)
 			(show_name no)
@@ -8263,7 +8263,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 79.7052 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -8342,7 +8342,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 87.63 88.9 0)
 			(hide yes)
 			(show_name no)
@@ -8521,7 +8521,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 120.65 53.34 0)
 			(hide yes)
 			(show_name no)
@@ -8872,7 +8872,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 79.7052 107.95 0)
 			(hide yes)
 			(show_name no)
@@ -8951,7 +8951,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 87.63 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -9131,7 +9131,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 87.63 121.92 0)
 			(hide yes)
 			(show_name no)
@@ -9224,7 +9224,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100uF"
+		(property "Value" "220uF"
 			(at 39.37 47.3709 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9235,7 +9235,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
 			(at 36.5252 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -9385,7 +9385,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100uF"
+		(property "Value" "220uF"
 			(at 158.75 46.1009 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9396,7 +9396,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
 			(at 155.9052 49.53 0)
 			(hide yes)
 			(show_name no)
@@ -9467,7 +9467,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100uF"
+		(property "Value" "220uF"
 			(at 39.37 104.5209 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9478,7 +9478,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
 			(at 36.5252 107.95 0)
 			(hide yes)
 			(show_name no)
@@ -9715,7 +9715,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 240.03 53.34 0)
 			(hide yes)
 			(show_name no)
@@ -9902,7 +9902,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 240.03 40.64 0)
 			(hide yes)
 			(show_name no)
@@ -10325,7 +10325,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 228.2952 106.68 0)
 			(hide yes)
 			(show_name no)
@@ -10483,7 +10483,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 207.01 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -10585,7 +10585,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 87.63 64.77 0)
 			(hide yes)
 			(show_name no)
@@ -10928,7 +10928,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 26.3652 107.95 0)
 			(hide yes)
 			(show_name no)
@@ -11007,7 +11007,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "ES1D:DIOM4325X250N"
 			(at 74.93 85.09 0)
 			(hide yes)
 			(show_name no)

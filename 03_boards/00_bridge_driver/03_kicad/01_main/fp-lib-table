@@ -9,4 +9,5 @@
 	(lib (name "sud90330e") (type "KiCad") (uri "C:/Users/WBowl/Documents/Work/OpenLSM/03_boards/00_bridge_driver/03_kicad/02_components/sud90330e") (options "") (descr ""))
 	(lib (name "82103C") (type "KiCad") (uri "C:/Users/WBowl/Documents/Work/OpenLSM/03_boards/00_bridge_driver/03_kicad/02_components/82103C") (options "") (descr ""))
 	(lib (name "82683C") (type "KiCad") (uri "C:/Users/WBowl/Documents/Work/OpenLSM/03_boards/00_bridge_driver/03_kicad/02_components/82683C") (options "") (descr ""))
+	(lib (name "ES1D") (type "KiCad") (uri "C:/Users/WBowl/Documents/Work/OpenLSM/03_boards/00_bridge_driver/03_kicad/02_components/ES1D") (options "") (descr ""))
 )

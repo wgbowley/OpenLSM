@@ -30,4 +30,6 @@ Input (up to 96V), Isolated 12V & Isolated 3.3V
 
 Design notes and implementation decisions are documented in [issue #12](https://github.com/wgbowley/OpenLSM/issues/12).
 
+> BOM can be found here [BOM.md](BOM.md)
+
 ---
