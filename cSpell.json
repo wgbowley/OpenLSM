@@ -110,6 +110,9 @@
     "savart",
     "matplotlib",
     "pylintrc",
-    "PGND"
+    "PGND",
+    "BIOM",
+    "USMFLAB",
+    "DWVR",
   ]
 }

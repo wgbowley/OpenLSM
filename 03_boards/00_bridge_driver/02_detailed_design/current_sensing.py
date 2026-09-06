@@ -18,8 +18,9 @@ gain = 20 * (voltage / voltage)     # -> (Nullset really)
 
 # These are all R_2512_6332Metric if you need a different one find it.
 line1 = 10 * milli * resistance
-line2 = 3 * milli * resistance
+line2 = 5 * milli * resistance
 line3 = 1 * milli * resistance
+
 
 @expects(current)
 def max_current(line: Q) -> Q:
