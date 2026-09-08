@@ -63,7 +63,7 @@ An `ironless planar linear` motor with a polylactic acid (PLA) armature featurin
 
 The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
 
-See the [alpha notes](/02_motors/00_prototype_alpha/readme.md) for the full report on Prototype Alpha.
+See the [`alpha notes`](/02_motors/00_prototype_alpha/readme.md) for the full report on Prototype Alpha.
 
 ---
 
@@ -98,7 +98,7 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
 </div>
 
 
-See the [Model Notes](./01_simulation/00_analytical/readme.md) for the mathematical/computational implementation.
+See the [`Model Notes`](./01_simulation/00_analytical/readme.md) for the mathematical/computational implementation.
 
 ### Hybrid
 
@@ -125,7 +125,7 @@ An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and
   </table>
 </div>
 
-See [03_boards/00_bridge_driver](/03_boards/00_bridge_driver/) for the detailed design, schematic, PCB, and BOM.
+See [`00_bridge_driver`](/03_boards/00_bridge_driver/) for the detailed design, schematic, PCB, and BOM.
 
 ---
 
@@ -141,13 +141,13 @@ The integrated sensor boards are a platform for measuring the motor's position, 
   <p><em>Bare armature board (black) & Bare encoder board (green)</em></p>
 </div>
 
-See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
+See [`03_boards`](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
 
 ---
 
 ### Documentation
 
 Each section of the repo is self-documenting.  
-For internal documentation, credits, and contributors, refer to [00_docs](./00_docs/).
+For internal documentation, credits, and contributors, refer to [`00_docs`](./00_docs/).
 
 ---
