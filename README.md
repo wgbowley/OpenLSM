@@ -70,7 +70,7 @@ See the [alpha notes](/02_motors/00_prototype_alpha/readme.md) for the full repo
 ### Beta ($\beta$)
 
 > *(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*  
-> *(Note). Revision 3 of the ironless tubular linear motor will be fabricated.*
+> *(Paused). Revision 3 will be designed and fabricated. Paused until PCB design finishes.*
 
 An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature featuring `12` slots, mechanically wound using `0.4 mm` diameter enameled copper wire, with `4` slots in-series per phase `(WYE)`. The stator, unlike the armature, is made of layered carbon fibre epoxy to form a tube with an internal radius of `5 mm` and outer radius of `6 mm`. The poles are `20 mm` in length and `5 mm` in radius such that they can be inserted into the stator tube in this pole arrangement `(N-S|S-N)`, using generic superglue to secure the end poles.
 
@@ -131,24 +131,14 @@ See [03_boards/00_bridge_driver](/03_boards/00_bridge_driver/) for the detailed 
 
 ### Integrated Sensor Boards
 
-> *(Fabrication). These boards haven't been populated or validated yet. (Components & PCBs ordered.)*
+> *(Fabrication). The armature board hasn't been populated yet. (Components and PCBs are on hand.)*
+> *(Validation). The encoder board has been populated and requires validation.*
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
-<!-- Need to update those images with the populated PCBs and also they need to be cleaned up -->
-<!-- They need to be updated in general. Those images are pretty poor quality --> 
-
 <div align="center">
-  <table>
-    <tr>
-      <td><img src="03_boards/01_armature_board/05_media/bare_pcb_front.jpg" alt="Armature Board" style="max-width:400px;"></td>
-      <td><img src="03_boards/02_magnetic_encoder/05_media/bare_pcb_top.jpg" alt="Encoder Board" style="max-width:350px;"></td>
-    </tr>
-    <tr>
-      <td><em>Armature Data Board</em></td>
-      <td><em>Encoder Board</em></td>
-    </tr>
-  </table>
+  <img src="./05_media/05_miscellaneous/bare_top_armature_and_encoder_boards.jpg" alt="Bare PCBs" style="max-width: 600px">
+  <p><em>Bare armature board (black) & Bare encoder board (green)</em></p>
 </div>
 
 See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.

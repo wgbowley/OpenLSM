@@ -1,13 +1,10 @@
 ### Overview
 
-<!-- Need to update those images with the populated PCBs and also they need to be cleaned up -->
-<!-- They need to be updated in general. Those images are pretty poor quality --> 
-
 <div align="center">
   <table>
     <tr>
-      <td><img src="05_media/bare_pcb_top.jpg" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="05_media/bare_pcb_back.jpg" alt="Bottom layer" style="max-width:400px;"></td>
+      <td><img src="05_media/populated_pcb_top.jpg" alt="Top layer" style="max-width:400px; height:400px;"></td>
+      <td><img src="05_media/populated_pcb_back.jpg" alt="Bottom layer" style="max-width:400px; height:400px;"></td>
     </tr>
     <tr>
       <td><em>Top layer — Facing the magnetic scale</em></td>
