@@ -10,18 +10,18 @@ until someone raises an issue about light-mode readability.
 P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 -->
 
-<p align="center">
-  <img src="05_media/01_logos/logo.png" alt="OpenLSM" style="width:100%; max-width:100%; display:block;">
-  <br>
-  <em>
-    Low-Cost Linear Synchronous Permanent-Magnet Motor Platform
-    <br>
-    Engineered by 
-    <a href="https://github.com/wgbowley">William Bowley</a>, 
-    with contributions from 
-    <a href="https://github.com/LawsonDG">Lawson Gallup</a>
-  </em>
-</p>
+
+<div align="center">
+  <img 
+    src="05_media/01_logos/logo.png" 
+    alt="OpenLSM" 
+    style="width:100%; max-width:100%;"
+  >
+  
+  Low-Cost Linear Synchronous Permanent-Magnet Motor Platform <br>
+  Engineered by [`William Bowley`](https://github.com/wgbowley), 
+  with contributions from [`Lawson Gallup`](https://github.com/LawsonDG)
+</div>
 
 ### Overview
 
@@ -79,7 +79,7 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
     <p><em>Beta: Cross-sectional view of the tubular linear motor showing the stator and armature.</em></p>
 </div>
 
-> See the [motor design notes](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
+> See the [`motor design notes`](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
 
 The radial heat-sink is made of aluminum with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
 
