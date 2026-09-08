@@ -69,7 +69,7 @@ See the [alpha notes](/02_motors/00_prototype_alpha/readme.md) for the full repo
 
 ### Beta ($\beta$)
 
-> *(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*  
+> *(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*  <br>
 > *(Paused). Revision 3 will be designed and fabricated. Paused until PCB design finishes.*
 
 An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature featuring `12` slots, mechanically wound using `0.4 mm` diameter enameled copper wire, with `4` slots in-series per phase `(WYE)`. The stator, unlike the armature, is made of layered carbon fibre epoxy to form a tube with an internal radius of `5 mm` and outer radius of `6 mm`. The poles are `20 mm` in length and `5 mm` in radius such that they can be inserted into the stator tube in this pole arrangement `(N-S|S-N)`, using generic superglue to secure the end poles.
@@ -131,7 +131,7 @@ See [03_boards/00_bridge_driver](/03_boards/00_bridge_driver/) for the detailed 
 
 ### Integrated Sensor Boards
 
-> *(Fabrication). The armature board hasn't been populated yet. (Components and PCBs are on hand.)*
+> *(Fabrication). The armature board hasn't been populated yet. (Components and PCBs are on hand.)* <br>
 > *(Validation). The encoder board has been populated and requires validation.*
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
