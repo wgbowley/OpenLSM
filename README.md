@@ -108,7 +108,7 @@ See the [`Model Notes`](./01_simulation/00_analytical/readme.md) for the mathema
 
 ### Bridge Driver
 
-> *(Design). The schematic is finished, and the footprints are done. The PCB is currently being modelled.*
+> *(Work in progress). This board is currently be designed and implemented.*
 
 An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and a power domain of `12-96 V (RMS)`, with current up to `20 A (RMS)`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for communication with external input boards for encoders, Hall-effect sensors, etc. 
 
