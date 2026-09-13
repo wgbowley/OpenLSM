@@ -10,22 +10,22 @@ until someone raises an issue about light-mode readability.
 P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 -->
 
-<p align="center">
-  <img src="05_media/01_logos/logo.png" alt="OpenLSM" style="width:100%; max-width:100%; display:block;">
-  <br>
-  <em>
-    Low-Cost Linear Synchronous Permanent-Magnet Motor Platform
-    <br>
-    Engineered by 
-    <a href="https://github.com/wgbowley">William Bowley</a>, 
-    with contributions from 
-    <a href="https://github.com/LawsonDG">Lawson Gallup</a>
-  </em>
-</p>
+
+<div align="center">
+  <img 
+    src="05_media/01_logos/logo.png" 
+    alt="OpenLSM" 
+    style="width:100%; max-width:100%;"
+  >
+  
+  Low-Cost Linear Synchronous Permanent-Magnet Motor Platform <br>
+  Engineered by [`William Bowley`](https://github.com/wgbowley), 
+  with contributions from [`Lawson Gallup`](https://github.com/LawsonDG)
+</div>
 
 ### Overview
 
-![Status](https://img.shields.io/badge/Status-Active-FFFFFF?style=flat-square)
+![Status](https://img.shields.io/badge/Status-L2-FFFFFF?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-FF8F0E?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Linear%20Motors-FFFFFF?style=flat-square)
 ![Scope](https://img.shields.io/badge/Scope-Design%20%26%20Validation-FF8F0E?style=flat-square)
@@ -37,8 +37,8 @@ OpenLSM is an experimental project with the objective of designing low-cost perm
 ### Objectives
 
 ```
-- [x] Support voltage ranges of `12 V`, `24 V`, and `48 V`.
-- [/] Achieve a target force per amp of `3.0 N/A` (rms).
+- [x] Support voltage bus ranges of `12 V_dc`, `24 V_dc`, and `48 V_dc`.
+- [/] Achieve a target force per amp of `3.0 N/A_rms`.
 - [/] Reach an asymptote temperature of `60°C` under standard use-cases.
 - [/] Validate the driver board and linear encoder board for linear motor applications.
 - [ ] Validate motor performance and generate performance curves for each voltage range.
@@ -63,14 +63,14 @@ An `ironless planar linear` motor with a polylactic acid (PLA) armature featurin
 
 The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
 
-See the [alpha notes](/02_motors/00_prototype_alpha/readme.md) for the full report on Prototype Alpha.
+See the [`alpha notes`](/02_motors/00_prototype_alpha/readme.md) for the full report on Prototype Alpha.
 
 ---
 
 ### Beta ($\beta$)
 
-> *(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*  
-> *(Note). Revision 3 of the ironless tubular linear motor will be fabricated.*
+> *(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*  <br>
+> *(Paused). Revision 3 will be designed and fabricated. Paused until PCB design finishes.*
 
 An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature featuring `12` slots, mechanically wound using `0.4 mm` diameter enameled copper wire, with `4` slots in-series per phase `(WYE)`. The stator, unlike the armature, is made of layered carbon fibre epoxy to form a tube with an internal radius of `5 mm` and outer radius of `6 mm`. The poles are `20 mm` in length and `5 mm` in radius such that they can be inserted into the stator tube in this pole arrangement `(N-S|S-N)`, using generic superglue to secure the end poles.
 
@@ -79,7 +79,7 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
     <p><em>Beta: Cross-sectional view of the tubular linear motor showing the stator and armature.</em></p>
 </div>
 
-> See the [motor design notes](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
+> See the [`motor design notes`](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
 
 The radial heat-sink is made of aluminum with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
 
@@ -98,7 +98,7 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
 </div>
 
 
-See the [Model Notes](./01_simulation/00_analytical/readme.md) for the mathematical/computational implementation.
+See the [`Model Notes`](./01_simulation/00_analytical/readme.md) for the mathematical/computational implementation.
 
 ### Hybrid
 
@@ -108,7 +108,7 @@ See the [Model Notes](./01_simulation/00_analytical/readme.md) for the mathemati
 
 ### Bridge Driver
 
-> *(Design). The schematic is finished, and the footprints are done. The PCB is currently being modelled.*
+> *(Work in progress). This board is currently be designed and implemented.*
 
 An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and a power domain of `12-96 V (RMS)`, with current up to `20 A (RMS)`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for communication with external input boards for encoders, Hall-effect sensors, etc. 
 
@@ -125,39 +125,29 @@ An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and
   </table>
 </div>
 
-See [03_boards/00_bridge_driver](/03_boards/00_bridge_driver/) for the detailed design, schematic, PCB, and BOM.
+See [`00_bridge_driver`](/03_boards/00_bridge_driver/) for the detailed design, schematic, PCB, and BOM.
 
 ---
 
 ### Integrated Sensor Boards
 
-> *(Fabrication). These boards haven't been populated or validated yet. (Components & PCBs ordered.)*
+> *(Fabrication). The armature board hasn't been populated yet. (Components and PCBs are on hand.)* <br>
+> *(Validation). The encoder board has been populated and requires validation.*
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
-<!-- Need to update those images with the populated PCBs and also they need to be cleaned up -->
-<!-- They need to be updated in general. Those images are pretty poor quality --> 
-
 <div align="center">
-  <table>
-    <tr>
-      <td><img src="03_boards/01_armature_board/05_media/bare_pcb_front.jpg" alt="Armature Board" style="max-width:400px;"></td>
-      <td><img src="03_boards/02_magnetic_encoder/05_media/bare_pcb_top.jpg" alt="Encoder Board" style="max-width:350px;"></td>
-    </tr>
-    <tr>
-      <td><em>Armature Data Board</em></td>
-      <td><em>Encoder Board</em></td>
-    </tr>
-  </table>
+  <img src="./05_media/05_miscellaneous/bare_top_armature_and_encoder_boards.jpg" alt="Bare PCBs" style="max-width: 600px">
+  <p><em>Bare armature board (black) & Bare encoder board (green)</em></p>
 </div>
 
-See [03_boards](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
+See [`03_boards`](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
 
 ---
 
 ### Documentation
 
 Each section of the repo is self-documenting.  
-For internal documentation, credits, and contributors, refer to [00_docs](./00_docs/).
+For internal documentation, credits, and contributors, refer to [`00_docs`](./00_docs/).
 
 ---

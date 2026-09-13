@@ -1,6 +1,6 @@
 ### 01_simulations
 
-#### [00_analytical](./00_analytical/readme.md) — Analytical Tubular Linear Motor Model
+#### [00_analytical](00_analytical/readme.md) — Analytical Tubular Linear Motor Model
 
 <div align="center">
   <img src="../05_media/00_simulation/00_analytical/example.png" alt="Analytical model" style="max-width: 600px">
@@ -13,7 +13,7 @@ over the z-axis to compute force.
 
 ---
 
-#### [00_hybrid](./01_hybrid/readme.md) — Hybrid Tubular Linear Motor Model
+#### [00_hybrid](01_hybrid/readme.md) — Hybrid Tubular Linear Motor Model
 
 *(TBD) — Work in progress*
 
