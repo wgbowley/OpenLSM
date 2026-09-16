@@ -129,6 +129,15 @@ See [`00_bridge_driver`](/03_boards/00_bridge_driver/) for the detailed design, 
 
 ---
 
+### TeensySFOC
+
+> *(Work in progress). The schematic is nearly finished. PCB development begins 10th of september.*
+
+
+See [`03_teensy_SFOC`](/03_boards/03_teensy_SFOC/) for the detailed design, schematic, PCB, and BOM.
+
+---
+
 ### Integrated Sensor Boards
 
 > *(Fabrication). The armature board hasn't been populated yet. (Components and PCBs are on hand.)* <br>
