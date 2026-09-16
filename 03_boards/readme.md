@@ -39,7 +39,7 @@ The board also includes a `3-axis SPI accelerometer` and processes data from the
 
 ---
 
-#### [02_magnetic_encoder](02_magnetic_encoder/readme.md) — Linear Encoder Breakout (Manufacturing)
+#### [02_magnetic_encoder](02_magnetic_encoder/readme.md) — Linear Encoder Breakout (Validation)
 
 <div align="center">
   <table>
@@ -57,3 +57,9 @@ The board also includes a `3-axis SPI accelerometer` and processes data from the
 A breakout and mechanical interface for the `AS5311` linear encoder, providing a resolution of `1.95 µm` and an estimated accuracy of `10–20 µm`, depending on mechanical implementation factors. The encoder operates from `0–600 mm/s` and is an incremental `A`, `B`, `Index` type.
 
 ---
+
+#### [03_teensy_SFOC](03_teensy_SFOC/readme.md) - Teensy 4.1 & SimpleFOC integration Board
+
+*(TBD) — Work in progress*
+
+--- 
