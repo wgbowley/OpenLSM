@@ -60,6 +60,19 @@ A breakout and mechanical interface for the `AS5311` linear encoder, providing a
 
 #### [03_teensy_SFOC](03_teensy_SFOC/readme.md) - Teensy 4.1 & SimpleFOC integration Board
 
-*(TBD) — Work in progress*
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="./03_teensy_SFOC/05_media/kicad_top_layer.png" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="./03_teensy_SFOC/05_media/kicad_bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+    </tr>
+    <tr>
+      <td><em>Top layer — Teensy & SimpleFOC shield</em></td>
+      <td><em>Bottom layer — Supporting electronics</em></td>
+    </tr>
+  </table>
+</div>
+
+The Teensy SFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield with `step/dir` input.
 
 --- 
