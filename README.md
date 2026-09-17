@@ -139,7 +139,7 @@ The integrated sensor boards are a platform for measuring the motor's position, 
 
 <div align="center">
   <img src="./05_media/05_miscellaneous/bare_top_armature_and_encoder_boards.jpg" alt="Bare PCBs" style="max-width: 600px">
-  <p><em>Bare armature board (black) & Bare encoder board (green)</em></p>
+  <p><em>Bare Rev 0 armature board (black) & Bare encoder board (green)</em></p>
 </div>
 
 See [`03_boards`](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
