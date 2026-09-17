@@ -1,22 +1,5 @@
 ### Overview
 
-<!-- Need to update those images with the populated PCBs and also they need to be cleaned up -->
-<!-- They need to be updated in general. Those images are pretty poor quality --> 
-
-<div align="center">
-  <table>
-    <tr>
-      <td><img src="05_media/bare_pcb_front.jpg" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="05_media/bare_pcb_back.jpg" alt="Bottom layer" style="max-width:400px;"></td>
-    </tr>
-    <tr>
-      <td><em>Top layer — STM32, Thermistor Array, Accelerometer & Encoder</em></td>
-      <td><em>Bottom layer — Basis resistors & decoupling caps for Thermistors</em></td>
-    </tr>
-  </table>
-</div>
-
-
 OpenLSM uses `closed-loop control` to position the motor's armature. 
 This requires a device to measure the armature's position: [an encoder board](../02_magnetic_encoder). 
 OpenLSM also requires acceleration and thermal data for validating the motor's transient behaviour during operation. To achieve this, 
@@ -81,8 +64,6 @@ Each M2 bolt hole is directly connected to the GND plane with exposed copper aro
 *(TBD) — Work in progress*
 
 > Programming is done via a `2×3 pin`, `2.54 mm` vertical male connector on the board, located near the `STM32G431K8Tx`.
-
-> SWO is connected to the wrong pin PB3 instead of PA3 hence SWO will not work if not soldered across with a jumper.
 
 ---
 

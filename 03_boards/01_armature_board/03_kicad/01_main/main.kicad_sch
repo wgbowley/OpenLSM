@@ -6,7 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "Armature Board")
-		(date "2026-07-22")
+		(date "2026-09-17")
+		(rev "1")
 	)
 	(lib_symbols
 		(symbol "74xx:74HC4051"
@@ -5021,8 +5022,8 @@
 		(uuid "d643d073-4954-4497-8997-8b9ee2b2f599")
 	)
 	(no_connect
-		(at 210.82 52.07)
-		(uuid "d7cef5c6-06b7-419e-a14a-7d09e11c1ee2")
+		(at 236.22 44.45)
+		(uuid "f36cf74c-de40-4c50-ae63-88b4e13a4c72")
 	)
 	(no_connect
 		(at 107.95 106.68)
@@ -6400,16 +6401,6 @@
 	)
 	(wire
 		(pts
-			(xy 236.22 44.45) (xy 240.03 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7c003dde-b2e7-42b3-a1de-0f0514fbf5ba")
-	)
-	(wire
-		(pts
 			(xy 27.94 90.17) (xy 49.53 90.17)
 		)
 		(stroke
@@ -6807,6 +6798,16 @@
 			(type default)
 		)
 		(uuid "9bacdca9-72b1-4714-abc4-35bd347b01cd")
+	)
+	(wire
+		(pts
+			(xy 207.01 52.07) (xy 210.82 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9bf6d088-8849-4a2e-b1b4-ab94f70ddf4a")
 	)
 	(wire
 		(pts
@@ -9739,17 +9740,17 @@
 	)
 	(global_label "SWO"
 		(shape output)
-		(at 240.03 44.45 0)
+		(at 207.01 52.07 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "cc2cf9ea-1ee6-4f26-ab2e-62f6d783e989")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 247.0066 44.45 0)
+			(at 200.0334 52.07 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9757,7 +9758,7 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 	)
@@ -10858,7 +10859,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_PH_B4B-PH-K_1x04_P2.00mm_Vertical"
+		(property "Footprint" "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical"
 			(at 22.86 33.02 0)
 			(hide yes)
 			(show_name no)
@@ -18284,7 +18285,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_PH_B5B-PH-K_1x05_P2.00mm_Vertical"
+		(property "Footprint" "Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical"
 			(at 22.86 95.25 0)
 			(hide yes)
 			(show_name no)
