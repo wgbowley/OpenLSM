@@ -58,7 +58,7 @@ A breakout and mechanical interface for the `AS5311` linear encoder, providing a
 
 ---
 
-#### [03_teensy_SFOC](03_teensy_SFOC/readme.md) - Teensy 4.1 & SimpleFOC integration Board
+#### [03_teensy_SFOC](03_teensy_SFOC/readme.md) - Teensy 4.1 & SimpleFOC Breakout Board
 
 <div align="center">
   <table>
