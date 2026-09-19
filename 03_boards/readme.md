@@ -1,6 +1,6 @@
 ### 03_boards
 
-#### [`00_bridge_driver`](00_bridge_driver/readme.md) — Triple Half-Bridge Driver (WIP)
+#### [00_bridge_driver](00_bridge_driver/readme.md) — Triple Half-Bridge Driver (WIP)
 
 <div align="center">
   <table>
@@ -21,7 +21,7 @@ communication with external input boards for encoders, Hall-effect sensors, etc.
 
 ---
 
-#### [`01_armature_board`](01_armature_board/readme.md) — Sensor Board (Manufacturing)
+#### [01_armature_board](01_armature_board/readme.md) — Sensor Board (Manufacturing)
 
 <div align="center">
   <table>
@@ -42,7 +42,7 @@ The board also includes a `3-axis SPI accelerometer` and processes data from the
 
 ---
 
-#### [`02_magnetic_encoder`](02_magnetic_encoder/readme.md) — Linear Encoder Breakout (Validation)
+#### [02_magnetic_encoder](02_magnetic_encoder/readme.md) — Linear Encoder Breakout (Validation)
 
 <div align="center">
   <table>
@@ -62,7 +62,7 @@ depending on mechanical implementation factors. The encoder operates from `0–6
 
 ---
 
-#### [`03_teensy_SFOC`](03_teensy_SFOC/readme.md) - Teensy 4.1 & SimpleFOC Breakout Board (Manufacturing)
+#### [03_teensy_SFOC](03_teensy_SFOC/readme.md) - Teensy 4.1 & SimpleFOC Breakout Board (Manufacturing)
 
 <div align="center">
   <table>
