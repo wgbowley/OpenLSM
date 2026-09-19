@@ -132,8 +132,6 @@ The system consists of two boards: an encoder board with an estimated accuracy o
   <p><em>Bare Rev 0 armature board (black) & Bare encoder board (green)</em></p>
 </div>
 
-See [`03_boards`](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
-
 ---
 
 ### TeensySFOC
@@ -154,6 +152,8 @@ It is a development board that is not intend for long-term usage.
     </tr>
   </table>
 </div>
+
+See [`03_boards`](/03_boards/readme.md) for the supporting PCB designs that enable motor development.
 
 ---
 
