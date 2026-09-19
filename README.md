@@ -124,7 +124,8 @@ See [`00_bridge_driver`](/03_boards/00_bridge_driver/) for the detailed design, 
 > *(Ordered). The armature board revision 1 has been ordered from JCLPCB* <br>
 > *(Validation). The encoder board revision 0 has been populated and requires validation.*
 
-The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
+The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. 
+The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
 <div align="center">
   <img src="./05_media/05_miscellaneous/bare_top_armature_and_encoder_boards.jpg" alt="Bare PCBs" style="max-width: 600px">
@@ -160,5 +161,18 @@ It is a development board that is not intend for long-term usage.
 
 Each section of the repo is self-documenting.  
 For internal documentation, credits, and contributors, refer to [`00_docs`](./00_docs/).
+
+#### Bibtex
+
+```
+@misc{openLSM_2026,
+  author = {William Bowley and Lawson Gallup},
+  title = {{openLSM: Low-Cost Linear Synchronous Permanent-Magnet Motor Platform}},
+  url = {https://github.com/wgbowley/openLSM},
+  year = {2026},
+  note = {GitHub repository},
+  license = {MIT}
+}
+```
 
 ---
