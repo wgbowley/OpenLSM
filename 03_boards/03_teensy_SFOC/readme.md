@@ -13,7 +13,9 @@
   </table>
 </div>
 
-The Teensy SFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield, with `RS-485/RS-422` support and a secondary encoder input if `RS-485` to the armature board cannot be used. It also has a `step/dir` input for use with standard 3D printer main-boards.
+The Teensy SFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield, with `RS-485/RS-422` support and 
+a secondary encoder input if `RS-485` to the armature board cannot be used. It also has a `step/dir` input for use with 
+standard 3D printer main-boards.
 
 > *(Note). This is a prototyping/dev board. It is not meant to be used long-term.*
 
@@ -21,6 +23,6 @@ The Teensy SFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Ardui
 
 ### Documentation
 
-Design notes and implementation decisions are documented in [issue #42](https://github.com/wgbowley/OpenLSM/issues/42).
+Design notes and implementation decisions are documented in `[issue #42`](https://github.com/wgbowley/OpenLSM/issues/42).
 
 ---

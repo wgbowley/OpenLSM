@@ -98,9 +98,9 @@ The board also has M2 bolt holes with a diameter of `~2.10 mm` in a rectangular 
 
 ### Documentation
 
-Design notes and implementation decisions are documented in [issue #10](https://github.com/wgbowley/OpenLSM/issues/10). <br>
-Implementation and validation notes are documented in [issue #36](https://github.com/wgbowley/OpenLSM/issues/36)
+Design notes and implementation decisions are documented in [`issue #10`](https://github.com/wgbowley/OpenLSM/issues/10). <br>
+Implementation and validation notes are documented in [`issue #36`](https://github.com/wgbowley/OpenLSM/issues/36)
 
-> BOM can be found here [BOM.md](BOM.md)
+> BOM can be found here [`BOM.md`](BOM.md)
 
 ---

@@ -165,6 +165,6 @@ The analytical model is intended as a reduced-order model rather than a replacem
 
 ### Documentation
 
-Reference: [Build a reduced order model for tubular linear synchronous motors](https://github.com/wgbowley/OpenLSM/issues/7)
+Reference: [`Build a reduced order model for tubular linear synchronous motors`](https://github.com/wgbowley/OpenLSM/issues/7)
 
 ---

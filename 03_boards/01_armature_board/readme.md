@@ -1,7 +1,7 @@
 ### Overview
 
 OpenLSM uses `closed-loop control` to position the motor's armature. 
-This requires a device to measure the armature's position: [an encoder board](../02_magnetic_encoder). 
+This requires a device to measure the armature's position: [`an encoder board`](../02_magnetic_encoder). 
 OpenLSM also requires acceleration and thermal data for validating the motor's transient behaviour during operation. To achieve this, 
 an `SPI` accelerometer is used to collect `3-axis` acceleration data, and an array of `8` thermistors across the motor's `z-axis` is used to collect temperature data `T(z, t)`.
 
@@ -69,9 +69,9 @@ Each M2 bolt hole is directly connected to the GND plane with exposed copper aro
 
 ### Documentation
 
-Design notes and implementation decisions are documented in [issue #11](https://github.com/wgbowley/OpenLSM/issues/11). <br>
-Implementation and validation notes are documented in [issue #36](https://github.com/wgbowley/OpenLSM/issues/36)
+Design notes and implementation decisions are documented in [`issue #11`](https://github.com/wgbowley/OpenLSM/issues/11). <br>
+Implementation and validation notes are documented in [`issue #36`](https://github.com/wgbowley/OpenLSM/issues/36)
 
-> BOM can be found here [BOM.md](BOM.md)
+> BOM can be found here [`BOM.md`](BOM.md)
 
 ---
