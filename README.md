@@ -139,7 +139,7 @@ See [`03_boards`](/03_boards/readme.md) for the supporting PCB designs that enab
 ### TeensySFOC
 > *(Ordered). The TeensySFOC board revision 0 has been ordered from JCLPCB*
 
-The Teensy SFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield with `step/dir` input. 
+The TeensySFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield with `step/dir` input. 
 It is a development board that is not intend for long-term usage.
 
 <div align="center">
