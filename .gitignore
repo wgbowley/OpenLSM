@@ -3,7 +3,6 @@
 # Ignore Files
 *.log
 *.ans
-*.fem
 *.anh
 *.feh
 *.pyc

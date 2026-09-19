@@ -98,13 +98,18 @@ See the [`Model Notes`](./01_simulation/00_analytical/readme.md) for the mathema
 
 ### Hybrid
 
-> *(Paused). This hybrid simulation is currently paused until PCB design finishes.*
+> *(Work in progress). This hybrid simulation is currently being designed and implemented.*
+
+A hybrid model using `FEMM` to compute the stator field, then using the Biot–Savart law with a parametric slot geometry to compute the armature field. 
+The magnetic co-energy is then calculated assuming uniform magnetic permeability, and finally the spatial derivative over the z-axis is used to compute force.
+
+See the [`Model Notes`](./01_simulation/01_hybrid/readme.md) for the mathematical/computational implementation.
 
 ---
 
 ### Bridge Driver
 
-> *(Work in progress). This board is currently be designed and implemented.*
+> *(Work in progress). This board is currently being designed and implemented.*
 
 An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and a power domain of `12-96 V (RMS)`, 
 with current up to `20 A (RMS)`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for 
@@ -117,7 +122,7 @@ See [`00_bridge_driver`](/03_boards/00_bridge_driver/) for the detailed design, 
 ### Integrated Sensor Boards
 
 > *(Ordered). The armature board revision 1 has been ordered from JCLPCB* <br>
-> *(Validation). The encoder board has been populated and requires validation.*
+> *(Validation). The encoder board revision 0 has been populated and requires validation.*
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
@@ -131,7 +136,7 @@ See [`03_boards`](/03_boards/readme.md) for the supporting PCB designs that enab
 ---
 
 ### TeensySFOC
-> *(Ordered). The TeensySFOC board has been ordered from JCLPCB*
+> *(Ordered). The TeensySFOC board revision 0 has been ordered from JCLPCB*
 
 The Teensy SFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield with `step/dir` input. 
 It is a development board that is not intend for long-term usage.

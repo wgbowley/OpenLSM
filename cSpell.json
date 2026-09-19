@@ -116,6 +116,10 @@
     "DWVR",
     "DIOM4",
     "sfoc",
-    "JCLPCB"
+    "JCLPCB",
+    "ifemm",
+    "contourf",
+    "colorbar",
+    "cbar"
   ]
 }
