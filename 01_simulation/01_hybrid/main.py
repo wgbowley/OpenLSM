@@ -6,7 +6,7 @@ Description:
     to be viewed directly within python
     
     Uses: 
-    pip install FEMMInterpreter
+    pip install ifemm
 """
 
 from pathlib import Path
@@ -14,6 +14,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 from ifemm import Parser
+
 
 # Imports the parser and parses the .ans file
 ROOT_DIR = Path(__file__).resolve().parents[0]

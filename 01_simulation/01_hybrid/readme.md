@@ -24,6 +24,6 @@
 ### Documentation
 
 Reference: [`Build a reduced order model for tubular linear synchronous motors`](https://github.com/wgbowley/OpenLSM/issues/7)<br>
-Reduced Order Modelling tool: [`FEMMInterpreter`](https://github.com/wgbowley/FEMMInterpreter)
+Reduced Order Modelling tool: [`ifemm`](https://github.com/wgbowley/iFEMM)
 
 ---
