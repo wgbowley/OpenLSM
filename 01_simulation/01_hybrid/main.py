@@ -22,7 +22,7 @@ data = Parser.open(ROOT_DIR / 'resources/model.ans')
 
 # Get the B field
 length_unit = data.length_unit
-x, y, bx, by = data.field_b()
+x, y, bx, by = data.b_field()
 
 # Calculate magnitude
 b_magnitude = np.sqrt(bx**2 + by**2)
