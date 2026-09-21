@@ -94,16 +94,14 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
 </div>
 
 
-See the [`Model Notes`](./01_simulation/00_analytical/readme.md) for the mathematical/computational implementation.
-
-### Hybrid
+#### Hybrid
 
 > *(Work in progress). This hybrid simulation is currently being designed and implemented.*
 
 A hybrid model using `FEMM` to compute the stator field, then using the Biot–Savart law with a parametric slot geometry to compute the armature field. 
 The magnetic co-energy is then calculated assuming uniform magnetic permeability, and finally the spatial derivative over the z-axis is used to compute force.
 
-See the [`Model Notes`](./01_simulation/01_hybrid/readme.md) for the mathematical/computational implementation.
+See the [`01_simulation`](./01_simulation/readme.md) for more details.
 
 ---
 
@@ -119,7 +117,9 @@ See [`00_bridge_driver`](/03_boards/00_bridge_driver/) for the detailed design, 
 
 ---
 
-### Integrated Sensor Boards
+#### Supporting Boards
+
+### Integrated Sensors
 
 > *(Ordered). The armature board revision 1 has been ordered from JCLPCB* <br>
 > *(Validation). The encoder board revision 0 has been populated and requires validation.*
@@ -132,9 +132,7 @@ The system consists of two boards: an encoder board with an estimated accuracy o
   <p><em>Bare Rev 0 armature board (black) & Bare encoder board (green)</em></p>
 </div>
 
----
-
-### TeensySFOC
+#### TeensySFOC
 > *(Ordered). The TeensySFOC board revision 0 has been ordered from JCLPCB*
 
 The TeensySFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield with `step/dir` input. 
