@@ -117,9 +117,9 @@ See [`00_bridge_driver`](/03_boards/00_bridge_driver/) for the detailed design, 
 
 ---
 
-#### Supporting Boards
+### Supporting Boards
 
-### Integrated Sensors
+#### Integrated Sensors
 
 > *(Ordered). The armature board revision 1 has been ordered from JCLPCB* <br>
 > *(Validation). The encoder board revision 0 has been populated and requires validation.*
