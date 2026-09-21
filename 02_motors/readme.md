@@ -28,6 +28,6 @@ Prototype Beta is a series of thermal management studies for an `ironless tubula
 
 `Rev 3` will most likely use an outer radial heat sink made of `aluminum`, with coils potted into that heat sink and the final inner bore hole being machined out.
 
-Reference: [Defining constraints and success metrics for prototype beta rev 3](https://github.com/wgbowley/OpenLSM/issues/5)
+Reference: [`Defining constraints and success metrics for prototype beta rev 3`](https://github.com/wgbowley/OpenLSM/issues/5)
 
 ---

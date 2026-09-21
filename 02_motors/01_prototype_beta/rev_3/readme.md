@@ -14,6 +14,6 @@ heat sink and the final inner bore hole being machined out.
 
 ### Documentation
 
-Reference: [Defining constraints and success metrics for prototype beta rev 3](https://github.com/wgbowley/OpenLSM/issues/5)
+Reference: [`Defining constraints and success metrics for prototype beta rev 3`](https://github.com/wgbowley/OpenLSM/issues/5)
 
 ---

@@ -2,19 +2,9 @@
 
 #### [00_bridge_driver](00_bridge_driver/readme.md) — Triple Half-Bridge Driver (WIP)
 
-<div align="center">
-  <table>
-    <tr>
-      <td><img src="00_bridge_driver/05_media/mock_up_board_forward.png" alt="Driver Board TOP" style="max-width:375px;"></td>
-      <td><img src="00_bridge_driver/05_media/mock_up_board_back.png" alt="Driver Board Bottom" style="max-width:375px;"></td>
-    </tr>
-    <tr>
-      <td><em>Top-side</em></td>
-      <td><em>Bottom-Side</em></td>
-    </tr>
-  </table>
-</div>
-An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and a power domain of `12-96 V (RMS)`, with current up to `20 A (RMS)`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for communication with external input boards for encoders, Hall-effect sensors, etc. 
+An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and a power domain of `12-96 V (RMS)`, 
+with current up to `20 A (RMS)`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for 
+communication with external input boards for encoders, Hall-effect sensors, etc. 
 
 ---
 
@@ -39,7 +29,7 @@ The board also includes a `3-axis SPI accelerometer` and processes data from the
 
 ---
 
-#### [02_magnetic_encoder](02_magnetic_encoder/readme.md) — Linear Encoder Breakout (Manufacturing)
+#### [02_magnetic_encoder](02_magnetic_encoder/readme.md) — Linear Encoder Breakout (Validation)
 
 <div align="center">
   <table>
@@ -54,6 +44,26 @@ The board also includes a `3-axis SPI accelerometer` and processes data from the
   </table>
 </div>
 
-A breakout and mechanical interface for the `AS5311` linear encoder, providing a resolution of `1.95 µm` and an estimated accuracy of `10–20 µm`, depending on mechanical implementation factors. The encoder operates from `0–600 mm/s` and is an incremental `A`, `B`, `Index` type.
+A breakout and mechanical interface for the `AS5311` linear encoder, providing a resolution of `1.95 µm` and an estimated accuracy of `10–20 µm`, 
+depending on mechanical implementation factors. The encoder operates from `0–600 mm/s` and is an incremental `A`, `B`, `Index` type.
 
 ---
+
+#### [03_teensy_SFOC](03_teensy_SFOC/readme.md) - Teensy 4.1 & SimpleFOC Breakout Board (Manufacturing)
+
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="./03_teensy_SFOC/05_media/kicad_top_layer.png" alt="Top layer" style="max-width:400px;"></td>
+      <td><img src="./03_teensy_SFOC/05_media/kicad_bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+    </tr>
+    <tr>
+      <td><em>Top layer — Teensy & SimpleFOC shield</em></td>
+      <td><em>Bottom layer — Supporting electronics</em></td>
+    </tr>
+  </table>
+</div>
+
+The Teensy SFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield with `step/dir` input.
+
+--- 

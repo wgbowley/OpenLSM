@@ -1,18 +1,16 @@
 ### 00_docs
 
-A credits list for tooling and individuals can be found here: [credits.md](./credits.md)
-
----
+A credits list for tooling and individuals can be found here: [`credits.md`](./credits.md)
 
 #### Contributors
 
-Documentation for tooling used in the development of `OpenLSM` can be found here: [CONTRIBUTORS.md](./CONTRIBUTORS.md)
+Documentation for tooling used in the development of `OpenLSM` can be found here: [`CONTRIBUTORS.md`](./CONTRIBUTORS.md)
 
 ---
 
-#### Internal Resources
+### Internal Resources
 
-All internal documentation can be found within this repo's [issues](https://github.com/wgbowley/OpenLSM/issues).
+All internal documentation can be found within this repo's [`issues`](https://github.com/wgbowley/OpenLSM/issues).
 
 #### Tags:
 
@@ -53,14 +51,14 @@ AN  -> Weekly application notes
 0x7 = Week 7
 0x8 = Week 8
 0x9 = Week 9
-0xA = Week 10   <- Current State
-0xB = Week 11
+0xA = Week 10
+0xB = Week 11   <- Current State
 0xC = Week 12
 0xD = Week 13
-0xE = Week 14
+0xE = Week 14 
 0xF = Week 15   <- Terminal State
 ```
 
-> Check [here](https://github.com/wgbowley/OpenLSM/issues?q=is%3Aissue%20label%3AAN) to view the weekly application notes.
+> Check [`here`](https://github.com/wgbowley/OpenLSM/issues?q=is%3Aissue%20label%3AAN) to view the weekly application notes.
 
 ---

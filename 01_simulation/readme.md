@@ -15,6 +15,9 @@ over the z-axis to compute force.
 
 #### [00_hybrid](01_hybrid/readme.md) — Hybrid Tubular Linear Motor Model
 
-*(TBD) — Work in progress*
+*(Work in progress).*
+
+A hybrid model using `FEMM` to compute the stator field, then using the Biot–Savart law with a parametric slot geometry to compute the armature field. 
+The magnetic co-energy is then calculated assuming uniform magnetic permeability, and finally the spatial derivative over the z-axis is used to compute force.
 
 ---

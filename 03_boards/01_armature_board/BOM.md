@@ -15,9 +15,9 @@ boards and does not include the JST socket or the `2x03` male header.
 | [x] | C10, C16, C17, C18, C19, C20, C21, C22, C23 | 9 | 10nF | Capacitor_SMD:C_0603_1608Metric | 16 V rated |
 | [x] | C11, C12 | 2 | 30pF | Capacitor_SMD:C_0603_1608Metric | 50 V rated |
 | [x] | D1 | 1 | LED | LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder | |
-| [-] | ENC1 | 1 | 01x05 | Connector_JST:JST_PH_B5B-PH-K_1x05_P2.00mm_Vertical |  Any standard JST socket set. |
+| [-] | ENC1 | 1 | 01x05 | Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical |  Any standard JST socket set. |
 | [x] | FB1 | 1 | BLM18AG601SN1D | BLM18AG601SN1D:BEADC1608X95N | |
-| [-] | INT1 | 1 | 01x04 | Connector_JST:JST_PH_B4B-PH-K_1x04_P2.00mm_Vertical |  Any standard JST socket set. |
+| [-] | INT1 | 1 | 01x04 | Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical |  Any standard JST socket set. |
 | [-] | NTC1-NTC8 | 8 | 01x02 | Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical |  Any standard JST socket set. |
 | [-] | PRO1 | 1 | 01x06 | Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical | Any standard 2.54 set. |
 | [x] | R1, R2 | 2 | 10Ω | Resistor_SMD:R_0603_1608Metric | |

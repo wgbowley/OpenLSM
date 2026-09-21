@@ -114,6 +114,12 @@
     "BIOM",
     "USMFLAB",
     "DWVR",
-    "DIOM4"
+    "DIOM4",
+    "sfoc",
+    "JCLPCB",
+    "ifemm",
+    "contourf",
+    "colorbar",
+    "cbar"
   ]
 }
