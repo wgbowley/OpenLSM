@@ -1,12 +1,9 @@
 """
-Filename: field_viewer.py
+Filename: main.py
 
 Description:
-    This file allows for the FEMM solution
-    to be viewed directly within python
-    
-    Uses: 
-    pip install ifemm
+    Hybrid simulation for a tubular 
+    linear synchronous motor.
 """
 
 from pathlib import Path

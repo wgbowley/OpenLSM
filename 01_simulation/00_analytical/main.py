@@ -2,8 +2,8 @@
 Filename: main.py
 
 Description:
-    1D analytical simulation for
-    a tubular linear synchronous motor. 
+    1D analytical simulation for a
+    tubular linear synchronous motor. 
 """
 
 from pathlib import Path

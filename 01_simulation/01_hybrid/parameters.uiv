@@ -1,14 +1,14 @@
 [version]
-format:     0.1.1
+format:     0.1.2
 unit_frame: derived.ut
 
-# ---------------------------------------------
+# ---------------------------------------------------------------
 
 [notes]
-simulation: "Reduced Order Analytical Model"
+simulation: "Hybrid FEM & Analytical Model"
 system:     "Axisymmetric (Z-R) (Axial-Radial)"
 
-# ---------------------------------------------
+# ---------------------------------------------------------------
 
 [numerics]
 line_voltage: 12 (V)
@@ -24,7 +24,7 @@ derivative_step:    0.2 m(m)
 [numerics.output]
 interval: 20 (∅)
 
-# ---------------------------------------------
+# ---------------------------------------------------------------
 
 [armature]
 number_slots:       6 (∅)
@@ -45,19 +45,14 @@ fill_factor:    0.70 (∅)
 
 conductivity:   63 M(S_m)
 
-# ---------------------------------------------
-
-[stator]
-length: 300 m(m)
+# ---------------------------------------------------------------
 
 [stator.tube]
 radial_wall_thickness:  1 m(m)
 
+# (Note). This is a descriptor. Change the .FEM file for stator.
 [stator.dipole]
-axial_length: 20 m(m)
-radial_thickness: 6 m(m)
+axial_length:       10 m(m)
+radial_thickness:   5 m(m)
 
-[stator.dipole.material]
-coercivity: 0.956 M(A_m)
-
-# ---------------------------------------------
+# ---------------------------------------------------------------
