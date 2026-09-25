@@ -9,13 +9,24 @@ Description:
 from pathlib import Path
 import numpy as np
 
-from ifemm import Parser
+from ifemm import Parser as iParser
+from picounits import Parser
+
 from picounits import ENERGY
 
 
 # Imports the parser and parses the .ans file
 ROOT_DIR = Path(__file__).resolve().parents[0]
-data = Parser.open(ROOT_DIR / 'resources/model.ans')
+data = iParser.open(ROOT_DIR / 'resources/model.ans')
+
+# Materials & Parameter files
+parameters_path = ROOT_DIR / "parameters.uiv"
+parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
+
+
+# (Work In Progress).
+# Calculates the energy within the magnetic field.
+
 
 # Get the B field
 length_unit = data.length_unit
