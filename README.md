@@ -165,7 +165,7 @@ For internal documentation, credits, and contributors, refer to [`00_docs`](./00
 ```
 @misc{openLSM_2026,
   author = {William Bowley and Lawson Gallup},
-  title = {{openLSM: Low-Cost Linear Synchronous Permanent-Magnet Motor Platform}},
+  title = {openLSM: Low-Cost Linear Synchronous Permanent-Magnet Motor Platform},
   url = {https://github.com/wgbowley/openLSM},
   year = {2026},
   note = {GitHub repository},
