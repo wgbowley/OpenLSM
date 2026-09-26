@@ -23,7 +23,6 @@ data = iParser.open(ROOT_DIR / 'resources/model.ans')
 parameters_path = ROOT_DIR / "parameters.uiv"
 parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
 
-
 # (Work In Progress).
 # Calculates the energy within the magnetic field.
 
