@@ -8,6 +8,7 @@ Description:
 
 import numpy as np
 
+
 def standard_helix(t: np.ndarray, radius: float, pitch: float) -> np.ndarray:
     """ Generates the parametric helix array """
     x_wire = radius * np.cos(t)
@@ -41,4 +42,20 @@ def biot_sum_integrand(r_eval: np.ndarray, r_wire: np.ndarray, dl: np.ndarray) -
     cross = np.cross(dl_expanded, r_vec, axis=-1)
 
     # Resulting integrand
-    return cross / np.expand_dims(flooring ** 3, axis=-1)
+    return np.sum(cross / np.expand_dims(flooring ** 3, axis=-1), axis=2)
+
+
+def b_layer(z: float, radius: float, length: float, pitch: float, r_eval: np.ndarray) -> np.ndarray:
+    """ Calculates the b-field solution for a single layer within a coil """
+
+    # (Work In Progress).
+    return
+
+
+def b_slot(
+    z: float, r: tuple[float, float], current: float, length: float, fill: float, r_eval: np.ndarray
+) -> np.ndarray:
+    """ Calculates the b-field solution for a single slot within the armature """
+
+    # (Work In Progress).
+    return
