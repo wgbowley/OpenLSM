@@ -7,6 +7,7 @@
     "**/*.asy",
     "**/*.csv",
     "**/*.fem",
+    "**/*.FEM",
     "**/*.kicad_csh",
     "**/*.kicad_mod",
     "**/*.kicad_prl",

@@ -128,27 +128,19 @@ The integrated sensor boards are a platform for measuring the motor's position, 
 The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
 <div align="center">
-  <img src="./05_media/05_miscellaneous/bare_top_armature_and_encoder_boards.jpg" alt="Bare PCBs" style="max-width: 600px">
+  <img src="./05_media/05_miscellaneous/bare_top_armature_and_encoder_boards.jpg" alt="Bare PCBs" style="max-width: 500px">
   <p><em>Bare Rev 0 armature board (black) & Bare encoder board (green)</em></p>
 </div>
 
 #### TeensySFOC
-> *(Ordered). The TeensySFOC board revision 0 has been ordered from JCLPCB*
+> *(Ordered.) TeensySFOC rev 0 is on-hand. Components have been ordered.*
 
 The TeensySFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield with `step/dir` input. 
 It is a development board that is not intend for long-term usage.
 
 <div align="center">
-  <table>
-    <tr>
-      <td><img src="./03_boards/03_teensy_SFOC/05_media/kicad_top_layer.png" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="./03_boards/03_teensy_SFOC/05_media/kicad_bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
-    </tr>
-    <tr>
-      <td><em>Top layer — Teensy & SimpleFOC shield</em></td>
-      <td><em>Bottom layer — Supporting electronics</em></td>
-    </tr>
-  </table>
+  <img src="./03_boards/03_teensy_SFOC/05_media/top-side.jpg" alt="Bare PCBs" style="max-width: 500px">
+  <p><em>Teensy 4.1 and SimpleFOC shield fitted to the bare TeensySFOC PCB.</em></p>
 </div>
 
 See [`03_boards`](/03_boards/readme.md) for the supporting PCB designs that enable motor development.

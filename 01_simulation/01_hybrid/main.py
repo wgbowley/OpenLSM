@@ -26,7 +26,6 @@ parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
 # (Work In Progress).
 # Calculates the energy within the magnetic field.
 
-
 # Get the B field
 length_unit = data.length_unit
 scale = data.length_scale
