@@ -12,11 +12,7 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 
 
 <div align="center">
-  <img 
-    src="05_media/01_logos/logo.png" 
-    alt="OpenLSM" 
-    style="width:100%; max-width:100%;"
-  >
+  <img src="05_media/01_logos/logo.png" alt="OpenLSM" >
   
   Low-Cost Linear Synchronous Permanent-Magnet Motor Platform <br>
   Engineered by [`William Bowley`](https://github.com/wgbowley), 
@@ -50,7 +46,7 @@ The project will fulfill this goal by using readily available materials and tool
 An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, although the force output was not quantified before the PLA coil forms deformed due to thermal stress.
 
 <div align="center">
-  <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side view on test stand" style="max-width: 600px">
+  <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side view on test stand" width="600">
   <br>
   <em>Alpha: Side view on test stand</em>
 </div>
@@ -71,7 +67,7 @@ See the [`alpha notes`](/02_motors/00_prototype_alpha/readme.md) for the full re
 An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature featuring `12` slots, mechanically wound using `0.4 mm` diameter enameled copper wire, with `4` slots in-series per phase `(WYE)`. The stator, unlike the armature, is made of layered carbon fibre epoxy to form a tube with an internal radius of `5 mm` and outer radius of `6 mm`. The poles are `20 mm` in length and `5 mm` in radius such that they can be inserted into the stator tube in this pole arrangement `(N-S|S-N)`, using generic superglue to secure the end poles.
 
 <div align="center">
-  <img src="05_media/03_prototype_beta/rev_2/cross_section.png" alt="cross sectional analysis" style="max-width: 600px">
+  <img src="05_media/03_prototype_beta/rev_2/cross_section.png" alt="cross sectional analysis" width="600">
     <p><em>Beta: Cross-sectional view of the tubular linear motor showing the stator and armature.</em></p>
 </div>
 
@@ -89,7 +85,7 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
 
 
 <div align="center">
-  <img src="./05_media/00_simulation/00_analytical/example.png" alt="Analytical model" style="max-width: 600px">
+  <img src="./05_media/00_simulation/00_analytical/example.png" alt="Analytical model" width="600">
   <p><em>1D field approximation and FOC showing position (linear) vs force (linear).</em></p>
 </div>
 
@@ -128,7 +124,7 @@ The integrated sensor boards are a platform for measuring the motor's position, 
 The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
 <div align="center">
-  <img src="./05_media/05_miscellaneous/bare_top_armature_and_encoder_boards.jpg" alt="Bare PCBs" style="max-width: 400px">
+  <img src="./05_media/05_miscellaneous/bare_top_armature_and_encoder_boards.jpg" alt="Bare PCBs" width="400">
   <p><em>Bare Rev 0 armature board (black) & Bare encoder board (green)</em></p>
 </div>
 
@@ -139,7 +135,7 @@ The TeensySFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduin
 It is a development board that is not intend for long-term usage.
 
 <div align="center">
-  <img src="./03_boards/03_teensy_SFOC/05_media/top-side.jpg" alt="Bare PCBs" style="max-width: 100px">
+  <img src="./03_boards/03_teensy_SFOC/05_media/top-side.jpg" alt="Bare PCBs" width="400">
   <p><em>Teensy 4.1 and SimpleFOC shield fitted to the bare TeensySFOC PCB.</em></p>
 </div>
 
