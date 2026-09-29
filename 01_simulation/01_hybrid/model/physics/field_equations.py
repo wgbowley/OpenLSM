@@ -41,21 +41,5 @@ def biot_sum_integrand(r_eval: np.ndarray, r_wire: np.ndarray, dl: np.ndarray) -
     dl_expanded = np.expand_dims(np.expand_dims(dl, axis=0), axis=0)
     cross = np.cross(dl_expanded, r_vec, axis=-1)
 
-    # Resulting integrand
+    # Resulting integrand summation
     return np.sum(cross / np.expand_dims(flooring ** 3, axis=-1), axis=2)
-
-
-def b_layer(z: float, radius: float, length: float, pitch: float, r_eval: np.ndarray) -> np.ndarray:
-    """ Calculates the b-field solution for a single layer within a coil """
-
-    # (Work In Progress).
-    return
-
-
-def b_slot(
-    z: float, r: tuple[float, float], current: float, length: float, fill: float, r_eval: np.ndarray
-) -> np.ndarray:
-    """ Calculates the b-field solution for a single slot within the armature """
-
-    # (Work In Progress).
-    return
