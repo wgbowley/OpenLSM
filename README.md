@@ -128,7 +128,7 @@ The integrated sensor boards are a platform for measuring the motor's position, 
 The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
 
 <div align="center">
-  <img src="./05_media/05_miscellaneous/bare_top_armature_and_encoder_boards.jpg" alt="Bare PCBs" style="max-width: 500px">
+  <img src="./05_media/05_miscellaneous/bare_top_armature_and_encoder_boards.jpg" alt="Bare PCBs" style="max-width: 400px">
   <p><em>Bare Rev 0 armature board (black) & Bare encoder board (green)</em></p>
 </div>
 
@@ -139,7 +139,7 @@ The TeensySFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduin
 It is a development board that is not intend for long-term usage.
 
 <div align="center">
-  <img src="./03_boards/03_teensy_SFOC/05_media/top-side.jpg" alt="Bare PCBs" style="max-width: 500px">
+  <img src="./03_boards/03_teensy_SFOC/05_media/top-side.jpg" alt="Bare PCBs" style="max-width: 400px">
   <p><em>Teensy 4.1 and SimpleFOC shield fitted to the bare TeensySFOC PCB.</em></p>
 </div>
 
