@@ -1,13 +1,5 @@
 ### 03_boards
 
-#### [00_bridge_driver](00_bridge_driver/readme.md) — Triple Half-Bridge Driver (WIP)
-
-An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and a power domain of `12-96 V (RMS)`, 
-with current up to `20 A (RMS)`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for 
-communication with external input boards for encoders, Hall-effect sensors, etc. 
-
----
-
 #### [01_armature_board](01_armature_board/readme.md) — Sensor Board (Manufacturing)
 
 <div align="center">
@@ -67,3 +59,11 @@ depending on mechanical implementation factors. The encoder operates from `0–6
 The Teensy SFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield with `step/dir` input.
 
 --- 
+
+#### [00_bridge_driver](00_bridge_driver/readme.md) — Triple Half-Bridge Driver (WIP)
+
+An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and a power domain of `12-96 V (RMS)`, 
+with current up to `20 A (RMS)`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for 
+communication with external input boards for encoders, Hall-effect sensors, etc. 
+
+---

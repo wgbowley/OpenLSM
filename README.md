@@ -100,19 +100,7 @@ The magnetic co-energy is then calculated assuming uniform magnetic permeability
 See the [`01_simulation`](./01_simulation/readme.md) for more details.
 
 ---
-
-### Bridge Driver
-
-> *(Work in progress). This board is currently being designed and implemented.*
-
-An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and a power domain of `12-96 V (RMS)`, 
-with current up to `20 A (RMS)`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for 
-communication with external input boards for encoders, Hall-effect sensors, etc. 
-
-See [`00_bridge_driver`](/03_boards/00_bridge_driver/) for the detailed design, schematic, PCB, and BOM.
-
----
-
+ 
 ### Supporting Boards
 
 #### Integrated Sensors
