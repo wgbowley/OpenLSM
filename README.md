@@ -139,7 +139,7 @@ The TeensySFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduin
 It is a development board that is not intend for long-term usage.
 
 <div align="center">
-  <img src="./03_boards/03_teensy_SFOC/05_media/top-side.jpg" alt="Bare PCBs" style="max-width: 400px">
+  <img src="./03_boards/03_teensy_SFOC/05_media/top-side.jpg" alt="Bare PCBs" style="max-width: 100px">
   <p><em>Teensy 4.1 and SimpleFOC shield fitted to the bare TeensySFOC PCB.</em></p>
 </div>
 
