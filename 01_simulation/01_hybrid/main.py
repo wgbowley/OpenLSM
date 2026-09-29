@@ -1,45 +1,54 @@
 """
-Filename: field_viewer.py
+Filename: main.py
 
 Description:
-    This file allows for the FEMM solution
-    to be viewed directly within python
-    
-    Uses: 
-    pip install ifemm
+    Hybrid simulation for a tubular 
+    linear synchronous motor.
 """
 
 from pathlib import Path
-from matplotlib import pyplot as plt
 import numpy as np
 
-from ifemm import Parser
+from ifemm import Parser as iParser
+from picounits import Parser
+
+from picounits import ENERGY
 
 
 # Imports the parser and parses the .ans file
 ROOT_DIR = Path(__file__).resolve().parents[0]
-data = Parser.open(ROOT_DIR / 'resources/model.ans')
+data = iParser.open(ROOT_DIR / 'resources/model.ans')
+
+# Materials & Parameter files
+parameters_path = ROOT_DIR / "parameters.uiv"
+parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
+
+# (Work In Progress).
+# Calculates the energy within the magnetic field.
 
 # Get the B field
 length_unit = data.length_unit
+scale = data.length_scale
 x, y, bx, by = data.b_field()
 
-# Calculate magnitude
+# Calculate b-field magnitude & removes invalid entries.
 b_magnitude = np.sqrt(bx**2 + by**2)
+valid = np.isfinite(b_magnitude)
 
-# Plot the solution
-fig, ax = plt.subplots(figsize=(10, 8))
+mu = 4 * np.pi * 1e-7
 
-# Plot magnitude as background
-contour = ax.contourf(x, y, b_magnitude, levels=50)
-cbar = plt.colorbar(contour, ax=ax)
-cbar.set_label('|B| (T)', fontsize=12)
+# Ensures both the x & y grids are arrays
+x = np.asarray(x)
+y = np.asarray(y)
 
-ax.set_xlabel(f'x ({length_unit})', fontsize=12)
-ax.set_ylabel(f'y ({length_unit})', fontsize=12)
-ax.set_title('Magnetic Flux Density |B| with Field Lines', fontsize=14)
-ax.axis('equal')
-ax.grid(True, alpha=0.3)
+# Assumes uniform x & y grid
+dx = np.abs(x[0, 1] - x[0, 0]) * scale
+dy = np.abs(y[1, 0] - y[0, 0]) * scale
+r = x * scale
 
-plt.tight_layout()
-plt.show()
+# Integrate only the valid cells
+# Axisymmetric volume element: dV = 2*pi*r*dr*dz
+cell_volume = 2 * np.pi * np.abs(r) * dx * dy
+U = np.sum(b_magnitude[valid]**2 * cell_volume[valid]) / (2 * mu)
+
+print(f"Stored magnetic energy U = {U*ENERGY:.3f}")

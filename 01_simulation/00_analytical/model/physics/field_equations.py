@@ -1,5 +1,5 @@
 """
-Filename: field.py
+Filename: field_equations.py
 
 Description:
     1D field equations for a analytical tubular linear motor.

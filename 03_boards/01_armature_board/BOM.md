@@ -1,7 +1,7 @@
 ### Armature Board — Bill of Materials (BOM)
 
 The procurement file [`04_procurement/digikey.csv`](./04_procurement/digikey.csv) is for `2x` 
-boards and does not include the JST socket or the `2x03` male header.
+boards and does not include the JST socket or the `2x03` male header or the thermistors.
 
 ---
 
@@ -19,6 +19,7 @@ boards and does not include the JST socket or the `2x03` male header.
 | [x] | FB1 | 1 | BLM18AG601SN1D | BLM18AG601SN1D:BEADC1608X95N | |
 | [-] | INT1 | 1 | 01x04 | Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical |  Any standard JST socket set. |
 | [-] | NTC1-NTC8 | 8 | 01x02 | Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical |  Any standard JST socket set. |
+| [-] | NTC1-NT8 | 8 | N/A | NTCLE203E3103SB0 | Not Included. |
 | [-] | PRO1 | 1 | 01x06 | Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical | Any standard 2.54 set. |
 | [x] | R1, R2 | 2 | 10Ω | Resistor_SMD:R_0603_1608Metric | |
 | [x] | R3 | 1 | 120Ω | Resistor_SMD:R_0603_1608Metric | |
