@@ -10,7 +10,7 @@
 [ACSolver]    =  0
 [PrevType]    =  0
 [PrevSoln]    =  ""
-[Comment]     =  "Add comments here."
+[Comment]     =  "For this simulation to work, keep both .fem & .uiv parameters in sync."
 [PointProps]   = 0
 [BdryProps]   = 1
   <BeginBdry>

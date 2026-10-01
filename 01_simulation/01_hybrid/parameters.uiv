@@ -47,10 +47,13 @@ conductivity:   63 M(S_m)
 
 # ----------------------------------------------------------------------
 
+# (Note).
+# This is a descriptor of the setup within the .FEM file.
+# For this simulation to work, keep both files in sync.
+
 [stator.tube]
 radial_wall_thickness:  1 m(m)
 
-# (Note). This is a descriptor section. Change the .FEM file for stator.
 [stator.dipole]
 axial_length:       10 m(m)
 radial_thickness:   5 m(m)

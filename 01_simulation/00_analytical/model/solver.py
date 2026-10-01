@@ -17,11 +17,7 @@ from model.physics import field_oriented_control
 
 
 class Solver:
-    """
-    Magnetic Solver for linear tubular motor problem.
-    Computes electromagnetic force using magnetic energy and virtual work methods.
-    """
-
+    """ Computes electromagnetic force using magnetic energy and virtual work methods. """
     def __init__(self, parameters: DynamicLoader) -> None:
         """ Initializes the solver class """
         self._extract_validate(parameters)
