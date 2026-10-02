@@ -7,6 +7,7 @@ Description:
 """
 
 
+from builtins import float as f
 from dataclasses import dataclass
 
 import numpy as np
@@ -40,6 +41,33 @@ class Solver:
         self.i_phb = 0.0
         self.i_phc = 0.0
 
+        # Computes derived values from parameters
+        self._compute_derived_values()
+
+    def _compute_derived_values(self) -> None:
+        """ Compute derived values based on parameters """
+        tube_outer_radius = self.dipole_radial_thickness + self.tube_radial_thickness
+        core_inner_radius = tube_outer_radius + self.radial_clearance
+        slot_inner_radius = core_inner_radius + self.core_radial_thickness
+        slot_outer_radius = slot_inner_radius + self.slot_radial_thickness
+
+        # Computes number of turns and saves slot size information
+        self.slot_turns = self._compute_turns()
+
+        self.slot_inner_radius = slot_inner_radius
+        self.slot_outer_radius = slot_outer_radius
+
+        # Armature Offsets (z_0)
+        self.armature_offset = self.dipole_axial_length / 2
+
+    def _compute_turns(self) -> f:
+        """ Computes the number of turns while according for the insulation & stacking. """
+        slot_section = self.slot_axial_length * self.slot_radial_thickness
+        wire_section = np.pi * (self.wire_diameter / 2) ** 2
+
+        effective_area = slot_section * self.fill_factor
+        return np.floor(effective_area / wire_section)
+
     def _extract_validate(self, parameters: DynamicLoader) -> None:
         """ Extracts qualities from attribute tree and validates units """
         # Numerical Configuration
@@ -64,7 +92,7 @@ class Solver:
         self.conductivity = validate(parameters.armature.slots.material.conductivity, CONDUCTIVITY)
 
         # Stator Tube
-        self.tube_radial_wall_thickness = validate(parameters.stator.tube.radial_wall_thickness, LENGTH)
+        self.tube_radial_thickness = validate(parameters.stator.tube.radial_wall_thickness, LENGTH)
 
         # Stator Dipole
         self.dipole_axial_length = validate(parameters.stator.dipole.axial_length, LENGTH)
