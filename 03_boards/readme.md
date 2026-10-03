@@ -1,6 +1,6 @@
 ### 03_boards
 
-#### [01_armature_board](01_armature_board/readme.md) — Sensor Board (Manufacturing)
+#### [01_armature_board](./01_armature_board) — Sensor Board (Manufacturing)
 
 <div align="center">
   <table>
@@ -21,7 +21,7 @@ The board also includes a `3-axis SPI accelerometer` and processes data from the
 
 ---
 
-#### [02_magnetic_encoder](02_magnetic_encoder/readme.md) — Linear Encoder Breakout (Validation)
+#### [02_magnetic_encoder](./02_magnetic_encoder) — Linear Encoder Breakout (Validation)
 
 <div align="center">
   <table>
@@ -41,7 +41,7 @@ depending on mechanical implementation factors. The encoder operates from `0–6
 
 ---
 
-#### [03_teensy_SFOC](03_teensy_SFOC/readme.md) - Teensy 4.1 & SimpleFOC Breakout Board (Manufacturing)
+#### [03_teensy_SFOC](./03_teensy_SFOC) - Teensy 4.1 & SimpleFOC Breakout Board (Manufacturing)
 
 <div align="center">
   <table>
@@ -60,7 +60,7 @@ The Teensy SFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Ardui
 
 --- 
 
-#### [00_bridge_driver](00_bridge_driver/readme.md) — Triple Half-Bridge Driver (WIP)
+#### [00_bridge_driver](./00_bridge_driver) — Triple Half-Bridge Driver (WIP)
 
 An isolated triple half-bridge driver with an MCU-side domain of `24 V (DC)` and a power domain of `12-96 V (RMS)`, 
 with current up to `20 A (RMS)`. It supports `step/dir` and `CANBUS` input interfaces and uses `RS-485/RS-422` for 
