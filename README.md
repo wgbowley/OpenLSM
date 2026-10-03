@@ -29,7 +29,7 @@ The project will fulfill this goal by using readily available materials and tool
 ### Objectives
 
 ```
-- [x] Support voltage bus ranges of `12 V_dc`, `24 V_dc`, and `48 V_dc`.
+- [x] Support voltage bus ranges of `12 V_dc` and `24 V_dc`.
 - [/] Achieve a target force per amp of `3.0 N/A_rms`.
 - [/] Reach an asymptote temperature of `60°C` under standard use-cases.
 - [/] Validate the TeensySFOC, armature, and encoder board for linear motor applications.
