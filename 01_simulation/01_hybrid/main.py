@@ -20,3 +20,4 @@ parameters_path = ROOT_DIR / "parameters.uiv"
 parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
 
 # (Work In Progress).
+parameters.info()
