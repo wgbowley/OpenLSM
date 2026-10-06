@@ -5,8 +5,8 @@
 <div align="center">
   <table>
     <tr>
-      <td><img src="01_armature_board/05_media/kicad_top_layer.png" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="01_armature_board/05_media/kicad_bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+      <td><img src="01_armature_board/05_media/kicad_top_layer.png" alt="Top layer"></td>
+      <td><img src="01_armature_board/05_media/kicad_bottom_layer.png" alt="Bottom layer"></td>
     </tr>
     <tr>
       <td><em>Top layer — STM32, thermistor array, accelerometer & encoder</em></td>
@@ -26,8 +26,8 @@ The board also includes a `3-axis SPI accelerometer` and processes data from the
 <div align="center">
   <table>
     <tr>
-      <td><img src="02_magnetic_encoder/05_media/kicad_top_layer.png" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="02_magnetic_encoder/05_media/kicad_bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+      <td><img src="02_magnetic_encoder/05_media/kicad_top_layer.png" alt="Top layer"></td>
+      <td><img src="02_magnetic_encoder/05_media/kicad_bottom_layer.png" alt="Bottom layer"></td>
     </tr>
     <tr>
       <td><em>Top layer — facing the magnetic scale</em></td>
@@ -46,8 +46,8 @@ depending on mechanical implementation factors. The encoder operates from `0–6
 <div align="center">
   <table>
     <tr>
-      <td><img src="./03_teensy_SFOC/05_media/kicad_top_layer.png" alt="Top layer" style="max-width:400px;"></td>
-      <td><img src="./03_teensy_SFOC/05_media/kicad_bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
+      <td><img src="./03_teensy_SFOC/05_media/kicad_top_layer.png" alt="Top layer"></td>
+      <td><img src="./03_teensy_SFOC/05_media/kicad_bottom_layer.png" alt="Bottom layer"></td>
     </tr>
     <tr>
       <td><em>Top layer — Teensy & SimpleFOC shield</em></td>
