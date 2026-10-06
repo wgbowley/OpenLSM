@@ -128,7 +128,7 @@ It is a development board that is not intended for long-term usage.
   <p><em>Populated TeensySFOC PCB.</em></p>
 </div>
 
-See [`03_boards`](/03_boards/readme.md) for the supporting PCB and [`04_fixtures]` for validation setup.
+See [`03_boards`](/03_boards/readme.md) for the supporting PCB and [`04_fixtures`](/04_fixture/readme.md) for validation setup.
 
 ---
 
