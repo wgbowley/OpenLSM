@@ -83,7 +83,7 @@ The radial heat-sink is made of aluminum with radial fins pitched at `1.50 mm`, 
 This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
 
 <div align="center">
-  <img src="./05_media/00_simulation/00_analytical/example.png" alt="Analytical model" width="700">
+  <img src="./05_media/00_simulation/00_analytical/example.png" alt="Analytical model" width="500">
   <p><em>1D field approximation and FOC showing position (linear) vs force (linear).</em></p>
 </div>
 
@@ -93,7 +93,7 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
 > *(Work in progress). This hybrid simulation is currently being designed and implemented.*
 
 <div align="center">
-  <img src="./05_media/00_simulation/01_hybrid/armature_test_solution.png" alt="Hybrid model" width="700">
+  <img src="./05_media/00_simulation/01_hybrid/armature_test_solution.png" alt="Hybrid model" width="500">
   <p><em>2D prototype low-resolution armature solution</em></p>
 </div>
 
