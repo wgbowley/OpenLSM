@@ -12,10 +12,9 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 
 
 <div align="center">
-  <img src="05_media/01_logos/logo.png" alt="OpenLSM" >
+  <img src="05_media/01_logos/logo.png" alt="OpenLSM" width="700">
   
   Low-Cost Linear Synchronous Permanent-Magnet Motor Platform <br>
-  Engineered by [`William Bowley`](https://github.com/wgbowley)
 </div>
 
 ### Overview
@@ -94,7 +93,7 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
 
 <div align="center">
   <img src="./05_media/00_simulation/01_hybrid/armature_test_solution.png" alt="Hybrid model" width="700">
-  <p><em>2D prototype low-resolution armature solution</em></p>
+  <p><em>Axisymmetric low-resolution armature solution</em></p>
 </div>
 
 A hybrid model using `FEMM` to compute the stator field, then using the Biot–Savart law with a parametric slot geometry to compute the armature field. 
