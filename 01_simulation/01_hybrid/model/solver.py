@@ -8,6 +8,7 @@ Description:
 
 
 from builtins import float as f
+from typing import Any
 
 import numpy as np
 
@@ -15,7 +16,7 @@ from ifemm import Parser as iParser
 from picounits import DynamicLoader, strip_quantity as validate
 from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, NULLSET
 
-from model.physics.field_equations import Slot
+from model.physics.field_equations import Slot, standard_helix, derivative_helix
 
 
 class Solver:
@@ -58,6 +59,35 @@ class Solver:
 
         return slots
 
+    def _slot_layers(self, slot: Slot, samples: int = 4) -> Any:
+        """ Decomposes a slot into helical sheets """
+        # Extracts the radial & axial components.
+        r_inner, r_outer = slot.p1[1], slot.p2[1]
+        z_start, z_end = slot.p1[0], slot.p2[0]
+
+        # Computes the number of sheets based on effective fill
+        effective_diameter = self.wire_diameter * (1 / self.fill_factor)
+        sheets = int(np.floor((r_outer - r_inner) / effective_diameter))
+
+        # Computes the axial pitch of the helix based on effective fill
+        layer_turns = (z_end - z_start) / effective_diameter
+
+        # Sample space per turn layer
+        total_samples = int(samples * layer_turns)
+        t = np.linspace(0.0, 2 * np.pi * layer_turns, total_samples)
+        dt = t[1] - t[0]
+
+        for sheet in range(0, sheets):
+            # Calculates the new inner radius
+            r_k = r_inner + effective_diameter * sheet
+
+            # Computes the helix and its derivative
+            wire = standard_helix(t, r_k, effective_diameter)
+            d_wire = derivative_helix(t, r_k, effective_diameter, dt)
+
+            # Returns each iteration
+            yield wire, d_wire
+
     def _compute_derived_values(self) -> None:
         """ Compute derived values based on parameters """
         tube_outer_radius = self.dipole_radial_thickness + self.tube_radial_thickness
@@ -80,7 +110,12 @@ class Solver:
         wire_section = np.pi * (self.wire_diameter / 2) ** 2
 
         effective_area = slot_section * self.fill_factor
-        return int(np.floor(effective_area / wire_section))
+        effective_turns = int(np.floor(effective_area / wire_section))
+
+        if effective_turns > 0: return effective_area
+
+        msg = f"A motor cannot have slots with negative turns: {effective_turns} in {effective_area * LENGTH **2}"
+        raise ValueError(msg)
 
     def _extract_validate(self, parameters: DynamicLoader) -> None:
         """ Extracts qualities from attribute tree and validates units """
