@@ -105,7 +105,7 @@ See [`01_simulation`](./01_simulation/readme.md) for more details.
  
 ### Supporting Boards
 
-#### Validation & Integrated Sensors
+#### Validation Stand & Sensors
 
 > *(Work in progress). The armature board revision 2 is a work in progress* <br>
 > *(Validation). The encoder board revision 0 has been populated and requires validation.*
