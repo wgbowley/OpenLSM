@@ -134,6 +134,7 @@
     "ylim",
     "yticklabels",
     "pcolormesh",
-    "linalg"
+    "linalg",
+    "aluminium",
   ]
 }

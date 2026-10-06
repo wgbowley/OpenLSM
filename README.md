@@ -60,7 +60,7 @@ See the [`alpha notes`](/02_motors/00_prototype_alpha/readme.md) for the full re
 ### Beta ($\beta$)
 
 > *(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*  <br>
-> *(Paused). Revision 3 is currently a work in progress and will be fabricated.*
+> *(Paused). Revision 3 is a work in progress and will be fabricated.*
 
 An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature featuring `12` slots, mechanically wound using `0.4 mm` diameter enameled copper wire, with `4` slots in-series per phase `(WYE)`. The stator, unlike the armature, is made of layered carbon fibre epoxy to form a tube with an internal radius of `5 mm` and outer radius of `6 mm`. The poles are `20 mm` in length and `5 mm` in radius such that they can be inserted into the stator tube in this pole arrangement `(N-S|S-N)`, using generic superglue to secure the end poles.
 
@@ -71,7 +71,7 @@ An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature f
 
 > See the [`motor design notes`](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
 
-The radial heat-sink is made of aluminum with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
+The radial heat-sink is made of aluminium with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
 
 ---
 
@@ -96,10 +96,10 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
   <p><em>Axisymmetric low-resolution armature solution</em></p>
 </div>
 
-A hybrid model using `FEMM` to compute the stator field, then using the Biot–Savart law with a parametric slot geometry to compute the armature field. 
+A hybrid model using `FEMM` to compute the stator field, then uses the Biot–Savart law with a parametric slot geometry to compute the armature field. 
 The magnetic co-energy is then calculated assuming uniform magnetic permeability, and finally the spatial derivative over the z-axis is used to compute force.
 
-See the [`01_simulation`](./01_simulation/readme.md) for more details.
+See [`01_simulation`](./01_simulation/readme.md) for more details.
 
 ---
  
@@ -115,13 +115,13 @@ The system consists of two boards: an encoder board with an estimated accuracy o
 
 <div align="center">
   <img src="./05_media/04_fixtures/01_validation_setup/initial-integration.jpg" alt="Test-stand" width="500">
-  <p><em>Validation stand with populated encoder and bare revision 1 armature board. </em></p>
+  <p><em>Validation stand with populated encoder and bare revision 1 armature board.</em></p>
 </div>
 
 #### TeensySFOC
 
 The TeensySFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield with `step/dir` input. 
-It is a development board that is not intend for long-term usage.
+It is a development board that is not intended for long-term usage.
 
 <div align="center">
   <img src="./03_boards/03_teensy_SFOC/05_media/top-side-populated.jpg" alt="TeensySFOC PCB" width="500">
