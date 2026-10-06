@@ -8,7 +8,6 @@ Description:
 
 
 from builtins import float as f
-from dataclasses import dataclass
 
 import numpy as np
 
@@ -16,14 +15,7 @@ from ifemm import Parser as iParser
 from picounits import DynamicLoader, strip_quantity as validate
 from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, NULLSET
 
-
-@dataclass(slots=True)
-class Slot:
-    """ A non-unit informed slot definition """
-    turns: int
-    current: float
-    p1: tuple[float, float]
-    p2: tuple[float, float]
+from model.physics.field_equations import Slot
 
 
 class Solver:
@@ -43,6 +35,28 @@ class Solver:
 
         # Computes derived values from parameters
         self._compute_derived_values()
+
+    def _armature_field(self, translation: f = 0.0) -> f:
+        """ Constructs the armature field using slots """
+        phases = [self.i_pha, self.i_phb, self.i_phc]
+        half_length = - self.number_slots * self.slot_axial_length / 2
+        offset = self.armature_offset + half_length
+
+        slots = []
+        for index in range(0, self.number_slots):
+            # Selects the slots phase and polarity
+            phase = phases[index % 3]
+            polarity = -1 if index % 2 == 0 else 1
+
+            # Computes the slot_pos & two reference points
+            slot_pos = offset + translation + self.slot_axial_length * index
+            p1 = (slot_pos, self.slot_inner_radius)
+            p2 = (slot_pos + self.slot_axial_length, self.slot_outer_radius)
+
+            # Appends the frozen slot
+            slots.append(Slot(polarity * self.slot_turns, phase, p1, p2))
+
+        return slots
 
     def _compute_derived_values(self) -> None:
         """ Compute derived values based on parameters """
@@ -66,7 +80,7 @@ class Solver:
         wire_section = np.pi * (self.wire_diameter / 2) ** 2
 
         effective_area = slot_section * self.fill_factor
-        return np.floor(effective_area / wire_section)
+        return int(np.floor(effective_area / wire_section))
 
     def _extract_validate(self, parameters: DynamicLoader) -> None:
         """ Extracts qualities from attribute tree and validates units """

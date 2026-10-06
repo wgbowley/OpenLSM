@@ -7,7 +7,18 @@ Description:
 """
 
 
+from dataclasses import dataclass
+
 import numpy as np
+
+
+@dataclass(slots=True)
+class Slot:
+    """ A non-unit informed slot definition """
+    turns: int
+    phase: float
+    p1: tuple[float, float]
+    p2: tuple[float, float]
 
 
 def standard_helix(t: np.ndarray, radius: float, pitch: float) -> np.ndarray:
