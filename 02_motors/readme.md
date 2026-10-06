@@ -1,9 +1,9 @@
 ### 02_motors
 
-#### [00_prototype_alpha](00_prototype_alpha/readme.md) — Ironless Planar Linear Motor
+#### [00_prototype_alpha](./00_prototype_alpha) — Ironless Planar Linear Motor
 
 <div align="center">
-    <img src="../05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="Side view on stand" style="max-width: 600px">
+    <img src="../05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="Side view on stand">
     <br>
     <em>Prototype Alpha. Side view on test stand without encoder wiring.</em>
 </div>
@@ -14,10 +14,10 @@ Prototype Alpha is an `ironless planar linear motor` with a polylactic acid (PLA
 
 ---
 
-#### [01_prototype_beta](01_prototype_beta/readme.md) — Ironless Tubular Linear Motor (WIP)
+#### [01_prototype_beta](./01_prototype_beta) — Ironless Tubular Linear Motor (WIP)
 
 <div align="center">
-<img src="../05_media/03_prototype_beta/rev_2/side_profile_cad.png" alt="Side profile" style="max-width: 600px">
+<img src="../05_media/03_prototype_beta/rev_2/side_profile_cad.png" alt="Side profile">
 <br>
 <em>Prototype Beta revision 2: Radial heat-sink design study (aluminum 6061, eddy current analysis).</em>
 </div>

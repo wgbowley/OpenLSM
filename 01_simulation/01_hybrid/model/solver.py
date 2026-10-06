@@ -6,4 +6,184 @@ Description:
     tubular linear motor using virtual work methods.
 """
 
-# (Work In Progress).
+
+from builtins import float as f
+from typing import Any
+
+import numpy as np
+
+from ifemm import Parser as iParser
+from picounits import DynamicLoader, strip_quantity as validate
+from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, NULLSET
+
+from model.physics.field_equations import Slot, standard_helix, derivative_helix, biot_sum_integrand
+
+
+class Solver:
+    """ Computes electromagnetic force using magnetic energy and virtual work methods. """
+    def __init__(self, parameters: DynamicLoader, data: iParser) -> None:
+        """ Initializes the solver class """
+        self._extract_validate(parameters)
+
+        # Finite element solution & environment permeability
+        self.data = data
+        self.permeability = 4 * np.pi * 10 ** -7
+
+        # Phase currents
+        self.i_pha = 0.0
+        self.i_phb = 0.0
+        self.i_phc = 0.0
+
+        # Stator field solution
+        self.stator_r, self.stator_z, self.stator_bx, self.stator_by = data.b_field(256)
+        self.b_mag_stator = np.sqrt(self.stator_bx**2 + self.stator_by**2)
+
+        # Removing unit scaling from spacial axises
+        self.stator_z *= data.length_scale
+        self.stator_r *= data.length_scale
+
+        # Computes derived values from parameters
+        self._compute_derived_values()
+
+    def compute_armature_field(self, translation: float, turn_sample: int = 64):
+        """ Computes the armature field on the same grid as the FEM stator field """
+        r_eval = np.stack([self.stator_r, np.zeros_like(self.stator_r), self.stator_z], axis=-1)
+
+        mu0_over_4pi = self.permeability / (4 * np.pi)
+        B = np.zeros_like(r_eval)
+
+        for slot in self._armature_slots(translation=translation):
+            scale = mu0_over_4pi * slot.phase * np.sign(slot.turns)
+            for wire, d_wire in self._slot_layers(slot, turn_sample):
+                B += scale * biot_sum_integrand(r_eval, wire, d_wire)
+
+        return self.stator_r, self.stator_z, np.linalg.norm(B, axis=-1)
+
+    def _armature_slots(self, translation: f = 0.0) -> list[Slot]:
+        """ Constructs the armature field using slots """
+        phases = [self.i_pha, self.i_phb, self.i_phc]
+        half_length = - self.number_slots * self.slot_axial_length / 2
+        offset = self.armature_offset + half_length
+
+        slots = []
+        for index in range(0, self.number_slots):
+            # Selects the slots phase and polarity
+            phase = phases[index % 3]
+            polarity = -1 if index % 2 == 0 else 1
+
+            # Computes the slot_pos & two reference points
+            slot_pos = offset + translation + self.slot_axial_length * index
+            p1 = (slot_pos, self.slot_inner_radius)
+            p2 = (slot_pos + self.slot_axial_length, self.slot_outer_radius)
+
+            # Appends the frozen slot
+            slots.append(Slot(polarity * self.slot_turns, phase, p1, p2))
+
+        return slots
+
+    def _slot_layers(self, slot: Slot, samples: int) -> Any:
+        """ Decomposes a slot into helical sheets """
+        # Extracts the radial & axial components.
+        r_inner, r_outer = slot.p1[1], slot.p2[1]
+        z_start, z_end = slot.p1[0], slot.p2[0]
+
+        # Computes the number of sheets based on effective fill
+        effective_diameter = self.wire_diameter * (1 / self.fill_factor)
+        sheets = int(np.floor((r_outer - r_inner) / effective_diameter))
+
+        # Computes the axial pitch of the helix based on effective fill
+        layer_turns = (z_end - z_start) / effective_diameter
+
+        # Sample space per turn layer
+        total_samples = int(samples * layer_turns)
+        t = np.linspace(0.0, 2 * np.pi * layer_turns, total_samples)
+        dt = t[1] - t[0]
+
+        for sheet in range(0, sheets):
+            # Calculates the new inner radius
+            r_k = r_inner + effective_diameter * sheet
+
+            # Computes the helix and its derivative
+            wire = standard_helix(t, r_k, effective_diameter)
+            d_wire = derivative_helix(t, r_k, effective_diameter, dt)
+
+            # shift into the slot's axial position
+            wire[:, 2] += z_start
+
+            # Returns each iteration
+            yield wire, d_wire
+
+    def _compute_derived_values(self) -> None:
+        """ Compute derived values based on parameters """
+        tube_outer_radius = self.dipole_radial_thickness + self.tube_radial_thickness
+        core_inner_radius = tube_outer_radius + self.radial_clearance
+        slot_inner_radius = core_inner_radius + self.core_radial_thickness
+        slot_outer_radius = slot_inner_radius + self.slot_radial_thickness
+
+        # Computes number of turns and saves slot size information
+        self.slot_turns = self._compute_turns()
+
+        self.slot_inner_radius = slot_inner_radius
+        self.slot_outer_radius = slot_outer_radius
+
+        # Armature Offsets (z_0)
+        self.armature_offset = self.dipole_axial_length / 2
+
+    def _compute_turns(self) -> f:
+        """ Computes the number of turns while according for the insulation & stacking. """
+        slot_section = self.slot_axial_length * self.slot_radial_thickness
+        wire_section = np.pi * (self.wire_diameter / 2) ** 2
+
+        effective_area = slot_section * self.fill_factor
+        effective_turns = int(np.floor(effective_area / wire_section))
+
+        if effective_turns <= 0:
+            msg = f"A motor cannot have slots with negative turns: {effective_turns}"
+            raise ValueError(msg)
+
+        return effective_turns
+
+    def _build_evaluation_grid(self, n_r: int, n_z: int):
+        """ Build the (r, z) evaluation grid for Biot-Savart. """
+        r_min = float(self.stator_r.min())
+        r_max = float(self.stator_r.max())
+        z_min = float(self.stator_z.min())
+        z_max = float(self.stator_z.max())
+
+        r_axis = np.linspace(r_min, r_max, n_r)
+        z_axis = np.linspace(z_min, z_max, n_z)
+
+        R, Z = np.meshgrid(r_axis, z_axis, indexing='ij')
+        r_eval = np.stack([R, np.zeros_like(R), Z], axis=-1)
+
+        return r_axis, z_axis, r_eval
+
+    def _extract_validate(self, parameters: DynamicLoader) -> None:
+        """ Extracts qualities from attribute tree and validates units """
+        # Numerical Configuration
+        self.line_voltage = validate(parameters.numerics.line_voltage, VOLTAGE)
+
+        # Numerical Control
+        self.integration_step = validate(parameters.numerics.solver.integration_step, LENGTH)
+        self.derivative_step = validate(parameters.numerics.solver.derivative_step, LENGTH)
+
+        # Armature Core
+        self.number_slots = validate(parameters.armature.number_slots, NULLSET)
+        self.radial_clearance = validate(parameters.armature.radial_clearance, LENGTH)
+        self.core_radial_thickness = validate(parameters.armature.core.radial_wall_thickness, LENGTH)
+
+        # Armature Slot
+        self.slot_axial_pitch = validate(parameters.armature.slots.axial_pitch, LENGTH)
+        self.slot_axial_length = validate(parameters.armature.slots.axial_length, LENGTH)
+        self.slot_radial_thickness = validate(parameters.armature.slots.radial_thickness, LENGTH)
+
+        self.wire_diameter = validate(parameters.armature.slots.material.wire_diameter, LENGTH)
+        self.fill_factor = validate(parameters.armature.slots.material.fill_factor, NULLSET)
+        self.conductivity = validate(parameters.armature.slots.material.conductivity, CONDUCTIVITY)
+
+        # Stator Tube
+        self.tube_radial_thickness = validate(parameters.stator.tube.radial_wall_thickness, LENGTH)
+
+        # Stator Dipole
+        self.dipole_axial_length = validate(parameters.stator.dipole.axial_length, LENGTH)
+        self.dipole_radial_thickness = validate(parameters.stator.dipole.radial_thickness, LENGTH)

@@ -6,14 +6,14 @@ Description:
     linear synchronous motor.
 """
 
+from math import sin, pi
 from pathlib import Path
-import numpy as np
+from matplotlib import pyplot as plt
 
 from ifemm import Parser as iParser
 from picounits import Parser
 
-from picounits import ENERGY
-
+from model.solver import Solver
 
 # Imports the parser and parses the .ans file
 ROOT_DIR = Path(__file__).resolve().parents[0]
@@ -23,32 +23,13 @@ data = iParser.open(ROOT_DIR / 'resources/model.ans')
 parameters_path = ROOT_DIR / "parameters.uiv"
 parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
 
-# (Work In Progress).
-# Calculates the energy within the magnetic field.
+solver = Solver(parameters, data)
 
-# Get the B field
-length_unit = data.length_unit
-scale = data.length_scale
-x, y, bx, by = data.b_field()
+solver.i_pha, solver.i_phb, solver.i_phc = 10 * sin(0), 10 * sin(2 * pi / 3), 10 * sin(4 * pi / 3)
 
-# Calculate b-field magnitude & removes invalid entries.
-b_magnitude = np.sqrt(bx**2 + by**2)
-valid = np.isfinite(b_magnitude)
+r, z, b_mag = solver.compute_armature_field(0)
 
-mu = 4 * np.pi * 1e-7
-
-# Ensures both the x & y grids are arrays
-x = np.asarray(x)
-y = np.asarray(y)
-
-# Assumes uniform x & y grid
-dx = np.abs(x[0, 1] - x[0, 0]) * scale
-dy = np.abs(y[1, 0] - y[0, 0]) * scale
-r = x * scale
-
-# Integrate only the valid cells
-# Axisymmetric volume element: dV = 2*pi*r*dr*dz
-cell_volume = 2 * np.pi * np.abs(r) * dx * dy
-U = np.sum(b_magnitude[valid]**2 * cell_volume[valid]) / (2 * mu)
-
-print(f"Stored magnetic energy U = {U*ENERGY:.3f}")
+plt.pcolormesh(z, r, b_mag, shading='auto')
+plt.xlabel('z [m]'); plt.ylabel('r [m]'); plt.colorbar()
+plt.title('|B| [T]')
+plt.show()

@@ -17,11 +17,7 @@ from model.physics import field_oriented_control
 
 
 class Solver:
-    """
-    Magnetic Solver for linear tubular motor problem.
-    Computes electromagnetic force using magnetic energy and virtual work methods.
-    """
-
+    """ Computes electromagnetic force using magnetic energy and virtual work methods. """
     def __init__(self, parameters: DynamicLoader) -> None:
         """ Initializes the solver class """
         self._extract_validate(parameters)
@@ -102,7 +98,7 @@ class Solver:
     def _armature_field(self, pos: f = 0.0, translation: f = 0.0) -> f:
         """ Solves for the armature field at a specific z-position """
         phases = [self.i_pha, self.i_phb, self.i_phc]
-        half_length = - self.number_slots * self.axial_slot_pitch / 2
+        half_length = - self.number_slots * self.slot_axial_pitch / 2
         offset = self.armature_offset + half_length
 
         field_strength = 0.0
@@ -112,7 +108,7 @@ class Solver:
             polarity = -1 if index % 2 == 0 else 1
 
             # Computes the slot position
-            slot_pos = offset + translation + self.axial_slot_pitch * index
+            slot_pos = offset + translation + self.slot_axial_pitch * index
 
             # Takes the sum of the fields at that position
             field_strength += field_equations.pole_field_strength(
@@ -217,7 +213,7 @@ class Solver:
 
         # Armature
         self.number_slots = validate(parameters.armature.number_slots, NULLSET)
-        self.axial_slot_pitch = validate(parameters.armature.slots.axial_pitch, LENGTH)
+        self.slot_axial_pitch = validate(parameters.armature.slots.axial_pitch, LENGTH)
         self.radial_clearance = validate(parameters.armature.radial_clearance, LENGTH)
         self.core_radial_thickness = validate(parameters.armature.core.radial_wall_thickness, LENGTH)
 
