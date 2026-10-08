@@ -1,6 +1,6 @@
 ### 03_boards
 
-#### [01_armature_board](./01_armature_board) — Sensor Board (Manufacturing)
+#### [01_armature_board](./01_armature_board) — Sensor Board (Revision 2 - Rework)
 
 <div align="center">
   <table>
@@ -41,7 +41,7 @@ depending on mechanical implementation factors. The encoder operates from `0–6
 
 ---
 
-#### [03_teensy_SFOC](./03_teensy_SFOC) - Teensy 4.1 & SimpleFOC Breakout Board (Manufacturing)
+#### [03_teensy_SFOC](./03_teensy_SFOC) - Teensy 4.1 & SimpleFOC Breakout Board (Validation)
 
 <div align="center">
   <table>

@@ -14,7 +14,7 @@ Prototype Alpha is an `ironless planar linear motor` with a polylactic acid (PLA
 
 ---
 
-#### [01_prototype_beta](./01_prototype_beta) — Ironless Tubular Linear Motor (WIP)
+#### [01_prototype_beta](./01_prototype_beta) — Ironless Tubular Linear Motor
 
 <div align="center">
 <img src="../05_media/03_prototype_beta/rev_2/side_profile_cad.png" alt="Side profile">
