@@ -12,7 +12,7 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 
 
 <div align="center">
-  <img src="05_media/01_logos/logo.png" alt="OpenLSM" width="450">
+  <img src="05_media/01_logos/logo.png" alt="OpenLSM" width="500">
   
   Low-Cost Linear Synchronous Permanent-Magnet Motor Platform <br>
 </div>
