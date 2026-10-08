@@ -15,7 +15,7 @@ from ifemm import Parser as iParser
 from picounits import DynamicLoader, strip_quantity as validate
 from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, NULLSET
 
-from model.physics.field_equations import kernel_limit
+from model.physics.field_equations import kernel_limit, standard_helix, derivative_helix, biot_sum_integrand
 
 class Solver:
     """ Computes electromagnetic force using magnetic energy and virtual work methods. """
@@ -37,16 +37,58 @@ class Solver:
         self.b_mag_stator = np.sqrt(self.stator_bx**2 + self.stator_by**2)
 
         # Removing unit scaling from spacial axises
-        self.stator_z *= data.length_scale
-        self.stator_r *= data.length_scale
+        self.stator_z *= data.length_scale      # (Need to check this.)
 
-        # Computes derived values from parameters
+        # Computes derived values from parameters & slot kernel
         self._compute_derived_values()
-        nominal_radius = self.slot_inner_radius + self.slot_radial_thickness / 2
-        kernel_limit(0.01, self.slot_axial_length, nominal_radius)
+        self._compute_kernel()
 
-    # def _compute_kernel(self) -> np.ndarray:
-    #     """ Computes the biot savart integrand for solution kernel. """
+    def _compute_kernel(self, samples=16) -> np.ndarray:
+        """ Computes the biot savart integrand for solution kernel. """
+        # Calculates the limit for the kernel
+        nominal_radius = self.slot_inner_radius + self.slot_radial_thickness / 2
+        limit = kernel_limit(self.slot_dropoff, self.slot_axial_length, nominal_radius)
+
+        # Builds a mesh for the kernel with the same density as the FEM solution
+        rx = round(1 / (self.stator_r[0][1] - self.stator_r[0][0]))     # (Need to check this.)
+        rz = round(1 / (self.stator_r[1][1] - self.stator_z[1][0]))     # (Need to check this.)
+
+        lin_r = np.linspace(0, limit, rx)
+        lin_z = np.linspace(0, limit, rz)
+
+        # Creates the evaluation space for the kernel
+        R, Z = np.meshgrid(lin_r, lin_z, indexing="ij")
+        r_eval = np.stack([R, np.zeros_like(R), Z], axis=-1)
+
+        self.r_eval = r_eval
+
+        ## -=== Random BS ===-
+        
+        # Computes the number of sheets based on effective fill
+        effective_diameter = self.wire_diameter * (1 / self.fill_factor)
+        sheets = int(np.floor(self.slot_radial_thickness / effective_diameter))
+        layer_turns = self.slot_axial_length / effective_diameter
+
+        # Sample space per turn layer
+        total_samples = int(samples * layer_turns)
+        t = np.linspace(0.0, 2 * np.pi * layer_turns, total_samples)
+        dt = t[1] - t[0]
+
+        solutions = []
+        for sheet in range(0, sheets):
+            # Calculates the new inner radius
+            r_k = self.slot_inner_radius + effective_diameter * sheet
+
+            # Computes the helix and its derivative
+            wire = standard_helix(t, r_k, effective_diameter)
+            d_wire = derivative_helix(t, r_k, effective_diameter, dt)
+            solutions.append((wire, d_wire))
+
+        B = np.zeros_like(r_eval)
+        for layer in solutions:
+            B += biot_sum_integrand(r_eval, layer[0], layer[1])
+
+        self.b_field = np.linalg.norm(B, axis=-1)
 
     def _compute_derived_values(self) -> None:
         """ Compute derived values based on parameters """
@@ -84,6 +126,7 @@ class Solver:
         self.line_voltage = validate(parameters.numerics.line_voltage, VOLTAGE)
 
         # Numerical Control
+        self.slot_dropoff = validate(parameters.numerics.solver.slot_drop_off, NULLSET)
         self.integration_step = validate(parameters.numerics.solver.integration_step, LENGTH)
         self.derivative_step = validate(parameters.numerics.solver.derivative_step, LENGTH)
 

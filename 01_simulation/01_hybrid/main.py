@@ -8,7 +8,7 @@ Description:
 
 from math import sin, pi
 from pathlib import Path
-# from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 
 from ifemm import Parser as iParser
 from picounits import Parser
@@ -27,9 +27,18 @@ solver = Solver(parameters, data)
 
 solver.i_pha, solver.i_phb, solver.i_phc = 10 * sin(0), 10 * sin(2 * pi / 3), 10 * sin(4 * pi / 3)
 
-# r, z, b_mag = solver.compute_armature_field(0)
 
-# plt.pcolormesh(z, r, b_mag, shading='auto')
-# plt.xlabel('z [m]'); plt.ylabel('r [m]'); plt.colorbar()
-# plt.title('|B| [T]')
-# plt.show()
+r = solver.r_eval          # (n_r, n_z, 3)
+B = solver.b_field         # (n_r, n_z)
+
+R = r[..., 0]              # (n_r, n_z) — x-coordinate = radial
+Z = r[..., 2]              # (n_r, n_z) — z-coordinate
+
+fig, ax = plt.subplots(figsize=(8, 5))
+im = ax.pcolormesh(R, Z, B, shading="auto", cmap="viridis")
+ax.set_xlabel("r")
+ax.set_ylabel("z")
+ax.set_aspect("equal")
+plt.colorbar(im, label="|B|")
+plt.title("Kernel field magnitude")
+plt.show()
