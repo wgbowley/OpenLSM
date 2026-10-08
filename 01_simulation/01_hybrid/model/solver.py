@@ -15,6 +15,7 @@ from ifemm import Parser as iParser
 from picounits import DynamicLoader, strip_quantity as validate
 from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, NULLSET
 
+from model.physics.field_equations import kernel_limit
 
 class Solver:
     """ Computes electromagnetic force using magnetic energy and virtual work methods. """
@@ -41,9 +42,12 @@ class Solver:
 
         # Computes derived values from parameters
         self._compute_derived_values()
-    
-    def _compute_kernel(self)
-    
+        nominal_radius = self.slot_inner_radius + self.slot_radial_thickness / 2
+        kernel_limit(0.01, self.slot_axial_length, nominal_radius)
+
+    # def _compute_kernel(self) -> np.ndarray:
+    #     """ Computes the biot savart integrand for solution kernel. """
+
     def _compute_derived_values(self) -> None:
         """ Compute derived values based on parameters """
         tube_outer_radius = self.dipole_radial_thickness + self.tube_radial_thickness

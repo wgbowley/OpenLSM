@@ -6,6 +6,8 @@ Description:
     Axisymmetric biot-savart equation.
 """
 
+from builtins import float as f
+from random import random
 
 import numpy as np
 
@@ -44,3 +46,45 @@ def biot_sum_integrand(r_eval: np.ndarray, r_wire: np.ndarray, dl: np.ndarray) -
 
     # Resulting integrand summation
     return np.sum(cross / np.expand_dims(flooring ** 3, axis=-1), axis=2)
+
+
+def _anti_derivative_function(z: f, pos: f, radius: f) -> f:
+    """ Computes the anti-derivative of the axial Biot-Savart pole field. """
+    return (z - pos) / (radius ** 2 + (z - pos) ** 2) ** 0.5
+
+
+def _integrand_pole_model(pos: f, length: f, radius: f) -> f:
+    """ Computes the integrand along the z-axis using the finite pole model """
+    half_length = length / 2
+
+    # Calculates the axial field components via integration
+    term2 = _anti_derivative_function(half_length, pos, radius)
+    term1 = _anti_derivative_function(-half_length, pos, radius)
+
+    return term2 - term1
+
+
+def kernel_limit(dropoff: f, length: f, radius: f) -> f:
+    """ Calculates the limit for the kernel with dropoff being the limit """
+    original = _integrand_pole_model(radius, length, radius)
+    target = dropoff * original
+
+    # Restricts the search space within bounds [radius, inf]
+    high = radius
+    while _integrand_pole_model(high, length, radius) > target:
+        high *= 2
+
+    # Uses random search to get an approximate radius
+    best_position = high
+    best_error = abs(target - _integrand_pole_model(high, length, radius))
+
+    for _ in range(20):
+        position = radius + (high - radius) * random()
+        value = _integrand_pole_model(position, length, radius)
+        error = abs(target - value)
+
+        if error < best_error:
+            best_error = error
+            best_position = position
+
+    return best_position

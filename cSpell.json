@@ -136,5 +136,6 @@
     "pcolormesh",
     "linalg",
     "aluminium",
+    "dropoff",
   ]
 }
