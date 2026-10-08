@@ -41,7 +41,9 @@ class Solver:
 
         # Computes derived values from parameters
         self._compute_derived_values()
-
+    
+    def _compute_kernel(self)
+    
     def _compute_derived_values(self) -> None:
         """ Compute derived values based on parameters """
         tube_outer_radius = self.dipole_radial_thickness + self.tube_radial_thickness
