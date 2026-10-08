@@ -7,18 +7,7 @@ Description:
 """
 
 
-from dataclasses import dataclass
-
 import numpy as np
-
-
-@dataclass(slots=True)
-class Slot:
-    """ A non-unit informed slot definition """
-    turns: int
-    phase: float
-    p1: tuple[float, float]
-    p2: tuple[float, float]
 
 
 def standard_helix(t: np.ndarray, radius: float, pitch: float) -> np.ndarray:
@@ -42,7 +31,7 @@ def derivative_helix(t: np.ndarray, radius: float, pitch: float, dt: float) -> n
 
 
 def biot_sum_integrand(r_eval: np.ndarray, r_wire: np.ndarray, dl: np.ndarray) -> np.ndarray:
-    """ Biot savart sum of the integrand """
+    """ 3D Biot savart sum of the integrand """
     r_vec = np.expand_dims(r_eval, axis=2) - r_wire
 
     # Calculates magnitude of r_vec and forces safe flooring
