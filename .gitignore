@@ -2,7 +2,6 @@
 
 # Ignore Files
 *.log
-*.ans
 *.feh
 *.pyc
 *.gz
