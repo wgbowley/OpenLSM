@@ -137,5 +137,8 @@
     "linalg",
     "aluminium",
     "dropoff",
+    "ndshift",
+    "ndimage",
+    "cval"
   ]
 }

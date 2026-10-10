@@ -10,6 +10,7 @@ Description:
 from builtins import float as f
 
 import numpy as np
+from scipy.ndimage import shift as ndshift
 
 from ifemm import Parser as iParser
 from picounits import DynamicLoader, strip_quantity as validate
@@ -47,14 +48,37 @@ class Solver:
         self._construct_kernel()
         self._compute_kernel()
 
+        self._compute_slot()
+
+    def _compute_slot(self) -> None:
+        """ Computes the slot field by summing copies of the sheet kernel. """
+        sheet_turns = int(np.floor(self.slot_axial_length / self.effective_diameter))
+        dz_grid = (self.kernel_z[1] - self.kernel_z[0])[0]
+
+        # Pulls the integrand kernel for r & z axises
+        integrand_r = self.kernel[..., 0]
+        integrand_z = self.kernel[..., 2]
+
+        # Creates a r and z array with same shape
+        r = np.zeros_like(integrand_r)
+        z = np.zeros_like(integrand_z)
+
+        for turn in range(sheet_turns):
+            # Sums the sources using superposition.
+            pixels = (turn * self.effective_diameter) / dz_grid
+            r += ndshift(integrand_r, shift=(pixels, 0.0), mode='constant', cval=0.0)
+            z += ndshift(integrand_z, shift=(pixels, 0.0), mode='constant', cval=0.0)
+
+        self.slot_kernel_integrand_r = r
+        self.slot_kernel_integrand_z = z
+
     def _compute_kernel(self) -> None:
-        """ Computes the kernel solution based on slot geometry """
+        """ Computes the kernel solution based on sheet geometry """
         # Calculates the number of sheets and turns per sheet.
         sheets = int(np.floor(self.slot_radial_thickness / self.effective_diameter))
 
         # Creates the linear sample space for the sheets.
-        total_samples = int(self.samples_per_turn)
-        t = np.linspace(0.0, 2 * np.pi, total_samples)
+        t = np.linspace(0.0, 2 * np.pi, int(self.samples_per_turn))
         dt = t[1] - t[0]
 
         wires = []
@@ -63,8 +87,8 @@ class Solver:
             r_k = self.slot_inner_radius + self.effective_diameter * sheet
 
             # Computes the helix and its derivative
-            wire = standard_helix(t, r_k, self.effective_diameter, 1)
-            d_wire = derivative_helix(t, r_k, self.effective_diameter, 1, dt)
+            wire = standard_helix(t, r_k, self.effective_diameter)
+            d_wire = derivative_helix(t, r_k, self.effective_diameter, dt)
 
             wire[:, 2] += self.effective_diameter/2
 
@@ -80,6 +104,7 @@ class Solver:
         keep_r = self.kernel_r[0, :] >= 0
         self.kernel_r = self.kernel_r[:, keep_r]
         self.kernel_z = self.kernel_z[:, keep_r]
+
         self.kernel   = kernel[:, keep_r, :]
 
     def _construct_kernel(self) -> None:
