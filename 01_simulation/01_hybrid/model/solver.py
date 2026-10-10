@@ -15,7 +15,7 @@ from ifemm import Parser as iParser
 from picounits import DynamicLoader, strip_quantity as validate
 from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, NULLSET
 
-from model.physics.field_equations import kernel_limit
+from model.physics.field_equations import kernel_limit, standard_helix, derivative_helix, biot_sum_integrand
 
 
 class Solver:
@@ -24,9 +24,10 @@ class Solver:
         """ Initializes the solver class """
         self._extract_validate(parameters)
 
-        # Finite element solution & environment permeability
+        # Finite element solution, environment permeability & biot-savart term
         self.data = data
         self.permeability = 4 * np.pi * 10 ** -7
+        self.mu0_over_4pi = self.permeability / (4 * np.pi)
 
         # Phase currents
         self.i_pha = 0.0
@@ -44,11 +45,40 @@ class Solver:
         # Computes derived values from parameters & slot kernel space
         self._compute_derived_values()
         self._construct_kernel()
+        self._compute_kernel()
 
     def _compute_kernel(self) -> None:
-        """ Computes the kernel solution"""
-        return
+        """ Computes the kernel solution based on slot geometry """
+        effective_diameter = self.wire_diameter * (1 / self.fill_factor)
 
+        # Calculates the number of sheets and turns per sheet.
+        sheets = int(np.floor(self.slot_radial_thickness / effective_diameter))
+        sheet_turns = int(np.floor(self.slot_axial_length / effective_diameter))
+
+        # Creates the linear sample space for the sheets.
+        total_samples = int(self.samples_per_turn * sheet_turns)
+        t = np.linspace(0.0, 2 * np.pi * sheet_turns, total_samples)
+        dt = t[1] - t[0]
+
+        wires = []
+        for sheet in range(0, sheets):
+            # Calculates the new inner radius
+            r_k = self.slot_inner_radius + effective_diameter * sheet
+
+            # Computes the helix and its derivative
+            wire = standard_helix(t, r_k, effective_diameter)
+            d_wire = derivative_helix(t, r_k, effective_diameter, dt)
+
+            # Appends wire & d_wire to wires set
+            wires.append((wire, d_wire))
+
+        # Constructs the kernel from integrand
+        kernel = np.zeros_like(self.kernel_evaluation)
+        for wire, d_wire in wires:
+            kernel += biot_sum_integrand(self.kernel_evaluation, wire, d_wire)
+
+        self.kernel = kernel
+        self.kernel_mag = np.linalg.norm(kernel, axis=-1)
 
     def _construct_kernel(self) -> None:
         """ Constructs the kernel size based on limit radius. """
@@ -64,8 +94,11 @@ class Solver:
         lin_z = np.linspace(0, limit, int(round(rz * limit)))
 
         # # Creates the evaluation space for the kernel
-        R, Z = np.meshgrid(lin_r, lin_z, indexing="ij")
+        R, Z = np.meshgrid(lin_r, lin_z)
         r_eval = np.stack([R, np.zeros_like(R), Z], axis=-1)
+
+        self.kernel_r = R
+        self.kernel_z = Z
 
         self.kernel_evaluation = r_eval
 
