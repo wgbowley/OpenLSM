@@ -61,13 +61,13 @@ class Solver:
         dt = t[1] - t[0]
 
         wires = []
-        for sheet in range(0, sheets):
+        for sheet in range(1, sheets+1):
             # Calculates the new inner radius
             r_k = self.slot_inner_radius + effective_diameter * sheet
 
             # Computes the helix and its derivative
-            wire = standard_helix(t, r_k, effective_diameter)
-            d_wire = derivative_helix(t, r_k, effective_diameter, dt)
+            wire = standard_helix(t, r_k, self.slot_axial_length, sheet_turns)
+            d_wire = derivative_helix(t, r_k, self.slot_axial_length, sheet_turns, dt)
 
             # Appends wire & d_wire to wires set
             wires.append((wire, d_wire))
@@ -78,7 +78,7 @@ class Solver:
             kernel += biot_sum_integrand(self.kernel_evaluation, wire, d_wire)
 
         self.kernel = kernel
-        self.kernel_mag = np.linalg.norm(kernel, axis=-1)
+        print("finished")
 
     def _construct_kernel(self) -> None:
         """ Constructs the kernel size based on limit radius. """
@@ -92,12 +92,14 @@ class Solver:
 
         lin_r = np.linspace(0, limit, int(round(rx * limit)))
         lin_z = np.linspace(0, limit, int(round(rz * limit)))
+        lin_y = np.linspace(0, limit, int(round(rz * limit)))
 
-        # # Creates the evaluation space for the kernel
-        R, Z = np.meshgrid(lin_r, lin_z)
-        r_eval = np.stack([R, np.zeros_like(R), Z], axis=-1)
+        # Creates the evaluation space for the kernel
+        R, Y, Z = np.meshgrid(lin_r, lin_y, lin_z)
+        r_eval = np.stack([R ,Y, Z], axis=-1)
 
         self.kernel_r = R
+        self.kernel_y = Y
         self.kernel_z = Z
 
         self.kernel_evaluation = r_eval

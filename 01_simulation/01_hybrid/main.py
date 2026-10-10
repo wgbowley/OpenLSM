@@ -28,6 +28,6 @@ solver = Solver(parameters, data)
 
 solver.i_pha, solver.i_phb, solver.i_phc = 10 * sin(0), 10 * sin(2 * pi / 3), 10 * sin(4 * pi / 3)
 
-plt.pcolormesh(solver.kernel_r, solver.kernel_z, 100 * solver.kernel_mag, shading='auto')
-plt.xlabel('z [m]'); plt.ylabel('r [m]'); plt.colorbar()
-plt.show()
+# plt.pcolormesh(solver.kernel_r, solver.kernel_z, 100 * solver.kernel_mag, shading='auto')
+# plt.xlabel('z [m]'); plt.ylabel('r [m]'); plt.colorbar()
+# plt.show()
