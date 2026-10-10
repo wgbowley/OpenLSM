@@ -29,7 +29,7 @@ def _integrand_pole_model(pos: f, length: f, radius: f) -> f:
 
 def kernel_limit(dropoff: f, length: f, radius: f) -> f:
     """ Calculates the limit for the kernel with dropoff being the limit """
-    original = _integrand_pole_model(radius, length, radius)
+    original = _integrand_pole_model(0.0, length, radius)
     target = dropoff * original
 
     # Restricts the search space within bounds [radius, inf]

@@ -88,7 +88,6 @@ See [`01_simulation`](./01_simulation/readme.md) for more details.
 #### Validation Stand & Sensors
 
 > *(Work in progress). The armature board revision 2 is a work in progress* <br>
-> *(Validation). The encoder board revision 0 has been populated and requires validation.*
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. 
 The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.

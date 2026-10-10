@@ -38,7 +38,8 @@ class Solver:
         self.b_mag_stator = np.sqrt(self.stator_bx**2 + self.stator_by**2)
 
         # Removing unit scaling from spacial axises
-        self.stator_z *= data.length_scale      # (Need to check this.)
+        self.stator_r *= data.length_scale
+        self.stator_z *= data.length_scale
 
         # Computes derived values from parameters & slot kernel space
         self._compute_derived_values()
@@ -56,13 +57,13 @@ class Solver:
         limit = kernel_limit(self.slot_dropoff, self.slot_axial_length, nominal_radius)
 
         # Builds a mesh for the kernel with the same density as the FEM solution
-        rx = round(1 / (self.stator_r[0][1] - self.stator_r[0][0]))     # (Need to check this.)
-        rz = round(1 / (self.stator_r[1][1] - self.stator_z[1][0]))     # (Need to check this.)
+        rx = round(1 / (self.stator_r[1] - self.stator_r[0]))
+        rz = round(1 / (self.stator_z[1] - self.stator_z[0]))
 
-        lin_r = np.linspace(0, limit, rx)
-        lin_z = np.linspace(0, limit, rz)
+        lin_r = np.linspace(0, limit, int(round(rx * limit)))
+        lin_z = np.linspace(0, limit, int(round(rz * limit)))
 
-        # Creates the evaluation space for the kernel
+        # # Creates the evaluation space for the kernel
         R, Z = np.meshgrid(lin_r, lin_z, indexing="ij")
         r_eval = np.stack([R, np.zeros_like(R), Z], axis=-1)
 
@@ -106,7 +107,7 @@ class Solver:
         # Numerical Control
         self.slot_dropoff = validate(parameters.numerics.solver.slot_drop_off, NULLSET)
         self.samples_per_turn = validate(parameters.numerics.solver.samples_per_turn, NULLSET)
-        
+
         self.integration_step = validate(parameters.numerics.solver.integration_step, LENGTH)
         self.derivative_step = validate(parameters.numerics.solver.derivative_step, LENGTH)
 

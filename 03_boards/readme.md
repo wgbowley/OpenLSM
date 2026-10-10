@@ -2,6 +2,10 @@
 
 #### [01_armature_board](./01_armature_board) — Sensor Board (Revision 2 - Rework)
 
+A sensor board that connects to the driver over `RS-485/RS-422`. 
+It features `8` NTC thermistors switched via an analog multiplexer to produce a thermal profile `T(z, t)`. 
+The board also includes a `3-axis SPI accelerometer` and processes data from the encoder board.
+
 <div align="center">
   <table>
     <tr>
@@ -15,13 +19,12 @@
   </table>
 </div>
 
-A sensor board that connects to the driver over `RS-485/RS-422`. 
-It features `8` NTC thermistors switched via an analog multiplexer to produce a thermal profile `T(z, t)`. 
-The board also includes a `3-axis SPI accelerometer` and processes data from the encoder board.
-
 ---
 
 #### [02_magnetic_encoder](./02_magnetic_encoder) — Linear Encoder Breakout (Validation)
+
+A breakout and mechanical interface for the `AS5311` linear encoder, providing a resolution of `1.95 µm` and an estimated accuracy of `10–20 µm`, 
+depending on mechanical implementation factors. The encoder operates from `0–600 mm/s` and is an incremental `A`, `B`, `Index` type.
 
 <div align="center">
   <table>
@@ -36,12 +39,11 @@ The board also includes a `3-axis SPI accelerometer` and processes data from the
   </table>
 </div>
 
-A breakout and mechanical interface for the `AS5311` linear encoder, providing a resolution of `1.95 µm` and an estimated accuracy of `10–20 µm`, 
-depending on mechanical implementation factors. The encoder operates from `0–600 mm/s` and is an incremental `A`, `B`, `Index` type.
-
 ---
 
 #### [03_teensy_SFOC](./03_teensy_SFOC) - Teensy 4.1 & SimpleFOC Breakout Board (Validation)
+
+The Teensy SFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield with `step/dir` input.
 
 <div align="center">
   <table>
@@ -55,7 +57,5 @@ depending on mechanical implementation factors. The encoder operates from `0–6
     </tr>
   </table>
 </div>
-
-The Teensy SFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield with `step/dir` input.
 
 ---
