@@ -82,4 +82,3 @@ def biot_sum_integrand(r_eval: np.ndarray, r_wire: np.ndarray, dl: np.ndarray) -
     # Cross and resulting summation of the integrand
     cross = np.linalg.cross(dl, r_vec)
     return np.sum(cross / flooring[..., None]**3, axis=-2)
-
