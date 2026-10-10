@@ -28,11 +28,11 @@ The project will fulfill this goal by using readily available materials and tool
 
 ```
 - [x] Support voltage bus ranges of `12 V_dc` and `24 V_dc`.
-- [/] Validate the TeensySFOC and encoder board for linear motor applications.
-- [/] Achieve a target force per amp of `3.0 N/A_rms`.
-- [/] Reach an asymptote temperature of `60°C` under standard use-cases.
-- [ ] Validate motor performance and generate performance curves for each voltage range.
-- [ ] Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
+- [x] Validate the TeensySFOC and encoder board for linear motor applications.
+- [/] Achieve a target force per amp of `3.0 N/A_rms` and positional accuracy of `50 µm`.
+- [/] Reach an asymptote temperature of `60°C` under constant `5 N` static loading.
+- [/] Validate motor performance and generate performance curves for each voltage range.
+- [/] Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
 ```
 
 > *(Note). `[ ]` Not started. `[/]` In progress. `[x]` Complete.*
@@ -40,8 +40,6 @@ The project will fulfill this goal by using readily available materials and tool
 ---
 
 ### Beta ($\beta$)
-
-> *(Work In Progress). Revision 3 will be fabricated.*
 
 ---
 
