@@ -49,60 +49,60 @@ class Solver:
 
     def _compute_kernel(self) -> None:
         """ Computes the kernel solution based on slot geometry """
-        effective_diameter = self.wire_diameter * (1 / self.fill_factor)
-
         # Calculates the number of sheets and turns per sheet.
-        sheets = int(np.floor(self.slot_radial_thickness / effective_diameter))
-        sheet_turns = int(np.floor(self.slot_axial_length / effective_diameter))
+        sheets = int(np.floor(self.slot_radial_thickness / self.effective_diameter))
 
         # Creates the linear sample space for the sheets.
-        total_samples = int(self.samples_per_turn * sheet_turns)
-        t = np.linspace(0.0, 2 * np.pi * sheet_turns, total_samples)
+        total_samples = int(self.samples_per_turn)
+        t = np.linspace(0.0, 2 * np.pi, total_samples)
         dt = t[1] - t[0]
 
         wires = []
         for sheet in range(1, sheets+1):
             # Calculates the new inner radius
-            r_k = self.slot_inner_radius + effective_diameter * sheet
+            r_k = self.slot_inner_radius + self.effective_diameter * sheet
 
             # Computes the helix and its derivative
-            wire = standard_helix(t, r_k, self.slot_axial_length, sheet_turns)
-            d_wire = derivative_helix(t, r_k, self.slot_axial_length, sheet_turns, dt)
+            wire = standard_helix(t, r_k, self.effective_diameter, 1)
+            d_wire = derivative_helix(t, r_k, self.effective_diameter, 1, dt)
+
+            wire[:, 2] += self.effective_diameter/2
 
             # Appends wire & d_wire to wires set
             wires.append((wire, d_wire))
 
         # Constructs the kernel from integrand
-        kernel = np.zeros_like(self.kernel_evaluation)
+        kernel = np.zeros_like(self._kernel_evaluation)
         for wire, d_wire in wires:
-            kernel += biot_sum_integrand(self.kernel_evaluation, wire, d_wire)
+            kernel += biot_sum_integrand(self._kernel_evaluation, wire, d_wire)
 
-        self.kernel = kernel
-        print("finished")
+        # Approximates the 3D solution as axisymmetric.
+        keep_r = self.kernel_r[0, :] >= 0
+        self.kernel_r = self.kernel_r[:, keep_r]
+        self.kernel_z = self.kernel_z[:, keep_r]
+        self.kernel   = kernel[:, keep_r, :]
 
     def _construct_kernel(self) -> None:
         """ Constructs the kernel size based on limit radius. """
         # Calculates the limit for the kernel
         nominal_radius = self.slot_inner_radius + self.slot_radial_thickness / 2
-        limit = kernel_limit(self.slot_dropoff, self.slot_axial_length, nominal_radius)
+        limit = kernel_limit(self.slot_dropoff, self.effective_diameter, nominal_radius)
 
         # Builds a mesh for the kernel with the same density as the FEM solution
         rx = round(1 / (self.stator_r[1] - self.stator_r[0]))
         rz = round(1 / (self.stator_z[1] - self.stator_z[0]))
 
-        lin_r = np.linspace(0, limit, int(round(rx * limit)))
-        lin_z = np.linspace(0, limit, int(round(rz * limit)))
-        lin_y = np.linspace(0, limit, int(round(rz * limit)))
+        lin_r = np.linspace(-limit, limit, int(round(rx * limit)))
+        lin_z = np.linspace(-limit, limit, int(round(rz * limit)))
 
         # Creates the evaluation space for the kernel
-        R, Y, Z = np.meshgrid(lin_r, lin_y, lin_z)
-        r_eval = np.stack([R ,Y, Z], axis=-1)
+        R, Z = np.meshgrid(lin_r, lin_z)
+        r_eval = np.stack([R, np.zeros_like(R), Z], axis=-1)
 
         self.kernel_r = R
-        self.kernel_y = Y
         self.kernel_z = Z
 
-        self.kernel_evaluation = r_eval
+        self._kernel_evaluation = r_eval
 
     def _compute_derived_values(self) -> None:
         """ Compute derived values based on parameters """
@@ -112,6 +112,7 @@ class Solver:
         slot_outer_radius = slot_inner_radius + self.slot_radial_thickness
 
         # Computes number of turns and saves slot size information
+        self.effective_diameter = self.wire_diameter * (1 / self.fill_factor)
         self.slot_turns = self._compute_turns()
 
         self.slot_inner_radius = slot_inner_radius

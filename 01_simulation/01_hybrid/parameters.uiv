@@ -18,8 +18,8 @@ displacement: 400 m(m)
 displacement_size:  1 m(m)
 
 [numerics.solver]
-slot_drop_off:      0.75 (∅)
-samples_per_turn:   4  (∅)
+slot_drop_off:      0.1 (∅)
+samples_per_turn:   64  (∅)
 
 integration_step:   0.2 m(m)
 derivative_step:    0.2 m(m)
