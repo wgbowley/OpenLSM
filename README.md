@@ -39,11 +39,7 @@ The project will fulfill this goal by using readily available materials and tool
 
 ---
 
-### Beta ($\beta$)
-
----
-
-### Alpha ($\alpha$)
+### Alpha
 
 An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, although the force output was not quantified before the PLA coil forms deformed due to thermal stress.
 

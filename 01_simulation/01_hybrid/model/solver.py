@@ -17,6 +17,7 @@ from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, NULLSET
 
 from model.physics.field_equations import kernel_limit
 
+
 class Solver:
     """ Computes electromagnetic force using magnetic energy and virtual work methods. """
     def __init__(self, parameters: DynamicLoader, data: iParser) -> None:
