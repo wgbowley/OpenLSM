@@ -44,8 +44,13 @@ class Solver:
         self._compute_derived_values()
         self._construct_kernel()
 
-    def _construct_kernel(self) -> np.ndarray:
-        """ Computes the biot savart integrand for solution kernel. """
+    def _compute_kernel(self) -> None:
+        """ Computes the kernel solution"""
+        return
+
+
+    def _construct_kernel(self) -> None:
+        """ Constructs the kernel size based on limit radius. """
         # Calculates the limit for the kernel
         nominal_radius = self.slot_inner_radius + self.slot_radial_thickness / 2
         limit = kernel_limit(self.slot_dropoff, self.slot_axial_length, nominal_radius)
@@ -100,6 +105,8 @@ class Solver:
 
         # Numerical Control
         self.slot_dropoff = validate(parameters.numerics.solver.slot_drop_off, NULLSET)
+        self.samples_per_turn = validate(parameters.numerics.solver.samples_per_turn, NULLSET)
+        
         self.integration_step = validate(parameters.numerics.solver.integration_step, LENGTH)
         self.derivative_step = validate(parameters.numerics.solver.derivative_step, LENGTH)
 
