@@ -77,8 +77,6 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
 
 #### Hybrid
 
-> *(Work in progress). This hybrid simulation is currently being designed and implemented.*
-
 <div align="center">
   <img src="./05_media/00_simulation/01_hybrid/armature_test_solution.png" alt="Hybrid model" width="700">
   <p><em>Axisymmetric low-resolution armature solution</em></p>
