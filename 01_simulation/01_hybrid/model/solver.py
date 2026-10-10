@@ -105,7 +105,7 @@ class Solver:
         self.kernel_r = self.kernel_r[:, keep_r]
         self.kernel_z = self.kernel_z[:, keep_r]
 
-        self.kernel   = kernel[:, keep_r, :]
+        self.kernel = kernel[:, keep_r, :]
 
     def _construct_kernel(self) -> None:
         """ Constructs the kernel size based on limit radius. """
