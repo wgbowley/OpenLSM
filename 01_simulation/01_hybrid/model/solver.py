@@ -49,7 +49,7 @@ class Solver:
         self._compute_kernel()
 
         self._compute_slot()
-    
+
     def _compute_slot(self) -> None:
         """ Computes the slot field by summing copies of the sheet kernel. """
         sheet_turns = int(np.floor(self.slot_axial_length / self.effective_diameter))
@@ -72,15 +72,6 @@ class Solver:
 
         self.slot_kernel_integrand_r = r * self.mu0_over_4pi
         self.slot_kernel_integrand_z = z * self.mu0_over_4pi
-        
-        import matplotlib.pyplot as plt
-        bmag = np.sqrt(self.slot_kernel_integrand_r **2 + self.slot_kernel_integrand_z ** 2)
-        fig, ax = plt.subplots(figsize=(6, 6))
-        cf = ax.contourf(self.kernel_z, self.kernel_r, bmag, levels=30, cmap='viridis')
-        ax.set_aspect('equal')
-        fig.colorbar(cf, ax=ax, label='|B|')
-        plt.tight_layout()
-        plt.show()
 
     def _compute_kernel(self) -> None:
         """ Computes the kernel solution based on sheet geometry """
