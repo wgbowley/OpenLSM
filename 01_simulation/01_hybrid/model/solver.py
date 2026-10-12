@@ -67,8 +67,8 @@ class Solver:
             # Sums the sources using superposition.
             shift = (turn * self.effective_diameter - self.slot_axial_length / 2) / dz_grid
 
-            r += ndshift(integrand_r, shift=(shift, 0.0), mode='constant', cval=0.0)
-            z += ndshift(integrand_z, shift=(shift, 0.0), mode='constant', cval=0.0)
+            r += ndshift(integrand_r, shift=(shift, 0.0))
+            z += ndshift(integrand_z, shift=(shift, 0.0))
 
         self.slot_kernel_integrand_r = r
         self.slot_kernel_integrand_z = z
