@@ -1,23 +1,23 @@
 ### 01_mix_solution
 
-*(TBD) — Work in progress*
+*(TBD) - Work in progress*
 
 > Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
 
 ---
 
 ### Mathematical Implementation
-*(TBD) — Work in progress*
+*(TBD) - Work in progress*
 
 ---
 
 ### Computational Implementation
-*(TBD) — Work in progress*
+*(TBD) - Work in progress*
 
 ---
 
 ### Model Validation
-*(TBD) — Work in progress*
+*(TBD) - Work in progress*
 
 ---
 

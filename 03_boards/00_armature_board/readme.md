@@ -45,8 +45,8 @@ Thermistor Array (800 Hz), SPI Accelerometer, Linear Encoder Interconnect (350 k
       <td><img src="05_media/kicad_bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
     </tr>
     <tr>
-      <td><em>Top layer — STM32, Thermistor Array, Accelerometer & Encoder</em></td>
-      <td><em>Bottom layer — Basis resistors & decoupling caps for Thermistors</em></td>
+      <td><em>Top layer - STM32, Thermistor Array, Accelerometer & Encoder</em></td>
+      <td><em>Bottom layer - Basis resistors & decoupling caps for Thermistors</em></td>
     </tr>
   </table>
 </div>
@@ -61,7 +61,7 @@ Each M2 bolt hole is directly connected to the GND plane with exposed copper aro
 
 ### Software considerations
 
-*(TBD) — Work in progress*
+*(TBD) - Work in progress*
 
 > Programming is done via a `2×3 pin`, `2.54 mm` vertical male connector on the board, located near the `STM32G431K8Tx`.
 

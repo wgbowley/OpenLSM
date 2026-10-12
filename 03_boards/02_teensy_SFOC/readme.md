@@ -7,8 +7,8 @@
       <td><img src="05_media/kicad_bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
     </tr>
     <tr>
-      <td><em>Top layer — Teensy & SimpleFOC shield</em></td>
-      <td><em>Bottom layer — Supporting electronics</em></td>
+      <td><em>Top layer - Teensy & SimpleFOC shield</em></td>
+      <td><em>Bottom layer - Supporting electronics</em></td>
     </tr>
   </table>
 </div>

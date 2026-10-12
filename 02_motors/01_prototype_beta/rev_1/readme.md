@@ -18,7 +18,7 @@ A specific area that `revision 1` focused on was the thermal circuit of the moto
 
 <div align="center"><img src="../../../05_media/03_prototype_beta/rev_1/radial_distance_vs_b_field.png" alt="Cross Sectional Analysis" style="max-width: 600px">
     <br>
-    <em>Revision 3 — Radial distance vs. magnitude of B-field.</em>
+    <em>Revision 3 - Radial distance vs. magnitude of B-field.</em>
 </div>
 <br>
 

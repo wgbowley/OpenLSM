@@ -1,6 +1,6 @@
 ### 02_motors
 
-#### [00_prototype_alpha](./00_prototype_alpha) — Ironless Planar Linear Motor
+#### [00_prototype_alpha](./00_prototype_alpha) - Ironless Planar Linear Motor
 
 Prototype Alpha is an `ironless planar linear motor` with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase (WYE). The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total.
 
@@ -14,7 +14,7 @@ Prototype Alpha is an `ironless planar linear motor` with a polylactic acid (PLA
 
 ---
 
-#### [01_prototype_beta](./01_prototype_beta) — Ironless Tubular Linear Motor
+#### [01_prototype_beta](./01_prototype_beta) - Ironless Tubular Linear Motor
 
 Prototype Beta is a series of thermal management studies for an `ironless tubular linear motor`, with a final implementation and validation of the thermal management strategy developed through the `rev 1` and `rev 2` studies.
 

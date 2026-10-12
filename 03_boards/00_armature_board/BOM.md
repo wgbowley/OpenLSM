@@ -1,4 +1,4 @@
-### Armature Board — Bill of Materials (BOM)
+### Armature Board - Bill of Materials (BOM)
 
 The procurement file [`04_procurement/digikey.csv`](./04_procurement/digikey.csv) is for `2x` 
 boards and does not include the JST socket or the `2x03` male header or the thermistors.
