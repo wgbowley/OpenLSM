@@ -75,8 +75,8 @@ A hybrid model using `FEMM` to compute the stator field, then uses the Biot–Sa
 The magnetic co-energy is then calculated assuming uniform magnetic permeability, and finally the spatial derivative over the z-axis is used to compute force.
 
 <div align="center">
-  <img src="./05_media/00_simulation/01_hybrid/armature_test_solution.png" alt="Hybrid model" width="700">
-  <p><em>Axisymmetric low-resolution armature solution</em></p>
+  <img src="./05_media/00_simulation/01_hybrid/slot_integrand_kernel" alt="Hybrid model" width="700">
+  <p><em>Axisymmetric slot integrand kernel</em></p>
 </div>
 
 See [`01_simulation`](./01_simulation/readme.md) for more details.
