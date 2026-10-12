@@ -35,7 +35,7 @@ The project will fulfill this goal by using readily available materials and tool
 - [/] Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
 ```
 
-> *(Note). `[ ]` Not started. `[/]` In progress. `[x]` Complete.*
+> *(Note). `[/]` In progress. `[x]` Complete.*
 
 ---
 
