@@ -1,9 +1,5 @@
 ### 04_fixture
 
-*(TBD) — Work in progress*
-
----
-
 #### [00_potting](./00_potting/) — Motor Potting
 
 *(TBD) — Work in progress*
