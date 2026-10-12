@@ -49,7 +49,7 @@ class Solver:
         self._compute_kernel()
 
         self._compute_slot()
-
+    
     def _compute_slot(self) -> None:
         """ Computes the slot field by summing copies of the sheet kernel. """
         sheet_turns = int(np.floor(self.slot_axial_length / self.effective_diameter))
@@ -70,8 +70,17 @@ class Solver:
             r += ndshift(integrand_r, shift=(shift, 0.0))
             z += ndshift(integrand_z, shift=(shift, 0.0))
 
-        self.slot_kernel_integrand_r = r
-        self.slot_kernel_integrand_z = z
+        self.slot_kernel_integrand_r = r * self.mu0_over_4pi
+        self.slot_kernel_integrand_z = z * self.mu0_over_4pi
+        
+        import matplotlib.pyplot as plt
+        bmag = np.sqrt(self.slot_kernel_integrand_r **2 + self.slot_kernel_integrand_z ** 2)
+        fig, ax = plt.subplots(figsize=(6, 6))
+        cf = ax.contourf(self.kernel_z, self.kernel_r, bmag, levels=30, cmap='viridis')
+        ax.set_aspect('equal')
+        fig.colorbar(cf, ax=ax, label='|B|')
+        plt.tight_layout()
+        plt.show()
 
     def _compute_kernel(self) -> None:
         """ Computes the kernel solution based on sheet geometry """
@@ -114,12 +123,14 @@ class Solver:
         nominal_radius = self.slot_inner_radius + self.slot_radial_thickness / 2
         limit = kernel_limit(self.slot_dropoff, self.effective_diameter, nominal_radius)
 
-        # Builds a mesh for the kernel with the same density as the FEM solution
-        rx = round(1 / (self.stator_r[1] - self.stator_r[0]))
-        rz = round(1 / (self.stator_z[1] - self.stator_z[0]))
+        # Checks sampling density is less then features.
+        samples_density = 2 * limit / self.kernel_samples
+        if samples_density > self.wire_diameter:
+            msg = "Increase kernel samples or decreases drop off window to increase samples per mm"
+            raise ValueError(msg)
 
-        lin_r = np.linspace(-limit, limit, int(round(rx * limit)))
-        lin_z = np.linspace(-limit, limit, int(round(rz * limit)))
+        lin_r = np.linspace(-limit, limit, int(self.kernel_samples))
+        lin_z = np.linspace(-limit, limit, int(self.kernel_samples))
 
         # Creates the evaluation space for the kernel
         R, Z = np.meshgrid(lin_r, lin_z)
@@ -169,6 +180,7 @@ class Solver:
         # Numerical Control
         self.slot_dropoff = validate(parameters.numerics.solver.slot_drop_off, NULLSET)
         self.samples_per_turn = validate(parameters.numerics.solver.samples_per_turn, NULLSET)
+        self.kernel_samples = validate(parameters.numerics.solver.kernel_samples, NULLSET)
 
         self.integration_step = validate(parameters.numerics.solver.integration_step, LENGTH)
         self.derivative_step = validate(parameters.numerics.solver.derivative_step, LENGTH)

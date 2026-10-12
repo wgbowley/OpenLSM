@@ -76,7 +76,7 @@ The magnetic co-energy is then calculated assuming uniform magnetic permeability
 
 <div align="center">
   <img src="./05_media/00_simulation/01_hybrid/slot_integrand_kernel.png" alt="Hybrid model" width="700">
-  <p><em>Axisymmetric slot integrand kernel</em></p>
+  <p><em>Axisymmetric slot kernel at 1 ampere.</em></p>
 </div>
 
 See [`01_simulation`](./01_simulation/readme.md) for more details.
