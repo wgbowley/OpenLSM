@@ -39,6 +39,16 @@ The project will fulfill this goal by using readily available materials and tool
 
 ---
 
+### Beta
+
+> *(Work in progress). This tubular motor design is currently being designed.*
+
+An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`50 Hz` at a linear velocity of `1 m/s`, eddy currents are a second-order issue compared to removing heat from the slots. The stator is a carbon fibre tube with a pole arrangement of `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
+
+> See the [`motor design notes`](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Conceptual Design Rev 2`.
+
+---
+
 ### Alpha
 
 An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, although the force output was not quantified before the PLA coil forms deformed due to thermal stress.
@@ -71,7 +81,7 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
 
 #### Hybrid
 
-> *(Work in progress). This hybrid simulation is currently being designed and implemented.*
+> *(Work in progress). This hybrid simulation is currently being implemented.*
 
 A hybrid model using `FEMM` to compute the stator field, then uses the Biot–Savart law with a parametric slot geometry to compute the armature field. 
 The magnetic co-energy is then calculated assuming uniform magnetic permeability, and finally the spatial derivative over the z-axis is used to compute force.
@@ -89,7 +99,7 @@ See [`01_simulation`](./01_simulation/readme.md) for more details.
 
 #### Validation Stand & Sensors
 
-> *(Work in progress). The armature board revision 2 is a work in progress* <br>
+> *(Work in progress). The armature board is a work in progress* <br>
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. 
 The system consists of two boards: an encoder board with a resolution of `1.96 µm` and estimated accuracy of `10–20 µm`,
