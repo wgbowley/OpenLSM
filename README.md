@@ -71,6 +71,8 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
 
 #### Hybrid
 
+> *(Work in progress). This hybrid simulation is currently being designed and implemented.*
+
 A hybrid model using `FEMM` to compute the stator field, then uses the Biot–Savart law with a parametric slot geometry to compute the armature field. 
 The magnetic co-energy is then calculated assuming uniform magnetic permeability, and finally the spatial derivative over the z-axis is used to compute force.
 
