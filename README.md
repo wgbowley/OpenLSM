@@ -22,8 +22,6 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. 
 The project will fulfill this goal by using readily available materials and tooling, combined with analytical and hybrid models.
 
-> This research project has no commercial aspirations. Its contents will remain available under the `MIT` License.
-
 ### Objectives
 
 ```
