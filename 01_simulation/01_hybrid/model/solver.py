@@ -14,15 +14,9 @@ from scipy.ndimage import shift as ndshift
 
 from ifemm import Parser as iParser
 from picounits import DynamicLoader, strip_quantity as validate
-from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, NULLSET
+from picounits import Q, LENGTH, VOLTAGE, CONDUCTIVITY, NULLSET
 
-from model.physics.field_equations import (
-    kernel_limit,
-    standard_helix,
-    derivative_helix,
-    biot_sum_integrand
-)
-
+from model.physics import field_equations, field_oriented_control
 
 class Solver:
     """ Computes electromagnetic force using magnetic energy and virtual work methods. """
@@ -53,7 +47,26 @@ class Solver:
         self._construct_kernel()
         self._compute_kernel()
 
+        # Computes the slot kernel from the sheet kernel
         self._compute_slot()
+
+    def update_currents(self, angle: f) -> None:
+        """ Updates phase currents based on time """
+        ab_ref = field_oriented_control.inverse_park_transform(0.0, 0.0, angle)
+        a, b, c = field_oriented_control.inverse_clarke_transform(ab_ref)
+
+        # Updates currents
+        self.i_pha = a
+        self.i_phb = b
+        self.i_phc = c
+
+    def compute_force(self, z_pos: Q) -> Q:
+        """ Computes force using finite difference of the energy distribution """
+        # Validates the unit of z_pos and removes units
+        z_pos = validate(z_pos, LENGTH)
+
+        electrical_angle = field_oriented_control.electrical_angle(z_pos, self.dipole_axial_length)
+        self.update_currents(electrical_angle)
 
     def _compute_slot(self) -> None:
         """ Computes the slot field by summing copies of the sheet kernel. """
@@ -95,8 +108,8 @@ class Solver:
             r_k = self.slot_inner_radius + self.effective_diameter * sheet
 
             # Computes the helix and its derivative
-            wire = standard_helix(t, r_k, self.effective_diameter)
-            d_wire = derivative_helix(t, r_k, self.effective_diameter, dt)
+            wire = field_equations.standard_helix(t, r_k, self.effective_diameter)
+            d_wire = field_equations.derivative_helix(t, r_k, self.effective_diameter, dt)
 
             wire[:, 2] += self.effective_diameter/2
 
@@ -106,7 +119,7 @@ class Solver:
         # Constructs the kernel from integrand
         kernel = np.zeros_like(self._kernel_evaluation)
         for wire, d_wire in wires:
-            kernel += biot_sum_integrand(self._kernel_evaluation, wire, d_wire)
+            kernel += field_equations.biot_sum_integrand(self._kernel_evaluation, wire, d_wire)
 
         # Approximates the 3D solution as axisymmetric.
         keep_r = self.kernel_r[0, :] >= 0
@@ -120,7 +133,7 @@ class Solver:
         """ Constructs the kernel size based on limit radius. """
         # Calculates the limit for the kernel
         nominal_radius = self.slot_inner_radius + self.slot_radial_thickness / 2
-        limit = kernel_limit(self.slot_dropoff, self.effective_diameter, nominal_radius)
+        limit = field_equations.kernel_limit(self.slot_dropoff, self.effective_diameter, nominal_radius)
 
         # NOTE: (Investigate - coupling between source & grid resolution)
         # Kernel grid uses 4x samples_per_turn as a resolution proxy.
