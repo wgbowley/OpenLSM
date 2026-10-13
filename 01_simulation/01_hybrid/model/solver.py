@@ -16,7 +16,12 @@ from ifemm import Parser as iParser
 from picounits import DynamicLoader, strip_quantity as validate
 from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, NULLSET
 
-from model.physics.field_equations import kernel_limit, standard_helix, derivative_helix, biot_sum_integrand
+from model.physics.field_equations import (
+    kernel_limit,
+    standard_helix,
+    derivative_helix,
+    biot_sum_integrand
+)
 
 
 class Solver:
@@ -114,8 +119,6 @@ class Solver:
         # Calculates the limit for the kernel
         nominal_radius = self.slot_inner_radius + self.slot_radial_thickness / 2
         limit = kernel_limit(self.slot_dropoff, self.effective_diameter, nominal_radius)
-
-        # Creates the linear spaces for r, z
 
         # NOTE: (Investigate - coupling between source & grid resolution)
         # Kernel grid uses 4x samples_per_turn as a resolution proxy.
