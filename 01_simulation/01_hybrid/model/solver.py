@@ -78,6 +78,7 @@ class Solver:
         # Saves the slot kernel integrand.
         self.slot_kernel_r = r
         self.slot_kernel_z = z
+        print("Slot Kernel Generated...")
 
     def _compute_kernel(self) -> None:
         """ Computes the kernel solution based on sheet geometry """
@@ -113,6 +114,7 @@ class Solver:
         self.kernel_z = self.kernel_z[:, keep_r]
 
         self.kernel = kernel[:, keep_r, :]
+        print("Sheet Kernel Generated...")
 
     def _construct_kernel(self) -> None:
         """ Constructs the kernel size based on limit radius. """
