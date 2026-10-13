@@ -114,14 +114,11 @@ class Solver:
         nominal_radius = self.slot_inner_radius + self.slot_radial_thickness / 2
         limit = kernel_limit(self.slot_dropoff, self.effective_diameter, nominal_radius)
 
-        # Checks sampling density is less then features.
-        samples_density = 2 * limit / self.kernel_samples
-        if samples_density > self.wire_diameter:
-            msg = "Increase kernel samples or decreases drop off window to increase samples per mm"
-            raise ValueError(msg)
+        # Creates the linear spaces for r, z based on wire diameter
+        samples = int(np.floor(2 * limit / (self.effective_diameter / self.samples_per_turn)))
 
-        lin_r = np.linspace(-limit, limit, int(self.kernel_samples))
-        lin_z = np.linspace(-limit, limit, int(self.kernel_samples))
+        lin_r = np.linspace(-limit, limit, samples)
+        lin_z = np.linspace(-limit, limit, samples)
 
         # Creates the evaluation space for the kernel
         R, Z = np.meshgrid(lin_r, lin_z)
@@ -171,7 +168,6 @@ class Solver:
         # Numerical Control
         self.slot_dropoff = validate(parameters.numerics.solver.slot_drop_off, NULLSET)
         self.samples_per_turn = validate(parameters.numerics.solver.samples_per_turn, NULLSET)
-        self.kernel_samples = validate(parameters.numerics.solver.kernel_samples, NULLSET)
 
         self.integration_step = validate(parameters.numerics.solver.integration_step, LENGTH)
         self.derivative_step = validate(parameters.numerics.solver.derivative_step, LENGTH)
