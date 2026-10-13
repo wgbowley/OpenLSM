@@ -48,30 +48,30 @@ class Solver:
         self._construct_kernel()
         self._compute_kernel()
 
-        self._compute_slot()
+        # self._compute_slot()
 
-    def _compute_slot(self) -> None:
-        """ Computes the slot field by summing copies of the sheet kernel. """
-        sheet_turns = int(np.floor(self.slot_axial_length / self.effective_diameter))
-        dz_grid = (self.kernel_z[1] - self.kernel_z[0])[0]
+    # def _compute_slot(self) -> None:
+    #     """ Computes the slot field by summing copies of the sheet kernel. """
+    #     sheet_turns = int(np.floor(self.slot_axial_length / self.effective_diameter))
+    #     dz_grid = (self.kernel_z[1] - self.kernel_z[0])[0]
 
-        # Pulls the integrand kernel for r & z axises
-        integrand_r = self.kernel[..., 0]
-        integrand_z = self.kernel[..., 2]
+    #     # Pulls the integrand kernel for r & z axises
+    #     integrand_r = self.kernel[..., 0]
+    #     integrand_z = self.kernel[..., 2]
 
-        # Creates a r and z array with same shape
-        r = np.zeros_like(integrand_r)
-        z = np.zeros_like(integrand_z)
+    #     # Creates a r and z array with same shape
+    #     r = np.zeros_like(integrand_r)
+    #     z = np.zeros_like(integrand_z)
 
-        for turn in range(sheet_turns):
-            # Sums the sources using superposition.
-            shift = (turn * self.effective_diameter - self.slot_axial_length / 2) / dz_grid
+    #     for turn in range(sheet_turns):
+    #         # Sums the sources using superposition.
+    #         shift = (turn * self.effective_diameter - self.slot_axial_length / 2) / dz_grid
 
-            r += ndshift(integrand_r, shift=(shift, 0.0))
-            z += ndshift(integrand_z, shift=(shift, 0.0))
+    #         r += ndshift(integrand_r, shift=(shift, 0.0))
+    #         z += ndshift(integrand_z, shift=(shift, 0.0))
 
-        self.slot_kernel_integrand_r = r * self.mu0_over_4pi
-        self.slot_kernel_integrand_z = z * self.mu0_over_4pi
+    #     self.slot_kernel_integrand_r = r * self.mu0_over_4pi
+    #     self.slot_kernel_integrand_z = z * self.mu0_over_4pi
 
     def _compute_kernel(self) -> None:
         """ Computes the kernel solution based on sheet geometry """
@@ -115,16 +115,23 @@ class Solver:
         limit = kernel_limit(self.slot_dropoff, self.effective_diameter, nominal_radius)
 
         # Creates the linear spaces for r, z based on wire diameter
-        samples = int(np.floor(2 * limit / (self.effective_diameter / self.samples_per_turn)))
+        samples = 256
 
-        lin_r = np.linspace(-limit, limit, samples)
-        lin_z = np.linspace(-limit, limit, samples)
+        r_space = np.linspace(-limit, limit, samples)
+        theta_space = np.linspace(0, 2 * np.pi, samples)
+        z_space = np.linspace(-limit, limit, samples)
 
         # Creates the evaluation space for the kernel
-        R, Z = np.meshgrid(lin_r, lin_z)
-        r_eval = np.stack([R, np.zeros_like(R), Z], axis=-1)
+        R, THETA, Z = np.meshgrid(r_space, theta_space, z_space)
 
-        self.kernel_r = R
+        X = R * np.cos(THETA)
+        Y = R * np.sin(THETA)
+
+        # Creates the evaluation grid for the kernel
+        r_eval = np.stack([R, Y, Z], axis=-1)
+
+        self.kernel_r = X
+        self.kernel_y = Y
         self.kernel_z = Z
 
         self._kernel_evaluation = r_eval
