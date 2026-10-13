@@ -34,21 +34,20 @@ The project will fulfill this goal by using readily available materials and tool
 - [/] Validate motor performance and generate performance curves for each voltage range.
 - [/] Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
 ```
-
 > *(Note). `[/]` In progress. `[x]` Complete.*
 
 ---
 
 ### Beta
 
-> *(Work in progress). This tubular motor design is currently being designed.*
+> *(Work in progress). This tubular motor design is currently being developed.*
 
 An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`50 Hz` at a linear velocity of `1 m/s`, eddy currents are a second-order effect compared to removing heat from the slots. The stator is a carbon fibre tube with a pole arrangement of `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
 
 <div align="center">
-  <img src="05_media\03_prototype_beta\rev_3\armature_conceptual_model.png" alt="Conceptual design of armature" width="700">
+  <img src="05_media/03_prototype_beta/rev_3/armature_conceptual_model.png" alt="Conceptual design of armature" width="700">
   <br>
-  <em>Conceptual design of armature. </em>
+  <em>Conceptual design of armature.</em>
 </div>
 
 <br>
@@ -86,7 +85,6 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
   <p><em>1D field approximation and FOC showing position (linear) vs force (linear).</em></p>
 </div>
 
-
 #### Hybrid
 
 > *(Work in progress). This hybrid simulation is currently being implemented.*
@@ -107,7 +105,7 @@ See [`01_simulation`](./01_simulation/readme.md) for more details.
 
 #### Validation Stand & Sensors
 
-> *(on-hand). The armature board rev 1 pcb is on-hand. Components ordered from digikey.* <br>
+> *(On-hand). The armature board rev 1 PCB is on-hand. Components ordered from DigiKey.*
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. 
 The system consists of two boards: an encoder board with a resolution of `1.96 µm` and estimated accuracy of `10–20 µm`,
