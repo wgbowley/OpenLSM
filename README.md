@@ -51,6 +51,8 @@ An `ironless tubular linear` motor featuring a passive radial `6061` aluminium h
   <em>Conceptual design of armature. </em>
 </div>
 
+<br>
+
 See the [`motor design notes`](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Conceptual Design Rev 2`.
 
 ---
