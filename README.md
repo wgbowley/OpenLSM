@@ -107,7 +107,7 @@ See [`01_simulation`](./01_simulation/readme.md) for more details.
 
 #### Validation Stand & Sensors
 
-> *(Work in progress). The armature board is a work in progress* <br>
+> *(on-hand). The armature board rev 1 pcb is on-hand. Components ordered from digikey.* <br>
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. 
 The system consists of two boards: an encoder board with a resolution of `1.96 µm` and estimated accuracy of `10–20 µm`,
