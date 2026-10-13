@@ -43,7 +43,7 @@ The project will fulfill this goal by using readily available materials and tool
 
 > *(Work in progress). This tubular motor design is currently being designed.*
 
-An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`50 Hz` at a linear velocity of `1 m/s`, eddy currents are a second-order issue compared to removing heat from the slots. The stator is a carbon fibre tube with a pole arrangement of `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
+An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`50 Hz` at a linear velocity of `1 m/s`, eddy currents are a second-order effect compared to removing heat from the slots. The stator is a carbon fibre tube with a pole arrangement of `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
 
 > See the [`motor design notes`](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Conceptual Design Rev 2`.
 
