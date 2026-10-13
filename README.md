@@ -48,7 +48,7 @@ An `ironless tubular linear` motor featuring a passive radial `6061` aluminium h
 <div align="center">
   <img src="05_media\03_prototype_beta\rev_3\armature_conceptual_model.png" alt="Conceptual design of armature" width="700">
   <br>
-  <em>Conceptual design of beta armature. </em>
+  <em>Conceptual design of armature. </em>
 </div>
 
 See the [`motor design notes`](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Conceptual Design Rev 2`.
@@ -62,7 +62,7 @@ An `ironless planar linear` motor with a polylactic acid (PLA) armature featurin
 <div align="center">
   <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side view on test stand" width="700">
   <br>
-  <em>Side view on alpha test stand.</em>
+  <em>Side view on test stand.</em>
 </div>
 
 <br>
