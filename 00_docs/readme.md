@@ -53,9 +53,9 @@ AN  -> Weekly application notes
 0x9 = Week 9
 0xA = Week 10
 0xB = Week 11   
-0xC = Week 12   <- Current State
+0xC = Week 12
 0xD = Week 13
-0xE = Week 14 
+0xE = Week 14   <- Current State
 0xF = Week 15   <- Terminal State
 ```
 

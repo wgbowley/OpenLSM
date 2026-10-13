@@ -12,9 +12,9 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 
 
 <div align="center">
-  <img src="05_media/01_logos/logo.png" alt="OpenLSM" width="700">
+  <img src="05_media/01_logos/logo.png" alt="OpenLSM" width="500">
   
-  Low-Cost Linear Synchronous Permanent-Magnet Motor Platform <br>
+  Low-Cost Linear Synchronous Permanent-Magnet Motor <br>
 </div>
 
 ### Overview
@@ -22,49 +22,46 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. 
 The project will fulfill this goal by using readily available materials and tooling, combined with analytical and hybrid models.
 
-> This project has no commercial aspirations. Its contents will remain available under the `MIT` License.
-
 ### Objectives
 
 ```
 - [x] Support voltage bus ranges of `12 V_dc` and `24 V_dc`.
-- [/] Achieve a target force per amp of `3.0 N/A_rms`.
-- [/] Reach an asymptote temperature of `60°C` under standard use-cases.
-- [/] Validate the TeensySFOC, armature, and encoder board for linear motor applications.
-- [ ] Validate motor performance and generate performance curves for each voltage range.
-- [ ] Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
+- [x] Validate the TeensySFOC and encoder board for linear motor applications.
+- [/] Achieve a target force per amp of `3.0 N/A_rms` and positional accuracy of `50 µm`.
+- [/] Reach an asymptote temperature of `60°C` under constant `5 N` static loading.
+- [/] Validate motor performance and generate performance curves for each voltage range.
+- [/] Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
 ```
-
-> *(Note). `[ ]` Not started. `[/]` In progress. `[x]` Complete.*
+> *(Note). `[/]` In progress. `[x]` Complete.*
 
 ---
 
-### Beta ($\beta$)
+### Beta
 
-> *(Conceptual). Revision 2 of the ironless tubular linear motor design. Not for fabrication.*  <br>
-> *(WIP). Revision 3 is a work in progress and will be fabricated.*
+> *(Work in progress). This motor design is currently being developed.*
 
-An `ironless tubular linear` motor with a carbon fibre nylon (PA6-CF) armature featuring `12` slots, mechanically wound using `0.4 mm` diameter enameled copper wire, with `4` slots in-series per phase `(WYE)`. The stator, unlike the armature, is made of layered carbon fibre epoxy to form a tube with an internal radius of `5 mm` and outer radius of `6 mm`. The poles are `20 mm` in length and `5 mm` in radius such that they can be inserted into the stator tube in this pole arrangement `(N-S|S-N)`, using generic superglue to secure the end poles.
+An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`50 Hz` at a linear velocity of `1 m/s`, eddy currents are a second-order effect compared to removing heat from the slots. The stator is a carbon fibre tube with a pole arrangement of `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
 
 <div align="center">
-  <img src="05_media/03_prototype_beta/rev_2/cross_section.png" alt="cross sectional analysis" width="700">
-    <p><em>Beta: Cross-sectional view of the tubular linear motor showing the stator and armature.</em></p>
+  <img src="05_media/03_prototype_beta/rev_3/armature_conceptual_model.png" alt="Conceptual design of armature" width="700">
+  <br>
+  <em>Conceptual design of the armature.</em>
 </div>
 
-> See the [`motor design notes`](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Revision 2`.
+<br>
 
-The radial heat-sink is made of aluminium with radial fins pitched at `1.50 mm`, axial thickness of `0.50 mm`, and radial thickness of `7.30 mm`. The thermal interface material is still to be determined. This is expected to improve thermal steady-state conditions, though both this assumption and the analytical eddy-current model remain to be validated experimentally.
+See the [`motor design notes`](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Conceptual Design Rev 2`.
 
 ---
 
-### Alpha ($\alpha$)
+### Alpha
 
 An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, although the force output was not quantified before the PLA coil forms deformed due to thermal stress.
 
 <div align="center">
   <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side view on test stand" width="700">
   <br>
-  <em>Alpha: Side view on test stand</em>
+  <em>Side view on test stand.</em>
 </div>
 
 <br>
@@ -86,18 +83,17 @@ This analytical model uses inverse Clarke and Park transforms to compute the pha
   <p><em>1D field approximation and FOC showing position (linear) vs force (linear).</em></p>
 </div>
 
-
 #### Hybrid
 
-> *(Work in progress). This hybrid simulation is currently being designed and implemented.*
-
-<div align="center">
-  <img src="./05_media/00_simulation/01_hybrid/armature_test_solution.png" alt="Hybrid model" width="700">
-  <p><em>Axisymmetric low-resolution armature solution</em></p>
-</div>
+> *(Work in progress). This hybrid simulation is currently being implemented.*
 
 A hybrid model using `FEMM` to compute the stator field, then uses the Biot–Savart law with a parametric slot geometry to compute the armature field. 
 The magnetic co-energy is then calculated assuming uniform magnetic permeability, and finally the spatial derivative over the z-axis is used to compute force.
+
+<div align="center">
+  <img src="./05_media/00_simulation/01_hybrid/slot_integrand_kernel.png" alt="Hybrid model" width="700">
+  <p><em>Axisymmetric slot kernel at 1 ampere.</em></p>
+</div>
 
 See [`01_simulation`](./01_simulation/readme.md) for more details.
 
@@ -107,11 +103,12 @@ See [`01_simulation`](./01_simulation/readme.md) for more details.
 
 #### Validation Stand & Sensors
 
-> *(Work in progress). The armature board revision 2 is a work in progress* <br>
-> *(Validation). The encoder board revision 0 has been populated and requires validation.*
+> *(On-hand). The armature board rev 1 PCB is on-hand. Components will be ordered from DigiKey soon.*
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. 
-The system consists of two boards: an encoder board with an estimated accuracy of `10–20 µm`, and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, all controlled via an `STM32`.
+The system consists of two boards: an encoder board with a resolution of `1.96 µm` and estimated accuracy of `10–20 µm`,
+and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, encoder interface, and `RS-485/RS-422` output, 
+all collected via an `STM32`.
 
 <div align="center">
   <img src="./05_media/04_fixtures/01_validation_setup/initial-integration.jpg" alt="Test-stand" width="500">
@@ -124,11 +121,11 @@ The TeensySFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduin
 It is a development board that is not intended for long-term usage.
 
 <div align="center">
-  <img src="./03_boards/03_teensy_SFOC/05_media/top-side-populated.jpg" alt="TeensySFOC PCB" width="500">
+  <img src="./03_boards/02_teensy_SFOC/05_media/top-side-populated.jpg" alt="TeensySFOC PCB" width="500">
   <p><em>Populated TeensySFOC PCB.</em></p>
 </div>
 
-See [`03_boards`](/03_boards/readme.md) for the supporting PCB and [`04_fixtures`](/04_fixture/readme.md) for validation setup.
+See [`03_boards`](/03_boards/readme.md) for the supporting PCB and [`04_fixtures`](/04_fixtures/) for validation setup.
 
 ---
 

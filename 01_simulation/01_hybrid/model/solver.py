@@ -8,16 +8,15 @@ Description:
 
 
 from builtins import float as f
-from typing import Any
 
 import numpy as np
+from scipy.ndimage import shift as ndshift
 
 from ifemm import Parser as iParser
 from picounits import DynamicLoader, strip_quantity as validate
-from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, NULLSET
+from picounits import Q, LENGTH, VOLTAGE, CONDUCTIVITY, NULLSET
 
-from model.physics.field_equations import Slot, standard_helix, derivative_helix, biot_sum_integrand
-
+from model.physics import field_equations, field_oriented_control
 
 class Solver:
     """ Computes electromagnetic force using magnetic energy and virtual work methods. """
@@ -25,9 +24,10 @@ class Solver:
         """ Initializes the solver class """
         self._extract_validate(parameters)
 
-        # Finite element solution & environment permeability
+        # Finite element solution, environment permeability & biot-savart term
         self.data = data
         self.permeability = 4 * np.pi * 10 ** -7
+        self.mu0_over_4pi = self.permeability / (4 * np.pi)
 
         # Phase currents
         self.i_pha = 0.0
@@ -35,83 +35,119 @@ class Solver:
         self.i_phc = 0.0
 
         # Stator field solution
-        self.stator_r, self.stator_z, self.stator_bx, self.stator_by = data.b_field(256)
+        self.stator_r, self.stator_z, self.stator_bx, self.stator_by = data.b_field(512)
         self.b_mag_stator = np.sqrt(self.stator_bx**2 + self.stator_by**2)
 
         # Removing unit scaling from spacial axises
-        self.stator_z *= data.length_scale
         self.stator_r *= data.length_scale
+        self.stator_z *= data.length_scale
 
-        # Computes derived values from parameters
+        # Computes derived values from parameters & slot kernel space
         self._compute_derived_values()
+        self._construct_kernel()
+        self._compute_kernel()
 
-    def compute_armature_field(self, translation: float, turn_sample: int = 64):
-        """ Computes the armature field on the same grid as the FEM stator field """
-        r_eval = np.stack([self.stator_r, np.zeros_like(self.stator_r), self.stator_z], axis=-1)
+        # Computes the slot kernel from the sheet kernel
+        self._compute_slot()
 
-        mu0_over_4pi = self.permeability / (4 * np.pi)
-        B = np.zeros_like(r_eval)
+    def update_currents(self, angle: f) -> None:
+        """ Updates phase currents based on time """
+        ab_ref = field_oriented_control.inverse_park_transform(0.0, 0.0, angle)
+        a, b, c = field_oriented_control.inverse_clarke_transform(ab_ref)
 
-        for slot in self._armature_slots(translation=translation):
-            scale = mu0_over_4pi * slot.phase * np.sign(slot.turns)
-            for wire, d_wire in self._slot_layers(slot, turn_sample):
-                B += scale * biot_sum_integrand(r_eval, wire, d_wire)
+        # Updates currents
+        self.i_pha = a
+        self.i_phb = b
+        self.i_phc = c
 
-        return self.stator_r, self.stator_z, np.linalg.norm(B, axis=-1)
+    def compute_force(self, z_pos: Q) -> Q:
+        """ Computes force using finite difference of the energy distribution """
+        # Validates the unit of z_pos and removes units
+        z_pos = validate(z_pos, LENGTH)
 
-    def _armature_slots(self, translation: f = 0.0) -> list[Slot]:
-        """ Constructs the armature field using slots """
-        phases = [self.i_pha, self.i_phb, self.i_phc]
-        half_length = - self.number_slots * self.slot_axial_length / 2
-        offset = self.armature_offset + half_length
+        electrical_angle = field_oriented_control.electrical_angle(z_pos, self.dipole_axial_length)
+        self.update_currents(electrical_angle)
 
-        slots = []
-        for index in range(0, self.number_slots):
-            # Selects the slots phase and polarity
-            phase = phases[index % 3]
-            polarity = -1 if index % 2 == 0 else 1
+    def _compute_slot(self) -> None:
+        """ Computes the slot field by summing copies of the sheet kernel. """
+        sheet_turns = int(np.floor(self.slot_axial_length / self.effective_diameter))
+        dz_grid = (self.kernel_z[1] - self.kernel_z[0])[0]
 
-            # Computes the slot_pos & two reference points
-            slot_pos = offset + translation + self.slot_axial_length * index
-            p1 = (slot_pos, self.slot_inner_radius)
-            p2 = (slot_pos + self.slot_axial_length, self.slot_outer_radius)
+        # Pulls the integrand kernel for r & z axises
+        integrand_r = self.kernel[..., 0]
+        integrand_z = self.kernel[..., 2]
 
-            # Appends the frozen slot
-            slots.append(Slot(polarity * self.slot_turns, phase, p1, p2))
+        # Creates a r and z array with same shape
+        r = np.zeros_like(integrand_r)
+        z = np.zeros_like(integrand_z)
 
-        return slots
+        for turn in range(sheet_turns):
+            # Sums the sources using superposition.
+            shift = (turn * self.effective_diameter - self.slot_axial_length / 2) / dz_grid
 
-    def _slot_layers(self, slot: Slot, samples: int) -> Any:
-        """ Decomposes a slot into helical sheets """
-        # Extracts the radial & axial components.
-        r_inner, r_outer = slot.p1[1], slot.p2[1]
-        z_start, z_end = slot.p1[0], slot.p2[0]
+            r += ndshift(integrand_r, shift=(shift, 0.0))
+            z += ndshift(integrand_z, shift=(shift, 0.0))
 
-        # Computes the number of sheets based on effective fill
-        effective_diameter = self.wire_diameter * (1 / self.fill_factor)
-        sheets = int(np.floor((r_outer - r_inner) / effective_diameter))
+        # Saves the slot kernel integrand.
+        self.slot_kernel_r = r
+        self.slot_kernel_z = z
+        print("Slot Kernel Generated...")
 
-        # Computes the axial pitch of the helix based on effective fill
-        layer_turns = (z_end - z_start) / effective_diameter
+    def _compute_kernel(self) -> None:
+        """ Computes the kernel solution based on sheet geometry """
+        # Calculates the number of sheets and turns per sheet.
+        sheets = int(np.floor(self.slot_radial_thickness / self.effective_diameter))
 
-        # Sample space per turn layer
-        total_samples = int(samples * layer_turns)
-        t = np.linspace(0.0, 2 * np.pi * layer_turns, total_samples)
+        # Creates the linear sample space for the sheets.
+        t = np.linspace(0.0, 2 * np.pi, int(self.samples_per_turn))
         dt = t[1] - t[0]
 
-        for sheet in range(0, sheets):
+        wires = []
+        for sheet in range(1, sheets+1):
             # Calculates the new inner radius
-            r_k = r_inner + effective_diameter * sheet
+            r_k = self.slot_inner_radius + self.effective_diameter * sheet
 
             # Computes the helix and its derivative
-            wire = standard_helix(t, r_k, effective_diameter)
-            d_wire = derivative_helix(t, r_k, effective_diameter, dt)
+            wire = field_equations.standard_helix(t, r_k, self.effective_diameter)
+            d_wire = field_equations.derivative_helix(t, r_k, self.effective_diameter, dt)
 
-            # shift into the slot's axial position
-            wire[:, 2] += z_start
+            wire[:, 2] += self.effective_diameter/2
 
-            # Returns each iteration
-            yield wire, d_wire
+            # Appends wire & d_wire to wires set
+            wires.append((wire, d_wire))
+
+        # Constructs the kernel from integrand
+        kernel = np.zeros_like(self._kernel_evaluation)
+        for wire, d_wire in wires:
+            kernel += field_equations.biot_sum_integrand(self._kernel_evaluation, wire, d_wire)
+
+        # Approximates the 3D solution as axisymmetric.
+        keep_r = self.kernel_r[0, :] >= 0
+        self.kernel_r = self.kernel_r[:, keep_r]
+        self.kernel_z = self.kernel_z[:, keep_r]
+
+        self.kernel = kernel[:, keep_r, :]
+        print("Sheet Kernel Generated...")
+
+    def _construct_kernel(self) -> None:
+        """ Constructs the kernel size based on limit radius. """
+        # Calculates the limit for the kernel
+        nominal_radius = self.slot_inner_radius + self.slot_radial_thickness / 2
+        limit = field_equations.kernel_limit(self.slot_dropoff, self.effective_diameter, nominal_radius)
+
+        # NOTE: (Investigate - coupling between source & grid resolution)
+        # Kernel grid uses 4x samples_per_turn as a resolution proxy.
+        lin_r = np.linspace(-limit, limit, self.samples_per_turn * 4)
+        lin_z = np.linspace(-limit, limit, self.samples_per_turn * 4)
+
+        # Creates the evaluation space for the kernel
+        R, Z = np.meshgrid(lin_r, lin_z)
+        r_eval = np.stack([R, np.zeros_like(R), Z], axis=-1)
+
+        self.kernel_r = R
+        self.kernel_z = Z
+
+        self._kernel_evaluation = r_eval
 
     def _compute_derived_values(self) -> None:
         """ Compute derived values based on parameters """
@@ -121,6 +157,7 @@ class Solver:
         slot_outer_radius = slot_inner_radius + self.slot_radial_thickness
 
         # Computes number of turns and saves slot size information
+        self.effective_diameter = self.wire_diameter * (1 / self.fill_factor)
         self.slot_turns = self._compute_turns()
 
         self.slot_inner_radius = slot_inner_radius
@@ -143,27 +180,15 @@ class Solver:
 
         return effective_turns
 
-    def _build_evaluation_grid(self, n_r: int, n_z: int):
-        """ Build the (r, z) evaluation grid for Biot-Savart. """
-        r_min = float(self.stator_r.min())
-        r_max = float(self.stator_r.max())
-        z_min = float(self.stator_z.min())
-        z_max = float(self.stator_z.max())
-
-        r_axis = np.linspace(r_min, r_max, n_r)
-        z_axis = np.linspace(z_min, z_max, n_z)
-
-        R, Z = np.meshgrid(r_axis, z_axis, indexing='ij')
-        r_eval = np.stack([R, np.zeros_like(R), Z], axis=-1)
-
-        return r_axis, z_axis, r_eval
-
     def _extract_validate(self, parameters: DynamicLoader) -> None:
         """ Extracts qualities from attribute tree and validates units """
         # Numerical Configuration
         self.line_voltage = validate(parameters.numerics.line_voltage, VOLTAGE)
 
         # Numerical Control
+        self.slot_dropoff = validate(parameters.numerics.solver.slot_drop_off, NULLSET)
+        self.samples_per_turn = validate(parameters.numerics.solver.samples_per_turn, NULLSET)
+
         self.integration_step = validate(parameters.numerics.solver.integration_step, LENGTH)
         self.derivative_step = validate(parameters.numerics.solver.derivative_step, LENGTH)
 

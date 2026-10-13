@@ -1,9 +1,0 @@
-﻿"Index","Quantity","Part Number","Manufacturer Part Number","Description","Unit of Measure","Customer Reference","Available","Backorder","Unit Price","Extended Price AUD"
-"1","4","399-C1206C105K3RACTUCT-ND","C1206C105K3RACTU","CAP CER 1UF 25V X7R 1206","","","4","0","0.50000","AU$2.00"
-"2","4","399-C1206C104K5RACTUCT-ND","C1206C104K5RACTU","CAP CER 0.1UF 50V X7R 1206","","","4","0","0.22000","AU$0.88"
-"3","4","1N4148WTPMSCT-ND","1N4148W-TP","DIODE STANDARD 100V 150MA SOD123","","","4","0","0.16000","AU$0.64"
-"4","2","311-120GRCT-ND","RC0603JR-07120RL","RES 120 OHM 5% 1/10W 0603","","","2","0","0.15000","AU$0.30"
-"5","4","311-1.00KFRCT-ND","RC1206FR-071KL","RES 1K OHM 1% 1/4W 1206","","","4","0","0.15000","AU$0.60"
-"6","2","MAX3485CSA+CT-ND","MAX3485CSA+T","IC TXRX 8-SOIC","","","2","0","10.45000","AU$20.90"
-"7","2","497-1241-1-ND","LD1117S33CTR","IC REG LINEAR 3.3V 800MA SOT-223","","","2","0","0.58000","AU$1.16"
-
