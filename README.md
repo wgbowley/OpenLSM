@@ -38,9 +38,9 @@ The project will fulfill this goal by using readily available materials and tool
 
 ### Beta
 
-> *(Work in progress). This motor design is currently being developed.*
+> *(Work in progress). The electromagnetic configuration is being optimized and then implemented in Fusion 360.*
 
-An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`50 Hz` at a linear velocity of `1 m/s`, eddy currents are a second-order effect compared to removing heat from the slots. The stator is a carbon fibre tube with a pole arrangement of `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
+An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`50 Hz` at a linear velocity of `1 m/s`, eddy currents are a second-order effect compared to removing heat from the slots. The stator is a carbon fibre tube with `10 mm` × `10 mm` `N52` poles arranged as `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
 
 <div align="center">
   <img src="05_media/03_prototype_beta/rev_3/armature_conceptual_model.png" alt="Conceptual design of armature" width="700">
@@ -50,7 +50,7 @@ An `ironless tubular linear` motor featuring a passive radial `6061` aluminium h
 
 <br>
 
-See the [`motor design notes`](/02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Conceptual Design Rev 2`.
+See the [`motor design notes`](./02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Conceptual Design Rev 2`.
 
 ---
 
@@ -68,32 +68,21 @@ An `ironless planar linear` motor with a polylactic acid (PLA) armature featurin
 
 The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
 
-See the [`alpha notes`](/02_motors/00_prototype_alpha/readme.md) for the full report on Prototype Alpha.
+See the [`alpha notes`](./02_motors/00_prototype_alpha/readme.md) for the full report on Prototype Alpha.
 
 ---
 
-### Simulations
+### Analytical Simulation
 
-#### Analytical
-
-This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
+This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, 
+then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
 
 <div align="center">
   <img src="./05_media/00_simulation/00_analytical/example.png" alt="Analytical model" width="700">
   <p><em>1D field approximation and FOC showing position (linear) vs force (linear).</em></p>
 </div>
 
-#### Hybrid
-
-> *(Work in progress). This hybrid simulation is currently being implemented.*
-
-A hybrid model using `FEMM` to compute the stator field, then uses the Biot–Savart law with a parametric slot geometry to compute the armature field. 
-The magnetic co-energy is then calculated assuming uniform magnetic permeability, and finally the spatial derivative over the z-axis is used to compute force.
-
-<div align="center">
-  <img src="./05_media/00_simulation/01_hybrid/slot_integrand_kernel.png" alt="Hybrid model" width="700">
-  <p><em>Axisymmetric slot kernel at 1 ampere.</em></p>
-</div>
+<br>
 
 See [`01_simulation`](./01_simulation/readme.md) for more details.
 
@@ -125,7 +114,9 @@ It is a development board that is not intended for long-term usage.
   <p><em>Populated TeensySFOC PCB.</em></p>
 </div>
 
-See [`03_boards`](/03_boards/readme.md) for the supporting PCB and [`04_fixtures`](/04_fixtures/) for validation setup.
+<br>
+
+See [`03_boards`](./03_boards/) for the supporting PCB and [`04_fixtures`](./04_fixtures/) for validation setup.
 
 ---
 
@@ -133,6 +124,17 @@ See [`03_boards`](/03_boards/readme.md) for the supporting PCB and [`04_fixtures
 
 Each section of the repo is self-documenting.  
 For internal documentation, credits, and contributors, refer to [`00_docs`](./00_docs/).
+
+#### Dropped
+
+This folder contains items that were attempted but dropped, as they were determined to not serve the critical path of the project.
+
+```
+00 - 96 V, 30 A triple half-bridge driver.
+01 - Hybrid model between FEMM and Biot–Savart
+```
+
+See [`06_dropped`](./06_dropped/) for more details.
 
 #### Bibtex
 
