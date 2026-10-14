@@ -76,24 +76,15 @@ See the [`alpha notes`](/02_motors/00_prototype_alpha/readme.md) for the full re
 
 #### Analytical
 
-This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
+This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, 
+then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
 
 <div align="center">
   <img src="./05_media/00_simulation/00_analytical/example.png" alt="Analytical model" width="700">
   <p><em>1D field approximation and FOC showing position (linear) vs force (linear).</em></p>
 </div>
 
-#### Hybrid
-
-> *(Work in progress). This hybrid simulation is currently being implemented.*
-
-A hybrid model using `FEMM` to compute the stator field, then uses the Biot–Savart law with a parametric slot geometry to compute the armature field. 
-The magnetic co-energy is then calculated assuming uniform magnetic permeability, and finally the spatial derivative over the z-axis is used to compute force.
-
-<div align="center">
-  <img src="./05_media/00_simulation/01_hybrid/slot_integrand_kernel.png" alt="Hybrid model" width="700">
-  <p><em>Axisymmetric slot kernel at 1 ampere.</em></p>
-</div>
+<br>
 
 See [`01_simulation`](./01_simulation/readme.md) for more details.
 
