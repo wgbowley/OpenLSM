@@ -74,9 +74,9 @@ stall = 0
 step_size = parameters.optimizer.size.start
 
 # Series of best outputs
-best_normalized        = 0 * NULLSET
-best_force_per_amp     = 0 * FORCE / CURRENT
-best_losses            = 0 * POWER
+best_normalized        = - 1e10 * NULLSET
+best_force_per_amp     = - 1e10 * FORCE / CURRENT
+best_losses            = - 1e10 * POWER
 best_slot_axial_length = parameters.armature.slots.axial_length
 best_slot_thickness    = parameters.armature.slots.radial_thickness
 
@@ -84,6 +84,7 @@ best_slot_thickness    = parameters.armature.slots.radial_thickness
 index = 0
 for index in range(0, parameters.optimizer.samples.stripped):
     print(index, best_force_per_amp, best_losses)
+
     # Perturb current best geometry
     axial = abs(best_slot_axial_length + step_size * (random() * 2 - 1))
     thickness = abs(best_slot_thickness + step_size * (random() * 2 - 1))

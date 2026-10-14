@@ -19,7 +19,7 @@ radial_wall_thickness: 1 m(m)
 
 [armature.slots]
 axial_pitch:    3.333 m(m)
-axial_length:   3 m(m)
+axial_length:   1 m(m)
 
 radial_thickness: 5 m(m)
 
