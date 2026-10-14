@@ -48,7 +48,7 @@ Because the spatial derivative is being calculated, both $H_{\text{stator}}^2$ a
 
 $$ U = \mu_0 \int_{\text{vol}} (H_{\text{armature}} H_{\text{stator}}) \, dv $$
 
-The volume integral can then be simplified for the 1D approximation using $A_{\text{rad}}$ between the slot mean and pole outer diameter:
+The volume integral can then be simplified for the 1D approximation using $A_{\text{rad}}$ as the slot radial thickness:
 
 $$ U = A_{\text{rad}} \cdot \mu_0 \int_{\Omega} H_{\text{armature}}(z - z_{o}) \cdot H_{\text{stator}}(z) \, dz $$
 
@@ -160,6 +160,31 @@ while True:
 The analytical model is intended as a reduced-order model rather than a replacement for finite-element analysis (FEA). 
 It is quite quick, though exact speeds depend on parameters. It is useful for understanding the mechanics of linear 
 motors without the large execution times of FEA.
+
+---
+
+### Optimization
+
+The optimizer is a form of stochastic local search with adaptive step-size reduction. It searches for better slot thickness 
+and axial lengths within fixed wire size, voltage, pole size, and other secondary parameters. It searches for designs that 
+have high force per ampere while also having low copper losses (the first-order loss mechanism for ironless motors).
+
+```
+# Note: These only applies for `optimizer.py`.
+[optimizer]
+stall_max: 100 (∅)
+samples: 10000 (∅)
+
+[optimizer.size]
+start: 1.5 m(m)
+min: 0.1 m(m)
+
+[optimizer.normalization]
+copper_loss: 40 (W)
+force_per_ampere: 10 (N/A)
+```
+
+> `optimizer.size` defines the step size of the optimizer which is the same for both axial and thickness.
 
 ---
 
