@@ -127,7 +127,6 @@ For internal documentation, credits, and contributors, refer to [`00_docs`](./00
 
 This folder contains items that were attempted but dropped, as they were determined to not serve the critical path of the project.
 
-
 ```
 00 - 96 V, 30 A triple half-bridge driver.
 01 - Hybrid model between FEMM and Biot–Savart
