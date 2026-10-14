@@ -186,6 +186,9 @@ force_per_ampere: 10 (N/A)
 
 > `optimizer.size` defines the step size of the optimizer which is the same for both axial and thickness.
 
+Stochastic (random) search was chosen as the parameter size is small (`N^2`) and because the design space is known to contain valid designs, 
+and `OpenLSM` doesn't need the best possible motor within the design space. It is a reasonable choice given those conditions.
+
 ---
 
 ### Documentation
