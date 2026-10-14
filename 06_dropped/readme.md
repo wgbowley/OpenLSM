@@ -1,6 +1,6 @@
 ### 06_dropped
 
-This folder contains deliverables that were dropped due to not being on the critical path of `OpenLSM`. However, they are archived here to serve as a starting point for future work, or for others to expand upon.
+This folder contains deliverables that were dropped due to not being on the critical path of `OpenLSM`. However, they are dropped here to serve as a starting point for future work, or for others to expand upon.
 
 ---
 
