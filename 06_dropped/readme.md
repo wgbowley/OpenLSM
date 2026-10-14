@@ -19,7 +19,7 @@ A `96 V`, `30 A` triple half-bridge driver with CAN, RS-485, and `step/dir` inte
 
 #### [01_hybrid](01_hybrid) - Hybrid Tubular Linear Motor Model
 
-> This item was dropped because the `analytical model` works reasonably well as an approximation within appropriate limits.
+> This item was dropped because the `analytical model` works reasonably well as an approximation within appropriate limits. if u_r!=0 than hybrid would be required for modelling.
 
 > *(Work in progress). IFEMM works for the FEMM solution and the Biot–Savart kernel works. Just need to combine them and finish the model.*
 
