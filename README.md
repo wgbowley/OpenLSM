@@ -72,9 +72,7 @@ See the [`alpha notes`](/02_motors/00_prototype_alpha/readme.md) for the full re
 
 ---
 
-### Simulations
-
-#### Analytical
+### Analytical Simulation
 
 This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, 
 then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
