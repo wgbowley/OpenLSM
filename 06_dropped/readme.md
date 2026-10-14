@@ -1,10 +1,13 @@
 ### 06_dropped
 
+> It has not been manufactured, experimentally validated, or verified for performance.
+> Do not assume the design or simulation is suitable for fabrication/usage without further analysis.
+
 This folder contains deliverables that were dropped due to not being on the critical path of `OpenLSM`. However, they are dropped here to serve as a starting point for future work, or for others to expand upon.
 
 ---
 
-#### [00_bridge_driver](00_bridge_driver) — Triple Half-Bridge Driver
+#### [00_bridge_driver](00_bridge_driver) - Triple Half-Bridge Driver
 
 > This item was dropped because a custom bridge driver isn't required, as the `TeensySFOC` works for motor development. This should be continued as a separate repo.
 
@@ -14,7 +17,7 @@ A `96 V`, `30 A` triple half-bridge driver with CAN, RS-485, and `step/dir` inte
 
 ---
 
-#### [01_hybrid](01_hybrid) — Hybrid Tubular Linear Motor Model
+#### [01_hybrid](01_hybrid) - Hybrid Tubular Linear Motor Model
 
 > This item was dropped because the `analytical model` works reasonably well as an approximation within appropriate limits.
 
