@@ -11,14 +11,14 @@ from picounits import Parser
 from picounits import CURRENT, RESISTANCE, LENGTH, INDUCTANCE, POWER, NULLSET
 
 from matplotlib import pyplot as plt
-from model.solver import Solver
+from solver import Solver
 
 
 # Loads unit system, material library & parameters
 ROOT_DIR = Path(__file__).resolve().parents[0]
 
 # Materials & Parameter files
-parameters_path = ROOT_DIR / "parameters.uiv"
+parameters_path = ROOT_DIR / "../parameters.uiv"
 parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
 
 # Magnetic Solver for tubular linear motor

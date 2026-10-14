@@ -12,8 +12,8 @@ from math import pi, floor, sqrt
 from picounits import Q, DynamicLoader, strip_quantity as validate
 from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, COERCIVITY, NULLSET, FORCE
 
-from model.physics import field_equations
-from model.physics import field_oriented_control
+from physics import field_equations
+from physics import field_oriented_control
 
 
 class Solver:
