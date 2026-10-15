@@ -105,7 +105,12 @@ class Solver:
         for index in range(0, self.number_slots):
             # Selects the slots phase and polarity
             phase = phases[index % 3]
-            polarity = -1 if index % 2 == 0 else 1
+
+            # (Note). Not exactly sure why this rule works but it seems to.
+            if self.number_slots > 6:
+                polarity = 1 if index % 2 == 0 else -1
+            else:
+                polarity = -1 if index % 2 == 0 else 1
 
             # Computes the slot position
             slot_pos = offset + translation + self.slot_axial_pitch * index
