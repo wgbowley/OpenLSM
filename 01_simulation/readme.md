@@ -165,9 +165,19 @@ motors without the large execution times of FEA.
 
 ### Optimization
 
+> For optimization within a deterministic mode, differences between results are often more informative than absolute values.
+> Do not assume the resulting absolute value is correct and/or will function identically in reality.
+
 The optimizer is a form of stochastic local search with adaptive step-size reduction. It searches for better slot thickness 
 and axial lengths within fixed wire size, voltage, pole size, and other secondary parameters. It searches for designs that 
-have high force per ampere while also having low copper losses (the first-order loss mechanism for ironless motors).
+have high force and high force per ampere while also having low copper losses (the first-order loss mechanism for ironless motors).
+
+```
+objective(fixed_params, slot_thickness, slot_axial_length) = force + force_per_amp - 2 * copper_losses
+```
+
+Stochastic (random) search was chosen as the parameter size is small (`N^2`) and because the design space is known to contain valid designs, 
+and OpenLSM doesn't need the best possible motor within the design space. It is a reasonable choice given those conditions.
 
 ```
 # Note: These only applies for `optimizer.py`.
@@ -186,8 +196,6 @@ force_per_ampere: 10 (N/A)
 
 > `optimizer.size` defines the step size of the optimizer which is the same for both axial and thickness.
 
-Stochastic (random) search was chosen as the parameter size is small (`N^2`) and because the design space is known to contain valid designs, 
-and `OpenLSM` doesn't need the best possible motor within the design space. It is a reasonable choice given those conditions.
 
 ---
 

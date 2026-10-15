@@ -23,7 +23,7 @@ parameters_path = ROOT_DIR / "parameters.uiv"
 parameters = Parser.open(parameters_path, ROOT_DIR / "derived.ut")
 
 
-def evaluate(param: DynamicLoader) -> tuple[Q, Q]:
+def evaluate(param: DynamicLoader) -> tuple[Q, Q, Q]:
     """ Evaluates the proposed motor design over one pole pitch. """
     # Magnetic Solver for tubular linear motor
     solver = Solver(param)
@@ -52,18 +52,19 @@ def evaluate(param: DynamicLoader) -> tuple[Q, Q]:
     force_per_amp = force_average / (solver.phase_rms_current * CURRENT)
 
     # Returns the force per ampere and copper losses (first order losses)
-    return force_per_amp, solver.average_losses * POWER
+    return force_average, force_per_amp, solver.average_losses * POWER
 
 # Creates a optimization trace file
-csv_filename = "optimization_trace.csv"
+csv_filename = ROOT_DIR / "optimization_trace.csv"
 csv_file = open(csv_filename, mode='w', newline='')
 csv_writer = csv.writer(csv_file)
 
 # Adds the specific rows the solver uses.
 csv_writer.writerow([
     "Iteration", 
-    "Axial Length (mm)", 
-    "Radial Thickness (mm)", 
+    "Axial Length (m)", 
+    "Radial Thickness (m)",
+    "Absolute Force (N)",
     "Force per Ampere (N/A)", 
     "Copper Loss (W)", 
     "Normalized Score"
@@ -75,6 +76,7 @@ step_size = parameters.optimizer.size.start
 
 # Series of best outputs
 best_normalized        = - 1e10 * NULLSET
+best_force             = - 1e10 * NULLSET
 best_force_per_amp     = - 1e10 * FORCE / CURRENT
 best_losses            = - 1e10 * POWER
 best_slot_axial_length = parameters.armature.slots.axial_length
@@ -83,7 +85,7 @@ best_slot_thickness    = parameters.armature.slots.radial_thickness
 # Optimization loop
 index = 0
 for index in range(0, parameters.optimizer.samples.stripped):
-    print(index, best_force_per_amp, best_losses)
+    print(index, best_force, best_force_per_amp, best_losses)
 
     # Perturb current best geometry
     axial = abs(best_slot_axial_length + step_size * (random() * 2 - 1))
@@ -96,18 +98,20 @@ for index in range(0, parameters.optimizer.samples.stripped):
     # Sets new parameters to attempt and solves that set
     parameters.armature.slots.axial_length = axial
     parameters.armature.slots.radial_thickness = thickness
-    force_per_amp, losses = evaluate(parameters)
+    average_force, force_per_amp, losses = evaluate(parameters)
 
     # Normalizes the evaluation function
+    normalized_F = average_force / parameters.optimizer.normalization.average_force
     normalized_F_A = force_per_amp / parameters.optimizer.normalization.force_per_ampere
     normalized_losses = losses / parameters.optimizer.normalization.copper_loss
-    normalized = normalized_F_A - normalized_losses
+    normalized = normalized_F + normalized_F_A - 2 * normalized_losses
 
     # Logs all evaluations
     csv_writer.writerow([
         index,
         axial.stripped,
         thickness.stripped,
+        average_force.stripped,
         force_per_amp.stripped,
         losses.stripped,
         normalized.stripped
@@ -119,8 +123,9 @@ for index in range(0, parameters.optimizer.samples.stripped):
         stall = 0
 
         # Saves the best outputs & inputs
-        best_losses = losses
+        best_force = average_force
         best_force_per_amp = force_per_amp
+        best_losses = losses
 
         best_slot_axial_length = axial
         best_slot_thickness = thickness

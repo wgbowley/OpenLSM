@@ -21,7 +21,7 @@ radial_wall_thickness: 1 m(m)
 axial_pitch:    3.333 m(m)
 axial_length:   1 m(m)
 
-radial_thickness: 5 m(m)
+radial_thickness: 1 m(m)
 
 [armature.slots.material]
 wire_diameter:  0.4 m(m)
@@ -47,7 +47,7 @@ coercivity: 0.956 M(A_m)
 # ---------------------------------------------
 
 [numerics]
-line_voltage: 12 (V)
+line_voltage: 24 (V)
 displacement: 10 m(m)
 
 [numerics.samples]
@@ -72,7 +72,8 @@ start: 1.5 m(m)
 min: 0.1 m(m)
 
 [optimizer.normalization]
-copper_loss: 40 (W)
+average_force: 10 (N)
 force_per_ampere: 10 (N/A)
+copper_loss: 40 (W)
 
 # ---------------------------------------------
