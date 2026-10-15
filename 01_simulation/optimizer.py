@@ -92,7 +92,7 @@ best_slot_thickness    = parameters.armature.slots.radial_thickness
 # Optimization loop
 index = 0
 for index in range(0, parameters.optimizer.samples.stripped):
-    print(index, best_force, best_force_per_amp, best_losses)
+    print(index, best_force, best_force_per_amp, best_force_per_second, best_losses)
 
     # Perturb current best geometry
     axial = abs(best_slot_axial_length + step_size * (random() * 2 - 1))

@@ -5,6 +5,9 @@ approximations to compute the magnetic co-energy, and finally uses its spatial d
 
 #### High Level Topology
 
+> Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
+
+
 ```
 Z-axis Position (z)
     ↓
@@ -22,7 +25,7 @@ Force on Armature at That Position
     ↺ (Moves to next position)
 ```
 
-> Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
+> *(Note.) Back-emf is not modeled as it serves to model asymptotic velocity and force drop-off from v=0 to v=max, and was considered not required for OpenLSM.*
 
 ---
 
@@ -170,10 +173,10 @@ motors without the large execution times of FEA.
 
 The optimizer is a form of stochastic local search with adaptive step-size reduction. It searches for better slot thickness 
 and axial lengths within fixed wire size, voltage, pole size, and other secondary parameters. It searches for designs that 
-have high force and high force per ampere while also having low copper losses (the first-order loss mechanism for ironless motors).
+have high force, high force per ampere, high force per second while also having low copper losses (the first-order loss mechanism for ironless motors).
 
 ```
-objective(fixed_params, slot_thickness, slot_axial_length) = force + force_per_amp - 2 * copper_losses
+objective(fixed_params, slot_thickness, slot_axial_length) = force + force_per_amp + force_per_second - 3 * copper_losses
 ```
 
 Stochastic (random) search was chosen as the parameter size is small (`N^2`) and because the design space is known to contain valid designs, 
