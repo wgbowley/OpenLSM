@@ -27,9 +27,7 @@ Force on Armature at That Position
 
 > *(Note). Back-emf is not modeled as it serves to model asymptotic velocity and force drop-off from v=0 to v=max, and was considered not required for OpenLSM.*
 
----
-
-### Model Validation
+#### Model Validation
 
 The analytical model is intended as a reduced-order model rather than a replacement for finite-element analysis (FEA). 
 It is quite quick, though exact speeds depend on parameters. It is useful for understanding the mechanics of linear 
