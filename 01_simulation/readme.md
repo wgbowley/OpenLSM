@@ -29,6 +29,14 @@ Force on Armature at That Position
 
 ---
 
+### Model Validation
+
+The analytical model is intended as a reduced-order model rather than a replacement for finite-element analysis (FEA). 
+It is quite quick, though exact speeds depend on parameters. It is useful for understanding the mechanics of linear 
+motors without the large execution times of FEA.
+
+---
+
 ### Mathematical Implementation
 
 #### Magnetic Force Derivation
@@ -155,14 +163,6 @@ while True:
     # Moves along the z-axis
     z += dz
 ```
-
----
-
-### Model Validation
-
-The analytical model is intended as a reduced-order model rather than a replacement for finite-element analysis (FEA). 
-It is quite quick, though exact speeds depend on parameters. It is useful for understanding the mechanics of linear 
-motors without the large execution times of FEA.
 
 ---
 
