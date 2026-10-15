@@ -12,10 +12,10 @@ This search run used 200 µm (0.2 mm) diameter wire and 6 slots, with the rest o
 `parameters.uiv` file. The objective function was maximized:
 
 ```py
-# (Note). Not exactly sure why this rule works but it seems to.
-if self.number_slots > 6:
-    polarity = 1 if index % 2 == 0 else -1
-else:
+# A, -B, C, -A, B, -C
+for index in range(0, self.number_slots):
+    # Selects the slots phase and polarity
+    phase = phases[index % 3]
     polarity = -1 if index % 2 == 0 else 1
 ```
 

@@ -14,7 +14,7 @@ import pandas as pd
 
 # Load the CSV file from path to memory
 ROOT_DIR = Path(__file__).resolve().parents[0]
-csv_filename = ROOT_DIR / "06_run_500um_12_slots/trace.csv"
+csv_filename = ROOT_DIR / "08_run_300um_18_slots/trace.csv"
 df = pd.read_csv(csv_filename)
 
 

@@ -11,13 +11,16 @@
 This search run used 300 µm (0.3 mm) diameter wire and 12 slots, with the rest of the parameters fixed according to the
 `parameters.uiv` file. The objective function was maximized:
 
+> *(Note). Polarity equation changes due to the winding needing to be phase-shifted 180 degrees*
+
 ```py
-# (Note). Not exactly sure why this rule works but it seems to.
-if self.number_slots > 6:
+# -A, B, -C, A, -B, C, -A, B, -C, A, -B, C
+for index in range(0, self.number_slots):
+    # Selects the slots phase and polarity
+    phase = phases[index % 3]
     polarity = 1 if index % 2 == 0 else -1
-else:
-    polarity = -1 if index % 2 == 0 else 1
 ```
+
 
 #### High-Level
 
