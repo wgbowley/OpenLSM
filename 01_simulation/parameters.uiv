@@ -24,7 +24,7 @@ axial_length:   2 m(m)
 radial_thickness: 5 m(m)
 
 [armature.slots.material]
-wire_diameter:  0.2 m(m)
+wire_diameter:  0.5 m(m)
 fill_factor:    0.70 (∅)
 
 conductivity:   63 M(S_m)

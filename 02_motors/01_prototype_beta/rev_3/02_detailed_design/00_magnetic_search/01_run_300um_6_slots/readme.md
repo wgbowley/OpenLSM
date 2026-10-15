@@ -1,4 +1,4 @@
-### 00_run_300um_6_slots
+### 01_run_300um_6_slots
 
 <div align="center">
   <img src="./trace.png" alt="Normalized Trace" width="700">
@@ -10,6 +10,14 @@
 
 This search run used 300 µm (0.3 mm) diameter wire and 6 slots, with the rest of the parameters fixed according to the
 `parameters.uiv` file. The objective function was maximized:
+
+```py
+# (Note). Not exactly sure why this rule works but it seems to.
+if self.number_slots > 6:
+    polarity = 1 if index % 2 == 0 else -1
+else:
+    polarity = -1 if index % 2 == 0 else 1
+```
 
 #### High-Level
 

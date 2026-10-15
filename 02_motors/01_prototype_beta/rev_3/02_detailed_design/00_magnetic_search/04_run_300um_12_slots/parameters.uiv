@@ -1,0 +1,81 @@
+[version]
+format:     0.1.1
+unit_frame: derived.ut
+
+# ---------------------------------------------
+
+[notes]
+simulation: "Reduced Order Analytical Model"
+system:     "Axisymmetric (Z-R) (Axial-Radial)"
+
+# ---------------------------------------------
+
+[armature]
+number_slots:       12 (∅)
+radial_clearance:   0.5 m(m)
+
+[armature.core]
+radial_wall_thickness: 0 m(m)
+
+[armature.slots]
+axial_pitch:    3.333 m(m)
+axial_length:   2 m(m)
+
+radial_thickness: 5 m(m)
+
+[armature.slots.material]
+wire_diameter:  0.3 m(m)
+fill_factor:    0.70 (∅)
+
+conductivity:   63 M(S_m)
+
+# ---------------------------------------------
+
+[stator]
+length: 300 m(m)
+
+[stator.tube]
+radial_wall_thickness:  1 m(m)
+
+[stator.dipole]
+axial_length: 10 m(m)
+radial_thickness: 5 m(m)
+
+[stator.dipole.material]
+coercivity: 0.956 M(A_m)
+
+# ---------------------------------------------
+
+[numerics]
+velocity:     650 m(m/s)
+line_voltage: 24 (V)
+displacement: 10 m(m)
+
+[numerics.samples]
+displacement_size:  1 m(m)
+
+[numerics.solver]
+integration_step:   0.2 m(m)
+derivative_step:    0.2 m(m)
+
+[numerics.output]
+interval: 20 (∅)
+
+# ---------------------------------------------
+
+# Note: These only applies for `optimizer.py`.
+[optimizer]
+stall_max: 100 (∅)
+samples: 10000 (∅)
+
+[optimizer.size]
+start: 1.5 m(m)
+min: 0.05 m(m)
+
+[optimizer.normalization]
+average_force: 10 (N)
+force_per_ampere: 30 (N/A)
+force_per_second: 100 k(N/s)
+copper_loss: 40 (W)
+
+# ---------------------------------------------

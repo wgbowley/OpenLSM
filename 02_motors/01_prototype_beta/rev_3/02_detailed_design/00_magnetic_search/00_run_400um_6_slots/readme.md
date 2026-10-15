@@ -11,6 +11,14 @@
 This search run used 400 µm (0.4 mm) diameter wire and 6 slots, with the rest of the parameters fixed according to the
 `parameters.uiv` file. The objective function was maximized:
 
+```py
+# (Note). Not exactly sure why this rule works but it seems to.
+if self.number_slots > 6:
+    polarity = 1 if index % 2 == 0 else -1
+else:
+    polarity = -1 if index % 2 == 0 else 1
+```
+
 #### High-Level
 
 ```
