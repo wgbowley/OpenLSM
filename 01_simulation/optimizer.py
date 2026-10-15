@@ -11,7 +11,7 @@ from pathlib import Path
 from random import random
 
 from picounits import Q, Parser, DynamicLoader
-from picounits import LENGTH, FORCE, CURRENT, POWER, NULLSET
+from picounits import LENGTH, FORCE, CURRENT, POWER, NULLSET, TIME
 from model.solver import Solver
 
 
@@ -51,8 +51,13 @@ def evaluate(param: DynamicLoader) -> tuple[Q, Q, Q]:
     force_average = sum(force_result, 0 * FORCE) / len(force_result)
     force_per_amp = force_average / (solver.phase_rms_current * CURRENT)
 
+    # Computes the force slew rate
+    current_raise = solver.line_voltage / solver.phase_inductance
+    force_per_second = force_per_amp * (current_raise * (CURRENT / TIME))
+
     # Returns the force per ampere and copper losses (first order losses)
-    return force_average, force_per_amp, solver.average_losses * POWER
+    return force_average, force_per_amp, force_per_second, solver.average_losses * POWER
+
 
 # Creates a optimization trace file
 csv_filename = ROOT_DIR / "optimization_trace.csv"
@@ -65,7 +70,8 @@ csv_writer.writerow([
     "Axial Length (m)", 
     "Radial Thickness (m)",
     "Absolute Force (N)",
-    "Force per Ampere (N/A)", 
+    "Force per Ampere (N/A)",
+    "Force slew rate (N/s)"
     "Copper Loss (W)", 
     "Normalized Score"
 ])
@@ -78,6 +84,7 @@ step_size = parameters.optimizer.size.start
 best_normalized        = - 1e10 * NULLSET
 best_force             = - 1e10 * NULLSET
 best_force_per_amp     = - 1e10 * FORCE / CURRENT
+best_force_per_second  = - 1e10 * FORCE / TIME
 best_losses            = - 1e10 * POWER
 best_slot_axial_length = parameters.armature.slots.axial_length
 best_slot_thickness    = parameters.armature.slots.radial_thickness
@@ -98,13 +105,19 @@ for index in range(0, parameters.optimizer.samples.stripped):
     # Sets new parameters to attempt and solves that set
     parameters.armature.slots.axial_length = axial
     parameters.armature.slots.radial_thickness = thickness
-    average_force, force_per_amp, losses = evaluate(parameters)
+
+    try:
+        average_force, force_per_amp, force_per_second, losses = evaluate(parameters)
+    except:
+        # Skips invalid designs
+        continue
 
     # Normalizes the evaluation function
     normalized_F = average_force / parameters.optimizer.normalization.average_force
     normalized_F_A = force_per_amp / parameters.optimizer.normalization.force_per_ampere
+    normalized_F_S = force_per_second / parameters.optimizer.normalization.force_per_second
     normalized_losses = losses / parameters.optimizer.normalization.copper_loss
-    normalized = normalized_F + normalized_F_A - 2 * normalized_losses
+    normalized = normalized_F + normalized_F_S + normalized_F_A - 3 * normalized_losses
 
     # Logs all evaluations
     csv_writer.writerow([
@@ -113,6 +126,7 @@ for index in range(0, parameters.optimizer.samples.stripped):
         thickness.stripped,
         average_force.stripped,
         force_per_amp.stripped,
+        force_per_second.stripped,
         losses.stripped,
         normalized.stripped
     ])
@@ -125,6 +139,7 @@ for index in range(0, parameters.optimizer.samples.stripped):
         # Saves the best outputs & inputs
         best_force = average_force
         best_force_per_amp = force_per_amp
+        best_force_per_second = force_per_second
         best_losses = losses
 
         best_slot_axial_length = axial

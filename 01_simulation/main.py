@@ -8,7 +8,7 @@ Description:
 
 from pathlib import Path
 from picounits import Parser
-from picounits import CURRENT, RESISTANCE, LENGTH, INDUCTANCE, POWER, NULLSET
+from picounits import CURRENT, RESISTANCE, LENGTH, INDUCTANCE, POWER, FORCE, NULLSET, TIME
 
 from matplotlib import pyplot as plt
 from model.solver import Solver
@@ -56,6 +56,14 @@ for index in range(0, steps):
         print(f"Position: {z_output} | Force: {force}")
 
 
+# Computes force per ampere
+force_average = sum(force_result, 0 * FORCE) / len(force_result)
+force_per_amp = force_average / (solver.phase_rms_current * CURRENT)
+
+# Computes force per second
+current_raise = solver.line_voltage / solver.phase_inductance
+force_per_second = force_per_amp * (current_raise * (CURRENT / TIME))
+
 # Prints a few different system parameters
 print("-" * 50)
 print(f"Slot Turns:         {solver.slot_turns * NULLSET}")
@@ -63,6 +71,8 @@ print(f"Line Resistance:    {solver.l2l_resistance * RESISTANCE}")
 print(f"Line Inductance:    {solver.l2l_inductance * INDUCTANCE}")
 print(f"Line Current:       {solver.phase_rms_current * CURRENT} (RMS)")
 print(f"System Losses:      {solver.average_losses * POWER}  (1st order)")
+print(f"Force/amp:          {force_per_amp}")
+print(f"Force/second:       {force_per_second}")
 print("-" * 50)
 
 

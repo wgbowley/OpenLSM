@@ -7,6 +7,9 @@ format: 0.1.2
 
 [mechanics]
 N:      kg*m*s^-2
+N/A:    kg*m*s^-2*A^-1
+N/s:    kg*m*s^-3
+
 J:      kg*m^2*s^-2
 W:      kg*m^2*s^-3
 Pa:     kg*m^-1*s^-2
