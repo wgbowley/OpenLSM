@@ -123,7 +123,7 @@ for index in range(0, parameters.optimizer.samples.stripped):
     # Logs all evaluations
     csv_writer.writerow([
         index,
-        step_size,
+        step_size.stripped,
         axial.stripped,
         thickness.stripped,
         average_force.stripped,

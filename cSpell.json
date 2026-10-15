@@ -140,6 +140,12 @@
     "dropoff",
     "ndshift",
     "ndimage",
-    "cval"
+    "cval",
+    "textcoords",
+    "xytext",
+    "datalim",
+    "facecolor",
+    "edgecolor",
+    "zorder"
   ]
 }

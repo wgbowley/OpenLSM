@@ -7,7 +7,6 @@ approximations to compute the magnetic co-energy, and finally uses its spatial d
 
 > Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
 
-
 ```
 Z-axis Position (z)
     ↓
