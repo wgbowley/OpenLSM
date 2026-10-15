@@ -1,5 +1,5 @@
 """
-Filename: optimizer.py
+Filename: search.py
 
 Description:
     converging random search using 1D analytical 
@@ -60,7 +60,7 @@ def evaluate(param: DynamicLoader) -> tuple[Q, Q, Q]:
 
 
 # Creates a optimization trace file
-csv_filename = ROOT_DIR / "optimization_trace.csv"
+csv_filename = ROOT_DIR / "trace.csv"
 csv_file = open(csv_filename, mode='w', newline='')
 csv_writer = csv.writer(csv_file)
 

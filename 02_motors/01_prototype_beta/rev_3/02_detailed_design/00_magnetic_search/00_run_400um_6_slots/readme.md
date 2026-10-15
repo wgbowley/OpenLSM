@@ -6,7 +6,9 @@
   <em>Normalized Trace.</em>
 </div>
 
-This optimization run used 400 µm (0.4 mm) diameter wire and 6 slots, with the rest of the parameters fixed according to the
+<br>
+
+This search run used 400 µm (0.4 mm) diameter wire and 6 slots, with the rest of the parameters fixed according to the
 `parameters.uiv` file. The objective function was maximized:
 
 #### High-Level
@@ -15,7 +17,28 @@ This optimization run used 400 µm (0.4 mm) diameter wire and 6 slots, with the 
 objective(fixed_params, slot_thickness, slot_axial_length) = force + force_per_amp + force_per_second - 2 * copper_losses
 ```
 
-#### Implementation
+#### Normalization
+
+```
+# Note: These only applies for `search.py`.
+[optimizer]
+stall_max: 100 (∅)
+samples: 10000 (∅)
+
+[optimizer.size]
+start: 1.5 m(m)
+min: 0.05 m(m)
+
+[optimizer.normalization]
+average_force: 10 (N)
+force_per_ampere: 10 (N/A)
+force_per_second: 50 k(N/s)
+copper_loss: 40 (W)
+```
+
+---
+
+### Implementation
 
 ```py
     # Normalizes the evaluation function

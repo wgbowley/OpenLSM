@@ -163,7 +163,7 @@ while True:
 
 ---
 
-### Optimization
+### Search/Optimization
 
 > For optimization within a deterministic mode, differences between results are often more informative than absolute values.
 > Do not assume the resulting absolute value is correct and/or will function identically in reality.
