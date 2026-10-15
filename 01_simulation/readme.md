@@ -174,7 +174,7 @@ and axial lengths within fixed wire size, voltage, pole size, and other secondar
 have high force, high force per ampere, high force per second while also having low copper losses (the first-order loss mechanism for ironless motors).
 
 ```
-objective(fixed_params, slot_thickness, slot_axial_length) = force + force_per_amp + force_per_second - 3 * copper_losses
+objective(fixed_params, slot_thickness, slot_axial_length) = force + force_per_amp + force_per_second - 2 * copper_losses
 ```
 
 Stochastic (random) search was chosen as the parameter size is small (`N^2`) and because the design space is known to contain valid designs, 

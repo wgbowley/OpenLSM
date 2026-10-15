@@ -66,12 +66,13 @@ csv_writer = csv.writer(csv_file)
 
 # Adds the specific rows the solver uses.
 csv_writer.writerow([
-    "Iteration", 
+    "Iteration",
+    "step_size (m)",
     "Axial Length (m)", 
     "Radial Thickness (m)",
     "Absolute Force (N)",
     "Force per Ampere (N/A)",
-    "Force slew rate (N/s)"
+    "Force slew rate (N/s)",
     "Copper Loss (W)", 
     "Normalized Score"
 ])
@@ -117,11 +118,12 @@ for index in range(0, parameters.optimizer.samples.stripped):
     normalized_F_A = force_per_amp / parameters.optimizer.normalization.force_per_ampere
     normalized_F_S = force_per_second / parameters.optimizer.normalization.force_per_second
     normalized_losses = losses / parameters.optimizer.normalization.copper_loss
-    normalized = normalized_F + normalized_F_S + normalized_F_A - 3 * normalized_losses
+    normalized = normalized_F + normalized_F_S + normalized_F_A - 2 * normalized_losses
 
     # Logs all evaluations
     csv_writer.writerow([
         index,
+        step_size,
         axial.stripped,
         thickness.stripped,
         average_force.stripped,

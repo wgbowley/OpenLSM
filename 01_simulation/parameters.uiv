@@ -19,9 +19,9 @@ radial_wall_thickness: 0 m(m)
 
 [armature.slots]
 axial_pitch:    3.333 m(m)
-axial_length:   2 m(m)
+axial_length:   3.2 m(m)
 
-radial_thickness: 2 m(m)
+radial_thickness: 5 m(m)
 
 [armature.slots.material]
 wire_diameter:  0.4 m(m)
@@ -75,7 +75,7 @@ min: 0.05 m(m)
 [optimizer.normalization]
 average_force: 10 (N)
 force_per_ampere: 10 (N/A)
-force_per_second: 100 (N/s)
-copper_loss: 30 (W)
+force_per_second: 50 k(N/s)
+copper_loss: 40 (W)
 
 # ---------------------------------------------
