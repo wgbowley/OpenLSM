@@ -25,7 +25,7 @@ Force on Armature at That Position
     ↺ (Moves to next position)
 ```
 
-> *(Note.) Back-emf is not modeled as it serves to model asymptotic velocity and force drop-off from v=0 to v=max, and was considered not required for OpenLSM.*
+> *(Note). Back-emf is not modeled as it serves to model asymptotic velocity and force drop-off from v=0 to v=max, and was considered not required for OpenLSM.*
 
 ---
 
