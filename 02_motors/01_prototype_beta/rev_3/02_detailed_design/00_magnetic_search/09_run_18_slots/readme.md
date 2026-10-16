@@ -9,6 +9,7 @@
 <br>
 
 > *(Note). Ended this one early as it wasn't very useful.*
+> *(Note). Compared to the others I increased the fill factor to 0.95*
 
 This search run used 18 slots, with the rest of the parameters fixed according to the
 `parameters.uiv` file. The objective function was maximized:
