@@ -36,9 +36,9 @@ radial_wall_thickness: 0 m(m)
 
 [armature.slots]
 axial_pitch:    3.333 m(m)
-axial_length:   3.333 m(m)
+axial_length:   3.30 m(m)
 
-radial_thickness: 4.2 m(m)
+radial_thickness: 4.8 m(m)
 
 [armature.slots.material]
 wire_diameter:  0.30 m(m)
