@@ -1,5 +1,5 @@
 """
-Filename: visualize.py
+Filename: search_visualize.py
 
 Description:
     Visualizes the normalized score improvement with 
@@ -14,7 +14,7 @@ import pandas as pd
 
 # Load the CSV file from path to memory
 ROOT_DIR = Path(__file__).resolve().parents[0]
-csv_filename = ROOT_DIR / "12_run_18_slots/trace.csv"
+csv_filename = ROOT_DIR / "09_run_18_slots/trace.csv"
 df = pd.read_csv(csv_filename)
 
 
@@ -87,6 +87,8 @@ plt.grid(True, linestyle="--")
 plt.legend(loc="best")
 
 plt.tight_layout()
-plt.savefig("trace.png", dpi=300)
-print("Visualization saved successfully as 'trace.png'.")
+out_path = csv_filename.parent / "trace.png"
+plt.savefig(out_path, dpi=300, bbox_inches="tight")
+print(f"Visualization saved successfully as '{out_path}'.")
+
 plt.show()

@@ -11,7 +11,7 @@ from pathlib import Path
 from random import random
 
 from picounits import Q, Parser, DynamicLoader
-from picounits import LENGTH, FORCE, CURRENT, POWER, NULLSET, TIME
+from picounits import LENGTH, FORCE, CURRENT, POWER, NULLSET, MILLI, TIME
 from model.solver import Solver
 
 
@@ -99,6 +99,10 @@ for index in range(0, parameters.optimizer.samples.stripped):
     wire      = abs(best_wire + 1/10 * step_size * (random() * 2 - 1))
     thickness = abs(best_slot_thickness + step_size * (random() * 2 - 1))
 
+    if 0.1 * MILLI * LENGTH > wire < 1 * MILLI * LENGTH:
+        # Skips invalid designs
+        continue
+
     # Sets new parameters to attempt and solves that set
     parameters.armature.slots.material.wire_diameter = wire
     parameters.armature.slots.radial_thickness = thickness
@@ -140,7 +144,7 @@ for index in range(0, parameters.optimizer.samples.stripped):
         best_force_per_second = force_per_second
         best_losses = losses
 
-        # best_slot_axial_length = axial
+        best_wire = wire
         best_slot_thickness = thickness
         continue
 
