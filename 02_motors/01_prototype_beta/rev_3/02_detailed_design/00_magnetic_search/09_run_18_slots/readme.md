@@ -1,4 +1,4 @@
-### 09_run_3300um_thickness_18_slots
+### 09_run_18_slots
 
 <div align="center">
   <img src="./trace.png" alt="Normalized Trace" width="700">
