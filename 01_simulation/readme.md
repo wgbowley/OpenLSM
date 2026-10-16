@@ -169,11 +169,11 @@ while True:
 > Do not assume the resulting absolute value is correct and/or will function identically in reality.
 
 The optimizer is a form of stochastic local search with adaptive step-size reduction. It searches for better slot thickness 
-and axial lengths within fixed wire size, voltage, pole size, and other secondary parameters. It searches for designs that 
+and wire diameters within fixed wire size, voltage, pole size, and other secondary parameters. It searches for designs that 
 have high force, high force per ampere, high force per second while also having low copper losses (the first-order loss mechanism for ironless motors).
 
 ```
-objective(fixed_params, slot_thickness, slot_axial_length) = force + force_per_amp + force_per_second - 2 * copper_losses
+objective(fixed_params, slot_thickness, wire_diameter) = force + force_per_amp + force_per_second - 2 * copper_losses
 ```
 
 Stochastic (random) search was chosen as the parameter size is small (`N^2`) and because the design space is known to contain valid designs, 

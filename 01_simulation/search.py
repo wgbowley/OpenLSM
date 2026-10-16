@@ -68,7 +68,7 @@ csv_writer = csv.writer(csv_file)
 csv_writer.writerow([
     "Iteration",
     "step_size (m)",
-    "Axial Length (m)", 
+    "Wire diameter (m)",
     "Radial Thickness (m)",
     "Absolute Force (N)",
     "Force per Ampere (N/A)",
@@ -87,7 +87,7 @@ best_force             = - 1e10 * NULLSET
 best_force_per_amp     = - 1e10 * FORCE / CURRENT
 best_force_per_second  = - 1e10 * FORCE / TIME
 best_losses            = - 1e10 * POWER
-best_slot_axial_length = parameters.armature.slots.axial_length
+best_wire              = parameters.armature.slots.material.wire_diameter
 best_slot_thickness    = parameters.armature.slots.radial_thickness
 
 # Optimization loop
@@ -96,15 +96,11 @@ for index in range(0, parameters.optimizer.samples.stripped):
     print(index, best_force, best_force_per_amp, best_force_per_second, best_losses)
 
     # Perturb current best geometry
-    axial = abs(best_slot_axial_length + step_size * (random() * 2 - 1))
+    wire      = abs(best_wire + 1/10 * step_size * (random() * 2 - 1))
     thickness = abs(best_slot_thickness + step_size * (random() * 2 - 1))
 
-    if axial > parameters.armature.slots.axial_pitch:
-        # Skips invalid axial lengths
-        continue
-
     # Sets new parameters to attempt and solves that set
-    parameters.armature.slots.axial_length = axial
+    parameters.armature.slots.material.wire_diameter = wire
     parameters.armature.slots.radial_thickness = thickness
 
     try:
@@ -124,7 +120,7 @@ for index in range(0, parameters.optimizer.samples.stripped):
     csv_writer.writerow([
         index,
         step_size.stripped,
-        axial.stripped,
+        wire.stripped,
         thickness.stripped,
         average_force.stripped,
         force_per_amp.stripped,
@@ -144,7 +140,7 @@ for index in range(0, parameters.optimizer.samples.stripped):
         best_force_per_second = force_per_second
         best_losses = losses
 
-        best_slot_axial_length = axial
+        # best_slot_axial_length = axial
         best_slot_thickness = thickness
         continue
 

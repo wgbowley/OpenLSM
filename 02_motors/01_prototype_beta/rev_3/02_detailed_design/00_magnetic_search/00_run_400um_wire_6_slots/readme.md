@@ -1,4 +1,4 @@
-### 00_run_400um_6_slots
+### 00_run_400um_wire_6_slots
 
 <div align="center">
   <img src="./trace.png" alt="Normalized Trace" width="700">
@@ -49,29 +49,29 @@ copper_loss: 40 (W)
 ### Implementation
 
 ```py
-    # Normalizes the evaluation function
-    normalized_F = average_force / parameters.optimizer.normalization.average_force
-    normalized_F_A = force_per_amp / parameters.optimizer.normalization.force_per_ampere
-    normalized_F_S = force_per_second / parameters.optimizer.normalization.force_per_second
-    normalized_losses = losses / parameters.optimizer.normalization.copper_loss
-    normalized = normalized_F + normalized_F_S + normalized_F_A - 2 * normalized_losses
+# Normalizes the evaluation function
+normalized_F = average_force / parameters.optimizer.normalization.average_force
+normalized_F_A = force_per_amp / parameters.optimizer.normalization.force_per_ampere
+normalized_F_S = force_per_second / parameters.optimizer.normalization.force_per_second
+normalized_losses = losses / parameters.optimizer.normalization.copper_loss
+normalized = normalized_F + normalized_F_S + normalized_F_A - 2 * normalized_losses
 ```
 
 ```py
-    if normalized > best_normalized:
-        # Updates the best normalized & drops the stall
-        best_normalized = normalized
-        stall = 0
+if normalized > best_normalized:
+    # Updates the best normalized & drops the stall
+    best_normalized = normalized
+    stall = 0
 
-        # Saves the best outputs & inputs
-        best_force = average_force
-        best_force_per_amp = force_per_amp
-        best_force_per_second = force_per_second
-        best_losses = losses
+    # Saves the best outputs & inputs
+    best_force = average_force
+    best_force_per_amp = force_per_amp
+    best_force_per_second = force_per_second
+    best_losses = losses
 
-        best_slot_axial_length = axial
-        best_slot_thickness = thickness
-        continue
+    best_slot_axial_length = axial
+    best_slot_thickness = thickness
+    continue
 ```
 
 ---
