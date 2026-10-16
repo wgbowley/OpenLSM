@@ -18104,7 +18104,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "STM32G431K8Tx"
+		(property "Value" "STM32G431"
 			(at 228.092 83.566 0)
 			(show_name no)
 			(do_not_autoplace no)
