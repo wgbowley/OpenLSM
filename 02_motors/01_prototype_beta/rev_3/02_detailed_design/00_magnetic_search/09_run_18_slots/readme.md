@@ -32,10 +32,10 @@ objective(fixed_params, slot_thickness, wire_diameter) = force + force_per_amp +
 
 ```
 [optimizer.normalization]
-average_force: 5 (N)
-force_per_ampere: 80 (N/A)
+average_force: 100 (N)
+force_per_ampere: 1000 (N/A)
 force_per_second: 100 k(N/s)
-copper_loss: 40 (W)
+copper_loss: 100 (W)
 ```
 
 > *(Note). Was using the normalization as a weight proxy and also was not aiming for those 1:1:1:2*
