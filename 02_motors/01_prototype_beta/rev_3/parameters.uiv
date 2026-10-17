@@ -26,7 +26,7 @@ radial_thickness: 4.8 m(m)
 wire_diameter:  0.30 m(m)
 fill_factor:    0.95 (∅)
 
-conductivity:   63 M(S_m)
+conductivity:   58 M(S_m)
 
 # ---------------------------------------------
 

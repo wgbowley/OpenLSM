@@ -16,8 +16,8 @@ from picounits import RESISTANCE, INDUCTANCE, LENGTH, FREQUENCY
 # Loads the unit system
 resolve_derived()
 
-# System Constants
-resistivity = 3.70 * 10 ** - 8 * (RESISTANCE * LENGTH)
+# System Constants (Conductivity of 30 MS/m)
+resistivity = 3.33 * 10 ** - 8 * (RESISTANCE * LENGTH)
 free_space_permeability = 4 * pi * 10 ** -7 * (INDUCTANCE / LENGTH)
 
 # System Parameters

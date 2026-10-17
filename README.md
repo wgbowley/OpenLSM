@@ -38,7 +38,7 @@ The project will fulfill this goal by using readily available materials and tool
 
 ### Beta
 
-> *(Work in progress). The electromagnetic configuration is being optimized and then implemented in Fusion 360.*
+> *(Work in progress). The design is being implemented in CAD with a focus on heat sink development.*
 
 An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`50 Hz` at a linear velocity of `1 m/s`, eddy currents are a second-order effect compared to removing heat from the slots. The stator is a carbon fibre tube with `10 mm` × `10 mm` `N52` poles arranged as `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
 
