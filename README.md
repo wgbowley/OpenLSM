@@ -45,7 +45,7 @@ An `ironless tubular linear` motor featuring a passive radial `6061` aluminium h
 <div align="center">
   <img src="./05_media/03_prototype_beta/rev_3/winding_data_collection.jpg" alt="slot and pole" width="500">
   <br>
-  <em>Single slot coil and single stator pole.</em>
+  <em>Single armature slot and single stator pole.</em>
 </div>
 
 <br>
