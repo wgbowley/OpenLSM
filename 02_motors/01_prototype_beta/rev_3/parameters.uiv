@@ -24,7 +24,7 @@ radial_thickness: 4.8 m(m)
 
 [armature.slots.material]
 wire_diameter:  0.30 m(m)
-fill_factor:    0.95 (∅)
+fill_factor:    0.80 (∅)
 
 conductivity:   58 M(S_m)
 

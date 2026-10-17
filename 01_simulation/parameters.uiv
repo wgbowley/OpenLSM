@@ -13,7 +13,7 @@ system:     "Axisymmetric (Z-R) (Axial-Radial)"
 [numerics]
 velocity:     650 m(m/s)
 line_voltage: 24 (V)
-displacement: 400 m(m)
+displacement: 300 m(m)
 
 [numerics.samples]
 displacement_size:  1 m(m)
@@ -42,7 +42,7 @@ radial_thickness: 4.8 m(m)
 
 [armature.slots.material]
 wire_diameter:  0.30 m(m)
-fill_factor:    0.95 (∅)
+fill_factor:    0.8 (∅)
 
 conductivity:   58 M(S_m)
 
