@@ -19,8 +19,8 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 
 ### Overview
 
-OpenLSM is an open-source project to design low-cost linear motors for 3D printers and related Cartesian motion systems. 
-The project intends to require only limited tooling, specifically a lathe (and supporting tools), soldering equipment, a 3D printer, and a lot of patience. 
+<b>OpenLSM</b> is an open-source project to design low-cost linear motors for 3D printers and related Cartesian motion systems. 
+The project intends to require only limited tooling, specifically a `lathe` (and supporting tools), `soldering equipment`, a `3D printer`, and a lot of `patience`. 
 Ultimately, the project will conclude by establishing a reference design that is intended to be extended upon by the community.
 
 ### Objectives
