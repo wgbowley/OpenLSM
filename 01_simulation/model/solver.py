@@ -10,7 +10,7 @@ from builtins import float as f
 from math import pi, floor, sqrt
 
 from picounits import Q, DynamicLoader, strip_quantity as validate
-from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, COERCIVITY, NULLSET, FORCE
+from picounits import LENGTH, VOLTAGE, CONDUCTIVITY, COERCIVITY, NULLSET, FORCE, TIME
 
 from model.physics import field_equations
 from model.physics import field_oriented_control
@@ -170,13 +170,19 @@ class Solver:
         self.phase_inductance = self.phase_slots * self.slot_inductance
         self.phase_voltage = self.line_voltage / sqrt(3)
 
-        # Calculates the rms and peak currents for WYE
-        self.phase_rms_current = self.phase_voltage / self.phase_resistance
-        self.phase_peak_current = sqrt(2) * self.phase_rms_current
-
         # Calculate line-to-line resistance & inductance
         self.l2l_resistance = 2 * self.phase_resistance
         self.l2l_inductance = 2 * self.phase_inductance
+
+        # Calculates line impedance at operating velocity
+        self.frequency = self.velocity / self.dipole_axial_length
+
+        self.phase_reactance = 2 * pi * self.frequency * self.phase_inductance
+        self.phase_impedance = sqrt(self.phase_resistance ** 2 + self.phase_reactance ** 2)
+
+        # Calculates the rms and peak currents for WYE
+        self.phase_rms_current = self.phase_voltage / self.phase_impedance
+        self.phase_peak_current = sqrt(2) * self.phase_rms_current
 
         # Calculates the copper losses
         self.average_losses = 3 * self.phase_rms_current**2 * self.phase_resistance
@@ -207,9 +213,10 @@ class Solver:
     def _extract_validate(self, parameters: DynamicLoader) -> None:
         """ Extracts qualities from attribute tree and validates units """
         # Numerical
-        self.int_step_size = validate(parameters.numerics.solver.integration_step, LENGTH)
-        self.der_step_size = validate(parameters.numerics.solver.derivative_step, LENGTH)
-        self.line_voltage = validate(parameters.numerics.line_voltage, VOLTAGE)
+        self.int_step_size  = validate(parameters.numerics.solver.integration_step, LENGTH)
+        self.der_step_size  = validate(parameters.numerics.solver.derivative_step, LENGTH)
+        self.line_voltage   = validate(parameters.numerics.line_voltage, VOLTAGE)
+        self.velocity       = validate(parameters.numerics.velocity, LENGTH/TIME)
 
         # Armature
         self.number_slots = validate(parameters.armature.number_slots, NULLSET)

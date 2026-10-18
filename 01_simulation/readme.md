@@ -5,6 +5,8 @@ approximations to compute the magnetic co-energy, and finally uses its spatial d
 
 #### High Level Topology
 
+> Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
+
 ```
 Z-axis Position (z)
     ↓
@@ -22,7 +24,13 @@ Force on Armature at That Position
     ↺ (Moves to next position)
 ```
 
-> Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
+> *(Note). Back-emf is not modeled as it serves to model asymptotic velocity and force drop-off from v=0 to v=max, and was considered not required for OpenLSM.*
+
+#### Model Validation
+
+The analytical model is intended as a reduced-order model rather than a replacement for finite-element analysis (FEA). 
+It is quite quick, though exact speeds depend on parameters. It is useful for understanding the mechanics of linear 
+motors without the large execution times of FEA.
 
 ---
 
@@ -48,7 +56,7 @@ Because the spatial derivative is being calculated, both $H_{\text{stator}}^2$ a
 
 $$ U = \mu_0 \int_{\text{vol}} (H_{\text{armature}} H_{\text{stator}}) \, dv $$
 
-The volume integral can then be simplified for the 1D approximation using $A_{\text{rad}}$ between the slot mean and pole outer diameter:
+The volume integral can then be simplified for the 1D approximation using $A_{\text{rad}}$ as the slot radial thickness:
 
 $$ U = A_{\text{rad}} \cdot \mu_0 \int_{\Omega} H_{\text{armature}}(z - z_{o}) \cdot H_{\text{stator}}(z) \, dz $$
 
@@ -152,14 +160,6 @@ while True:
     # Moves along the z-axis
     z += dz
 ```
-
----
-
-### Model Validation
-
-The analytical model is intended as a reduced-order model rather than a replacement for finite-element analysis (FEA). 
-It is quite quick, though exact speeds depend on parameters. It is useful for understanding the mechanics of linear 
-motors without the large execution times of FEA.
 
 ---
 

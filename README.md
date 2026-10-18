@@ -19,14 +19,16 @@ P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
 
 ### Overview
 
-OpenLSM is an experimental project with the objective of designing low-cost permanent magnet linear motors for Cartesian motion systems such as pick-and-place machines or CNC machines. 
-The project will fulfill this goal by using readily available materials and tooling, combined with analytical and hybrid models.
+<b>OpenLSM</b> is an open-source project to design low-cost linear motors for 3D printers and related Cartesian motion systems. 
+The project intends to require only limited tooling, specifically a `lathe` (and supporting tools), `soldering equipment`, a `3D printer`, and a lot of `patience`. 
+Ultimately, the project will conclude by establishing a `reference design` that is intended to be extended upon by the community.
 
 ### Objectives
 
 ```
 - [x] Support voltage bus ranges of `12 V_dc` and `24 V_dc`.
 - [x] Validate the TeensySFOC and encoder board for linear motor applications.
+- [/] Total BOM cost for the motor (armature + stator) under $100 AUS.
 - [/] Achieve a target force per amp of `3.0 N/A_rms` and positional accuracy of `50 µm`.
 - [/] Reach an asymptote temperature of `60°C` under constant `5 N` static loading.
 - [/] Validate motor performance and generate performance curves for each voltage range.
@@ -38,19 +40,17 @@ The project will fulfill this goal by using readily available materials and tool
 
 ### Beta
 
-> *(Work in progress). The electromagnetic configuration is being optimized and then implemented in Fusion 360.*
-
-An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`50 Hz` at a linear velocity of `1 m/s`, eddy currents are a second-order effect compared to removing heat from the slots. The stator is a carbon fibre tube with `10 mm` × `10 mm` `N52` poles arranged as `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
+An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`65 Hz` at a linear velocity of `650 mm/s`, eddy currents are a second-order effect compared to removing heat from the slots. The armature has `18 slots` of `0.3 mm` diameter enamelled wire, with `6` slots in series per phase. The stator is a carbon fibre tube with `10 mm × 10 mm N52` poles arranged as `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
 
 <div align="center">
-  <img src="05_media/03_prototype_beta/rev_3/armature_conceptual_model.png" alt="Conceptual design of armature" width="700">
+  <img src="./05_media/03_prototype_beta/rev_3/winding_data_collection.jpg" alt="slot and pole" width="700">
   <br>
-  <em>Conceptual design of the armature.</em>
+  <em>Single armature slot and single stator pole.</em>
 </div>
 
 <br>
 
-See the [`motor design notes`](./02_motors/01_prototype_beta/rev_2/readme.md) for the full electromagnetic and thermal rationale of `Conceptual Design Rev 2`.
+See the [`motor design notes`](./02_motors/01_prototype_beta/rev_2/readme.md) for the thermal rationale of `Conceptual Design Rev 2`.
 
 ---
 
@@ -72,13 +72,15 @@ See the [`alpha notes`](./02_motors/00_prototype_alpha/readme.md) for the full r
 
 ---
 
-### Analytical Simulation
+### Numerical Methods
+
+#### Simulation
 
 This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, 
 then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
 
 <div align="center">
-  <img src="./05_media/00_simulation/00_analytical/example.png" alt="Analytical model" width="700">
+  <img src="./05_media/03_prototype_beta/rev_3/predicted_performance.png" alt="Analytical model" width="700">
   <p><em>1D field approximation and FOC showing position (linear) vs force (linear).</em></p>
 </div>
 
@@ -86,13 +88,25 @@ then uses 1D field approximations to compute the magnetic co-energy, and finally
 
 See [`01_simulation`](./01_simulation/readme.md) for more details.
 
+#### Convergent Random Search
+
+This search method used a random 64-bit float and adaptive step-size to converge towards a best-performing design under a normalized objective score. 
+The step-size was reduced using a `stall` effect where, if a better design isn't found within `x` iterations, the step-size is reduced by half until a cutoff.
+
+<div align="center">
+  <img src="./05_media/03_prototype_beta/rev_3/trace_300um_18slot.png" alt="Search" width="700">
+  <p><em>Length Vs thickness for a 18 slots motor with a fixed 330 µm wire diameter.</em></p>
+</div>
+
+<br>
+
+See [`01_prototype_beta/.../00_magnetic_search`](./02_motors/01_prototype_beta/rev_3/02_detailed_design/00_magnetic_search/) for more details.
+
 ---
  
 ### Supporting Boards
 
 #### Validation Stand & Sensors
-
-> *(On-hand). The armature board rev 1 PCB is on-hand. Components will be ordered from DigiKey soon.*
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. 
 The system consists of two boards: an encoder board with a resolution of `1.96 µm` and estimated accuracy of `10–20 µm`,

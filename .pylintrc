@@ -11,7 +11,9 @@ disable = W0621,                      # redefined-outer-name - Redefining name f
           R0903,                      # too-few-public-methods - Too few public methods (<2)
           E0401,                      # import-error - Unable to import module
           R0917,                      # too-many-positional-arguments - Too many positional arguments (>5)
-          C0103                       # invalid-name - Doesn't conform to snake_case naming
-
+          C0103,                      # invalid-name - Doesn't conform to snake_case naming
+          R1732,                      # Consider using `with` for resource-allocating operations
+          W1514,                      # Using open without explicitly specifying an encoding
+          W0702,                      # No exception type(s) specified (bare-except)
 [FORMAT]
 max-line-length = 120                 # Maximum number of characters on a single line

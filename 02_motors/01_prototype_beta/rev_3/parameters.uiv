@@ -6,4 +6,41 @@ unit_frame: si_metric.ut
 parameters: "prototype_beta/rev_3 design"
 system: "Axisymmetric (Z-R) (Axial-Radial)"
 
+
+# ---------------------------------------------
+
+[armature]
+number_slots:       18 (∅)
+radial_clearance:   0.5 m(m)
+
+[armature.core]
+radial_wall_thickness: 0 m(m)
+
+[armature.slots]
+axial_pitch:    3.333 m(m)
+axial_length:   3.30 m(m)
+
+radial_thickness: 4.8 m(m)
+
+[armature.slots.material]
+wire_diameter:  0.30 m(m)
+fill_factor:    0.80 (∅)
+
+conductivity:   58 M(S_m)
+
+# ---------------------------------------------
+
+[stator]
+length: 300 m(m)
+
+[stator.tube]
+radial_wall_thickness:  1 m(m)
+
+[stator.dipole]
+axial_length: 10 m(m)
+radial_thickness: 5 m(m)
+
+[stator.dipole.material]
+coercivity: 0.956 M(A_m)
+
 # ---------------------------------------------
