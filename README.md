@@ -100,7 +100,7 @@ The step-size was reduced using a `stall` effect where, if a better design isn't
 
 <br>
 
-See [`01_prototype_beta/.../00_magnetic_search](./02_motors/01_prototype_beta/rev_3/02_detailed_design/00_magnetic_search/) for more details.
+See [`01_prototype_beta/.../00_magnetic_search`](./02_motors/01_prototype_beta/rev_3/02_detailed_design/00_magnetic_search/) for more details.
 
 ---
  
