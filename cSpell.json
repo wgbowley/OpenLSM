@@ -146,6 +146,7 @@
     "datalim",
     "facecolor",
     "edgecolor",
-    "zorder"
+    "zorder",
+    "NTCLE",
   ]
 }
