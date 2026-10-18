@@ -88,9 +88,27 @@ then uses 1D field approximations to compute the magnetic co-energy, and finally
 
 See [`01_simulation`](./01_simulation/readme.md) for more details.
 
-#### Stochastic Search
+#### Random Search
 
-*(work in progress).*
+This search method used a random 64-bit float and adaptive step-size to converge towards a best-performing design under a normalized objective score. 
+The step-size was reduced using a `stall` effect where, if a better design isn't found within `x` iterations, the step-size is reduced by half until a cutoff.
+
+Two objective functions were used:
+
+```
+objective(_, thickness, axial_length) = n_force + n_force_per_amp + n_force_per_second - 2 * n_copper_losses
+objective(_, thickness, wire_diameter) = n_force + n_force_per_amp + n_force_per_second - 2 * n_copper_losses
+```
+
+The normalization scores were also used as quasi-weights to drive the solution towards a specific region, but 
+no standalone weights were established other than a `2x` penalty on copper losses (first-order losses).
+
+<div align="center">
+  <img src="./05_media/03_prototype_beta/rev_3/trace_300um_18slot.png" alt="Search" width="700">
+  <p><em>Convergent random search with 18 slots and a fixed 330 µm wire diameter.</em></p>
+</div>
+
+See [`01_prototype_beta/.../00_magnetic_search](./02_motors/01_prototype_beta/rev_3/02_detailed_design/00_magnetic_search/) for more details.
 
 ---
  

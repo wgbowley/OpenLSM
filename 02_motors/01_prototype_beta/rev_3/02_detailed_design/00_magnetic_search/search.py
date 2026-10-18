@@ -12,7 +12,7 @@ from random import random
 
 from picounits import Q, Parser, DynamicLoader
 from picounits import LENGTH, FORCE, CURRENT, POWER, NULLSET, MILLI, TIME
-from model.solver import Solver
+from model.solver import Solver         # <- Needs to be using the analytical simulation.
 
 
 # Loads unit system, material library & parameters

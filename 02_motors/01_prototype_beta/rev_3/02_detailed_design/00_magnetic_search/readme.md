@@ -8,7 +8,7 @@ and wire diameters within fixed wire size, voltage, pole size, and other seconda
 have high force, high force per ampere, high force per second while also having low copper losses (the first-order loss mechanism for ironless motors).
 
 ```
-objective(fixed_params, slot_thickness, wire_diameter) = force + force_per_amp + force_per_second - 2 * copper_losses
+objective(_, thickness, axial_length)= n_force + n_force_per_amp + n_force_per_second - 2 * n_copper_losses
 ```
 
 Stochastic (random) search was chosen as the parameter size is small (`N^2`) and because the design space is known to contain valid designs, 
