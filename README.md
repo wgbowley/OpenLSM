@@ -40,8 +40,6 @@ Ultimately, the project will conclude by establishing a `reference design` that 
 
 ### Beta
 
-> *(Work in progress). The motor is being implemented in CAD with a focus on heat sink development.*
-
 An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`65 Hz` at a linear velocity of `650 mm/s`, eddy currents are a second-order effect compared to removing heat from the slots. The armature has `18 slots` of `0.3 mm` diameter enamelled wire, with `6` slots in series per phase. The stator is a carbon fibre tube with `10 mm × 10 mm N52` poles arranged as `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
 
 <div align="center">
@@ -109,8 +107,6 @@ See [`01_prototype_beta/.../00_magnetic_search`](./02_motors/01_prototype_beta/r
 ### Supporting Boards
 
 #### Validation Stand & Sensors
-
-> *(On-hand). The armature board rev 1 PCB is on-hand. Components have been ordered from DigiKey.*
 
 The integrated sensor boards are a platform for measuring the motor's position, acceleration, and thermal profile `T(z, t)`. 
 The system consists of two boards: an encoder board with a resolution of `1.96 µm` and estimated accuracy of `10–20 µm`,
