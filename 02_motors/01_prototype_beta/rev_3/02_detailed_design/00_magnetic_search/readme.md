@@ -5,6 +5,7 @@
   <em>Trade offs for 18 slot 300um wire diameter motor under weights/normalization.</em>
 </div>
 
+<br>
 
 ### Search/Optimization
 
