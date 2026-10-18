@@ -2,7 +2,7 @@
 <div align="center">
   <img src="./08_run_300um_wire_18_slots/tradeoffs.png" alt="Trade offs" width="700">
   <br>
-  <em>Trade offs for 18 slot 300um wire diameter motor.</em>
+  <em>Trade offs for 18 slot 300um wire diameter motor under weights/normalization.</em>
 </div>
 
 
