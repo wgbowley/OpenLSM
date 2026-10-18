@@ -98,6 +98,8 @@ The step-size was reduced using a `stall` effect where, if a better design isn't
   <p><em>Convergent random search with 18 slots and a fixed 330 µm wire diameter.</em></p>
 </div>
 
+<br>
+
 See [`01_prototype_beta/.../00_magnetic_search](./02_motors/01_prototype_beta/rev_3/02_detailed_design/00_magnetic_search/) for more details.
 
 ---
