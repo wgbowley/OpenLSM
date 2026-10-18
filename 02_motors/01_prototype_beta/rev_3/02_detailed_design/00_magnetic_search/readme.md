@@ -11,6 +11,8 @@ have high force, high force per ampere, high force per second while also having 
 objective(_, thickness, axial_length)= n_force + n_force_per_amp + n_force_per_second - 2 * n_copper_losses
 ```
 
+<br>
+
 Stochastic (random) search was chosen as the parameter size is small (`N^2`) and because the design space is known to contain valid designs, 
 and OpenLSM doesn't need the best possible motor within the design space. It is a reasonable choice given those conditions.
 
