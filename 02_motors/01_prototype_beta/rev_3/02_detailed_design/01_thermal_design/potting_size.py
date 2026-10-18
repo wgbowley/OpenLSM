@@ -24,7 +24,7 @@ axial_length = 60 * MILLI * LENGTH
 for i in range(0, 9):
     # Calculates the temperature at the boundary of the potting
     term = 2 * pi * thermal_conductivity * axial_length
-    outer_temp = first_order_loss / term * log(outer_radius / inner_radius) + room_temperature
+    DT = - first_order_loss / term * log(outer_radius / inner_radius)
 
     # Calculates the energy stored in that potting per k
     volume = pi * (outer_radius ** 2 - inner_radius ** 2) * axial_length
@@ -32,5 +32,5 @@ for i in range(0, 9):
 
     capacity = approx_capacity * mass
 
-    print(f"dT over {outer_radius}, {inner_radius}, {volume}: {room_temperature} {outer_temp}, {capacity}")
+    print(f"{outer_radius}, {inner_radius}, {volume}: {DT}, {capacity}")
     outer_radius -= 1 * MILLI * LENGTH
