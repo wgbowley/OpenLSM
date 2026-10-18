@@ -40,7 +40,7 @@ The project will fulfill this goal by using readily available materials and tool
 
 > *(Work in progress). The design is being implemented in CAD with a focus on heat sink development.*
 
-An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`50 Hz` at a linear velocity of `1 m/s`, eddy currents are a second-order effect compared to removing heat from the slots. The armature has `18 slots` of `0.3 mm` diameter enamelled wire, with `6` slots in series per phase. The stator is a carbon fibre tube with `10 mm × 10 mm N52` poles arranged as `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
+An `ironless tubular linear` motor featuring a passive radial `6061` aluminium heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`65 Hz` at a linear velocity of `650 mm/s`, eddy currents are a second-order effect compared to removing heat from the slots. The armature has `18 slots` of `0.3 mm` diameter enamelled wire, with `6` slots in series per phase. The stator is a carbon fibre tube with `10 mm × 10 mm N52` poles arranged as `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
 
 <div align="center">
   <img src="./05_media/03_prototype_beta/rev_3/winding_data_collection.jpg" alt="slot and pole" width="700">
@@ -72,19 +72,25 @@ See the [`alpha notes`](./02_motors/00_prototype_alpha/readme.md) for the full r
 
 ---
 
-### Analytical Simulation
+### Numerical Methods
+
+#### Simulation
 
 This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, 
 then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
 
 <div align="center">
-  <img src="./05_media/00_simulation/example.png" alt="Analytical model" width="700">
+  <img src="./05_media/03_prototype_beta/rev_3/predicted_performance.png" alt="Analytical model" width="700">
   <p><em>1D field approximation and FOC showing position (linear) vs force (linear).</em></p>
 </div>
 
 <br>
 
 See [`01_simulation`](./01_simulation/readme.md) for more details.
+
+#### Stochastic Search
+
+*(work in progress).*
 
 ---
  
