@@ -90,14 +90,14 @@ then uses 1D field approximations to compute the magnetic co-energy, and finally
 
 See [`01_simulation`](./01_simulation/readme.md) for more details.
 
-#### Random Search
+#### Convergent Random Search
 
 This search method used a random 64-bit float and adaptive step-size to converge towards a best-performing design under a normalized objective score. 
 The step-size was reduced using a `stall` effect where, if a better design isn't found within `x` iterations, the step-size is reduced by half until a cutoff.
 
 <div align="center">
   <img src="./05_media/03_prototype_beta/rev_3/trace_300um_18slot.png" alt="Search" width="700">
-  <p><em>Convergent random search with 18 slots and a fixed 330 µm wire diameter.</em></p>
+  <p><em>Length Vs thickness for a 18 slots motor with a fixed 330 µm wire diameter.</em></p>
 </div>
 
 <br>
