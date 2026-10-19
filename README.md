@@ -52,8 +52,6 @@ An `ironless tubular linear` motor featuring a passive radial `6061` aluminium h
 
 See the [`motor design notes`](./02_motors/01_prototype_beta/rev_2/readme.md) for the thermal rationale of `Conceptual Design Rev 2`.
 
----
-
 ### Numerical Methods
 
 #### Simulation
@@ -84,7 +82,6 @@ The step-size was reduced using a `stall` effect where, if a better design isn't
 
 See [`01_prototype_beta/.../00_magnetic_search`](./02_motors/01_prototype_beta/rev_3/02_detailed_design/00_magnetic_search/) for more details.
 
----
  
 ### Supporting Boards
 
