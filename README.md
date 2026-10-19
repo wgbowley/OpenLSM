@@ -54,24 +54,6 @@ See the [`motor design notes`](./02_motors/01_prototype_beta/rev_2/readme.md) fo
 
 ---
 
-### Alpha
-
-An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, although the force output was not quantified before the PLA coil forms deformed due to thermal stress.
-
-<div align="center">
-  <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side view on test stand" width="700">
-  <br>
-  <em>Side view on test stand.</em>
-</div>
-
-<br>
-
-The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
-
-See the [`alpha notes`](./02_motors/00_prototype_alpha/readme.md) for the full report on Prototype Alpha.
-
----
-
 ### Numerical Methods
 
 #### Simulation
@@ -131,6 +113,24 @@ It is a development board that is not intended for long-term usage.
 <br>
 
 See [`03_boards`](./03_boards/) for the supporting PCB and [`04_fixtures`](./04_fixtures/) for validation setup.
+
+---
+
+### Alpha
+
+An `ironless planar linear` motor with a polylactic acid (PLA) armature featuring `6` slots, hand wound using `0.2 mm` diameter enameled copper wire and `5 mm` wide Kapton tape, with `2` slots in-series per phase `(WYE)`. The stator, similar to the armature, was printed in PLA and had `4` pole pairs per armature length and `10` pole pairs total. The motor produced measurable force, although the force output was not quantified before the PLA coil forms deformed due to thermal stress.
+
+<div align="center">
+  <img src="05_media/02_prototype_alpha/02_experimental/side_view_on_test_stand.jpg" alt="side view on test stand" width="700">
+  <br>
+  <em>Side view on test stand.</em>
+</div>
+
+<br>
+
+The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
+
+See the [`alpha notes`](./02_motors/00_prototype_alpha/readme.md) for the full report on Prototype Alpha.
 
 ---
 
