@@ -27,9 +27,9 @@ base_delta: -0.254 (K)
 
 [fin]
 base_radius: 15.3 m(m)
-outer_radius: 19.3 m(m)
+outer_radius: 16.3 m(m)
 axial_length: 60 m(m)
-axial_spacing: 1 m(m)
+axial_spacing: 2 m(m)
 axial_thickness: 1 m(m)
 
 # ---------------------------------------------

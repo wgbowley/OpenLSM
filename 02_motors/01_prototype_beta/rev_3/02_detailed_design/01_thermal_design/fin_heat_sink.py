@@ -43,7 +43,7 @@ def compute_setup() -> tuple[Q, Q, Q, Q]:
 
     # Computes the Elenbaas Correlation for natural convection
     nu_term = (1 - exp(-35/rayleigh)) ** (3/4)
-    nu_natural = 1 / 24 * rayleigh * (parameters.fin.axial_spacing / radial_thickness) ** nu_term
+    nu_natural = rayleigh / 24 * nu_term
 
     # Computes the heat transfer coefficient for the with the environment
     heat_transfer = nu_natural * environmental.k_conductivity / parameters.fin.axial_spacing
