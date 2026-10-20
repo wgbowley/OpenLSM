@@ -15,5 +15,6 @@ disable = W0621,                      # redefined-outer-name - Redefining name f
           R1732,                      # Consider using `with` for resource-allocating operations
           W1514,                      # Using open without explicitly specifying an encoding
           W0702,                      # No exception type(s) specified (bare-except)
+          E0611,                      # (No name in module)
 [FORMAT]
 max-line-length = 120                 # Maximum number of characters on a single line

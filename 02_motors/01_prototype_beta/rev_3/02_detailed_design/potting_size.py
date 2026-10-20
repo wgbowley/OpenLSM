@@ -11,7 +11,6 @@ from math import pi, log
 from picounits import THERMAL_CONDUCTIVITY, ENERGY, TEMPERATURE, POWER, LENGTH, MASS, MILLI
 
 # Parameters
-room_temperature = 24 * TEMPERATURE
 thermal_conductivity = 1.25 * THERMAL_CONDUCTIVITY
 density = 1950 * MASS / LENGTH ** 3
 approx_capacity = 1500 * ENERGY / (MASS * TEMPERATURE)
