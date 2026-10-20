@@ -15,7 +15,7 @@ samples: 100
 
 [numerics.step_size]
 axial_spacing: 0.1 m(m)
-radius: 0.5 m(m)
+radius: 0.1 m(m)
 
 # ---------------------------------------------
 
@@ -36,8 +36,8 @@ base_delta: -0.254 (K)
 # ---------------------------------------------
 
 [fin]
-base_radius: 15.3 m(m)
-outer_radius: 15.4 m(m)     # Initial radius*
+base_radius: 14.3 m(m)
+outer_radius: 14.4 m(m)     # Initial radius*
 axial_length: 60 m(m)
 axial_spacing: 0.1 m(m)     # Initial spacing*
 axial_thickness: 2 m(m)
