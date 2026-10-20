@@ -149,6 +149,7 @@
     "zorder",
     "NTCLE",
     "scipython",
-    "Elenbaas"
+    "Elenbaas",
+    "imshow"
   ]
 }

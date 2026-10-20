@@ -6,6 +6,16 @@ unit_frame: derived.ut
 
 [notes]
 simulation: "Analytical annular heat-sink model"
+NOTE: "Goto 01_simulation for final thermal simulation."
+
+# ---------------------------------------------
+
+[numerics]
+samples: 100
+
+[numerics.step_size]
+axial_spacing: 0.1 m(m)
+radius: 0.5 m(m)
 
 # ---------------------------------------------
 
@@ -27,9 +37,13 @@ base_delta: -0.254 (K)
 
 [fin]
 base_radius: 15.3 m(m)
-outer_radius: 16.3 m(m)
+outer_radius: 15.4 m(m)     # Initial radius*
 axial_length: 60 m(m)
-axial_spacing: 2 m(m)
-axial_thickness: 1 m(m)
+axial_spacing: 0.1 m(m)     # Initial spacing*
+axial_thickness: 2 m(m)
+
+emissivity: 0.85 (∅)
+stefan_boltzmann: 5.67e-8 (W*m^-2*K^-4) 
+k_conductivity: 167 (W*m^-1*K^-1)
 
 # ---------------------------------------------

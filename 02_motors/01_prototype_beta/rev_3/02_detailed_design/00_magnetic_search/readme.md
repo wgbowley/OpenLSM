@@ -41,6 +41,6 @@ copper_loss: 40 (W)
 force_per_ampere: 10 (N/A)
 ```
 
-> `optimizer.size` defines the step size of the optimizer which is the same for both axial and thickness.
+> `optimizer.size` defines the step size of the optimizer which is the same for both axial length and radial thickness.
 
 ---
