@@ -77,7 +77,7 @@ of fin spacing and radial fin sizes to produce a thermal performance graph.
 
 <div align="center">
   <img src="./05_media/00_simulation/01_thermal/example.png" alt="Thermal Model" width="700">
-  <p><em>Grid search over fin axial spacing and radial thickness of fins.</em></p>
+  <p><em>Grid search over fin axial spacing and radial fin size.</em></p>
 </div>
 
 <br>
