@@ -1,0 +1,57 @@
+[version]
+format:     0.1.2
+unit_frame: derived.ut
+
+# ---------------------------------------------
+
+[notes]
+simulation: "Reduced Order Analytical Model"
+system:     "Axisymmetric (Z-R) (Axial-Radial)"
+
+# ---------------------------------------------
+
+[numerics]
+samples: 100
+
+[numerics.step_size]
+axial_spacing: 0.1 m(m)
+radial_thickness: 0.1 m(m)
+
+[numerics.source]
+copper_delta: 60 (K)
+
+# ---------------------------------------------
+
+[environmental]
+gravity: 9.81 (m*s^-2)
+temperature: 293.15 (K)
+
+viscosity: 1.506e-5 (m^2*s^-1)
+diffusivity: 2.0e-5 (m^2*s^-1)
+conductivity: 0.0264 (W*m^-1*K^-1)
+
+# ---------------------------------------------
+
+[potting]
+inner_radius: 11 m(m)
+radial_thickness: 1 m(m)
+
+[potting.material]
+conductivity: 1.25 (W*m^-1*K^-1)
+
+# ---------------------------------------------
+
+[sink]
+axial_length: 60 m(m)
+radial_thickness: 2 m(m)
+
+[sink.fin]
+# Both radial thickness & spacing are computed.
+axial_thickness: 2 m(m)
+radiate_self_absorption: 0.5 (∅)
+
+[sink.material]
+emissivity: 0.85 (∅)
+conductivity: 167 (W*m^-1*K^-1)
+
+# ---------------------------------------------

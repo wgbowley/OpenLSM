@@ -30,11 +30,10 @@ This is Revision 2, which was designed to develop a thermal management strategy 
 
 ---
 
-#### [Revision 3](./rev_3) - Implementation of Prototype Beta and validation of the thermal studies
+#### [Revision 3](./rev_3) - Implemented Beta Design.
 
 *(TBD) - Work in progress*
 
-This is Revision 3, which is intended to be built and validated using the boards designed alongside it. 
-This prototype is intended to serve as validation for the thermal analysis studies conducted in Revisions 1 and 2.
+This is Revision 3, which is intended to be built and validated using the boards designed alongside it. This prototype is intended to serve as validation for the thermal analysis studies conducted in Revisions 1 and 2.
 
 ---
