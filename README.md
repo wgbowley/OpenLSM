@@ -73,7 +73,7 @@ See [`01_simulation/00_magnetic`](./01_simulation/00_magnetic/readme.md) for mor
 
 This analytical model uses heat conduction to model the temperature drop across the potting material and heat sink base. It then uses the surface temperature
 of the exposed heat sink to calculate the conductive, convective and radiate heat dissipation of a specific geometry. It then repeats this across a grid
-of fin spacing and radial fin sizes to produce a tradeoff graph.
+of fin spacing and radial fin sizes to produce a thermal performance graph.
 
 <div align="center">
   <img src="./05_media/00_simulation/01_thermal/example.png" alt="Thermal Model" width="700">
