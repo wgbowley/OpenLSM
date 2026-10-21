@@ -23,10 +23,16 @@ axial_length:   3.30 m(m)
 radial_thickness: 4.8 m(m)
 
 [armature.slots.material]
+# Enamelled Copper Wire 
 wire_diameter:  0.30 m(m)
 fill_factor:    0.80 (∅)
 
 conductivity:   58 M(S_m)
+
+# [armature.potting]
+
+
+# [armature.heat_sink]
 
 # ---------------------------------------------
 
@@ -41,6 +47,7 @@ axial_length: 10 m(m)
 radial_thickness: 5 m(m)
 
 [stator.dipole.material]
+# N52 NdFeB - Axially Magnetized
 coercivity: 0.956 M(A_m)
 
 # ---------------------------------------------
