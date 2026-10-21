@@ -56,8 +56,9 @@ See the [`motor design notes`](./02_motors/01_prototype_beta/rev_2/readme.md) fo
 
 #### Magnetic Model
 
-This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, 
-then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
+This analytical model uses control currents (id, iq) and then a three-phase transform to compute the phase current based on position, 
+then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force. 
+This is then repeated across the stator to produce a force vs position graph.
 
 <div align="center">
   <img src="./05_media/03_prototype_beta/rev_3/predicted_performance.png" alt="Magnetic Model" width="700">
@@ -70,7 +71,9 @@ See [`01_simulation/00_magnetic`](./01_simulation/00_magnetic/readme.md) for mor
 
 #### Thermal Model
 
-This analytical model uses Fourier's law of heat conduction to model the delta across the potting material and heat sink base. It then uses the resulting surface temperature and the fin efficiency from a modified Bessel function. The Rayleigh and Nusselt numbers are then calculated based on the geometry to get the approximate convective/conductive heat transfer (Elenbaas). The radiated heat transfer is then calculated with the Stefan-Boltzmann law with a weighting factor for self-absorption to finally compute the total heat dissipation.
+This analytical model uses heat conduction to model the temperature drop across the potting material and heat sink base. It then uses the surface temperature
+of the exposed heat sink to calculate the conductive, convective and radiate heat dissipation of a specific geometry. It then repeats this across a grid
+of fin spacing and radial fin sizes to produce a tradeoff graph.
 
 <div align="center">
   <img src="./05_media/00_simulation/01_thermal/example.png" alt="Thermal Model" width="700">
