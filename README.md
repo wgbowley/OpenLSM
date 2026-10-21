@@ -52,37 +52,35 @@ An `ironless tubular linear` motor featuring a passive radial `6061` annular hea
 
 See the [`motor design notes`](./02_motors/01_prototype_beta/rev_2/readme.md) for the thermal rationale of `Conceptual Design Rev 2`.
 
-### Numerical Methods
+### Simulation
 
-#### Simulation
+#### Magnetic Model
 
 This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, 
 then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
 
 <div align="center">
-  <img src="./05_media/03_prototype_beta/rev_3/predicted_performance.png" alt="Analytical model" width="700">
+  <img src="./05_media/03_prototype_beta/rev_3/predicted_performance.png" alt="Magnetic Model" width="700">
   <p><em>1D field approximation and FOC showing position (linear) vs force (linear).</em></p>
 </div>
 
 <br>
 
-See [`01_simulation`](./01_simulation/readme.md) for more details.
+See [`01_simulation/00_magnetic`](./01_simulation/00_magnetic/readme.md) for more details.
 
-#### Convergent Random Search
+#### Thermal Model
 
-This search method used a random 64-bit float and adaptive step-size to converge towards a best-performing design under a normalized objective score. 
-The step-size was reduced using a `stall` effect where, if a better design isn't found within `x` iterations, the step-size is reduced by half until a cutoff.
+This analytical model uses Fourier's law of heat conduction to model the delta across the potting material and heat sink base. It then uses the resulting surface temperature and the fin efficiency from a modified Bessel function. The Rayleigh and Nusselt numbers are then calculated based on the geometry to get the approximate convective/conductive heat transfer (Elenbaas). The radiated heat transfer is then calculated with the Stefan-Boltzmann law with a weighting factor for self-absorption to finally compute the total heat dissipation.
 
 <div align="center">
-  <img src="./05_media/03_prototype_beta/rev_3/trace_300um_18slot.png" alt="Search" width="700">
-  <p><em>Length Vs thickness for a 18 slots motor with a fixed 330 µm wire diameter.</em></p>
+  <img src="./05_media/00_simulation/01_thermal/example.png" alt="Thermal Model" width="700">
+  <p><em>Grid search over fin axial spacing and radial thickness of fins.</em></p>
 </div>
 
 <br>
 
-See [`01_prototype_beta/.../00_magnetic_search`](./02_motors/01_prototype_beta/rev_3/02_detailed_design/00_magnetic_search/) for more details.
+See [`01_simulation/01_thermal`](./01_simulation/01_thermal/readme.md) for more details.
 
- 
 ### Supporting Boards
 
 #### Validation Stand & Sensors
