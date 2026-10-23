@@ -50,7 +50,7 @@ An `ironless tubular linear` motor featuring a passive radial `6061` annular hea
 
 <br>
 
-See the [`motor design notes`](./02_motors/01_prototype_beta/rev_2/readme.md) for the thermal rationale of `Conceptual Design Rev 2`.
+See the [`motor design notes`](./02_motors/01_prototype_beta/rev_2) for the thermal rationale of `Conceptual Design Rev 2`.
 
 ### Simulation
 
@@ -67,7 +67,7 @@ This is then repeated across the stator to produce a force vs position graph.
 
 <br>
 
-See [`01_simulation/00_magnetic`](./01_simulation/00_magnetic/readme.md) for more details.
+See [`01_simulation/00_magnetic`](./01_simulation/00_magnetic) for more details.
 
 #### Thermal Model
 
@@ -82,7 +82,7 @@ of fin spacing and radial fin sizes to produce a thermal performance graph.
 
 <br>
 
-See [`01_simulation/01_thermal`](./01_simulation/01_thermal/readme.md) for more details.
+See [`01_simulation/01_thermal`](./01_simulation/01_thermal) for more details.
 
 ### Supporting Boards
 
@@ -128,7 +128,7 @@ An `ironless planar linear` motor with a polylactic acid (PLA) armature featurin
 
 The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
 
-See the [`alpha notes`](./02_motors/00_prototype_alpha/readme.md) for the full report on Prototype Alpha.
+See the [`alpha notes`](./02_motors/00_prototype_alpha) for the report on Prototype Alpha.
 
 ---
 
