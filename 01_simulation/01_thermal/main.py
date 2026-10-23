@@ -9,6 +9,8 @@ Description:
 from pathlib import Path
 from picounits import Parser
 
+from model.solver import Solver
+
 # Loads unit system, material library & parameters
 ROOT_DIR = Path(__file__).resolve().parents[0]
 
@@ -16,4 +18,5 @@ ROOT_DIR = Path(__file__).resolve().parents[0]
 parameters_path = ROOT_DIR / "parameters.uiv"
 parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
 
-parameters.info()
+# Thermal Solver for annulus heat-sink
+solver = Solver(parameters)

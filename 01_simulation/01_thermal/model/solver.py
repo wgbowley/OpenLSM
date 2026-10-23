@@ -1,0 +1,85 @@
+"""
+Filename:
+
+Description:
+    Thermal solver class for calculating the total
+    heat dissipation from an annulus heat sink.
+"""
+
+from math import pi, log
+from builtins import float as f
+
+from picounits import DynamicLoader, strip_quantity as validate
+from picounits import TEMPERATURE, THERMAL_CONDUCTIVITY, LENGTH, TIME, NULLSET, POWER
+
+class Solver:
+    """ Computes the total heat dissipation for a annulus heat sink """
+    def __init__(self, parameters: DynamicLoader) -> None:
+        """ Initializes the solver class """
+        self._extract_validate(parameters)
+        self.stefan_boltzmann = 5.67 * 10 ** - 9
+
+        # Computes derived values from parameters
+        self._compute_derived_values()
+
+    def compute_performance(self) -> None:
+        """ Computes the thermal performance map of a series of heat-sinks """
+        return
+
+    def _try_permutation(self, axial_space: f, thickness: f) -> None:
+        """ Computes the thermal performance of the axial space and thickness permutation """
+        _ = axial_space
+        _ = thickness
+
+        return
+
+    def _compute_derived_values(self) -> None:
+        """ Compute derived values based on parameters """
+        potting_outer_radius = self.potting_inner_radius + self.potting_radial_thickness
+        self.sink_outer_radius = potting_outer_radius + self.sink_radial_thickness
+
+        # Calculates the temperature drop across the potting material
+        r_pot = log(potting_outer_radius / self.potting_inner_radius)
+        r_pot /= 2 * pi * self.potting_conductivity * self.sink_axial_length
+
+        self.t_pot_drop = - r_pot * self.copper_loss
+
+        # Calculates the temperature drop across the annulus heat-sink base
+        r_sink = log(self.sink_outer_radius / potting_outer_radius)
+        r_sink /= 2 * pi * self.sink_conductivity * self.sink_axial_length
+
+        self.t_sink_drop = - r_sink * self.copper_loss
+        self.fin_delta = self.copper_delta + self.t_pot_drop + self.t_sink_drop
+
+        # Calculates the thermal expansion coefficient (Assumes ideal gas)
+        self.t_expansion = 1.0 / (self.fin_delta + self.env_temp)
+
+    def _extract_validate(self, parameters: DynamicLoader) -> None:
+        """ Extracts qualities from attribute tree and validates units """
+        # Numerics
+        self.samples = validate(parameters.numerics.samples, NULLSET)
+        self.axial_size = validate(parameters.numerics.step_size.axial_spacing, LENGTH)
+        self.radial_size = validate(parameters.numerics.step_size.radial_thickness, LENGTH)
+
+        self.copper_loss = validate(parameters.numerics.source.loss, POWER)
+        self.copper_delta = validate(parameters.numerics.source.delta, TEMPERATURE)
+
+        # Environmental variables
+        self.gravity = validate(parameters.environmental.gravity, LENGTH * TIME ** -2)
+        self.env_temp = validate(parameters.environmental.temperature, TEMPERATURE)
+        self.viscosity = validate(parameters.environmental.viscosity, LENGTH ** 2 * TIME ** -1)
+        self.diffusivity = validate(parameters.environmental.diffusivity, LENGTH ** 2 * TIME ** -1)
+        self.env_conduct = validate(parameters.environmental.conductivity, THERMAL_CONDUCTIVITY)
+
+        # Potting
+        self.potting_inner_radius = validate(parameters.potting.inner_radius, LENGTH)
+        self.potting_radial_thickness = validate(parameters.potting.radial_thickness, LENGTH)
+        self.potting_conductivity = validate(parameters.potting.material.conductivity, THERMAL_CONDUCTIVITY)
+
+        # Heat Sink
+        self.sink_axial_length = validate(parameters.sink.axial_length, LENGTH)
+        self.sink_radial_thickness = validate(parameters.sink.radial_thickness, LENGTH)
+        self.fin_axial_thickness = validate(parameters.sink.fin.axial_thickness, LENGTH)
+        self.fin_self_absorption = validate(parameters.sink.fin.self_absorption, NULLSET)
+        self.sink_emissivity = validate(parameters.sink.material.emissivity, NULLSET)
+        self.sink_conductivity = validate(parameters.sink.material.conductivity, THERMAL_CONDUCTIVITY)

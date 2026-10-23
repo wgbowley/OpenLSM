@@ -18,7 +18,8 @@ axial_spacing: 0.1 m(m)
 radial_thickness: 0.1 m(m)
 
 [numerics.source]
-copper_delta: 60 (K)
+loss: 40 (W)
+delta: 60 (K)
 
 # ---------------------------------------------------
 
