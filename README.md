@@ -154,7 +154,7 @@ See [`06_dropped`](./06_dropped/) for more details.
 ```
 @misc{openLSM_2026,
   author = {William Bowley},
-  title = {openLSM: Low-Cost Linear Synchronous Permanent-Magnet Motor Platform},
+  title = {openLSM: Low-Cost Linear Synchronous Permanent-Magnet Motor},
   url = {https://github.com/wgbowley/openLSM},
   year = {2026},
   note = {GitHub repository},
