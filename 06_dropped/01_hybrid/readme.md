@@ -6,9 +6,6 @@ This hybrid model uses the inverse Clarke and Park transforms to compute the pha
 
 *(TBD) - Work in progress*
 
-```
-
-```
 
 > Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
 

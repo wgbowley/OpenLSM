@@ -56,7 +56,7 @@ See the [`motor design notes`](./02_motors/01_prototype_beta/rev_2/readme.md) fo
 
 #### Magnetic Model
 
-This analytical model uses control currents (id, iq) and then a three-phase transform to compute the phase current based on position, 
+This analytical model uses control currents `(id, iq)` and then a three-phase transform to compute the phase current based on position, 
 then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force. 
 This is then repeated across the stator to produce a force vs position graph.
 

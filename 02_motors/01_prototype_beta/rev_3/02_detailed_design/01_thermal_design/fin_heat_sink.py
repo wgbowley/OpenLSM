@@ -7,7 +7,7 @@ Description:
     and thermal boundary at fin tips.
     
     NOTE:
-    This is the initial thermal simulation.
+    This is the PROTOTYPE thermal simulation.
     Goto 01_simulation for final thermal simulation.
 """
 

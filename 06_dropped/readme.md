@@ -1,11 +1,6 @@
 ### 06_dropped
 
-> It has not been manufactured, experimentally validated, or verified for performance.
-> Do not assume the design or simulation is suitable for fabrication/usage without further analysis.
-
 This folder contains deliverables that were dropped due to not being on the critical path of `OpenLSM`. However, they are dropped here to serve as a starting point for future work, or for others to expand upon.
-
----
 
 #### [00_bridge_driver](00_bridge_driver) - Triple Half-Bridge Driver
 
@@ -14,6 +9,15 @@ This folder contains deliverables that were dropped due to not being on the crit
 > *(Work in progress). The current sensors should be replaced with a magnetic sensor, and the CANBUS interface needs fixing. The schematic needs a design review also.*
 
 A `96 V`, `30 A` triple half-bridge driver with CAN, RS-485, and `step/dir` interfaces, and full isolation between the `STM32`, the half-bridge drivers, and current sensors.
+
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="./00_bridge_driver/05_media/mock_up_board_forward.png" alt="Driver Board TOP" width="350"></td>
+      <td><img src="./00_bridge_driver/05_media/mock_up_board_back.png" alt="Driver Board Bottom" width="350"></td>
+    </tr>
+  </table>
+</div>
 
 ---
 
@@ -24,5 +28,11 @@ A `96 V`, `30 A` triple half-bridge driver with CAN, RS-485, and `step/dir` inte
 > *(Work in progress). IFEMM works for the FEMM solution and the Biot–Savart kernel works. Just need to combine them and finish the model.*
 
 A hybrid model using `FEMM` to compute the stator field, then using the Biot–Savart law with a parametric slot geometry to compute the armature field. The magnetic co-energy is then calculated assuming uniform magnetic permeability, and finally the spatial derivative over the z-axis is used to compute force.
+
+<div align="center">
+  <img src="./01_hybrid/media/slot_integrand_kernel.png" width="700">
+  <br>
+  <em>Slot integrand kernel solution.</em>
+</div>
 
 ---

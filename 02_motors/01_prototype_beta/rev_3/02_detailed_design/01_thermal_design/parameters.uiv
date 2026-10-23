@@ -6,7 +6,7 @@ unit_frame: derived.ut
 
 [notes]
 simulation: "Analytical annular heat-sink model"
-NOTE: "Goto 01_simulation for final thermal simulation."
+NOTE: "This is the PROTOTYPE heat simulation."
 
 # ---------------------------------------------
 

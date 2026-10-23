@@ -16,11 +16,7 @@ Prototype Alpha is an `ironless planar linear motor` with a polylactic acid (PLA
 
 #### [01_prototype_beta](./01_prototype_beta) - Ironless Tubular Linear Motor
 
-Prototype Beta is a series of thermal management studies for an `ironless tubular linear motor`, with a final implementation and validation of the thermal management strategy developed through the `rev 1` and `rev 2` studies.
-
-`Rev 3` will most likely use an outer radial heat sink made of `aluminum`, with coils potted into that heat sink and the final inner bore hole being machined out.
-
-Reference: [`Defining constraints and success metrics for prototype beta rev 3`](https://github.com/wgbowley/OpenLSM/issues/5)
+Prototype Beta is an `ironless tubular linear motor` series; the first and second revisions are thermal management studies, with the third revision using strategies developed. The third revision is intended to be built and tested.
 
 <div align="center">
 <img src="../05_media/03_prototype_beta/rev_2/side_profile_cad.png" alt="Side profile">
