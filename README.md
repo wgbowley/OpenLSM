@@ -67,7 +67,7 @@ This is then repeated across the stator to produce a force vs position graph.
 
 <br>
 
-See [`01_simulation/00_magnetic`](./01_simulation/00_magnetic) for more details.
+See [`../00_magnetic`](./01_simulation/00_magnetic) for more details.
 
 #### Thermal Model
 
@@ -82,7 +82,7 @@ of fin spacing and radial fin sizes to produce a thermal performance graph.
 
 <br>
 
-See [`01_simulation/01_thermal`](./01_simulation/01_thermal) for more details.
+See [`../01_thermal`](./01_simulation/01_thermal) for more details.
 
 ### Supporting Boards
 
