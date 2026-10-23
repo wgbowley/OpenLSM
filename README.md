@@ -110,7 +110,7 @@ It is a development board that is not intended for long-term usage.
 
 <br>
 
-For boards, See [`03_boards`](./03_boards/). <br>
+For boards, see [`03_boards`](./03_boards/). <br>
 For fixtures, see [`04_fixtures`](./04_fixtures/).
 
 ---
