@@ -1,7 +1,8 @@
 ### 00_magnetic
 
-This analytical model uses inverse Clarke and Park transforms to compute the phase current based on position, then uses 1D field 
-approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force.
+The analytical model is intended as a reduced-order model rather than a replacement for finite-element analysis (FEA). 
+It is quite quick, though exact speeds depend on parameters. It is useful for understanding the mechanics of linear 
+motors without the large execution times of FEA.
 
 #### High Level Topology
 
@@ -25,12 +26,6 @@ Force on Armature at That Position
 ```
 
 > *(Note). Back-emf is not modeled as it serves to model asymptotic velocity and force drop-off from v=0 to v=max, and was considered not required for OpenLSM.*
-
-#### Model Validation
-
-The analytical model is intended as a reduced-order model rather than a replacement for finite-element analysis (FEA). 
-It is quite quick, though exact speeds depend on parameters. It is useful for understanding the mechanics of linear 
-motors without the large execution times of FEA.
 
 ---
 

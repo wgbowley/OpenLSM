@@ -12,7 +12,7 @@ system:     "Axisymmetric (Z-R) (Axial-Radial)"
 
 [numerics]
 velocity:     650 m(m/s)
-line_voltage: 6 (V)
+line_voltage: 18 (V)
 displacement: 300 m(m)
 
 [numerics.samples]
