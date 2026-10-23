@@ -50,7 +50,7 @@ An `ironless tubular linear` motor featuring a passive radial `6061` annular hea
 
 <br>
 
-See the [`design notes`](./02_motors/01_prototype_beta/rev_3) for more details.
+See [`design notes`](./02_motors/01_prototype_beta/rev_3) for more details.
 
 ### Simulation
 
