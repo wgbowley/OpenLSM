@@ -2,10 +2,11 @@
 format: 0.1.2
 unit_frame: si_metric.ut
 
+# ---------------------------------------------
+
 [notes]
 parameters: "prototype_beta/rev_3 design"
 system: "Axisymmetric (Z-R) (Axial-Radial)"
-
 
 # ---------------------------------------------
 
@@ -23,16 +24,22 @@ axial_length:   3.30 m(m)
 radial_thickness: 4.8 m(m)
 
 [armature.slots.material]
-# Enamelled Copper Wire 
+# Material: Enamelled Copper Wire 
 wire_diameter:  0.30 m(m)
 fill_factor:    0.80 (∅)
 
 conductivity:   58 M(S_m)
 
-# [armature.potting]
+[armature.potting]
+# Material: Electrolube ER2183 
+radial_thickness: 2 m(m)
 
+[armature.heat_sink]
+# Material: Aluminium 6061 (AI Mg 1 Si Cu)
+axial_spacing: 4 m(m)
 
-# [armature.heat_sink]
+axial_thickness: 2 m(m)
+radial_thickness: 8 m(m)
 
 # ---------------------------------------------
 
@@ -40,6 +47,7 @@ conductivity:   58 M(S_m)
 length: 300 m(m)
 
 [stator.tube]
+# Material: Baked carbon fibre pipe.
 radial_wall_thickness:  1 m(m)
 
 [stator.dipole]
