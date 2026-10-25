@@ -25,7 +25,7 @@ axial, radial, dissipation = solver.compute_performance()
 
 fig, ax = plt.subplots(figsize=(9, 6))
 im = ax.imshow(
-    list(dissipation),
+    dissipation,
     origin="lower",
     aspect="auto",
     extent=[axial[0], axial[-1], radial[0], radial[-1]],
@@ -35,8 +35,8 @@ im = ax.imshow(
 cbar = fig.colorbar(im, ax=ax)
 cbar.set_label("Heat dissipation (W)")
 
-ax.set_xlabel("Axial spacing (m)")
-ax.set_ylabel("Outer radius (m)")
+ax.set_xlabel("Axial Spacing (m)")
+ax.set_ylabel("Radial Thickness (m)")
 ax.set_title("Heat dissipation over solution space")
 
 fig.tight_layout()

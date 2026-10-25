@@ -19,7 +19,7 @@ class Solver:
     def __init__(self, parameters: DynamicLoader) -> None:
         """ Initializes the solver class """
         self._extract_validate(parameters)
-        self.stefan_boltzmann = 5.67 * 10 ** - 9
+        self.stefan_boltzmann = 5.67 * 10 ** - 8
 
         # Computes derived values from parameters
         self._compute_derived_values()
@@ -52,7 +52,7 @@ class Solver:
             print(f"[{i + 1:3d}/100] spacing: {axial * LENGTH}")
 
         # Returns (m), (m), (W=kg*m^2*s^-3)
-        return x_axial, y_radial, z_dissipation
+        return x_axial, y_radial, list(zip(*z_dissipation))
 
     def compute_permutation(self, axial_spacing: Q, radial_thickness: Q) -> Q:
         """ Computes a specific geometric permutation based on axial space and radial thickness """
@@ -68,7 +68,7 @@ class Solver:
         fin_outer_radius = self.sink_outer_radius + radial_thickness
 
         # Computes the rayleigh number based on spacing and thickness
-        rayleigh = self.gravity * self.t_expansion * self.fin_delta * axial_spacing
+        rayleigh = self.gravity * self.t_expansion * self.fin_delta * axial_spacing ** 4
         rayleigh /= self.viscosity * self.diffusivity * radial_thickness
 
         # Computes the elenbaas correlation for natural convection and heat transfer coefficient
@@ -84,11 +84,12 @@ class Solver:
         second_term = k0(u0) * i1(u1) + i0(u0) * k1(u1)
 
         bessel_function = first_term / second_term
-        efficiency = 1 / beta * (fin_outer_radius ** 2 - self.sink_outer_radius ** 2)
+
+        efficiency = 1 / (beta * (fin_outer_radius ** 2 - self.sink_outer_radius ** 2))
         efficiency *= 2 * self.sink_outer_radius * bessel_function
 
         # Calculates the heat dissipation from a single fin
-        fin_area = 2 * pi * (fin_outer_radius ** 2 - self.sink_outer_radius ** 2)
+        fin_area = 4 * pi * (fin_outer_radius ** 2 - self.sink_outer_radius ** 2)
         per_fin_heat_dissipation = efficiency * heat_transfer * fin_area * self.fin_delta
 
         # Calculates the number of fins and total area
