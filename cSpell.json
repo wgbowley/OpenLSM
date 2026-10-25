@@ -153,5 +153,6 @@
     "imshow",
     "Nusselt",
     "Electrolube",
+    "cmap",
   ]
 }

@@ -26,30 +26,33 @@ class Solver:
 
     def compute_performance(self) -> tuple[Q, Q, Q]:
         """ Computes the thermal performance map of a series of heat-sinks """
-        x_axial = []
-        y_thickness = []
-        z_dissipation = []
+        x_axial, y_radial, z_dissipation = [], [], []
+
+        thickness = self.radial_size
+        for _ in range(self.samples):
+            y_radial.append(thickness)
+            thickness += self.radial_size
 
         axial = self.axial_size
-        for _ in range(0, self.samples):
-            # Samples across a series of axial spacing and then thicknesses.
+        for i in range(self.samples):
             x_axial.append(axial)
 
             row = []
             thickness = self.radial_size
-            for _ in range(0, self.samples):
-                # Samples across a series of thickness at a specific spacing.
-                y_thickness.append(thickness)
-
+            for _ in range(self.samples):
                 dissipation = self._try_permutation(axial, thickness)
                 row.append(dissipation)
+
                 thickness += self.radial_size
 
             z_dissipation.append(row)
             axial += self.axial_size
 
+            # Sample console output
+            print(f"[{i + 1:3d}/100] spacing: {axial * LENGTH}")
+
         # Returns (m), (m), (W=kg*m^2*s^-3)
-        return x_axial * LENGTH, y_thickness * LENGTH, z_dissipation * POWER
+        return x_axial, y_radial, z_dissipation
 
     def compute_permutation(self, axial_spacing: Q, radial_thickness: Q) -> Q:
         """ Computes a specific geometric permutation based on axial space and radial thickness """
@@ -77,8 +80,8 @@ class Solver:
         u0 = beta * self.sink_outer_radius
         u1 = beta * fin_outer_radius
 
-        first_term = k1(u0.stripped) * i1(u1.stripped) - i1(u0.stripped) * k1(u1.stripped)
-        second_term = k0(u0.stripped) * i1(u1.stripped) + i0(u0.stripped) * k1(u1.stripped)
+        first_term = k1(u0) * i1(u1) - i1(u0) * k1(u1)
+        second_term = k0(u0) * i1(u1) + i0(u0) * k1(u1)
 
         bessel_function = first_term / second_term
         efficiency = 1 / beta * (fin_outer_radius ** 2 - self.sink_outer_radius ** 2)
