@@ -14,6 +14,7 @@ from scipy.special import k0, k1, i0, i1
 from picounits import Q, DynamicLoader, strip_quantity as validate
 from picounits import TEMPERATURE, THERMAL_CONDUCTIVITY, LENGTH, TIME, NULLSET, POWER
 
+
 class Solver:
     """ Computes the total heat dissipation for a annulus heat sink """
     def __init__(self, parameters: DynamicLoader) -> None:
