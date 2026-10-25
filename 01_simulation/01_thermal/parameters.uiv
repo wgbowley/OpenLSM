@@ -27,9 +27,9 @@ delta: 60 (K)
 gravity: 9.81 (m*s^-2)
 temperature: 293.15 (K)
 
-viscosity: 1.506e-5 (m^2*s^-1)
-diffusivity: 2.0e-5 (m^2*s^-1)
-conductivity: 0.0264 (W*m^-1*K^-1)
+viscosity: 15.06 u(m^2*s^-1)
+diffusivity: 20 u(m^2*s^-1)
+conductivity: 26.4 m(W*m^-1*K^-1)
 
 # ---------------------------------------------------
 

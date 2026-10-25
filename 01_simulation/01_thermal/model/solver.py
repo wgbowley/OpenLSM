@@ -11,7 +11,7 @@ from builtins import float as f
 
 from scipy.special import k0, k1, i0, i1
 
-from picounits import DynamicLoader, strip_quantity as validate
+from picounits import Q, DynamicLoader, strip_quantity as validate
 from picounits import TEMPERATURE, THERMAL_CONDUCTIVITY, LENGTH, TIME, NULLSET, POWER
 
 class Solver:
@@ -24,9 +24,41 @@ class Solver:
         # Computes derived values from parameters
         self._compute_derived_values()
 
-    def compute_performance(self) -> None:
+    def compute_performance(self) -> tuple[Q, Q, Q]:
         """ Computes the thermal performance map of a series of heat-sinks """
-        return
+        x_axial = []
+        y_thickness = []
+        z_dissipation = []
+
+        axial = self.axial_size
+        for _ in range(0, self.samples):
+            # Samples across a series of axial spacing and then thicknesses.
+            x_axial.append(axial)
+
+            row = []
+            thickness = self.radial_size
+            for _ in range(0, self.samples):
+                # Samples across a series of thickness at a specific spacing.
+                y_thickness.append(thickness)
+
+                dissipation = self._try_permutation(axial, thickness)
+                row.append(dissipation)
+                thickness += self.radial_size
+
+            z_dissipation.append(row)
+            axial += self.axial_size
+
+        # Returns (m), (m), (W=kg*m^2*s^-3)
+        return x_axial * LENGTH, y_thickness * LENGTH, z_dissipation * POWER
+
+    def compute_permutation(self, axial_spacing: Q, radial_thickness: Q) -> Q:
+        """ Computes a specific geometric permutation based on axial space and radial thickness """
+        axial = validate(axial_spacing, LENGTH)
+        radial = validate(radial_thickness, LENGTH)
+
+        # Computes the permutation and returns
+        dissipation = self._try_permutation(axial, radial)
+        return dissipation * POWER
 
     def _try_permutation(self, axial_spacing: f, radial_thickness: f) -> f:
         """ Computes the thermal performance of the axial space and thickness permutation """
