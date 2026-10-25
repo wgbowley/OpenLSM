@@ -6,16 +6,11 @@ Prototype Beta explores thermal management strategies for the `ironless tubular 
 
 ### Revisions
 
-> Revisions 1 and 2 are conceptual designs not intended to be fabricated. Revision 3 takes learnings from both and is currently being designed.
+#### [Revision 3](./rev_3) - Implemented Beta Design.
 
-#### [Revision 1](./rev_1) - Thermal interface study (transformer oil, PTFE armature)
+*(TBD) - Work in progress*
 
-<div align="center">
-<img src="../../05_media/03_prototype_beta/rev_1/side_profile_cad.png" alt="Side profile" style="max-width: 600px">
-</div>
-<br>
-
-This is Revision 1, which was designed to begin developing thermal management strategies for `ironless tubular linear` motors. It investigates transformer oil, a `PTFE` armature, and an outer aluminum heat sink as possible thermal strategies. The revision concluded that the aluminum heat sink might work well, but transformer oil is not optimal as a thermal interface material for this application, and `PTFE` most likely won't perform as initially expected.
+This is Revision 3, which is intended to be built and validated using the boards designed alongside it. This prototype is intended to serve as validation for the thermal analysis studies conducted in Revisions 1 and 2.
 
 ---
 
@@ -30,10 +25,15 @@ This is Revision 2, which was designed to develop a thermal management strategy 
 
 ---
 
-#### [Revision 3](./rev_3) - Implemented Beta Design.
+> Revisions 1 and 2 are conceptual designs not intended to be fabricated. Revision 3 takes learnings from both and is currently being designed.
 
-*(TBD) - Work in progress*
+#### [Revision 1](./rev_1) - Thermal interface study (transformer oil, PTFE armature)
 
-This is Revision 3, which is intended to be built and validated using the boards designed alongside it. This prototype is intended to serve as validation for the thermal analysis studies conducted in Revisions 1 and 2.
+<div align="center">
+<img src="../../05_media/03_prototype_beta/rev_1/side_profile_cad.png" alt="Side profile" style="max-width: 600px">
+</div>
+<br>
+
+This is Revision 1, which was designed to begin developing thermal management strategies for `ironless tubular linear` motors. It investigates transformer oil, a `PTFE` armature, and an outer aluminum heat sink as possible thermal strategies. The revision concluded that the aluminum heat sink might work well, but transformer oil is not optimal as a thermal interface material for this application, and `PTFE` most likely won't perform as initially expected.
 
 ---
