@@ -2,7 +2,7 @@
 
 #### [00_armature_board](./00_armature_board) - Sensor Board
 
-> *Requires. build & Validation*
+> *Requires. Validation*
 
 A sensor board that connects to the driver over `RS-485/RS-422`. 
 It features `8` NTC thermistors switched via an analog multiplexer to produce a thermal profile `T(z, t)`. 

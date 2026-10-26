@@ -1,4 +1,4 @@
-### 04_fixture
+### 04_fixtures
 
 #### [00_potting](./00_potting/) - Motor Potting
 

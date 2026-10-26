@@ -2,18 +2,32 @@
 
 Prototype Beta explores thermal management strategies for the `ironless tubular linear` motor topology. Two conceptual design revisions were developed to inform decisions for Revision 3, which is currently being designed.
 
-#### [Revision 3](./rev_3) - Implemented Beta Design.
+#### [Revision 3](./rev_3) - Final Design
 
-*(TBD) - Work in progress*
+This revision is intended to serve as validation for the thermal analysis studies conducted in Revisions 1 and 2.
 
-This is Revision 3, which is intended to be built and validated using the boards designed alongside it. This prototype is intended to serve as validation for the thermal analysis studies conducted in Revisions 1 and 2.
+<div align="center">
+  <a href="https://a360.co/4z4PTOW">
+        <img 
+            src="../../05_media/03_prototype_beta/rev_3/motor_design_in_cad_cross_section.png" 
+            alt="Cross Section CAD"
+            width="700"
+        >
+  </a>
+  
+  <em>Cross-sectional analysis of armature & stator</em>
+</div>
 
 ---
 
 #### [Revision 2](./rev_2) - Radial heat-sink design study (aluminum 6061, eddy current analysis)
 
 <div align="center">
-<img src="../../05_media/03_prototype_beta/rev_2/side_profile_cad.png" alt="Side profile" style="max-width: 600px">
+    <img 
+        src="../../05_media/03_prototype_beta/rev_2/side_profile_cad.png" 
+        alt="Side profile"
+        width="700"
+    >
 </div>
 <br>
 
@@ -26,7 +40,11 @@ This is Revision 2, which was designed to develop a thermal management strategy 
 #### [Revision 1](./rev_1) - Thermal interface study (transformer oil, PTFE armature)
 
 <div align="center">
-<img src="../../05_media/03_prototype_beta/rev_1/side_profile_cad.png" alt="Side profile" style="max-width: 600px">
+    <img 
+        src="../../05_media/03_prototype_beta/rev_1/side_profile_cad.png" 
+        alt="Side profile" 
+        width="700"
+    >
 </div>
 <br>
 

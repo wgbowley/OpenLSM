@@ -101,7 +101,7 @@ and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, enc
 all collected via an `STM32`.
 
 <div align="center">
-  <img src="./05_media/04_fixtures/01_validation_setup/initial-integration.jpg" alt="Test-stand" width="500">
+  <img src="./05_media/04_fixtures/01_validation_setup/pre-motor-assembly.jpg" alt="Test-stand" width="500">
   <p><em>Validation stand with populated encoder and bare revision 1 armature board.</em></p>
 </div>
 
