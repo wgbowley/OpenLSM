@@ -43,7 +43,7 @@ conductivity: 1.25 (W*m^-1*K^-1)
 # ---------------------------------------------------
 
 [sink]
-axial_length: 60 m(m)
+axial_length: 56 m(m)
 radial_thickness: 2 m(m)
 
 [sink.fin]
