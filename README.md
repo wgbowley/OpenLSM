@@ -48,10 +48,10 @@ An `ironless tubular linear` motor featuring a passive radial `6061` annular hea
     <img 
     src="./05_media/03_prototype_beta/rev_3/motor_design_in_cad_cross_section.png" 
     alt="Cross Section CAD"
-     width="800"
+     width="700"
      >
   </a>
-
+  
   <em>Cross-sectional analysis of armature & stator</em>
 </div>
 
