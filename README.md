@@ -137,7 +137,7 @@ An `ironless planar linear` motor with a polylactic acid (PLA) armature featurin
 
 The main conclusion from Prototype Alpha is that `planar linear motors` likely require `laminated silicon steel` armatures to produce force efficiently. In response, Prototype Beta shifts to an `ironless tubular topology` with the goal of quantifying force output and thermal performance.
 
-See the [`alpha notes`](./02_motors/00_prototype_alpha) for the report on Prototype Alpha.
+See the [`alpha notes`](./02_motors/00_prototype_alpha) for more details.
 
 ---
 
