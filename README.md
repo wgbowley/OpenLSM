@@ -29,8 +29,8 @@ Ultimately, the project will conclude by establishing a `reference design` that 
 - [x] Support voltage bus ranges of `12 V_dc` and `24 V_dc`.
 - [x] Validate the TeensySFOC, armature board and encoder board for linear motor applications.
 - [x] Total BOM cost for the motor (armature + stator) under $100 AUS.
-- [/] Achieve a target force per amp of `3.0 N/A_rms` and positional accuracy of `50 µm`.
-- [/] Reach an asymptote temperature of `60°C` under constant `5 N` static loading.
+- [/] Achieve a target force per amp of `3.0-15 N/A_rms` and positional accuracy of `1.96-50 µm`.
+- [/] Reach an asymptote temperature of `60°C` under constant `5-10 N` static loading.
 - [/] Validate motor performance and generate performance curves for each voltage range.
 - [/] Scope a `Prototype Gamma` as an entry point for contributors to extend beyond OpenLSM.
 ```
