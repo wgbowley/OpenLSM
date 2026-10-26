@@ -1,4 +1,14 @@
+
+<div align="center">
+  <img src="./08_run_300um_wire_18_slots/tradeoffs.png" alt="Trade offs" width="700">
+  <br>
+  <em>Trade offs for 18 slot 300um wire diameter motor under weights/normalization.</em>
+</div>
+
+<br>
+
 ### Search/Optimization
+
 
 > For optimization within a deterministic mode, differences between results are often more informative than absolute values.
 > Do not assume the resulting absolute value is correct and/or will function identically in reality.
@@ -31,6 +41,6 @@ copper_loss: 40 (W)
 force_per_ampere: 10 (N/A)
 ```
 
-> `optimizer.size` defines the step size of the optimizer which is the same for both axial and thickness.
+> `optimizer.size` defines the step size of the optimizer which is the same for both axial length and radial thickness.
 
 ---

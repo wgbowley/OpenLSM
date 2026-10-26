@@ -1,5 +1,5 @@
 [version]
-format:     0.1.1
+format:     0.1.2
 unit_frame: derived.ut
 
 # ---------------------------------------------
@@ -12,8 +12,8 @@ system:     "Axisymmetric (Z-R) (Axial-Radial)"
 
 [numerics]
 velocity:     650 m(m/s)
-line_voltage: 24 (V)
-displacement: 300 m(m)
+line_voltage: 18 (V)
+displacement: 10 m(m)
 
 [numerics.samples]
 displacement_size:  1 m(m)
@@ -59,6 +59,7 @@ axial_length: 10 m(m)
 radial_thickness: 5 m(m)
 
 [stator.dipole.material]
+# Axially Magnetized
 coercivity: 0.956 M(A_m)
 
 # ---------------------------------------------

@@ -1,6 +1,8 @@
 ### 03_boards
 
-#### [00_armature_board](./00_armature_board) - Sensor Board (Revision 2 - Rework)
+#### [00_armature_board](./00_armature_board) - Sensor Board
+
+> *Requires. Validation*
 
 A sensor board that connects to the driver over `RS-485/RS-422`. 
 It features `8` NTC thermistors switched via an analog multiplexer to produce a thermal profile `T(z, t)`. 
@@ -21,7 +23,9 @@ The board also includes a `3-axis SPI accelerometer` and processes data from the
 
 ---
 
-#### [01_magnetic_encoder](./01_magnetic_encoder) - Linear Encoder Breakout (Validation)
+#### [01_magnetic_encoder](./01_magnetic_encoder) - Linear Encoder Breakout
+
+> *Requires. Validation*
 
 A breakout and mechanical interface for the `AS5311` linear encoder, providing a resolution of `1.95 µm` and an estimated accuracy of `10–20 µm`, 
 depending on mechanical implementation factors. The encoder operates from `0–600 mm/s` and is an incremental `A`, `B`, `Index` type.
@@ -41,7 +45,9 @@ depending on mechanical implementation factors. The encoder operates from `0–6
 
 ---
 
-#### [02_teensy_SFOC](./02_teensy_SFOC) - Teensy 4.1 & SimpleFOC Breakout Board (Validation)
+#### [02_teensy_SFOC](./02_teensy_SFOC) - Teensy 4.1 & SimpleFOC Breakout Board
+
+> *Requires. Validation*
 
 The Teensy SFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduino shield with `step/dir` input.
 

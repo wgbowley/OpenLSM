@@ -1,0 +1,49 @@
+[version]
+format:     0.1.2
+unit_frame: derived.ut
+
+# ---------------------------------------------
+
+[notes]
+simulation: "Analytical annular heat-sink model"
+NOTE: "This is the PROTOTYPE heat simulation."
+
+# ---------------------------------------------
+
+[numerics]
+samples: 100
+
+[numerics.step_size]
+axial_spacing: 0.1 m(m)
+radius: 0.1 m(m)
+
+# ---------------------------------------------
+
+[environmental]
+temperature: 293.15 (K)
+gravity: 9.81 (m*s^-2)
+k_viscosity: 1.506e-5 (m^2*s^-1)
+t_diffusivity: 2.0e-5 (m^2*s^-1)
+k_conductivity: 0.0264 (W*m^-1*K^-1)
+
+# ---------------------------------------------
+
+[source]
+copper_delta: 60 (K)
+potting_delta: -7.386 (K)
+base_delta: -0.254 (K)
+
+# ---------------------------------------------
+
+[fin]
+base_radius: 14.3 m(m)
+outer_radius: 14.4 m(m)     # Initial radius*
+axial_length: 60 m(m)
+axial_spacing: 0.1 m(m)     # Initial spacing*
+axial_thickness: 2 m(m)
+
+emissivity: 0.85 (∅)
+stefan_boltzmann: 5.67e-8 (W*m^-2*K^-4) 
+k_conductivity: 167 (W*m^-1*K^-1)
+
+# ---------------------------------------------

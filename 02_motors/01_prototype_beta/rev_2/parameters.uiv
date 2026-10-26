@@ -2,12 +2,13 @@
 format:     0.1.0
 unit_frame: si_metric.ut
 
+# ----------------------------------------------
 
 [notes]
 parameters: "prototype_beta/rev_2 design"
 system:     "Axisymmetric (Z-R) (Axial-Radial)"
 
-# ---------------------------------------------
+# ----------------------------------------------
 
 [model]
 environmental_material: "air"
@@ -16,7 +17,7 @@ environmental_material: "air"
 pole_pairs:     4 (∅)
 number_slots:   12 (∅)
 
-# ---------------------------------------------
+# ----------------------------------------------
 
 [armature.core]
 material:           "Carbon Fibre Nylon"
@@ -53,7 +54,7 @@ radial_clearance:       1 m(m)
 radial_inner_thickness: 1.8 m(m)
 radial_fin_thickness:   7.30 m(m)
 
-# ---------------------------------------------
+# ----------------------------------------------
 
 [stator.tube]
 material:           "Layered Carbon Fibre Epoxy"
@@ -66,4 +67,4 @@ grade:              "N52"
 radial_thickness:   5 m(m)
 axial_length:       20 m(m)
 
-# ---------------------------------------------
+# ----------------------------------------------

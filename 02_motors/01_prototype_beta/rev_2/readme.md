@@ -6,7 +6,7 @@
 > Revisions 1 and 2 share the same electromagnetic configuration, only the thermal management and mechanical systems have been modified.
 
 
-<div align="center"><img src="../../../05_media/03_prototype_beta/rev_2/cross_section.png" alt="Cross Sectional Analysis" style="max-width: 600px"></div>
+<div align="center"><img src="../../../05_media/03_prototype_beta/rev_2/cross_section.png" alt="Cross Sectional Analysis" width="700"></div>
 
 ---
 
@@ -35,7 +35,7 @@ Therefore, with a pole pitch of `20 mm` and an assumed velocity of `1 m/s`, the 
 ---
 
 
-<div align="center"><img src="../../../05_media/03_prototype_beta/rev_2/p2p-quasi-transient-optimization.png" alt="point to point optimization of 296 motors" style="max-width: 600px"></div>
+<div align="center"><img src="../../../05_media/03_prototype_beta/rev_2/p2p-quasi-transient-optimization.png" alt="point to point optimization of 296 motors" width="700"></div>
 
 This is an extension of the work described above. The graph shows 296 motor designs transitioning from point A to point B at a target velocity of `200 mm/s`. The goal of this study was to optimize the motor design using evolutionary algorithms. The simulation ran for 7 days and solved approximately `1.5 million` finite element frames, as each point-to-point simulation was a quasi-transient loop.
 

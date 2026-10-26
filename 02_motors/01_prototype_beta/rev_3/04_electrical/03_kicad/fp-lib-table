@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "04_logo") (type "KiCad") (uri "C:/Users/WBowl/Documents/Work/OpenLSM/02_motors/01_prototype_beta/rev_3/04_electrical/04_logo") (options "") (descr ""))
+)
