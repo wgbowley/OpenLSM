@@ -42,6 +42,7 @@ Ultimately, the project will conclude by establishing a `reference design` that 
 
 An `ironless tubular linear` motor featuring a passive radial `6061` annular heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`65 Hz` at a linear velocity of `650 mm/s`, eddy currents are a second-order effect compared to removing heat from the slots. The armature has `18 slots` of `0.3 mm` diameter enamelled wire, with `6` slots in series per phase. The stator is a carbon fibre tube with `10 mm × 10 mm N52` poles arranged as `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
 
+> *(Note). Click image below for fusion 360 webview.*
 
 <div align="center">
   <a href="https://a360.co/4z4PTOW">
