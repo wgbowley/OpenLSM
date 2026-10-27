@@ -25,7 +25,7 @@ class Solver:
         # Computes derived values from parameters
         self._compute_derived_values()
 
-    def compute_performance(self) -> tuple[list, list, list]:
+    def compute_grid_performance(self) -> tuple[list, list, list]:
         """ Computes the thermal performance map of a series of heat-sinks """
         x_axial, y_radial, z_dissipation = [], [], []
 

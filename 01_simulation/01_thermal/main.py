@@ -21,8 +21,9 @@ parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
 
 # Thermal Solver for annulus heat-sink
 solver = Solver(parameters)
-axial, radial, dissipation = solver.compute_performance()
+axial, radial, dissipation = solver.compute_grid_performance()
 
+# Maps the performance heat-map against input parameters
 fig, ax = plt.subplots(figsize=(9, 6))
 im = ax.imshow(
     dissipation,
