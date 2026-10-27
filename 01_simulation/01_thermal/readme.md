@@ -50,6 +50,14 @@ $$ \Delta T = -\frac{Q}{2\pi k L} \ln\left(\frac{r_2}{r_1}\right) $$
 
 *(TBD) - Work in progress*
 
+#### Fin Efficiency
+
+*(TBD) - Work in progress*
+
+#### Convection & Radiate Heat Dissipation
+
+*(TBD) - Work in progress*
+
 ---
 
 ### Computational Implementation
