@@ -107,7 +107,7 @@ class Solver:
         convection = heat_transfer * bare_barrel_area * self.fin_delta + fins * per_fin_heat_dissipation
 
         # Total heat dissipation
-        total_dissipation = convection + self.fin_self_absorption * radiate
+        total_dissipation = convection + (1 - self.fin_self_absorption) * radiate
         return total_dissipation
 
     def _compute_derived_values(self) -> None:
