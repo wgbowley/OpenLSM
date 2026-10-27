@@ -48,7 +48,7 @@ $$ \Delta T = -\frac{Q}{2\pi k L} \ln\left(\frac{r_2}{r_1}\right) $$
 
 #### Natural Convection & Heat transfer
 
-*(TBD) - Work in progress*
+The heat transfer coefficient of the annulus heat-sink is computed via the Rayleigh-elenbaas correlation for natural convection.
 
 #### Fin Efficiency
 
