@@ -69,11 +69,13 @@ class Solver:
         fin_outer_radius = self.sink_outer_radius + radial_thickness
 
         # Computes the rayleigh number based on spacing and thickness
-        rayleigh = self.gravity * self.t_expansion * self.fin_delta * axial_spacing ** 4
-        rayleigh /= self.viscosity * self.diffusivity * radial_thickness
+        rayleigh = self.gravity * self.t_expansion * self.fin_delta * axial_spacing ** 3
+        rayleigh /= self.viscosity * self.diffusivity
+
+        rayleigh_elenbaas = rayleigh * (axial_spacing / radial_thickness)
 
         # Computes the elenbaas correlation for natural convection and heat transfer coefficient
-        nu_natural = rayleigh / 24 * (1 - exp(-35 / rayleigh)) ** (3/4)
+        nu_natural = rayleigh_elenbaas / 24 * (1 - exp(-35 / rayleigh_elenbaas)) ** (3/4)
         heat_transfer = nu_natural * self.env_conduct / axial_spacing
 
         # Cooling efficiency via modified bessel function

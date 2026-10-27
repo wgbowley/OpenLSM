@@ -32,8 +32,6 @@ Total Dissipation via Radiative and Convection Dissipation
 
 ### Mathematical Implementation
 
-*(TBD) - Work in progress*
-
 #### Conduction Rate (Fourier's Law)
 
 Fourier's law is used to compute the temperature drop across the potting material around the coils, and then the temperature drop across the annulus heat-sink base. It is assumed that thermal energy is conserved and migrating outwards.
@@ -47,6 +45,10 @@ $$ \int_{T_1}^{T_2} dT = -\int_{r_1}^{r_2} \frac{Q}{k(2\pi r L)} \, dr \Rightarr
 The final formula for the temperature drop, or more precisely the temperature delta across the cylindrical layer:
 
 $$ \Delta T = -\frac{Q}{2\pi k L} \ln\left(\frac{r_2}{r_1}\right) $$
+
+#### Natural Convection & Heat transfer
+
+*(TBD) - Work in progress*
 
 ---
 
