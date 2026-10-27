@@ -19,7 +19,7 @@ ROOT_DIR = Path(__file__).resolve().parents[0]
 parameters_path = ROOT_DIR / "parameters.uiv"
 parameters = Parser.open(parameters_path, ROOT_DIR / "../derived.ut")
 
-# Thermal Solver for annulus heat-sink
+# Computes the performance grid across spacing / thickness.
 solver = Solver(parameters)
 axial, radial, dissipation = solver.compute_grid_performance()
 
@@ -34,11 +34,13 @@ im = ax.imshow(
     cmap='inferno'
 )
 cbar = fig.colorbar(im, ax=ax)
-cbar.set_label("Heat dissipation (W)")
 
+# Graph details
+cbar.set_label("Heat dissipation (W)")
 ax.set_xlabel("Axial Spacing (m)")
 ax.set_ylabel("Radial Thickness (m)")
 ax.set_title("Heat dissipation over solution space")
 
+# Render plot to screen
 fig.tight_layout()
 plt.show()

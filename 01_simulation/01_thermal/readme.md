@@ -4,13 +4,29 @@ This analytical model is intended as a reduced-order model rather than a replace
 
 #### High Level Topology
 
-*(TBD) - Work in progress*
-
 > Do not assume the resulting design variables are suitable for fabrication or real-world use without further analysis.
 
 ```
-
+Temperature delta across potting and heat-sink base
+    ↓
+Rayleigh Number (Flow fluid Regime)
+    ↓
+Elenbaas Correlation for Natural Convection
+    ↓
+Modified Bessel Function (r1, r2 fixed temperatures)
+    ↓
+Geometric Fin Convection Efficiency
+    ↓
+Total Fin and Barrel Area based on Number of Fins
+    ↓
+Radiative Dissipation via Stefan-Boltzmann
+    ↓
+Convection via Fins and Barrel Area Together
+    ↓
+Total Dissipation via Radiative and Convection Dissipation
 ```
+
+> *(Note). Temperature delta is only calculated during initialization. It is assumed fixed.* 
 
 ---
 
@@ -24,15 +40,34 @@ This analytical model is intended as a reduced-order model rather than a replace
 
 #### High-Level Topology
 
-*(TBD) - Work in progress*
-
 ```
-
+UnitValues
+--------------------------------------------
+parameters.uiv ← derived.ut
+--------------------------------------------
+        ↓
+Python +3.10
+--------------------------------------------
+Solver Class
+        ↓
+Extracts Qualities from parameters
+        ↓
+============================================
+Validates & removes units from parameters
+============================================
+        ↓
+Solves the performance for spacing/thickness
+        ↓
+--------------------------------------------
+        ↓
+Generates matplotlib graph (dissipation (W))
+--------------------------------------------
+        ↓
+Output (matplotlib + terminal)
+--------------------------------------------
+matplotlib GUI
+--------------------------------------------
 ```
-
-#### Numerical Flow
-
-*(TBD) - Work in progress*
 
 ---
 

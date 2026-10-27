@@ -7,8 +7,8 @@
       <td><img src="05_media/populated_pcb_back.jpg" alt="Bottom layer" style="max-width:400px; height:400px;"></td>
     </tr>
     <tr>
-      <td><em>Top layer — Facing the magnetic scale</em></td>
-      <td><em>Bottom layer — JST XH 5-pin & mounting side</em></td>
+      <td><em>Top layer - Facing the magnetic scale</em></td>
+      <td><em>Bottom layer - JST XH 5-pin & mounting side</em></td>
     </tr>
   </table>
 </div>
@@ -78,8 +78,8 @@ the armature board should oversample at `10×` the source frequency.
       <td><img src="05_media/kicad_bottom_layer.png" alt="Bottom layer" style="max-width:400px;"></td>
     </tr>
     <tr>
-      <td><em>Top layer — Facing the magnetic scale</em></td>
-      <td><em>Bottom layer — JST XH 5-pin & mounting side</em></td>
+      <td><em>Top layer - Facing the magnetic scale</em></td>
+      <td><em>Bottom layer - JST XH 5-pin & mounting side</em></td>
     </tr>
   </table>
 </div>
