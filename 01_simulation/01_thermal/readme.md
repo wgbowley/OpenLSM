@@ -48,7 +48,19 @@ $$ \Delta T = -\frac{Q}{2\pi k L} \ln\left(\frac{r_2}{r_1}\right) $$
 
 #### Natural Convection & Heat transfer
 
-The heat transfer coefficient of the annulus heat-sink is computed via the Rayleigh-elenbaas correlation for natural convection.
+The heat transfer coefficient of the annulus heat-sink is computed via the Rayleigh–Elenbaas correlation for natural convection. The Rayleigh number was computed assuming constant pressure during thermal expansion:
+
+$$ \beta = \frac{1}{T_{\text{fin}} + T_{\text{env}}} \Rightarrow Ra = \frac{g \beta T_{\text{fin}} \ell^3}{\nu \alpha} $$
+
+Where $\nu$ is kinematic viscosity and $\alpha$ is thermal diffusivity. The Rayleigh–Elenbaas number and correlation were then computed:
+
+$$ Ra^* = Ra \times \frac{\ell}{t} \Rightarrow Nu = \frac{1}{24} Ra^* \left(1 - e^{-\frac{35}{Ra^*}}\right)^{\frac{3}{4}} $$
+
+Where $\ell$ is the axial spacing between fins and $t$ is the radial thickness of the fin. From the Nusselt number, the heat transfer coefficient could then be computed:
+
+$$ h = \frac{Nu \cdot k}{L} $$
+
+Where $L$ is the axial characteristic length of the heat-sink.
 
 #### Fin Efficiency
 
