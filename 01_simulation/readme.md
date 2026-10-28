@@ -1,6 +1,6 @@
 ### 01_simulations
 
-#### [00_magnetic](./00_magnetic/readme.md) — Magnetic Model
+#### [00_magnetic](./00_magnetic/readme.md) - Magnetic Model
 
 This analytical model uses control currents `(id, iq)` and then a three-phase transform to compute the phase current based on position, 
 then uses 1D field approximations to compute the magnetic co-energy, and finally uses its spatial derivative over the z-axis to compute force. 

@@ -23,6 +23,8 @@ standard 3D printer main-boards.
 
 ### Documentation
 
-Design notes and implementation decisions are documented in `[issue #42`](https://github.com/wgbowley/OpenLSM/issues/42).
+> BOM can be found here [`BOM.md`](BOM.md)
+
+Design notes and implementation decisions are documented in [`issue #42`](https://github.com/wgbowley/OpenLSM/issues/42).
 
 ---

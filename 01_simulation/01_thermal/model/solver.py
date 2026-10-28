@@ -25,7 +25,7 @@ class Solver:
         # Computes derived values from parameters
         self._compute_derived_values()
 
-    def compute_performance(self) -> tuple[Q, Q, Q]:
+    def compute_grid_performance(self) -> tuple[list, list, list]:
         """ Computes the thermal performance map of a series of heat-sinks """
         x_axial, y_radial, z_dissipation = [], [], []
 
@@ -69,24 +69,26 @@ class Solver:
         fin_outer_radius = self.sink_outer_radius + radial_thickness
 
         # Computes the rayleigh number based on spacing and thickness
-        rayleigh = self.gravity * self.t_expansion * self.fin_delta * axial_spacing ** 4
-        rayleigh /= self.viscosity * self.diffusivity * radial_thickness
+        rayleigh = self.gravity * self.t_expansion * self.fin_delta * axial_spacing ** 3
+        rayleigh /= self.viscosity * self.diffusivity
+
+        rayleigh_elenbaas = rayleigh * (axial_spacing / radial_thickness)
 
         # Computes the elenbaas correlation for natural convection and heat transfer coefficient
-        nu_natural = rayleigh / 24 * (1 - exp(-35 / rayleigh)) ** (3/4)
+        nu_natural = rayleigh_elenbaas / 24 * (1 - exp(-35 / rayleigh_elenbaas)) ** (3/4)
         heat_transfer = nu_natural * self.env_conduct / axial_spacing
 
         # Cooling efficiency via modified bessel function
-        beta = (heat_transfer / self.sink_conductivity / self.fin_axial_thickness) ** (1/2)
-        u0 = beta * self.sink_outer_radius
-        u1 = beta * fin_outer_radius
+        gamma = (heat_transfer / (self.sink_conductivity * self.fin_axial_thickness)) ** (1/2)
+        u0 = gamma * self.sink_outer_radius
+        u1 = gamma * fin_outer_radius
 
         first_term = k1(u0) * i1(u1) - i1(u0) * k1(u1)
         second_term = k0(u0) * i1(u1) + i0(u0) * k1(u1)
 
         bessel_function = first_term / second_term
 
-        efficiency = 1 / (beta * (fin_outer_radius ** 2 - self.sink_outer_radius ** 2))
+        efficiency = 1 / (gamma * (fin_outer_radius ** 2 - self.sink_outer_radius ** 2))
         efficiency *= 2 * self.sink_outer_radius * bessel_function
 
         # Calculates the heat dissipation from a single fin
@@ -107,7 +109,7 @@ class Solver:
         convection = heat_transfer * bare_barrel_area * self.fin_delta + fins * per_fin_heat_dissipation
 
         # Total heat dissipation
-        total_dissipation = convection + self.fin_self_absorption * radiate
+        total_dissipation = convection + (1 - self.fin_self_absorption) * radiate
         return total_dissipation
 
     def _compute_derived_values(self) -> None:

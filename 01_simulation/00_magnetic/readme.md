@@ -116,7 +116,7 @@ Solves the solution (virtual work methods)
 Re-attaches units at validated boundaries
 ============================================
         ↓
-Generates matplotlib graph (force vs position)
+Generates matplotlib graph (force vs pos)
 --------------------------------------------
         ↓
 Output (matplotlib + terminal)
