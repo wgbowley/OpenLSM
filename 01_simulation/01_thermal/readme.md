@@ -50,7 +50,7 @@ $$ \Delta T = -\frac{Q}{2\pi k L} \ln\left(\frac{r_2}{r_1}\right) $$
 
 The heat transfer coefficient of the annulus heat-sink is computed via the Rayleigh-Elenbaas correlation for natural convection. The Rayleigh number was computed assuming constant pressure during thermal expansion:
 
-$$ \beta = \frac{1}{T_{\text{fin}} + T_{\text{env}}} \Rightarrow Ra = \frac{g \beta T_{\text{fin}} \ell^3}{\nu \alpha} $$
+$$ \beta = \frac{1}{\Delta T_{fin} + T_{env}} \Rightarrow Ra = \frac{g \beta \Delta T_{fin} \ell^3}{\nu \alpha} $$
 
 Where $\nu$ is kinematic viscosity and $\alpha$ is thermal diffusivity. The Rayleigh-Elenbaas number and correlation were then computed:
 
@@ -64,11 +64,50 @@ Where $L$ is the axial characteristic length of the heat-sink.
 
 #### Fin Efficiency
 
-*(TBD) - Work in progress*
+The efficiency of the fin was computed using the governing heat transfer equation for an annular fin:
+
+$$ z^2 \frac{d^2\theta}{dz^2} + z \frac{d\theta}{dz} - z^2 \theta = 0 $$
+
+It can be observed that this specific differential equation matches the modified Bessel equation with $\alpha = 0$:
+
+$$ z^2 \frac{d^2\theta}{dz^2} + z \frac{d\theta}{dz} - (z^2 - \alpha^2)\theta = 0 $$
+$$ z^2 \frac{d^2\theta}{dz^2} + z \frac{d\theta}{dz} - z^2\theta = 0 $$
+
+The parameter $\gamma$ can then be computed for the ratio of conduction to convection:
+
+$$ \gamma = \sqrt{\frac{h}{k w}} $$
+
+where $h$ is the heat transfer coefficient of the environment and $k$ is the thermal conductivity of the fin material. The efficiency parameter can then be calculated using the first and second kind solutions of the Bessel function with fixed boundaries:
+
+$$ u_0 = \gamma \, r_{1}, \quad u_1 = \gamma \, r_{2} $$
+
+$$ t_1 = K_1(u_0) \, I_1(u_1) - I_1(u_0) \, K_1(u_1), \quad t_2 = K_0(u_0) \, I_1(u_1) + I_0(u_0) \, K_1(u_1) $$
+
+$$ \eta = \frac{2 r_1}{\gamma (r_2^2 - r_1^2)} \frac{t_1}{t_2} $$
+
+Where $r_2$ is the outer radius of the fin and $r_1$ is the inner radius of the fin.
 
 #### Convection & Radiate Heat Dissipation
 
-*(TBD) - Work in progress*
+The convection heat dissipation was calculated by reducing the problem to a single fin:
+
+$$ A_f = 4\pi \left( r_2^2 - r_1^2 \right) $$
+
+$$ Q_f = \eta \, h \, A_f \, \Delta T_f $$
+
+The number of fins is then computed using `mod` and `floor` to estimate the count, and ultimately $Q_f$ is multiplied by that estimate. The convection dissipation from the "barrel" of the heat-sink is then computed:
+
+$$ A_b = 2\pi r_1 \ell_{l-f} $$
+
+$$ Q_b = h A_b \Delta T_f $$
+
+The radiative heat dissipation was then computed using the Stefan–Boltzmann law with the total area $A_t = A_b + A_f$:
+
+$$ Q_r = \varepsilon \sigma A_t \left( (T_{env} + \Delta T_f)^4 - T_{env}^4 \right) $$
+
+The total heat dissipation is then simply the sum:
+
+$$ Q_t = Q_f + Q_b + Q_r $$
 
 ---
 
