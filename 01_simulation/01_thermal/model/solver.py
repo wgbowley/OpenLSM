@@ -79,16 +79,16 @@ class Solver:
         heat_transfer = nu_natural * self.env_conduct / axial_spacing
 
         # Cooling efficiency via modified bessel function
-        beta = (heat_transfer / self.sink_conductivity / self.fin_axial_thickness) ** (1/2)
-        u0 = beta * self.sink_outer_radius
-        u1 = beta * fin_outer_radius
+        gemma = (heat_transfer / self.sink_conductivity / self.fin_axial_thickness) ** (1/2)
+        u0 = gemma * self.sink_outer_radius
+        u1 = gemma * fin_outer_radius
 
         first_term = k1(u0) * i1(u1) - i1(u0) * k1(u1)
         second_term = k0(u0) * i1(u1) + i0(u0) * k1(u1)
 
         bessel_function = first_term / second_term
 
-        efficiency = 1 / (beta * (fin_outer_radius ** 2 - self.sink_outer_radius ** 2))
+        efficiency = 1 / (gemma * (fin_outer_radius ** 2 - self.sink_outer_radius ** 2))
         efficiency *= 2 * self.sink_outer_radius * bessel_function
 
         # Calculates the heat dissipation from a single fin
