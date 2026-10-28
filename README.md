@@ -53,7 +53,7 @@ An `ironless tubular linear` motor featuring a passive radial `6061` anodized he
      >
   </a>
   
-  <em>Cross-sectional analysis of armature & stator (Click image below for fusion 360 webview.)</em>
+  <em>Cross-sectional analysis of armature & stator (Click image for fusion 360 webview.)</em>
 </div>
 
 <br>
