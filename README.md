@@ -3,16 +3,12 @@ Color Palette:
 FFFFFF - pure white 
 FF8F0E - bold, warm orange with a strong golden-yellow undertone
 
-I'm going to do a little experiment here and not update the logo
-until someone raises an issue about light-mode readability.
-- William Bowley, 2026-07-05
-
-P.S: Thanks for downloading the OpenLSM repository `▽`ʃ♡
+Thanks for downloading the OpenLSM repository `▽`ʃ♡
+- William Bowley
 -->
 
-
 <div align="center">
-  <img src="05_media/01_logos/logo.png" alt="OpenLSM" width="500">
+  <img src="05_media/01_logos/black_background.png" alt="OpenLSM" width="700">
   
   Low-Cost Linear Synchronous Permanent-Magnet Motor <br>
 </div>
