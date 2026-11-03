@@ -36,8 +36,6 @@ Ultimately, the project will conclude by establishing a `reference design` that 
 
 ### Beta
 
-> *(Ordered). The radial heat-sink, potting material, and interface PCB have been ordered.*
-
 An `ironless tubular linear` motor featuring a passive radial `6061` anodized heat sink potted around the enameled copper slots. Due to the low electrical frequency of ~`65 Hz` at a linear velocity of `650 mm/s`, eddy currents are a second-order effect compared to removing heat from the slots. The armature has `18 slots` of `0.3 mm` diameter enamelled wire, with `6` slots in series per phase. The stator is a carbon fibre tube with `10 mm × 10 mm N52` poles arranged as `(N-S|S-N)`. The motor is intended to be used with `12–24 V` supplies.
 
 <div align="center">
@@ -98,7 +96,7 @@ and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, enc
 all collected via an `STM32`.
 
 <div align="center">
-  <img src="./05_media/04_fixtures/01_validation_setup/pre-motor-assembly.jpg" alt="Test-stand" width="500">
+  <img src="./05_media/04_fixtures/01_validation_setup/rev_0/pre-motor-assembly.jpg" alt="Test-stand" width="500">
   <p><em>Validation stand with populated encoder and armature board.</em></p>
 </div>
 
