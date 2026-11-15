@@ -9,7 +9,7 @@ This revision is intended to serve as validation for the thermal analysis studie
 <div align="center">
   <a href="https://a360.co/4z4PTOW">
         <img 
-            src="../../05_media/03_prototype_beta/rev_3/motor_design_in_cad_cross_section.png" 
+            src="../../05_media/03_prototype_beta/rev_3/01_cad/motor_design_in_cad_cross_section.png" 
             alt="Cross Section CAD"
             width="700"
         >
