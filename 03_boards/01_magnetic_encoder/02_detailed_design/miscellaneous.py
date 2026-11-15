@@ -1,4 +1,3 @@
-
 """
 Filename: miscellaneous.py
 
