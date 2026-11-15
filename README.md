@@ -41,7 +41,7 @@ An `ironless tubular linear` motor featuring a passive radial `6061` anodized he
 <div align="center">
   <a href="https://a360.co/4z4PTOW">
     <img 
-    src="./05_media/03_prototype_beta/rev_3/motor_design_in_cad_cross_section.png" 
+    src="./05_media/03_prototype_beta/rev_3/01_cad/motor_design_in_cad_cross_section.png" 
     alt="Cross Section CAD"
      width="700"
      >
@@ -63,7 +63,7 @@ then uses 1D field approximations to compute the magnetic co-energy, and finally
 This is then repeated across the stator to produce a force vs position graph.
 
 <div align="center">
-  <img src="./05_media/03_prototype_beta/rev_3/predicted_performance.png" alt="Magnetic Model" width="700">
+  <img src="./05_media/03_prototype_beta/rev_3/00_design/predicted_performance.png" alt="Magnetic Model" width="700">
   <p><em>1D field approximation and FOC showing position (linear) vs force (linear).</em></p>
 </div>
 
@@ -96,8 +96,15 @@ and a sensor board featuring a thermistor array, `3-axis` SPI accelerometer, enc
 all collected via an `STM32`.
 
 <div align="center">
-  <img src="./05_media/04_fixtures/01_validation_setup/rev_0/pre-motor-assembly.jpg" alt="Test-stand" width="500">
-  <p><em>Validation stand with populated encoder and armature board.</em></p>
+  <a href="https://a360.co/4sZ6hOq">
+    <img 
+    src="./05_media/04_fixtures/01_validation_setup/rev_1/stand.png" 
+    alt="CAD"
+    width="700"
+    >
+  </a>
+  
+  <em>Validation stand with boards and prototype beta rev 3 (click image for Fusion 360 webview).</em>
 </div>
 
 #### TeensySFOC
@@ -106,8 +113,8 @@ The TeensySFOC board is a breakout board for the Teensy 4.1 and SimpleFOC Arduin
 It is a development board that is not intended for long-term usage.
 
 <div align="center">
-  <img src="./03_boards/02_teensy_SFOC/05_media/top-side-populated.jpg" alt="TeensySFOC PCB" width="500">
-  <p><em>Populated TeensySFOC PCB.</em></p>
+  <img src="./05_media/04_fixtures/01_validation_setup/rev_0/pre-motor-assembly.jpg" alt="Test-stand" width="500">
+  <p><em>Validation stand with populated teensySFOC, encoder and armature board.</em></p>
 </div>
 
 <br>
