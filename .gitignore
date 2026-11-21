@@ -12,7 +12,21 @@
 *.zip
 *.raw
 *.net
+*.o
+*.d
+*.elf
+*.bin
+*.hex
+*.map
+*.list
+*.launch
 
 # Ignore folders
 .history
+.Debug
+.Release
+.build
 
+.settings/
+.cproject
+.project

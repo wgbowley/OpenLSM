@@ -28,7 +28,7 @@ Low dropout regulator (5V - 3.3V) (LD1117) (800mA Max Current) (~20°C Expected)
 ↓
 RS-485/RS-422 Link (MAX3485) (Differential Pair Standard) or (Rx, Tx Bypass)
 ↓ ↑
-Peripheral Controller (170 MHz) (STM32G431K6Tx )
+Peripheral Controller (170 MHz) (STM32G431K6Tx)
 ↓ ↑
 Thermistor Array (800 Hz), SPI Accelerometer, Linear Encoder Interconnect (350 kHz)
 -------------------------------------------------

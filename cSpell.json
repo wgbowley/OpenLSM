@@ -16,7 +16,9 @@
     "**/*.kicad_sym",
     "**/*.lib",
     "**/*.net",
-    "**/*.step"
+    "**/*.step",
+    "**/*.ld",
+    "**/*.s",
   ],
   "words": [
     "ADXL",
@@ -26,6 +28,7 @@
     "BEAD",
     "BEADC1608X95N",
     "behaviour",
+    "cproject",
     "Bibtex",
     "BIOM",
     "BlueShark",
@@ -152,6 +155,7 @@
     "ylabel",
     "ylim",
     "yticklabels",
-    "zorder"
+    "zorder",
+    "estack",
   ]
 }
