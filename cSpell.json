@@ -19,6 +19,8 @@
     "**/*.step",
     "**/*.ld",
     "**/*.s",
+    "**/*.h",
+    "**/*.cfg"
   ],
   "words": [
     "ADXL",
@@ -31,7 +33,6 @@
     "cproject",
     "Bibtex",
     "BIOM",
-    "BlueShark",
     "Bowley",
     "CANBUS",
     "DEAP",
@@ -126,7 +127,6 @@
     "pico",
     "picounits",
     "polylactic",
-    "pyfea",
     "pylint",
     "pylintrc",
     "pymoo",
@@ -157,5 +157,11 @@
     "yticklabels",
     "zorder",
     "estack",
+    "moder",
+    "gpioa",
+    "gpioaen",
+    "OTYPER",
+    "OSPEEDR",
+    "BSRR",
   ]
 }
